@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- * ***********************************************************************
+ *   Copyright (c) 2010 BIPOLAR
+ *   Confidential and Proprietary
+ *   All Rights Reserved
+ *
+ * @(#)$Id: mvc-dispatcher-servlet.xml 294 2010-11-04 08:37:32Z alex.vc@gmail.com $
+ * Last Revised By   : $Author: alex.vc@gmail.com $
+ * Last Checked In   : $Date: 2010-11-04 02:37:32 -0600 (Thu, 04 Nov 2010) $
+ * Last Version      : $Revision: 294 $
+ *
+ * Original Author   : Alejandro Vazquez
+ * Notes             :
+ * *********************************************************************** -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:ctx="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+    <ctx:component-scan base-package="mx.itesm.gda.bm.controllers"/>
+
+    <mvc:annotation-driven/>
+    <mvc:default-servlet-handler/>
+    <mvc:view-controller path="/" view-name="redirect:userLogin.do"/>
+
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerExceptionResolver">
+        <property name="order" value="10"/>
+    </bean>
+
+    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="defaultErrorView" value="errorFound"/>
+        <property name="defaultStatusCode" value="500"/>
+        <property name="warnLogCategory" value="mx.itesm.gda.bm.controllers"/>
+        <property name="order" value="1000"/>
+    </bean>
+
+    <bean id="velocityConfig" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+        <property name="velocityEngine" ref="velocityEngine"/>
+    </bean>
+
+    <bean class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
+        <property name="cache" value="true"/>
+        <property name="prefix" value=""/>
+        <property name="suffix" value=".vm"/>
+        <property name="exposeSpringMacroHelpers" value="true"/>
+        <property name="toolboxConfigLocation" value="/WEB-INF/toolbox.xml"/>
+        <property name="contentType" value="text/html; charset=UTF-8"/>
+    </bean>
+
+    <bean class="org.springframework.web.servlet.view.jasperreports.JasperReportsViewResolver">
+        <property name="cache" value="true"/>
+        <property name="prefix" value="WEB-INF/reports/"/>
+        <property name="suffix" value=".jasper"/>
+        <property name="viewClass" value="org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView"/>
+        <property name="jdbcDataSource" ref="dataSource"/>
+    </bean>
+
+</beans>

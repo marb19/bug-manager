@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- * ***********************************************************************
+ *   Copyright (c) 2010 BIPOLAR
+ *   Confidential and Proprietary
+ *   All Rights Reserved
+ *
+ * @(#)$Id: toolbox.xml 286 2010-11-01 02:47:37Z marco.rangel@gmail.com $
+ * Last Revised By   : $Author: marco.rangel@gmail.com $
+ * Last Checked In   : $Date: 2010-10-31 20:47:37 -0600 (Sun, 31 Oct 2010) $
+ * Last Version      : $Revision: 286 $
+ *
+ * Original Author   : Alejandro Vazquez
+ * Notes             :
+ * *********************************************************************** -->
+<toolbox>
+    <tool>
+        <key>dateLong</key>
+        <scope>application</scope>
+        <class>org.apache.velocity.tools.generic.DateTool</class>
+        <parameter name="format" value="dd 'de' MMMMM 'de' yyyy"/>
+        <parameter name="locale" value="es"/>
+    </tool>
+    <tool>
+        <key>dateShort</key>
+        <scope>application</scope>
+        <class>org.apache.velocity.tools.generic.DateTool</class>
+        <parameter name="format" value="dd-MM-yyyy"/>
+        <parameter name="locale" value="es"/>
+    </tool>
+    <tool>
+        <key>date</key>
+        <scope>application</scope>
+        <class>org.apache.velocity.tools.generic.DateTool</class>
+        <parameter name="format" value="dd-MMM-yyyy"/>
+        <parameter name="locale" value="es"/>
+    </tool>
+    <tool>
+        <key>display</key>
+        <scope>application</scope>
+        <class>org.apache.velocity.tools.generic.DisplayTool</class>
+    </tool>	
+    <tool>
+        <key>esc</key>
+        <scope>application</scope>
+        <class>org.apache.velocity.tools.generic.EscapeTool</class>
+    </tool>
+    <tool>
+        <key>math</key>
+        <scope>application</scope>
+        <class>org.apache.velocity.tools.generic.MathTool</class>
+    </tool>
+</toolbox>

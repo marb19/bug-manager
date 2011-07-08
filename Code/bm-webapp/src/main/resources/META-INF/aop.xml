@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE aspectj PUBLIC "-//AspectJ//DTD//EN"  "http://www.aspectj.org/dtd/aspectj_1_5_0.dtd">
+<!-- * ***********************************************************************
+ *   Copyright (c) 2010 BIPOLAR
+ *   Confidential and Proprietary
+ *   All Rights Reserved
+ *
+ * @(#)$Id: aop.xml 282 2010-10-31 03:07:22Z alex.vc@gmail.com $
+ * Last Revised By   : $Author: alex.vc@gmail.com $
+ * Last Checked In   : $Date: 2010-10-30 22:07:22 -0500 (Sat, 30 Oct 2010) $
+ * Last Version      : $Revision: 282 $
+ *
+ * Original Author   : Alejandro Vazquez
+ * Notes             :
+ * *********************************************************************** -->
+<aspectj>
+    <!--<weaver options="-verbose -showWeaveInfo -Xreweavable">-->
+    <weaver options="-Xreweavable">
+        <include within="mx.itesm.gda.bm..*"/>
+    </weaver>
+    <aspects>
+        <aspect name="org.springframework.orm.jpa.aspectj.JpaExceptionTranslatorAspect"/>
+        <aspect name="mx.itesm.gda.bm.utils.UserLoggedAspect"/>
+        <aspect name="mx.itesm.gda.bm.utils.SmtpConsoleAspect"/>
+        <aspect name="mx.itesm.gda.bm.utils.BizLogicWatchDogAspect"/>
+    </aspects>
+</aspectj>

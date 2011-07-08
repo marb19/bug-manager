@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- * ***********************************************************************
+ *   Copyright (c) 2010 BIPOLAR
+ *   Confidential and Proprietary
+ *   All Rights Reserved
+ *
+ * @(#)$Id: persistence.xml 113 2010-09-21 05:24:13Z alex.vc@gmail.com $
+ * Last Revised By   : $Author: alex.vc@gmail.com $
+ * Last Checked In   : $Date: 2010-09-21 00:24:13 -0500 (Tue, 21 Sep 2010) $
+ * Last Version      : $Revision: 113 $
+ *
+ * Original Author   : Alejandro Vazquez
+ * Notes             :
+ * *********************************************************************** -->
+<persistence version="1.0" xmlns="http://java.sun.com/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+             http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
+    <persistence-unit name="bm-punit" transaction-type="RESOURCE_LOCAL">
+        <class>mx.itesm.gda.bm.model.Project</class>
+        <class>mx.itesm.gda.bm.model.Task</class>
+        <class>mx.itesm.gda.bm.model.TaskComment</class>
+        <class>mx.itesm.gda.bm.model.TaskCompletionReport</class>
+        <class>mx.itesm.gda.bm.model.User</class>
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+    </persistence-unit>
+</persistence>

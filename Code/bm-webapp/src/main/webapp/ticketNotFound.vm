@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+#* ***************************************************************************
+ *   Copyright (c) 2010 BIPOLAR
+ *   Confidential and Proprietary
+ *   All Rights Reserved
+ *
+ * @(#)$Id: ticketNotFound.vm 210 2010-10-12 05:34:39Z jpabluz@gmail.com $
+ * Last Revised By   : $Author: jpabluz@gmail.com $
+ * Last Checked In   : $Date: 2010-10-12 00:34:39 -0500 (Tue, 12 Oct 2010) $
+ * Last Version      : $Revision: 210 $
+ *
+ * Original Author   : Alejandro Vazquez
+ * Notes             :
+ * ***************************************************************************
+*#<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Recuperar contraseña - All In Time System</title>
+        <link rel="stylesheet" href="CSS/Style.css" type="text/css" media="screen" />
+    </head>
+    <body>
+        <div id="header">
+            <img src="images/Login/bm-logo.png"  alt="BM logo" id="login-bmlogo"/>
+        </div>
+        <div id="page">
+            <div id="content"> <!--AQUI METER TODOS LOS INPUT, LABELS etc-->
+                <div>Tu solicitud de cambio de contraseña ya expiró, por lo 
+                que ya no es válida. Si lo deseas, puedes solicitar un
+                nuevo cambio de contraseña</div>
+                <div style="text-align: center"><a href="requestNewPassword.do">Recuperar de contraseña</a></div>
+            </div>
+        </div>
+    </body>
+</html>

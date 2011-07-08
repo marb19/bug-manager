@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<!-- * ***********************************************************************
+ *   Copyright (c) 2010 BIPOLAR
+ *   Confidential and Proprietary
+ *   All Rights Reserved
+ *
+ * @(#)$Id: log4j.xml 146 2010-10-03 04:38:39Z alex.vc@gmail.com $
+ * Last Revised By   : $Author: alex.vc@gmail.com $
+ * Last Checked In   : $Date: 2010-10-02 23:38:39 -0500 (Sat, 02 Oct 2010) $
+ * Last Version      : $Revision: 146 $
+ *
+ * Original Author   : Alejandro Vazquez
+ * Notes             :
+ * *********************************************************************** -->
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+    <appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+        <param name="Threshold" value="TRACE"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d [%t] %-5p %c %x - %m%n"/>
+        </layout>
+    </appender>
+
+    <category name="mx.itesm.gda.bm" additivity="false">
+        <priority value="TRACE"/>
+        <appender-ref ref="CONSOLE"/>
+    </category>
+
+    <category name="org.springframework" additivity="false">
+        <priority value="ERROR"/>
+        <appender-ref ref="CONSOLE"/>
+    </category>
+
+    <category name="org.hibernate" additivity="false">
+        <priority value="ERROR"/>
+        <appender-ref ref="CONSOLE"/>
+    </category>
+
+    <root>
+        <priority value="WARN"/>
+        <appender-ref ref="CONSOLE"/>
+    </root>
+</log4j:configuration>
