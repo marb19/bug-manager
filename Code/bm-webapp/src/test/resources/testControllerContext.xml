@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- * ***********************************************************************
+ *   Copyright (c) 2010 BIPOLAR
+ *   Confidential and Proprietary
+ *   All Rights Reserved
+ *
+ * @(#)$Id: testControllerContext.xml 280 2010-10-30 16:53:44Z alex.vc@gmail.com $
+ * Last Revised By   : $Author: alex.vc@gmail.com $
+ * Last Checked In   : $Date: 2010-10-30 11:53:44 -0500 (Sat, 30 Oct 2010) $
+ * Last Version      : $Revision: 280 $
+ *
+ * Original Author   : Alejandro Vazquez
+ * Notes             :
+ * *********************************************************************** -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:ctx="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-3.0.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+
+    <!-- activate load time weaving -->
+    <ctx:load-time-weaver aspectj-weaving="on"/>
+    <!-- Activate annotation-based bean configuration -->
+    <ctx:annotation-config/>
+    <ctx:spring-configured/>
+    <!-- Activate annotation-based transactions -->
+    <tx:annotation-driven mode="aspectj"/>
+
+    <ctx:component-scan base-package="mx.itesm.gda.bm.controllers"/>
+
+    <bean id="mockScope" class="mx.itesm.gda.bm.test.mocks.MockScope"/>
+
+    <bean class="org.springframework.beans.factory.config.CustomScopeConfigurer">
+        <property name="scopes">
+            <map key-type="java.lang.String">
+                <entry key="request" value-ref="mockScope"/>
+                <entry key="session" value-ref="mockScope"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="userAccessBizOpMock" class="mx.itesm.gda.bm.test.mocks.EasyMockFactory">
+        <constructor-arg value="mx.itesm.gda.bm.biz.UserAccessBizOp"/>
+    </bean>
+
+    <bean id="userManagementBizOpMock" class="mx.itesm.gda.bm.test.mocks.EasyMockFactory">
+        <constructor-arg value="mx.itesm.gda.bm.biz.UserManagementBizOp"/>
+    </bean>
+
+    <bean id="projectManagementBizOpMock" class="mx.itesm.gda.bm.test.mocks.EasyMockFactory">
+        <constructor-arg value="mx.itesm.gda.bm.biz.ProjectManagementBizOp"/>
+    </bean>
+
+    <bean id="taskManagementBizOpMock" class="mx.itesm.gda.bm.test.mocks.EasyMockFactory">
+        <constructor-arg value="mx.itesm.gda.bm.biz.TaskManagementBizOp"/>
+    </bean>
+
+    <bean id="loginSession" class="mx.itesm.gda.bm.session.UserLoginSession"/>
+
+    <bean id="transactionManager" class="mx.itesm.gda.bm.test.mocks.MockTxManager">
+    </bean>
+
+    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+        <property name="defaultLocale">
+            <bean class="java.util.Locale">
+                <constructor-arg value="es"/>
+                <constructor-arg value="MX"/>
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="basename" value="messages"/>
+        <property name="useCodeAsDefaultMessage" value="true"/>
+    </bean>
+
+    <bean class="org.springframework.context.support.MessageSourceAccessor"
+          autowire="constructor"/>
+
+    <bean class="org.springframework.mock.web.MockHttpServletRequest">
+        <constructor-arg>
+            <bean class="org.springframework.mock.web.MockServletContext">
+                <constructor-arg value="http://localhost:8080/bm"/>
+            </bean>
+        </constructor-arg>
+        <constructor-arg value="GET"/>
+        <constructor-arg value="/whatever.do"/>
+    </bean>
+
+</beans>

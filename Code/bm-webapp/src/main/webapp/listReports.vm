@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Reportes - All In Time System</title>
+        <link rel="stylesheet" href="CSS/Style.css" type="text/css" media="screen" />
+        <script type="text/javascript" src="./js/jquery-1.4.2.min.js"></script>
+        <script type="text/javascript" src="./js/jquery.validate.min.js"></script>
+        <script type="text/javascript" src="./js/localization/messages_es.js"></script>
+        <script type="text/javascript">
+                function goToUrl(url)
+                {
+                   window.location = url;
+                }
+
+                $(document).ready(function(){
+                   $("#selectedUserLabel").hide();
+                   $("#username").hide();
+                   $("#config-report-form").validate({
+                       rules: {
+                          username: {
+                              required: function(element) {
+                                return (this.$("#reportType").val() == "2");
+                              }
+                          }
+                       }
+                   });
+                   $("#config-report-form").submit(function() {
+                       switch (this.reportType.value)
+                       {
+                          case "1":
+                            $("#config-report-form").attr("action","./report/tasksByProject.pdf");
+                            break;
+                          case "2":
+                            $("#config-report-form").attr("action","./report/tasksByUser.pdf");
+                            break;
+                          case "3":
+                            $("#config-report-form").attr("action","./report/earnedValue.pdf");
+                            break;
+                          default:
+                            alert("Reporte no dado de alta, seleccione uno diferente");
+                            return false;
+                       }
+                       return true;
+                    });
+                    $("#reportType").change(function() {
+                        if (this.value == "2") {
+                            $("#selectedUserLabel").show("fast");
+                            $("#username").show("fast");
+                            $("#username").removeAttr("disabled");
+                        }
+                        else {
+                            $("#selectedUserLabel").hide("fast");
+                            $("#username").hide("fast");
+                            $("#username").val("");
+                            $("#username").attr("disabled", "true");
+                        }
+                    });
+                    if ($("#reportType").val() == "2") {
+                            $("#selectedUserLabel").show("fast");
+                            $("#username").show("fast");
+                            $("#username").removeAttr("disabled");
+                        }
+                        else {
+                            $("#selectedUserLabel").hide("fast");
+                            $("#username").hide("fast");
+                            $("#username").val("");
+                            $("#username").attr("disabled", "true");
+                        }
+                 });
+        </script>
+    </head>
+    <body>
+        <div id="header">
+            <img src="images/Login/bm-logo.png"  alt="BM logo" id="base-bmlogo"/>
+            <div id="base-header-text">
+				Hoy es $dateLong.format($date.systemDate)<br/>
+				Bienvenido, ${user.fullName}<br/>
+                <a href='userLogin.do?op=logout'>Salir</a>
+            </div>
+            <div id="base-menu">
+                <div id="base-menu-bar">
+                    <img src="images/Base/Menu1.png" id="base-menu-left" />
+                    <div id="base-menu-center">
+                        <ul>
+                            <li class='Proyectos' onclick="goToUrl('listProjects.do')" >
+                            </li>
+                            <li class='ReportesVisitando' onclick="goToUrl('listReports.do')" >
+                            </li>
+                            #if($user.administrator)
+                            <li class='Usuarios' onclick="goToUrl('listUsers.do')" >
+                            </li>
+                            #end
+                        </ul>
+                    </div>
+                    <img src="images/Base/Menu3.png" id="base-menu-right" />
+                </div>
+            </div>
+        </div>
+        <div id="content">
+            <div id="content-header">
+                <form action="#" method="POST" id="config-report-form">
+                    <h3 id="form-title">Generar Reporte</h3>
+                    <table id="user-modify">
+                        <tr>
+                            <td>
+                                <label for="reportType" id="reportTypeLabel">Tipo de Reporte:</label>
+                            </td>
+                            <td>
+                                <select name="reportType" id="reportType">
+                                    <option value="1">Tareas en desarrollo por Proyecto</option>
+                                    <option value="2">Tareas en desarrollo por Persona</option>
+                                    <option value="3">Reporte y gráfica de Valor Ganado</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="project_id" id="selectedProjectLabel">Proyecto:</label>
+                            </td>
+                            <td>
+                                <select name="project_id" id="project_id" class="required">
+                                    <option value=""> --- </option>
+                                    #foreach($p in $projects)
+                                        <option value="${p.projectId}">${p.projectName}</option>
+                                    #end
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="username" id="selectedUserLabel">Usuario:</label>
+                            </td>
+                            <td>
+                                <select name="username" id="username">
+                                    <option value=""> --- </option>
+                                    #foreach($u in $users)
+                                        <option value="${u.userName}">${u.fullName}</option>
+                                    #end
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <input type="image" value="Generar" src="images/Base/generar.png" id="generate-button" />
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
