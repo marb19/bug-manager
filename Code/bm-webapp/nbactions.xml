@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+    <action>
+        <actionName>CUSTOM-Build Project Site</actionName>
+        <displayName>Build Project Site</displayName>
+        <goals>
+            <goal>clean</goal>
+            <goal>install</goal>
+            <goal>site</goal>
+        </goals>
+        <properties>
+            <maven.test.skip>false</maven.test.skip>
+        </properties>
+    </action>
+    <action>
+        <actionName>run.single.main</actionName>
+        <goals>
+            <goal>process-classes</goal>
+            <goal>org.codehaus.mojo:exec-maven-plugin:1.1.1:exec</goal>
+        </goals>
+        <properties>
+            <exec.classpathScope>${classPathScope}</exec.classpathScope>
+            <exec.args>-javaagent:${spring.instrument.path} -classpath %classpath ${packageClassName}</exec.args>
+            <exec.executable>java</exec.executable>
+        </properties>
+    </action>
+    <action>
+        <actionName>debug.single.main</actionName>
+        <goals>
+            <goal>process-classes</goal>
+            <goal>org.codehaus.mojo:exec-maven-plugin:1.1.1:exec</goal>
+        </goals>
+        <properties>
+            <exec.classpathScope>${classPathScope}</exec.classpathScope>
+            <jpda.listen>true</jpda.listen>
+            <exec.args>-Xdebug -Xrunjdwp:transport=dt_socket,server=n,address=${jpda.address} -javaagent:${spring.instrument.path} -classpath %classpath ${packageClassName}</exec.args>
+            <jpda.stopclass>${packageClassName}</jpda.stopclass>
+            <exec.executable>java</exec.executable>
+        </properties>
+    </action>
+    <action>
+        <actionName>debug.test.single</actionName>
+        <goals>
+            <goal>test-compile</goal>
+            <goal>surefire:test</goal>
+        </goals>
+        <properties>
+            <jpda.listen>true</jpda.listen>
+            <maven.surefire.debug>-Xdebug -Xrunjdwp:transport=dt_socket,server=n,address=${jpda.address} -javaagent:${spring.instrument.path}</maven.surefire.debug>
+            <jpda.stopclass>${packageClassName}</jpda.stopclass>
+            <forkMode>once</forkMode>
+            <test>${className}</test>
+        </properties>
+    </action>
+    <action>
+        <actionName>test.single</actionName>
+        <goals>
+            <goal>test-compile</goal>
+            <goal>surefire:test</goal>
+        </goals>
+        <properties>
+            <forkMode>once</forkMode>
+            <argLine>-javaagent:${spring.instrument.path}</argLine>
+            <test>${className}</test>
+        </properties>
+    </action>
+    <action>
+        <actionName>CUSTOM-Debug Test project</actionName>
+        <displayName>Debug Test project</displayName>
+        <goals>
+            <goal>test</goal>
+        </goals>
+        <properties>
+            <jpda.listen>true</jpda.listen>
+            <maven.test.skip>false</maven.test.skip>
+            <maven.surefire.debug>-Xdebug -Xrunjdwp:transport=dt_socket,server=n,address=${jpda.address} -javaagent:${spring.instrument.path}</maven.surefire.debug>
+            <forkMode>once</forkMode>
+        </properties>
+    </action>
+    <action>
+            <actionName>CUSTOM-Clean, Build &amp; Test</actionName>
+            <displayName>Clean, Build &amp; Test</displayName>
+            <goals>
+                <goal>clean</goal>
+                <goal>install</goal>
+            </goals>
+            <properties>
+                <maven.test.skip>false</maven.test.skip>
+            </properties>
+        </action>
+</actions>
