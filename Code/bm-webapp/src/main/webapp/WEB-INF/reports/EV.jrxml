@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- * ***********************************************************************
+ *   Copyright (c) 2010 BIPOLAR
+ *   Confidential and Proprietary
+ *   All Rights Reserved
+ *
+ * @(#)$Id: EV.jrxml 366 2010-11-23 16:26:22Z zerocoolx@gmail.com $
+ * Last Revised By   : $Author: zerocoolx@gmail.com $
+ * Last Checked In   : $Date: 2010-11-23 10:26:22 -0600 (Tue, 23 Nov 2010) $
+ * Last Version      : $Revision: 366 $
+ *
+ * Original Author   : Humberto Garcia
+ * Notes             :
+ * *********************************************************************** -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="EarnedValue" pageWidth="1440" pageHeight="2000" orientation="Landscape" columnWidth="1400" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true">
+	<property name="ireport.zoom" value="1.0"/>
+    <property name="ireport.x" value="0"/>
+    <property name="ireport.y" value="0"/>
+    <parameter name="project_id" class="java.lang.Integer"/>
+    <queryString language="SQL"><![CDATA[select r.d,
+(select sum(t.ESTIMATEDHOURS) from app.TASK as t, app.PROJECT as p where t.ENDDATE <= r.d and t.PROJECT_PROJECTID = $P{project_id}) as PV,
+(select sum(t.ESTIMATEDHOURS) from app.TASK as t, app.PROJECT as p where t.COMPLETIONDATE <= r.d and t.TASKSTATE = 2 and t.PROJECT_PROJECTID = $P{project_id}) as EV,
+(select sum(t.INVESTEDHOURS) from app.TASK as t, app.PROJECT as p where t.COMPLETIONDATE <= r.d and t.TASKSTATE = 2 and t.PROJECT_PROJECTID = $P{project_id}) as AC
+from app.relevantdates as r, app.PROJECT as p where r.id = p.PROJECTID and r.id = $P{project_id}]]></queryString>
+	<field name="D" class="java.sql.Date"/>
+	<field name="PV" class="java.lang.Integer"/>
+	<field name="EV" class="java.lang.Integer"/>
+	<field name="AC" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="1400" height="79"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="24"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Valor Ganado"]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="66">
+			<textField>
+				<reportElement x="33" y="46" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="14"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Fecha"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="133" y="46" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="14"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["AC"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="233" y="46" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="14"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["PV"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="333" y="46" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="14"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["EV"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="133" y="0" width="180" height="32"/>
+				<textElement>
+					<font fontName="Arial" size="20"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Tabla de valores"]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="22">
+			<textField>
+				<reportElement x="33" y="0" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="14"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{D}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="133" y="0" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="14"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{AC}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="233" y="2" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="14"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{PV}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="333" y="2" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="14"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{EV}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="494" splitType="Stretch">
+			<lineChart>
+				<chart>
+					<reportElement x="0" y="64" width="1400" height="314"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["PV"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{D}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{PV}]]></valueExpression>
+					</categorySeries>
+					<categorySeries>
+						<seriesExpression><![CDATA["AC"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{D}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{AC}]]></valueExpression>
+					</categorySeries>
+					<categorySeries>
+						<seriesExpression><![CDATA["EV"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{D}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{EV}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<linePlot>
+					<plot labelRotation="90.0"/>
+					<categoryAxisFormat labelRotation="90.0">
+						<axisFormat>
+							<labelFont/>
+							<tickLabelFont/>
+						</axisFormat>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat>
+							<labelFont/>
+							<tickLabelFont/>
+						</axisFormat>
+					</valueAxisFormat>
+				</linePlot>
+			</lineChart>
+			<textField>
+				<reportElement x="33" y="378" width="117" height="24"/>
+				<textElement>
+					<font fontName="Arial" size="16"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Estado Actual"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="33" y="402" width="46" height="20"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["AC"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="33" y="422" width="46" height="20"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["PV"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="33" y="442" width="46" height="20"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["EV"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="79" y="402" width="71" height="20"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{AC}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="79" y="422" width="71" height="20"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{PV}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="79" y="442" width="71" height="20"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{EV}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="1400" height="39"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="20"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Gráfica de Valor Ganado"]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

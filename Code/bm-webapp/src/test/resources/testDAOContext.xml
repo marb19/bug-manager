@@ -36,19 +36,9 @@
     <ctx:component-scan base-package="mx.itesm.gda.bm.model.dao.impl"/>
     <ctx:component-scan base-package="mx.itesm.gda.bm.biz.impl"/>
 
-    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
-          destroy-method="close">
-        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://localhost/bm"/>
-        <property name="username" value="root"/>
-        <property name="password" value=""/>
-        <property name="initialSize" value="1"/>
-        <property name="maxActive" value="20"/>
-        <property name="maxIdle" value="1"/>
-        <property name="maxWait" value="1000"/>
-        <property name="minEvictableIdleTimeMillis" value="100"/>
-        <property name="minIdle" value="1"/>
-        <property name="timeBetweenEvictionRunsMillis" value="1000"/>
+    <bean id="dataSource" class="org.apache.derby.jdbc.EmbeddedDataSource">
+        <property name="databaseName" value="memory:BMDB"/>
+        <property name="createDatabase" value="create"/>
     </bean>
 
     <bean id="entityManagerFactory"
