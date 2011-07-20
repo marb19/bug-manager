@@ -37,6 +37,12 @@
     <ctx:component-scan base-package="mx.itesm.gda.bm.biz.impl"/>
     <ctx:component-scan base-package="mx.itesm.gda.bm.session"/>
 
+    <bean id="dataSource" class="org.apache.derby.jdbc.EmbeddedDataSource">
+        <property name="databaseName" value="BMDB"/>
+        <property name="createDatabase" value="create"/>
+    </bean>
+
+    <!--
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
           destroy-method="close">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
@@ -51,6 +57,7 @@
         <property name="minIdle" value="1"/>
         <property name="timeBetweenEvictionRunsMillis" value="1000"/>
     </bean>
+    -->
 
     <bean id="entityManagerFactory"
           class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
@@ -61,7 +68,8 @@
         </property>
         <property name="jpaProperties">
             <props>
-                <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</prop>
+                <prop key="hibernate.dialect">org.hibernate.dialect.DerbyDialect</prop>
+                <!-- <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</prop> -->
                 <prop key="hibernate.cache.provider_class">org.hibernate.cache.HashtableCacheProvider</prop>
                 <prop key="hibernate.hbm2ddl.auto">update</prop>
                 <prop key="hibernate.connection.release_mode">after_transaction</prop>

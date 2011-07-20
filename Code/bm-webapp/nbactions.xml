@@ -20,7 +20,7 @@
         </goals>
         <properties>
             <exec.classpathScope>${classPathScope}</exec.classpathScope>
-            <exec.args>-javaagent:${spring.instrument.path} -classpath %classpath ${packageClassName}</exec.args>
+            <exec.args>-Dderby.system.home=${derby.system.home} -javaagent:${spring.instrument.path} -classpath %classpath ${packageClassName}</exec.args>
             <exec.executable>java</exec.executable>
         </properties>
     </action>
@@ -60,7 +60,7 @@
         </goals>
         <properties>
             <forkMode>once</forkMode>
-            <argLine>-javaagent:${spring.instrument.path}</argLine>
+            <argLine>-Dderby.system.home=${derby.system.home} -javaagent:${spring.instrument.path}</argLine>
             <test>${className}</test>
         </properties>
     </action>
