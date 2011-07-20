@@ -130,10 +130,10 @@
         <property name="port" value="25025"/>
     </bean>
 
-    <!--<bean class="mx.itesm.gda.bm.utils.UserAdminInitializer">
+    <bean class="mx.itesm.gda.bm.utils.UserAdminInitializer">
         <property name="userName" value="admin"/>
         <property name="password" value="admin"/>
         <property name="fullName" value="Administrador del Sistema"/>
         <property name="email" value="admin@bm.com.mx"/>
-    </bean>-->
+    </bean>
 </beans>
