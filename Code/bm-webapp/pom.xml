@@ -216,12 +216,6 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>net.sf.jasperreports</groupId>
-            <artifactId>jasperreports</artifactId>
-            <scope>compile</scope>
-        </dependency>
-
-        <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
             <scope>runtime</scope>
@@ -263,10 +257,6 @@
                 <executions>
                     <execution>
                         <id>compile-aspects</id>
-                        <phase>compile</phase>
-                    </execution>
-                    <execution>
-                        <id>compile-jasperreports</id>
                         <phase>compile</phase>
                     </execution>
                 </executions>
