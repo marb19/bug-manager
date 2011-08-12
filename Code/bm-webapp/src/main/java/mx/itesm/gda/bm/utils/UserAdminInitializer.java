@@ -72,40 +72,6 @@ public class UserAdminInitializer {
         }
     }
 
-    @PostConstruct
-    @Transactional
-    private void checkView() {
-        LOGGER.warn("Checking RELEVANTDATES view");
-
-        Query q = em.createNativeQuery("SELECT COUNT(*) "
-                + "FROM SYS.SYSSCHEMAS S "
-                + "JOIN SYS.SYSTABLES T ON (S.SCHEMAID = T.SCHEMAID) "
-                + "JOIN SYS.SYSVIEWS V ON (T.TABLEID = V.TABLEID) "
-                + "WHERE S.SCHEMANAME = :schemaName "
-                + "AND T.TABLENAME = :tableName "
-                + "AND T.TABLETYPE = :tableType");
-
-        int c = (Integer)q.setParameter("schemaName", "APP").
-                setParameter("tableName", "RELEVANTDATES").
-                setParameter("tableType", "V").
-                getSingleResult();
-
-        if(c != 1) {
-            LOGGER.warn("Creating RELEVANTDATES view");
-
-            q = em.createNativeQuery("CREATE VIEW APP.RELEVANTDATES AS "
-                    + "(SELECT T.PROJECT_PROJECTID ID, T.STARTDATE D "
-                    + "FROM APP.TASK T) UNION "
-                    + "(SELECT T.PROJECT_PROJECTID ID, T.COMPLETIONDATE D "
-                    + "FROM APP.TASK T "
-                    + "WHERE T.COMPLETIONDATE IS NOT NULL) UNION "
-                    + "(SELECT T.PROJECT_PROJECTID ID, T.ENDDATE D "
-                    + "FROM APP.TASK T) ORDER BY D");
-
-            q.executeUpdate();
-        }
-    }
-
     /**
      * @return the userName
      */
