@@ -15,7 +15,7 @@
  * *********************************************************************** -->
 <aspectj>
     <!--<weaver options="-verbose -showWeaveInfo -Xreweavable">-->
-    <weaver options="-Xreweavable">
+    <weaver options="-Xreweavable -verbose -showWeaveInfo">
         <include within="mx.itesm.gda.bm..*"/>
     </weaver>
     <aspects>
