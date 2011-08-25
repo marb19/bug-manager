@@ -50,9 +50,6 @@ public class DefectType extends AbstractItem {
     @Column(length = 4095, nullable = false)
     private String defectTypeDescription;
 
-    @ManyToOne(optional = false)
-    private Project project;
-
     /**
      * @return the taskId
      */
@@ -94,19 +91,4 @@ public class DefectType extends AbstractItem {
     public void setDefectTypeDescription(String defectTypeDescription) {
         this.defectTypeDescription = defectTypeDescription;
     }
-
-    /**
-     * @return the project
-     */
-    public Project getProject() {
-        return project;
-    }
-
-    /**
-     * @param project the project to set
-     */
-    public void setProject(Project project) {
-        this.project = project;
-    }
-
 }
