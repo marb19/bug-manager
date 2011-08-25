@@ -13,9 +13,8 @@
  * ************************************************************************ */
 package mx.itesm.gda.bm.controllers;
 
-import mx.itesm.gda.bm.biz.UserManagementBizOp;
+import mx.itesm.gda.bm.biz.DefectTypeManagementBizOp;
 import mx.itesm.gda.bm.utils.UserLogged;
-import mx.itesm.gda.bm.utils.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -32,11 +31,11 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @Scope("request")
 @Controller
-@RequestMapping("/newUser")
-public class NewUserController extends BaseController{
+@RequestMapping("/newDefectType")
+public class NewDefectTypeController extends BaseController{
 
     @Autowired
-    private UserManagementBizOp userMgr;
+    private DefectTypeManagementBizOp defectTypeMgr;
 
     @RequestMapping(method = RequestMethod.GET)
     @Transactional(readOnly = true)
@@ -48,30 +47,16 @@ public class NewUserController extends BaseController{
     @RequestMapping(method = RequestMethod.POST)
     @Transactional
     @UserLogged(adminRequired = true)
-    public String newUser(
-            @RequestParam("userName") String userName,
-            @RequestParam(value = "isAdministrator", defaultValue = "false") boolean isAdministrator,
-            @RequestParam("fullName") String fullName,
-            @RequestParam("password") String password,
-            @RequestParam("email") String email,
+    public String newDefectType(
+            @RequestParam("defectTypeName") String defectTypeName,
+            @RequestParam("defectTypeDescription") String defectTypeDescription,
             ModelMap model) {
         
-        if (userName.equals("") || fullName.equals("") || password.equals("")
-                || email.equals("")) {
+        if (defectTypeName.equals("") || defectTypeDescription.equals("")) {
             throw new ControllerException("No se admiten campos vacios");
         }
-        if (!WebUtils.checkEmail(email)) {
-            throw new ControllerException("Formato de email incorrecto");
-        }
-        if (userMgr.getUser(userName) != null) {
-            throw new ControllerException("Nombre de usuario duplicado");
-        }
-        if (userMgr.getUserByEmail(email) != null) {
-            throw new ControllerException("Email duplicado");
-        }
-        String user = userMgr.createUser(userName, isAdministrator, fullName,
-                password, email);
+        int dt = defectTypeMgr.createDefectType(defectTypeName, defectTypeDescription);
 
-        return "redirect:listUsers.do";
+        return "redirect:listDefectTypes.do";
     }
 }
