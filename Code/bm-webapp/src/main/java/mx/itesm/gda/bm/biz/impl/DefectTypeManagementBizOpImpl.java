@@ -10,26 +10,26 @@ import java.util.List;
 import java.util.Map;
 import mx.itesm.gda.bm.biz.BizException;
 import mx.itesm.gda.bm.biz.DefectTypeManagementBizOp;;
-import mx.itesm.gda.bm.model.dao.UserDAO;
-import mx.itesm.gda.bm.model.User;
-import mx.itesm.gda.bm.model.DefectType;
-import org.springframework.beans.factory.annotation.Autowired;
-import mx.itesm.gda.bm.model.dao.DefectTypeDAO;
-import org.springframework.transaction.annotation.Propagation;
-import mx.itesm.gda.bm.model.dao.UserDAO;
-import mx.itesm.gda.bm.model.User;
-import mx.itesm.gda.bm.model.DefectType;
-import org.springframework.beans.factory.annotation.Autowired;
-import mx.itesm.gda.bm.model.dao.DefectTypeDAO;
 import org.springframework.transaction.annotation.Transactional;
-import mx.itesm.gda.bm.model.dao.UserDAO;
-import mx.itesm.gda.bm.model.User;
+import org.springframework.transaction.annotation.Propagation;
 import mx.itesm.gda.bm.model.DefectType;
 import org.springframework.beans.factory.annotation.Autowired;
 import mx.itesm.gda.bm.model.dao.DefectTypeDAO;
+import org.springframework.context.annotation.Scope;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.annotation.Propagation;
-import mx.itesm.gda.bm.model.dao.UserDAO;
-import mx.itesm.gda.bm.model.User;
+import mx.itesm.gda.bm.model.DefectType;
+import org.springframework.beans.factory.annotation.Autowired;
+import mx.itesm.gda.bm.model.dao.DefectTypeDAO;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.annotation.Propagation;
+import mx.itesm.gda.bm.model.DefectType;
+import org.springframework.beans.factory.annotation.Autowired;
+import mx.itesm.gda.bm.model.dao.DefectTypeDAO;
+import org.springframework.context.annotation.Scope;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.annotation.Propagation;
 import mx.itesm.gda.bm.model.DefectType;
 import org.springframework.beans.factory.annotation.Autowired;
 import mx.itesm.gda.bm.model.dao.DefectTypeDAO;
@@ -38,38 +38,38 @@ import mx.itesm.gda.bm.model.dao.DefectTypeDAO;
  *
  * @author CDE-Marco
  */
+@Scope("prototype")
+@Component
 public class DefectTypeManagementBizOpImpl extends AbstractBizOp implements
         DefectTypeManagementBizOp{
     
     @Autowired
     private DefectTypeDAO defectTypeDAO;
-    
-    @Autowired
-    private UserDAO userDAO;
-    
+
     @Override
-    public List<Map<String, ?>> retrieveDefectTypes(String userName){
+    @Transactional(readOnly = true, propagation = Propagation.MANDATORY)
+    public List<Map<String, ?>> retrieveDefectTypes(){
     
         List<Map<String, ?>> ret = new ArrayList<Map<String, ?>>();
-        User user = userDAO.findByUserName(userName);
 
-        if(user.isAdministrator()) {
-            List<DefectType> defectTypes;
-            defectTypes = defectTypeDAO.getAll();
+        List<DefectType> defectTypes;
+        defectTypes = defectTypeDAO.getAll();
             
-            for(DefectType defectType : defectTypes) {
-                Map<String, Object> dt = new HashMap<String, Object>();
-                dt.put("defectTypeId", defectType.getDefectTypeId());
-                dt.put("defectTypeName", defectType.getDefectTypeName());
-                dt.put("defectTypeDescription", defectType.getDefectTypeDescription());
-                ret.add(dt);
-            }
+        for(DefectType defectType : defectTypes) {
+            Map<String, Object> dt = new HashMap<String, Object>();
+            dt.put("ID", defectType.getDefectTypeId());
+            dt.put("Name", defectType.getDefectTypeName());
+            dt.put("Description", defectType.getDefectTypeDescription());
+            boolean isEmpty= false/*(Definir condiciones)*/;
+            dt.put("isEmpty", isEmpty);
+            ret.add(dt);
         }
 
         return ret;
     }
     
     @Override
+    @Transactional(propagation = Propagation.MANDATORY)
     public int createDefectType(String defectTypeName, String defectTypeDescription){
         
         DefectType dt = new DefectType();
@@ -81,6 +81,7 @@ public class DefectTypeManagementBizOpImpl extends AbstractBizOp implements
     }
     
     @Override
+    @Transactional(propagation = Propagation.MANDATORY)
     public void modifyDefectType(int defectTypeID, String defectTypeName, String defectTypeDescription){
               
         DefectType dt = defectTypeDAO.findById(defectTypeID);
@@ -93,6 +94,7 @@ public class DefectTypeManagementBizOpImpl extends AbstractBizOp implements
     }
     
     @Override
+    @Transactional(propagation = Propagation.MANDATORY)
     public void deleteDefectType(int defectTypeID){
         
         DefectType dt = defectTypeDAO.findById(defectTypeID);

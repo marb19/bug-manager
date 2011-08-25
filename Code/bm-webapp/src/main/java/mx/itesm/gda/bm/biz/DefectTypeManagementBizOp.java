@@ -14,7 +14,7 @@ import mx.itesm.gda.bm.model.Project;
  */
 public interface DefectTypeManagementBizOp extends BizOp{
     
-    public List<Map<String, ?>> retrieveDefectTypes(String userName);
+    public List<Map<String, ?>> retrieveDefectTypes();
     
     public int createDefectType(String defectTypeName, String defectTypeDescription);
     
