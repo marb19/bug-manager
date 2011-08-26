@@ -13,9 +13,9 @@
 			
 			function confirmDeleteDefectType(defectTypeID)
 			{
-				if (confirm("Estás seguro de borrar el tipo de defecto " + userName +"?"))
+				if (confirm("Estás seguro de borrar el tipo de defecto " + defectTypeID +"?"))
 				{
-					goToUrl("deleteUser.do?defectTypeID"+defectTypeID);
+					goToUrl("deleteDefectType.do?defectTypeId="+defectTypeID);
 				}
 			}
 		</script>
@@ -73,7 +73,7 @@
                                             <td>${dt.Description}</td>
                                             <td>
                                             #if($dt.isEmpty)
-                                            <a href="#" onclick="confirmDeleteDefectType('${u.userName}');">Borrar</a>
+                                            <a href="#" onclick="confirmDeleteDefectType(${dt.ID});">Borrar</a>
                                             #end
                                             </td>
 					</tr>

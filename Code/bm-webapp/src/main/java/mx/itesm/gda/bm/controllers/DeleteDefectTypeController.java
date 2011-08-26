@@ -1,5 +1,5 @@
 /* ***************************************************************************
- *   Copyright (c) 2010 BIPOLAR
+ *   Copyright (c) 2011 BM
  *   Confidential and Proprietary
  *   All Rights Reserved
  *
