@@ -1,5 +1,5 @@
 /* ***************************************************************************
- *   Copyright (c) 2010 BIPOLAR
+ *   Copyright (c) 2011 BM
  *   Confidential and Proprietary
  *   All Rights Reserved
  *
@@ -43,7 +43,7 @@ public class ModifyDefectTypeController extends BaseController {
     @RequestMapping(method = RequestMethod.GET)
     @Transactional
     @UserLogged
-    public String getDefectTypeData(@RequestParam("defectTypeId") int defectTypeID,
+    public String getDefectTypeData(@RequestParam("defectTypeID") int defectTypeID,
             ModelMap model) {
         Map<String, ?> dt = defectTypeMgr.getDefectType(defectTypeID);
         model.put("dt", dt);
@@ -62,10 +62,13 @@ public class ModifyDefectTypeController extends BaseController {
         if(defectTypeName.equals("") || defectTypeDescription.equals("")) {
             throw new ControllerException("No se admiten campos vacios");
         }
+        if (defectTypeID <= 0) {
+            throw new ControllerException("Illegal defectTypeID (Less or equal to zero)");
+        }
         
         defectTypeMgr.modifyDefectType(defectTypeID, defectTypeName, defectTypeDescription);
 
-        return "redirect:listUsers.do";
+        return "redirect:listDefectTypes.do";
     }
 
 }
