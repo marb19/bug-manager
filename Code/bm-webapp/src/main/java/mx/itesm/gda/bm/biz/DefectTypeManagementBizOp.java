@@ -20,7 +20,6 @@ package mx.itesm.gda.bm.biz;
 
 import java.util.List;
 import java.util.Map;
-import mx.itesm.gda.bm.model.Project;
 
 /**
  *

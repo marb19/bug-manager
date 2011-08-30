@@ -65,7 +65,7 @@ public class Defect extends AbstractItem {
     @ManyToOne(optional = true)
     private Task inyectionTask;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = true)
     private Phase remotionPhase;
 
     @Column(length = 255, nullable = true)
@@ -99,7 +99,7 @@ public class Defect extends AbstractItem {
     private Date openDate;
 
     @Temporal(TemporalType.DATE)
-    @Column(nullable = false)
+    @Column(nullable = true)
     private Date closeDate;
 
     @Enumerated(EnumType.ORDINAL)
