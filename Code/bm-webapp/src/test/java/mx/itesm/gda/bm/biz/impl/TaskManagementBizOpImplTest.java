@@ -60,13 +60,13 @@ public class TaskManagementBizOpImplTest {
     private TaskCommentDAO taskCommentDAOMock;
 
     private static User createUser(String userName, String fullName,
-            String email, String password, boolean administrator) {
+            String email, String password, int permissions) {
         User u = new User();
         u.setUserName(userName);
         u.setFullName(fullName);
         u.setEmail(email);
         u.setPassword(password);
-        u.setAdministrator(administrator);
+        u.setPermissions(permissions);
         return u;
     }
 
@@ -154,7 +154,7 @@ public class TaskManagementBizOpImplTest {
         List<TaskComment> tc = new ArrayList<TaskComment>();
         List<TaskCompletionReport> tcr = new ArrayList<TaskCompletionReport>();
         List<Task> t = new ArrayList<Task>();
-        User u = createUser("user1", "User1", "user1@bipolar.com", "user1", false);
+        User u = createUser("user1", "User1", "user1@bipolar.com", "user1", 10);
         Project p = createProject(11, "Proyecto1", t, "Desc1", 
                 createDate(11, 2, 2010), createDate(13, 2, 2010));
         t.add(createTask("task1", "Es la tarea 1", u, 20,
@@ -208,7 +208,7 @@ public class TaskManagementBizOpImplTest {
 
         List<TaskComment> tc = new ArrayList<TaskComment>();
         List<TaskCompletionReport> tcr = new ArrayList<TaskCompletionReport>();
-        User u = createUser("user1", "User1", "user1@bipolar.com", "user1",false);
+        User u = createUser("user1", "User1", "user1@bipolar.com", "user1",10);
         Project p = createProject(11, "Proyecto1", new ArrayList<Task>(), "Desc1", 
                 createDate(9, 2, 2010), createDate(13, 2, 2010));
         Task t = createTask("task1", "Es la tarea 1", u, 20,
@@ -242,7 +242,7 @@ public class TaskManagementBizOpImplTest {
 
         List<TaskComment> tc = new ArrayList<TaskComment>();
         List<TaskCompletionReport> tcr = new ArrayList<TaskCompletionReport>();
-        User u = createUser("user1", "User1", "user1@bipolar.com", "user1",false);
+        User u = createUser("user1", "User1", "user1@bipolar.com", "user1",10);
         Project p = createProject(11, "Proyecto1", new ArrayList<Task>(), "Desc1",
                 createDate(9, 2, 2010), createDate(13, 2, 2010));
         Task t = createTask("task1", "Es la tarea 1", u, 20,
@@ -273,7 +273,7 @@ public class TaskManagementBizOpImplTest {
     public void testCreateTask() {
         LOGGER.info("createTask");
 
-        User u = createUser("user1", "User1", "user1@bipolar.com", "user1",false);
+        User u = createUser("user1", "User1", "user1@bipolar.com", "user1",10);
         Project p = createProject(1, "Proyecto1", new ArrayList<Task>(), "Desc1",
                 createDate(9, 2, 2010), createDate(13, 2, 2010));
 
@@ -323,7 +323,7 @@ public class TaskManagementBizOpImplTest {
         exceptionThrown = false;
         List<TaskComment> tc = new ArrayList<TaskComment>();
         List<TaskCompletionReport> tcr = new ArrayList<TaskCompletionReport>();
-        User u = createUser("user1", "User1", "user1@bipolar.com", "user1",false);
+        User u = createUser("user1", "User1", "user1@bipolar.com", "user1",10);
         Project p = createProject(11, "Proyecto1", new ArrayList<Task>(), "Desc1",
                 createDate(9, 2, 2010), createDate(13, 2, 2010));
         Task t = createTask("task1", "Es la tarea 1", u, 20,
@@ -395,8 +395,8 @@ public class TaskManagementBizOpImplTest {
 
         List<TaskComment> tc = new ArrayList<TaskComment>();
         List<TaskCompletionReport> tcr = new ArrayList<TaskCompletionReport>();
-        User u = createUser("user1", "User1", "user1@bipolar.com", "user1",false);
-        User u2 = createUser("user2", "User1", "user1@bipolar.com", "user1",false);
+        User u = createUser("user1", "User1", "user1@bipolar.com", "user1",10);
+        User u2 = createUser("user2", "User1", "user1@bipolar.com", "user1",10);
         Project p = createProject(11, "Proyecto1", new ArrayList<Task>(), "Desc1",
                 createDate(9, 2, 2010), createDate(13, 2, 2010));
         Task t = createTask("task1", "Es la tarea 1", u, 20,
@@ -514,7 +514,7 @@ public class TaskManagementBizOpImplTest {
 
         List<TaskComment> tc = new ArrayList<TaskComment>();
         List<TaskCompletionReport> tcr = new ArrayList<TaskCompletionReport>();
-        User u = createUser("user1", "User1", "user1@bipolar.com", "user1",false);
+        User u = createUser("user1", "User1", "user1@bipolar.com", "user1",10);
         Project p = createProject(11, "Proyecto1", new ArrayList<Task>(), "Desc1",
                 createDate(9, 2, 2010), createDate(13, 2, 2010));
         Task t = createTask("task1", "Es la tarea 1", u, 20,

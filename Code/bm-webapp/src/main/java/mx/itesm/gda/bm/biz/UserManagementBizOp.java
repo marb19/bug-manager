@@ -26,12 +26,12 @@ public interface UserManagementBizOp extends BizOp {
 
     public List<Map<String, ?>> retrieveUsers();
 
-    public String createUser(String userName, boolean isAdmin, String fullName,
+    public String createUser(String userName, int permissions, String fullName,
             String password, String email);
 
     public void deleteUser(String userName);
 
-    public void modifyUser(String userName, boolean isAdmin, String fullName,
+    public void modifyUser(String userName, int permissions, String fullName,
             String email);
 
     public void modifyUserPassword(String userName, String password);

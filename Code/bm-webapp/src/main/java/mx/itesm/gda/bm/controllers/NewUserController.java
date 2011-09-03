@@ -50,7 +50,7 @@ public class NewUserController extends BaseController{
     @UserLogged(adminRequired = true)
     public String newUser(
             @RequestParam("userName") String userName,
-            @RequestParam(value = "isAdministrator", defaultValue = "false") boolean isAdministrator,
+            @RequestParam(value = "permissions", defaultValue = "30") int permissions,
             @RequestParam("fullName") String fullName,
             @RequestParam("password") String password,
             @RequestParam("email") String email,
@@ -69,7 +69,7 @@ public class NewUserController extends BaseController{
         if (userMgr.getUserByEmail(email) != null) {
             throw new ControllerException("Email duplicado");
         }
-        String user = userMgr.createUser(userName, isAdministrator, fullName,
+        String user = userMgr.createUser(userName, permissions, fullName,
                 password, email);
 
         return "redirect:listUsers.do";

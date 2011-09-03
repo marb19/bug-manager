@@ -55,7 +55,7 @@ public class ModifyUserController extends BaseController {
     @UserLogged(adminRequired = true)
     public String updateUser(
             @RequestParam("userName") String userName,
-            @RequestParam(value = "isAdministrator", defaultValue = "false") boolean isAdministrator,
+            @RequestParam(value = "permissions", defaultValue = "10") int permissions,
             @RequestParam("fullName") String fullName,
             @RequestParam("email") String email,
             ModelMap model) {
@@ -67,7 +67,7 @@ public class ModifyUserController extends BaseController {
             throw new ControllerException("Formato de email incorrecto");
         }
         
-        userMgr.modifyUser(userName, isAdministrator, fullName, email);
+        userMgr.modifyUser(userName, permissions, fullName, email);
 
         return "redirect:listUsers.do";
     }

@@ -61,14 +61,14 @@ public class ProjectManagementBizOpImplTest {
     private UserDAO userDAOMock;
 
     private static User createUser(String userName, String fullName,
-            String email, String password, boolean administrator,
+            String email, String password, int permissions,
             String recoveryTicket, Date recoveryExpiration) {
         User u = new User();
         u.setUserName(userName);
         u.setFullName(fullName);
         u.setEmail(email);
         u.setPassword(password);
-        u.setAdministrator(administrator);
+        u.setPermissions(permissions);
         u.setPasswordRecoveryTicket(recoveryTicket);
         u.setPasswordRecoveryExpiration(recoveryExpiration);
         u.setAssignedTasks(Collections.EMPTY_LIST);
@@ -119,7 +119,7 @@ public class ProjectManagementBizOpImplTest {
 
         EasyMock.expect(userDAOMock.findByUserName("user1")).
                 andReturn(createUser("user1", "Administrator",
-                "admin@bipolar.mx", "Password", true, null, null));
+                "admin@bipolar.mx", "Password", 30, null, null));
         EasyMock.expect(projectDAOMock.getAll()).andReturn(ps);
         EasyMock.replay(userDAOMock, projectDAOMock);
 
@@ -129,7 +129,7 @@ public class ProjectManagementBizOpImplTest {
         EasyMock.reset(userDAOMock, projectDAOMock);
         EasyMock.expect(userDAOMock.findByUserName("user1")).
                 andReturn(createUser("user1", "Administrator",
-                "admin@bipolar.mx", "Password", false, null, null));
+                "admin@bipolar.mx", "Password", 10, null, null));
         EasyMock.expect(projectDAOMock.searchByUserNameEnrolled("user1")).andReturn(ps);
         EasyMock.replay(userDAOMock, projectDAOMock);
 

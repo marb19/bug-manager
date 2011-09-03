@@ -49,6 +49,7 @@ public class UserManagementBizOpImpl extends AbstractBizOp implements
             Map<String, Object> u = new HashMap<String, Object>();
             u.put("userName", user.getUserName());
             u.put("isAdministrator", user.isAdministrator());
+            u.put("permissions", user.getPermissions());
             u.put("fullName", user.getFullName());
             u.put("email", user.getEmail());
             boolean isEmpty=(user.getAssignedTasks().isEmpty() && 
@@ -63,10 +64,10 @@ public class UserManagementBizOpImpl extends AbstractBizOp implements
 
     @Override
     @Transactional(propagation = Propagation.MANDATORY)
-    public String createUser(String userName, boolean isAdmin, String fullName, String password, String email) {
+    public String createUser(String userName, int permissions, String fullName, String password, String email) {
         User u = new User();
         u.setUserName(userName);
-        u.setAdministrator(isAdmin);
+        u.setPermissions(permissions);
         u.setFullName(fullName);
         u.setPassword(password);
         u.setEmail(email);
@@ -89,12 +90,12 @@ public class UserManagementBizOpImpl extends AbstractBizOp implements
 
     @Override
     @Transactional(propagation = Propagation.MANDATORY)
-    public void modifyUser(String userName, boolean isAdmin, String fullName, String email){
+    public void modifyUser(String userName, int permissions, String fullName, String email){
         User u = userDAO.findByUserName(userName);
         if (u==null){
             throw new BizException("Cannot modify non-existing user");
         }
-        u.setAdministrator(isAdmin);
+        u.setPermissions(permissions);
         u.setFullName(fullName);
         u.setEmail(email);
         userDAO.update(u);
@@ -121,6 +122,7 @@ public class UserManagementBizOpImpl extends AbstractBizOp implements
         Map<String, Object> u = new HashMap<String, Object>();
         u.put("userName", user.getUserName());
         u.put("isAdministrator", user.isAdministrator());
+        u.put("permissions", user.getPermissions());
         u.put("fullName", user.getFullName());
         u.put("email", user.getEmail());
         return u;
@@ -136,6 +138,7 @@ public class UserManagementBizOpImpl extends AbstractBizOp implements
         Map<String, Object> u = new HashMap<String, Object>();
         u.put("userName", user.getUserName());
         u.put("isAdministrator", user.isAdministrator());
+        u.put("permissions", user.getPermissions());
         u.put("fullName", user.getFullName());
         u.put("email", user.getEmail());
         return u;

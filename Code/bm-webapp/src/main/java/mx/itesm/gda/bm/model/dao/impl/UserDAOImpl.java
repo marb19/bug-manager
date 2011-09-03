@@ -46,7 +46,7 @@ public class UserDAOImpl extends BaseItemDAOImpl<User> implements UserDAO {
     public List<User> getAllAdministrators() {
         @SuppressWarnings("unchecked")
         List<User> result = getEntityManager().createQuery(
-                "SELECT u FROM User u WHERE u.administrator = true").
+                "SELECT u FROM User u WHERE u.permissions >= 30").
                 getResultList();
         return result;
     }

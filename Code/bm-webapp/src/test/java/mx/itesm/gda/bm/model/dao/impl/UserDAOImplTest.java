@@ -24,7 +24,6 @@ import mx.itesm.gda.bm.test.utils.TestUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,8 +68,8 @@ public class UserDAOImplTest extends DAODataTester {
                     Assert.assertEquals(u.getUserName(), user_usernames[i]);
                     Assert.assertEquals(u.getPassword(), user_passwords[i]);
                     Assert.assertEquals(u.getFullName(), user_fullnames[i]);
-                    Assert.assertEquals(u.isAdministrator(),
-                            user_administrators[i]);
+                    Assert.assertEquals(u.getPermissions(),
+                            user_permissions[i]);
                     Assert.assertEquals(u.getEmail(), user_emails[i]);
                     Assert.assertEquals(u.getPasswordRecoveryTicket(),
                             user_prtickets[i]);
@@ -99,7 +98,7 @@ public class UserDAOImplTest extends DAODataTester {
         List<User> users = userDAO.getAllAdministrators();
         OUTER:
         for(User u : users) {
-            Assert.assertTrue(u.isAdministrator());
+            Assert.assertTrue(u.getPermissions()>=30);
             for(int i = bitset.nextSetBit(0); i >= 0;
                     i = bitset.nextSetBit(i + 1)) {
                 if(user_usernames[i].equals(u.getUserName())) {
@@ -108,8 +107,8 @@ public class UserDAOImplTest extends DAODataTester {
                     Assert.assertEquals(u.getUserName(), user_usernames[i]);
                     Assert.assertEquals(u.getPassword(), user_passwords[i]);
                     Assert.assertEquals(u.getFullName(), user_fullnames[i]);
-                    Assert.assertEquals(u.isAdministrator(),
-                            user_administrators[i]);
+                    Assert.assertEquals(u.getPermissions(),
+                            user_permissions[i]);
                     Assert.assertEquals(u.getEmail(), user_emails[i]);
                     Assert.assertEquals(u.getPasswordRecoveryTicket(),
                             user_prtickets[i]);
@@ -125,7 +124,7 @@ public class UserDAOImplTest extends DAODataTester {
 
         for(int i = bitset.nextSetBit(0); i >= 0;
                 i = bitset.nextSetBit(i + 1)) {
-            Assert.assertFalse(user_administrators[i]);
+            Assert.assertFalse(user_permissions[i]>=30);
             bitset.clear(i);
         }
 
@@ -146,7 +145,7 @@ public class UserDAOImplTest extends DAODataTester {
             Assert.assertEquals(u.getUserName(), user_usernames[i]);
             Assert.assertEquals(u.getPassword(), user_passwords[i]);
             Assert.assertEquals(u.getFullName(), user_fullnames[i]);
-            Assert.assertEquals(u.isAdministrator(), user_administrators[i]);
+            Assert.assertEquals(u.getPermissions(), user_permissions[i]);
             Assert.assertEquals(u.getEmail(), user_emails[i]);
             Assert.assertEquals(u.getPasswordRecoveryTicket(), user_prtickets[i]);
             Assert.assertEquals(u.getPasswordRecoveryExpiration(),
@@ -182,8 +181,8 @@ public class UserDAOImplTest extends DAODataTester {
                     Assert.assertEquals(u.getUserName(), user_usernames[i]);
                     Assert.assertEquals(u.getPassword(), user_passwords[i]);
                     Assert.assertEquals(u.getFullName(), user_fullnames[i]);
-                    Assert.assertEquals(u.isAdministrator(),
-                            user_administrators[i]);
+                    Assert.assertEquals(u.getPermissions(),
+                            user_permissions[i]);
                     Assert.assertEquals(u.getEmail(), user_emails[i]);
                     Assert.assertEquals(u.getPasswordRecoveryTicket(),
                             user_prtickets[i]);
@@ -224,7 +223,7 @@ public class UserDAOImplTest extends DAODataTester {
             Assert.assertEquals(u.getUserName(), user_usernames[i]);
             Assert.assertEquals(u.getPassword(), user_passwords[i]);
             Assert.assertEquals(u.getFullName(), user_fullnames[i]);
-            Assert.assertEquals(u.isAdministrator(), user_administrators[i]);
+            Assert.assertEquals(u.getPermissions(), user_permissions[i]);
             Assert.assertEquals(u.getEmail(), user_emails[i]);
             Assert.assertEquals(u.getPasswordRecoveryTicket(), user_prtickets[i]);
             Assert.assertEquals(u.getPasswordRecoveryExpiration(),

@@ -79,7 +79,7 @@ public class UserAdminInitializerTest {
         EasyMock.resetToStrict(userDAOMock);
         u = new User();
         u.setUserName("some_admin");
-        u.setAdministrator(true);
+        u.setPermissions(30);
         EasyMock.expect(userDAOMock.getAllAdministrators()).andReturn(
                 Collections.singletonList(u));
         EasyMock.replay(userDAOMock);

@@ -63,7 +63,7 @@
 					<tr>
 						<th>Usuario</th>
 											<th>Nombre completo</th>
-						<th>Administrador</th>
+						<th>Permisos</th>
 						<th>E-mail</th>
 											<th></th>
 						<th></th>
@@ -71,12 +71,18 @@
 					#foreach($u in $users)
 					<tr>
 						<td><a href="modifyUser.do?userName=${u.userName}">${u.userName}</a></td>
-											<td>${u.fullName}</td>
-						#if($u.isAdministrator)
-						<td>Si</td>
-						#else
-						<td>No</td>
-						#end
+						<td>${u.fullName}</td>
+						<td>
+                                                    #if($u.permissions=='30')
+                                                    Administrador/Gerente
+                                                    #else
+                                                        #if($u.permissions=='20')
+                                                        Líder de proyecto
+                                                        #else
+                                                        Usuario
+                                                        #end
+                                                    #end
+                                                </td>
 						<td>${u.email}</td>
 											<td>
 												<a href="modifyUserPassword.do?userName=${u.userName}">Cambiar Password</a>
