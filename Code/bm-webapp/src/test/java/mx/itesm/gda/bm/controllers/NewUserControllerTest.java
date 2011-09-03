@@ -66,10 +66,10 @@ public class NewUserControllerTest {
 
         EasyMock.expect(userMgrMock.getUser("")).andReturn(null);
         EasyMock.expect(userMgrMock.getUserByEmail("")).andReturn(null);
-        EasyMock.expect(userMgrMock.createUser("", true, "", "", "")).andReturn("");
+        EasyMock.expect(userMgrMock.createUser("", 30, "", "", "")).andReturn("");
         EasyMock.replay(userMgrMock);
         try {
-            NewUserController.newUser("", true, "fullName", "pass", "mail@mail.com", new ModelMap());
+            NewUserController.newUser("", 30, "fullName", "pass", "mail@mail.com", new ModelMap());
         } catch (Exception e) {
             exceptionThrown = true;
         } finally {
@@ -81,10 +81,10 @@ public class NewUserControllerTest {
         exceptionThrown = false;
         EasyMock.expect(userMgrMock.getUser("uName")).andReturn(null);
         EasyMock.expect(userMgrMock.getUserByEmail("")).andReturn(null);
-        EasyMock.expect(userMgrMock.createUser("", true, "", "", "")).andReturn("");
+        EasyMock.expect(userMgrMock.createUser("", 30, "", "", "")).andReturn("");
         EasyMock.replay(userMgrMock);
         try {
-            NewUserController.newUser("uName", true, "", "pass", "mail@mail.com", new ModelMap());
+            NewUserController.newUser("uName", 30, "", "pass", "mail@mail.com", new ModelMap());
         } catch (Exception e) {
             exceptionThrown = true;
         } finally {
@@ -96,10 +96,10 @@ public class NewUserControllerTest {
         exceptionThrown = false;
         EasyMock.expect(userMgrMock.getUser("uName")).andReturn(null);
         EasyMock.expect(userMgrMock.getUserByEmail("")).andReturn(null);
-        EasyMock.expect(userMgrMock.createUser("", true, "", "", "")).andReturn("");
+        EasyMock.expect(userMgrMock.createUser("", 30, "", "", "")).andReturn("");
         EasyMock.replay(userMgrMock);
         try {
-            NewUserController.newUser("uName", true, "fullName", "", "mail@mail.com", new ModelMap());
+            NewUserController.newUser("uName", 30, "fullName", "", "mail@mail.com", new ModelMap());
         } catch (Exception e) {
             exceptionThrown = true;
         } finally {
@@ -111,10 +111,10 @@ public class NewUserControllerTest {
         exceptionThrown = false;
         EasyMock.expect(userMgrMock.getUser("uName")).andReturn(null);
         EasyMock.expect(userMgrMock.getUserByEmail("")).andReturn(null);
-        EasyMock.expect(userMgrMock.createUser("", true, "", "", "")).andReturn("");
+        EasyMock.expect(userMgrMock.createUser("", 30, "", "", "")).andReturn("");
         EasyMock.replay(userMgrMock);
         try {
-            NewUserController.newUser("uName", true, "fullName", "pass", "", new ModelMap());
+            NewUserController.newUser("uName", 30, "fullName", "pass", "", new ModelMap());
         } catch (Exception e) {
             exceptionThrown = true;
         } finally {
@@ -126,10 +126,10 @@ public class NewUserControllerTest {
         exceptionThrown = false;
         EasyMock.expect(userMgrMock.getUser("uName")).andReturn(null);
         EasyMock.expect(userMgrMock.getUserByEmail("")).andReturn(null);
-        EasyMock.expect(userMgrMock.createUser("", true, "", "", "")).andReturn("");
+        EasyMock.expect(userMgrMock.createUser("", 30, "", "", "")).andReturn("");
         EasyMock.replay(userMgrMock);
         try {
-            NewUserController.newUser("uName", true, "fullName", "pass", "phonyMail@", new ModelMap());
+            NewUserController.newUser("uName", 30, "fullName", "pass", "phonyMail@", new ModelMap());
         } catch (Exception e) {
             exceptionThrown = true;
         } finally {
@@ -142,10 +142,10 @@ public class NewUserControllerTest {
         Map<String, ?> existingUser = new HashMap<String, Object>();
         EasyMock.expect(userMgrMock.getUser("uName")).andReturn((Map) existingUser);
         EasyMock.expect(userMgrMock.getUserByEmail("")).andReturn(null);
-        EasyMock.expect(userMgrMock.createUser("", true, "", "", "")).andReturn("");
+        EasyMock.expect(userMgrMock.createUser("", 30, "", "", "")).andReturn("");
         EasyMock.replay(userMgrMock);
         try {
-            NewUserController.newUser("uName", true, "fullName", "pass", "mail@mail.com", new ModelMap());
+            NewUserController.newUser("uName", 30, "fullName", "pass", "mail@mail.com", new ModelMap());
         } catch (Exception e) {
             exceptionThrown = true;
         } finally {
@@ -157,10 +157,10 @@ public class NewUserControllerTest {
         exceptionThrown = false;
         EasyMock.expect(userMgrMock.getUser("uName")).andReturn(null);
         EasyMock.expect(userMgrMock.getUserByEmail("mail@mail.com")).andReturn((Map) existingUser);
-        EasyMock.expect(userMgrMock.createUser("", true, "", "", "")).andReturn("");
+        EasyMock.expect(userMgrMock.createUser("", 30, "", "", "")).andReturn("");
         EasyMock.replay(userMgrMock);
         try {
-            NewUserController.newUser("uName", true, "fullName",
+            NewUserController.newUser("uName", 30, "fullName",
                     "pass", "mail@mail.com", new ModelMap());
         } catch (Exception e) {
             exceptionThrown = true;
@@ -173,11 +173,11 @@ public class NewUserControllerTest {
 
         EasyMock.expect(userMgrMock.getUser("uName")).andReturn(null);
         EasyMock.expect(userMgrMock.getUserByEmail("mail@mail.com")).andReturn(null);
-        EasyMock.expect(userMgrMock.createUser("uName", true, "fullName",
+        EasyMock.expect(userMgrMock.createUser("uName", 30, "fullName",
                 "pass", "mail@mail.com")).andReturn("uName");
         EasyMock.replay(userMgrMock);
 
-        String got = NewUserController.newUser("uName", true, "fullName", "pass",
+        String got = NewUserController.newUser("uName", 30, "fullName", "pass",
                 "mail@mail.com", new ModelMap());
         Assert.assertEquals("redirect:listUsers.do", got);
         EasyMock.reset(userMgrMock);

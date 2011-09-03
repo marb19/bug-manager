@@ -58,14 +58,14 @@ public class UserAccessBizOpImplTest {
     private UserDAO userDAOMock;
 
     private static User createUser(String userName, String fullName,
-            String email, String password, boolean administrator,
+            String email, String password, int permissions,
             String recoveryTicket, Date recoveryExpiration) {
         User u = new User();
         u.setUserName(userName);
         u.setFullName(fullName);
         u.setEmail(email);
         u.setPassword(password);
-        u.setAdministrator(administrator);
+        u.setPermissions(permissions);
         u.setPasswordRecoveryTicket(recoveryTicket);
         u.setPasswordRecoveryExpiration(recoveryExpiration);
         u.setAssignedTasks(Collections.EMPTY_LIST);
@@ -81,7 +81,7 @@ public class UserAccessBizOpImplTest {
 
         EasyMock.expect(userDAOMock.findByUserName("sure_admin")).
                 andReturn(createUser("sure_admin", "Administrator",
-                "admin@bipolar.mx", "Password", true, null, null));
+                "admin@bipolar.mx", "Password", 30, null, null));
         EasyMock.replay(userDAOMock);
 
         boolean ret = userAccessBizOp.checkUserAdministrator("sure_admin");
@@ -91,7 +91,7 @@ public class UserAccessBizOpImplTest {
         EasyMock.reset(userDAOMock);
         EasyMock.expect(userDAOMock.findByUserName("no_admin")).
                 andReturn(createUser("no_admin", "No Administrator",
-                "no-admin@bipolar.mx", "Password", false, null, null));
+                "no-admin@bipolar.mx", "Password", 10, null, null));
         EasyMock.replay(userDAOMock);
 
         ret = userAccessBizOp.checkUserAdministrator("no_admin");
@@ -133,7 +133,7 @@ public class UserAccessBizOpImplTest {
 
         EasyMock.expect(userDAOMock.findByUserName("sure_admin")).
                 andReturn(createUser("sure_admin", "Administrator",
-                "admin@bipolar.mx", "Password", true, null, null));
+                "admin@bipolar.mx", "Password", 30, null, null));
         EasyMock.replay(userDAOMock);
 
         boolean ret = userAccessBizOp.checkValidUser("sure_admin");
@@ -143,7 +143,7 @@ public class UserAccessBizOpImplTest {
         EasyMock.reset(userDAOMock);
         EasyMock.expect(userDAOMock.findByUserName("no_admin")).
                 andReturn(createUser("no_admin", "No Administrator",
-                "no-admin@bipolar.mx", "Password", false, null, null));
+                "no-admin@bipolar.mx", "Password", 10, null, null));
         EasyMock.replay(userDAOMock);
 
         ret = userAccessBizOp.checkValidUser("no_admin");
@@ -185,7 +185,7 @@ public class UserAccessBizOpImplTest {
 
         EasyMock.expect(userDAOMock.findByUserName("some_user")).andReturn(
                 createUser("some_user", "Full Name", "some@email.com",
-                "somePasSwoRd", true, null, null));
+                "somePasSwoRd", 30, null, null));
         EasyMock.replay(userDAOMock);
 
         Map<String, ?> umodel = userAccessBizOp.getUserModel("some_user");
@@ -200,7 +200,7 @@ public class UserAccessBizOpImplTest {
         EasyMock.reset(userDAOMock);
         EasyMock.expect(userDAOMock.findByUserName("some_other")).andReturn(
                 createUser("some_other", "Full Name", "some@email.com",
-                "somePasSwoRd", false, null, null));
+                "somePasSwoRd", 10, null, null));
         EasyMock.replay(userDAOMock);
 
         umodel = userAccessBizOp.getUserModel("some_other");
@@ -247,7 +247,7 @@ public class UserAccessBizOpImplTest {
 
         EasyMock.expect(userDAOMock.findByEmail("some@email.com")).andReturn(
                 createUser("some_user", "Full Name", "some@email.com",
-                "somePasSwoRd", true, null, null));
+                "somePasSwoRd", 30, null, null));
         Capture<User> updatedUser = new Capture<User>();
         userDAOMock.update(EasyMock.and(EasyMock.isA(User.class),
                 EasyMock.capture(updatedUser)));
@@ -312,7 +312,7 @@ public class UserAccessBizOpImplTest {
         Capture<User> updatedUser = new Capture<User>();
         EasyMock.expect(userDAOMock.findByRecoveryTicket("qwertyuiop")).
                 andReturn(createUser("some_user", "Full Name", "some@email.com",
-                "12345", Boolean.FALSE, "qwertyuiop", expiration.getTime()));
+                "12345", 10, "qwertyuiop", expiration.getTime()));
         userDAOMock.update(EasyMock.and(EasyMock.capture(updatedUser),
                 EasyMock.isA(User.class)));
         EasyMock.replay(userDAOMock);
@@ -369,7 +369,7 @@ public class UserAccessBizOpImplTest {
 
         EasyMock.expect(userDAOMock.findByUserName("sure_admin")).
                 andReturn(createUser("sure_admin", "Administrator",
-                "admin@bipolar.mx", "Password", true, null, null));
+                "admin@bipolar.mx", "Password", 30, null, null));
         EasyMock.replay(userDAOMock);
 
         boolean ret = userAccessBizOp.validateUserLogin("sure_admin",
@@ -380,7 +380,7 @@ public class UserAccessBizOpImplTest {
         EasyMock.reset(userDAOMock);
         EasyMock.expect(userDAOMock.findByUserName("sure_admin")).
                 andReturn(createUser("sure_admin", "Administrator",
-                "admin@bipolar.mx", "Password", true, null, null));
+                "admin@bipolar.mx", "Password", 30, null, null));
         EasyMock.replay(userDAOMock);
 
         ret = userAccessBizOp.validateUserLogin("sure_admin", "bad_password");
@@ -390,7 +390,7 @@ public class UserAccessBizOpImplTest {
         EasyMock.reset(userDAOMock);
         EasyMock.expect(userDAOMock.findByUserName("sure_admin")).
                 andReturn(createUser("sure_admin", "Administrator",
-                "admin@bipolar.mx", "Password", true, null, null));
+                "admin@bipolar.mx", "Password", 30, null, null));
         EasyMock.replay(userDAOMock);
 
         ret = userAccessBizOp.validateUserLogin("sure_admin", "");
@@ -400,7 +400,7 @@ public class UserAccessBizOpImplTest {
         EasyMock.reset(userDAOMock);
         EasyMock.expect(userDAOMock.findByUserName("sure_admin")).
                 andReturn(createUser("sure_admin", "Administrator",
-                "admin@bipolar.mx", "Password", true, null, null));
+                "admin@bipolar.mx", "Password", 30, null, null));
         EasyMock.replay(userDAOMock);
 
         ret = userAccessBizOp.validateUserLogin("sure_admin", null);
@@ -410,7 +410,7 @@ public class UserAccessBizOpImplTest {
         EasyMock.reset(userDAOMock);
         EasyMock.expect(userDAOMock.findByUserName("no_admin")).
                 andReturn(createUser("no_admin", "No Administrator",
-                "no-admin@bipolar.mx", "Password", false, null, null));
+                "no-admin@bipolar.mx", "Password", 30, null, null));
         EasyMock.replay(userDAOMock);
 
         ret = userAccessBizOp.validateUserLogin("no_admin", "Password");
@@ -420,7 +420,7 @@ public class UserAccessBizOpImplTest {
         EasyMock.reset(userDAOMock);
         EasyMock.expect(userDAOMock.findByUserName("no_admin")).
                 andReturn(createUser("no_admin", "No Administrator",
-                "no-admin@bipolar.mx", "Password", false, null, null));
+                "no-admin@bipolar.mx", "Password", 30, null, null));
         EasyMock.replay(userDAOMock);
 
         ret = userAccessBizOp.validateUserLogin("no_admin", "bad_password");
@@ -430,7 +430,7 @@ public class UserAccessBizOpImplTest {
         EasyMock.reset(userDAOMock);
         EasyMock.expect(userDAOMock.findByUserName("no_admin")).
                 andReturn(createUser("no_admin", "No Administrator",
-                "no-admin@bipolar.mx", "Password", false, null, null));
+                "no-admin@bipolar.mx", "Password", 30, null, null));
         EasyMock.replay(userDAOMock);
 
         ret = userAccessBizOp.validateUserLogin("no_admin", "");
@@ -440,7 +440,7 @@ public class UserAccessBizOpImplTest {
         EasyMock.reset(userDAOMock);
         EasyMock.expect(userDAOMock.findByUserName("no_admin")).
                 andReturn(createUser("no_admin", "No Administrator",
-                "no-admin@bipolar.mx", "Password", false, null, null));
+                "no-admin@bipolar.mx", "Password", 30, null, null));
         EasyMock.replay(userDAOMock);
 
         ret = userAccessBizOp.validateUserLogin("no_admin", null);

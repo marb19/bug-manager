@@ -52,8 +52,8 @@ public abstract class DAODataTester {
         "gisela@bipolar.mx", "marco@bipolar.mx", "alex@bipolar.mx",
         "arturo@bipolar.mx" };
 
-    protected static final Boolean[] user_administrators = { Boolean.TRUE,
-        Boolean.TRUE, Boolean.FALSE, Boolean.FALSE, Boolean.FALSE };
+    protected static final int[] user_permissions = { 30,
+        30, 10, 10, 10 };
 
     protected static final String[] user_prtickets = { "abcdef", null, "cdefgh",
         null, null };
@@ -195,7 +195,7 @@ public abstract class DAODataTester {
             u.setUserName(user_usernames[i]);
             u.setPassword(user_passwords[i]);
             u.setFullName(user_fullnames[i]);
-            u.setAdministrator(user_administrators[i]);
+            u.setPermissions(user_permissions[i]);
             u.setEmail(user_emails[i]);
             u.setPasswordRecoveryTicket(user_prtickets[i]);
             u.setPasswordRecoveryExpiration(user_prtexpirations[i]);

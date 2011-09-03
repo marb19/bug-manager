@@ -150,10 +150,14 @@
 						</tr>
 						<tr>
 							<td>
-								<label for ="isAdministrator" id="isAdministratorLabel">Administrador:</label>
+								<label for ="permissions" id="permissions">Permisos:</label>
 							</td>
 							<td>
-								<input type="checkbox" name="isAdministrator" id="isAdministrator" value="true"/>
+								<select name="permissions" id="permissions">
+                                                                    <option value="10">Usuario</option>
+                                                                    <option value="20">Líder de proyecto</option>
+                                                                    <option value="30">Administrador/Gerente</option>
+                                                                </select>
 							</td>
 						</tr>
 						<tr>

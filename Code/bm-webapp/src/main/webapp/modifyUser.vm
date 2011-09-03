@@ -62,18 +62,37 @@
 						</tr>
 						<tr>
 							<td>
-								<label for ="isAdministrator" id="isAdministrator">Administrador:</label>
+								<label for ="permissions" id="permissions">Permisos:</label>
 							</td>
 							<td>
-								#if($u.isAdministrator)
+								#if($u.permissions=='30')
 									#if($u.userName == $user.userName)
-									<span>Si</span>
-									<input type="hidden" name="isAdministrator" value="true" />
+                                                                            <select name="permissions" id="permissions" disabled="disabled">
+                                                                                <option value="10">Usuario</option>
+                                                                                <option value="20">Líder de proyecto</option>
+                                                                                <option value="30" selected>Administrador/Gerente</option>
+                                                                            </select>
 									#else
-									<input type="checkbox" name="isAdministrator" checked="true" value="true"/>
+                                                                            <select name="permissions" id="permissions">
+                                                                                <option value="10">Usuario</option>
+                                                                                <option value="20">Líder de proyecto</option>
+                                                                                <option value="30" selected>Administrador/Gerente</option>
+                                                                            </select>
 									#end
 								#else
-								<input type="checkbox" name="isAdministrator" value="true"/>
+                                                                        #if($u.permissions=='20')
+                                                                            <select name="permissions" id="permissions">
+                                                                                <option value="10">Usuario</option>
+                                                                                <option value="20" selected>Líder de proyecto</option>
+                                                                                <option value="30">Administrador/Gerente</option>
+                                                                            </select>
+                                                                        #else
+                                                                            <select name="permissions" id="permissions">
+                                                                                <option value="10" selected>Usuario</option>
+                                                                                <option value="20">Líder de proyecto</option>
+                                                                                <option value="30">Administrador/Gerente</option>
+                                                                            </select>
+                                                                        #end
 								#end
 							</td>
 						</tr>

@@ -70,12 +70,12 @@ public class ModifyUserControllerTest {
         LOGGER.info("checkTestUpdateUser");
         boolean exceptionThrown = false;
 
-        userMgrMock.modifyUser("", true, "fullName", "mail@mail.com");
+        userMgrMock.modifyUser("", 30, "fullName", "mail@mail.com");
         EasyMock.expectLastCall();
         EasyMock.replay(userMgrMock);
 
         try {
-            ModifyUserController.updateUser("", true, "fullName",
+            ModifyUserController.updateUser("", 30, "fullName",
                     "mail@mail.com", new ModelMap());
         } catch (Exception e) {
             exceptionThrown = true;
@@ -87,12 +87,12 @@ public class ModifyUserControllerTest {
 
 
 
-        userMgrMock.modifyUser("uName", true, "", "mail@mail.com");
+        userMgrMock.modifyUser("uName", 30, "", "mail@mail.com");
         EasyMock.expectLastCall();
         EasyMock.replay(userMgrMock);
 
         try {
-            ModifyUserController.updateUser("uName", true, "",
+            ModifyUserController.updateUser("uName", 30, "",
                     "mail@mail.com", new ModelMap());
         } catch (Exception e) {
             exceptionThrown = true;
@@ -103,12 +103,12 @@ public class ModifyUserControllerTest {
         exceptionThrown = false;
 
 
-        userMgrMock.modifyUser("uName", true, "fullName", "");
+        userMgrMock.modifyUser("uName", 30, "fullName", "");
         EasyMock.expectLastCall();
         EasyMock.replay(userMgrMock);
 
         try {
-            ModifyUserController.updateUser("uName", true, "fullName", "", new ModelMap());
+            ModifyUserController.updateUser("uName", 30, "fullName", "", new ModelMap());
         } catch (Exception e) {
             exceptionThrown = true;
         } finally {
@@ -118,12 +118,12 @@ public class ModifyUserControllerTest {
         exceptionThrown = false;
 
         
-        userMgrMock.modifyUser("uName", true, "fullName", "phonymail@");
+        userMgrMock.modifyUser("uName", 30, "fullName", "phonymail@");
         EasyMock.expectLastCall();
         EasyMock.replay(userMgrMock);
 
         try {
-            ModifyUserController.updateUser("uName", true, "fullName",
+            ModifyUserController.updateUser("uName", 30, "fullName",
                     "phonymail@", new ModelMap());
         } catch (Exception e) {
             exceptionThrown = true;
@@ -134,11 +134,11 @@ public class ModifyUserControllerTest {
         exceptionThrown = false;
 
 
-        userMgrMock.modifyUser("uName", true, "fullName", "mail@mail.com");
+        userMgrMock.modifyUser("uName", 30, "fullName", "mail@mail.com");
         EasyMock.expectLastCall();
         EasyMock.replay(userMgrMock);
 
-        String got =  ModifyUserController.updateUser("uName", true, "fullName",
+        String got =  ModifyUserController.updateUser("uName", 30, "fullName",
                     "mail@mail.com", new ModelMap());
 
         EasyMock.reset(userMgrMock);

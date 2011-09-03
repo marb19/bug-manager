@@ -52,7 +52,7 @@ public class User extends AbstractItem {
     private String email;
 
     @Column(nullable = false)
-    private boolean administrator;
+    private int permissions;
 
     @Column(length = 64)
     private String passwordRecoveryTicket;
@@ -112,17 +112,24 @@ public class User extends AbstractItem {
     }
 
     /**
-     * @return the administrator
+     * @return the permissions
      */
-    public boolean isAdministrator() {
-        return administrator;
+    public int getPermissions() {
+        return permissions;
     }
 
     /**
-     * @param administrator the administrator to set
+     * @param permissions the permissions to set
      */
-    public void setAdministrator(boolean administrator) {
-        this.administrator = administrator;
+    public void setPermissions(int permissions) {
+        this.permissions = permissions;
+    }
+
+     /**
+     * @return the administrator
+     */
+    public boolean isAdministrator() {
+        return permissions>=30;
     }
 
     /**

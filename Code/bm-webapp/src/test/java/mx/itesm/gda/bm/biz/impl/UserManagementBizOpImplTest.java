@@ -60,7 +60,7 @@ public class UserManagementBizOpImplTest {
         u.setFullName("user1");
         u.setEmail("user1@email.com");
         u.setPassword("123");
-        u.setAdministrator(Boolean.TRUE);
+        u.setPermissions(30);
         u.setAssignedTasks(Collections.EMPTY_LIST);
         u.setAuthoredComments(Collections.EMPTY_LIST);
         u.setAuthoredCompletionReports(Collections.EMPTY_LIST);
@@ -83,7 +83,7 @@ public class UserManagementBizOpImplTest {
         u2.setFullName("user2");
         u2.setEmail("user2@email.com");
         u2.setPassword("123");
-        u2.setAdministrator(Boolean.FALSE);
+        u2.setPermissions(10);
         u2.setAssignedTasks(taskList);
         u2.setAuthoredComments(commentList);
         u2.setAuthoredCompletionReports(reportList);
@@ -94,7 +94,7 @@ public class UserManagementBizOpImplTest {
         u3.setFullName("user3");
         u3.setEmail("user3@email.com");
         u3.setPassword("123");
-        u3.setAdministrator(Boolean.FALSE);
+        u3.setPermissions(10);
         u3.setAssignedTasks(taskList);
         u3.setAuthoredComments(commentList);
         u3.setAuthoredCompletionReports(Collections.EMPTY_LIST);
@@ -105,7 +105,7 @@ public class UserManagementBizOpImplTest {
         u4.setFullName("user4");
         u4.setEmail("user4@email.com");
         u4.setPassword("123");
-        u4.setAdministrator(Boolean.FALSE);
+        u4.setPermissions(10);
         u4.setAssignedTasks(Collections.EMPTY_LIST);
         u4.setAuthoredComments(commentList);
         u4.setAuthoredCompletionReports(reportList);
@@ -116,7 +116,7 @@ public class UserManagementBizOpImplTest {
         u5.setFullName("user5");
         u5.setEmail("user5@email.com");
         u5.setPassword("123");
-        u5.setAdministrator(Boolean.FALSE);
+        u5.setPermissions(10);
         u5.setAssignedTasks(taskList);
         u5.setAuthoredComments(Collections.EMPTY_LIST);
         u5.setAuthoredCompletionReports(reportList);
@@ -127,7 +127,7 @@ public class UserManagementBizOpImplTest {
         u6.setFullName("user6");
         u6.setEmail("user6@email.com");
         u6.setPassword("123");
-        u6.setAdministrator(Boolean.FALSE);
+        u6.setPermissions(10);
         u6.setAssignedTasks(taskList);
         u6.setAuthoredComments(Collections.EMPTY_LIST);
         u6.setAuthoredCompletionReports(Collections.EMPTY_LIST);
@@ -138,7 +138,7 @@ public class UserManagementBizOpImplTest {
         u7.setFullName("user7");
         u7.setEmail("user7@email.com");
         u7.setPassword("123");
-        u7.setAdministrator(Boolean.FALSE);
+        u7.setPermissions(10);
         u7.setAssignedTasks(Collections.EMPTY_LIST);
         u7.setAuthoredComments(commentList);
         u7.setAuthoredCompletionReports(Collections.EMPTY_LIST);
@@ -149,7 +149,7 @@ public class UserManagementBizOpImplTest {
         u8.setFullName("user8");
         u8.setEmail("user8@email.com");
         u8.setPassword("123");
-        u8.setAdministrator(Boolean.FALSE);
+        u8.setPermissions(10);
         u8.setAssignedTasks(Collections.EMPTY_LIST);
         u8.setAuthoredComments(Collections.EMPTY_LIST);
         u8.setAuthoredCompletionReports(reportList);
@@ -159,13 +159,13 @@ public class UserManagementBizOpImplTest {
     }
 
     private static User createUser(String userName, String fullName,
-            String email, String password, boolean administrator) {
+            String email, String password, int permissions) {
         User u = new User();
         u.setUserName(userName);
         u.setFullName(fullName);
         u.setEmail(email);
         u.setPassword(password);
-        u.setAdministrator(administrator);
+        u.setPermissions(permissions);
         return u;
     }
 
@@ -240,7 +240,7 @@ public class UserManagementBizOpImplTest {
                 EasyMock.capture(createdUser)));
         EasyMock.expectLastCall();
         EasyMock.replay(userDAOMock);
-        String name = userManagementBizOp.createUser("test1", true, "test1", "123", "test1@email.com");
+        String name = userManagementBizOp.createUser("test1", 30, "test1", "123", "test1@email.com");
 
         User the_user = createdUser.getValue();
         Assert.assertEquals(name, the_user.getUserName());
@@ -257,7 +257,7 @@ public class UserManagementBizOpImplTest {
                 EasyMock.capture(createdUser)));
         EasyMock.expectLastCall();
         EasyMock.replay(userDAOMock);
-        name = userManagementBizOp.createUser("", false, "", "", "");
+        name = userManagementBizOp.createUser("", 10, "", "", "");
 
         the_user = createdUser.getValue();
         Assert.assertEquals(name, the_user.getUserName());
@@ -290,7 +290,7 @@ public class UserManagementBizOpImplTest {
 
         //Caso de que trate de borrar un usuario existente pero vacío
         exceptionThrown = false;
-        User u = createUser("uName", "fullName", "mail@mail.com", "pass", false);
+        User u = createUser("uName", "fullName", "mail@mail.com", "pass", 10);
         u.setAssignedTasks(new ArrayList<Task>());
         u.setAuthoredComments(new ArrayList<TaskComment>());
         u.setAuthoredCompletionReports(new ArrayList<TaskCompletionReport>());
@@ -380,7 +380,7 @@ public class UserManagementBizOpImplTest {
         EasyMock.expectLastCall();
         EasyMock.replay(userDAOMock);
         try {
-            userManagementBizOp.modifyUser("uName", true, "fullName", "mail@mail.com");
+            userManagementBizOp.modifyUser("uName", 30, "fullName", "mail@mail.com");
         } catch (Exception e) {
             exceptionThrown = true;
         } finally {
@@ -389,14 +389,14 @@ public class UserManagementBizOpImplTest {
         Assert.assertTrue(exceptionThrown);
 
 
-        User u = createUser("uName", "fullName", "mail@mail.com", "pass", true);
+        User u = createUser("uName", "fullName", "mail@mail.com", "pass", 30);
         EasyMock.expect(userDAOMock.findByUserName("uName")).andReturn(u);
         Capture<User> capturedUserMock = new Capture<User>();
         userDAOMock.update(EasyMock.and(EasyMock.isA(User.class), EasyMock.capture(capturedUserMock)));
         EasyMock.expectLastCall();
         EasyMock.replay(userDAOMock);
 
-        userManagementBizOp.modifyUser("uName", false, "newFullName", "newMail@mail.com");
+        userManagementBizOp.modifyUser("uName", 10, "newFullName", "newMail@mail.com");
 
         User capturedUser = capturedUserMock.getValue();
         Assert.assertEquals("uName", capturedUser.getUserName());
@@ -408,14 +408,14 @@ public class UserManagementBizOpImplTest {
 
 
 
-        u = createUser("uName", "fullName", "mail@mail.com", "pass", true);
+        u = createUser("uName", "fullName", "mail@mail.com", "pass", 10);
         EasyMock.expect(userDAOMock.findByUserName("uName")).andReturn(u);
         capturedUserMock = new Capture<User>();
         userDAOMock.update(EasyMock.and(EasyMock.isA(User.class), EasyMock.capture(capturedUserMock)));
         EasyMock.expectLastCall();
         EasyMock.replay(userDAOMock);
 
-        userManagementBizOp.modifyUser("uName", false, "", "");
+        userManagementBizOp.modifyUser("uName", 10, "", "");
 
         capturedUser = capturedUserMock.getValue();
         Assert.assertEquals("uName", capturedUser.getUserName());
@@ -447,7 +447,7 @@ public class UserManagementBizOpImplTest {
         Assert.assertTrue(exceptionThrown);
 
 
-        User u = createUser("uName", "fullName", "mail@mail.com", "pass", true);
+        User u = createUser("uName", "fullName", "mail@mail.com", "pass", 30);
         EasyMock.expect(userDAOMock.findByUserName("uName")).andReturn(u);
         Capture<User> capturedUserMock = new Capture<User>();
         userDAOMock.update(EasyMock.and(EasyMock.isA(User.class), EasyMock.capture(capturedUserMock)));
@@ -465,7 +465,7 @@ public class UserManagementBizOpImplTest {
         EasyMock.reset(userDAOMock);
 
 
-        u = createUser("uName", "fullName", "mail@mail.com", "pass", true);
+        u = createUser("uName", "fullName", "mail@mail.com", "pass", 30);
         EasyMock.expect(userDAOMock.findByUserName("uName")).andReturn(u);
         capturedUserMock = new Capture<User>();
         userDAOMock.update(EasyMock.and(EasyMock.isA(User.class), EasyMock.capture(capturedUserMock)));
@@ -497,7 +497,7 @@ public class UserManagementBizOpImplTest {
         EasyMock.reset(userDAOMock);
 
 
-        User u = createUser("uName", "phonyFullName", "mail@mail.com", "pass", true);
+        User u = createUser("uName", "phonyFullName", "mail@mail.com", "pass", 30);
         EasyMock.expect(userDAOMock.findByUserName("uName")).andReturn(u);
         EasyMock.replay(userDAOMock);
 
@@ -510,7 +510,7 @@ public class UserManagementBizOpImplTest {
         EasyMock.reset(userDAOMock);
 
 
-        u = createUser("", "", "", "", false);
+        u = createUser("", "", "", "", 10);
         EasyMock.expect(userDAOMock.findByUserName("")).andReturn(u);
         EasyMock.replay(userDAOMock);
 
@@ -538,7 +538,7 @@ public class UserManagementBizOpImplTest {
         EasyMock.reset(userDAOMock);
 
 
-        User u = createUser("uName", "phonyFullName", "mail@mail.com", "pass", true);
+        User u = createUser("uName", "phonyFullName", "mail@mail.com", "pass", 30);
         EasyMock.expect(userDAOMock.findByEmail("mail@mail.com")).andReturn(u);
         EasyMock.replay(userDAOMock);
 
@@ -551,7 +551,7 @@ public class UserManagementBizOpImplTest {
         EasyMock.reset(userDAOMock);
 
 
-        u = createUser("", "", "", "", false);
+        u = createUser("", "", "", "", 10);
         EasyMock.expect(userDAOMock.findByEmail("")).andReturn(u);
         EasyMock.replay(userDAOMock);
 

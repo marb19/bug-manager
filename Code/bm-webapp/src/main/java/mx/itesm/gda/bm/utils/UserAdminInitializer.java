@@ -65,7 +65,7 @@ public class UserAdminInitializer {
             userAdmin.setPassword(password);
             userAdmin.setFullName(fullName);
             userAdmin.setEmail(email);
-            userAdmin.setAdministrator(true);
+            userAdmin.setPermissions(30);
 
             userDAO.save(userAdmin);
             LOGGER.warn("Admin user created");
