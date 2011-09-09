@@ -27,5 +27,5 @@ public interface TaskDAO extends BaseItemDAO<Task> {
     public Task findById(int task_id);
 
     public List<Task> searchByTaskName(String task_name);
-
+    
 }

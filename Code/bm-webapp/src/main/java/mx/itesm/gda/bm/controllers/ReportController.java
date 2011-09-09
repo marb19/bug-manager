@@ -17,6 +17,9 @@ package mx.itesm.gda.bm.controllers;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import mx.itesm.gda.bm.biz.PhaseProdReportBizOp;
+import mx.itesm.gda.bm.biz.PhaseTimeReportBizOp;
+import mx.itesm.gda.bm.biz.PhaseYieldReportBizOp;
 import mx.itesm.gda.bm.utils.UserLogged;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -26,6 +29,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.ModelMap;
 
 /**
  *
@@ -35,6 +40,13 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @Scope("request")
 public class ReportController extends BaseController {
+
+    @Autowired
+    private PhaseProdReportBizOp phaseProdReport;
+    @Autowired
+    private PhaseTimeReportBizOp phaseTimeReport;
+    //@Autowired
+    //private PhaseYieldReportBizOp phaseYieldReport;
 
     private static final Map<String, String> REPORT_VIEW_MAP;
 
@@ -65,4 +77,21 @@ public class ReportController extends BaseController {
         return new ModelAndView(viewname, model);
     }
 
+    @RequestMapping(value = "/reportesGenerales",
+    method = { RequestMethod.POST, RequestMethod.GET })
+    @UserLogged
+    @Transactional
+    public String createGeneralReports(ModelMap model,
+            @RequestParam int project_id){
+
+        String phaseProdXML = phaseProdReport.getPhaseProdReport(project_id);
+        String phaseTimeXML = phaseTimeReport.getPhaseTimeReport(project_id);
+        //String phaseYieldXML = phaseYieldReport.getPhaseYieldReport(project_id);
+        String phaseYieldXML = null;
+
+        model.put("phaseTimeXML", phaseTimeXML);
+        model.put("phaseProdXML", phaseProdXML);
+        model.put("phaseYieldXML", phaseYieldXML);
+        return null;
+    }
 }

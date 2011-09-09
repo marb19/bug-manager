@@ -56,6 +56,8 @@ public class Project extends AbstractItem {
     @Temporal(TemporalType.DATE)
     private Date projectPlannedDate;
 
+    @OneToMany(mappedBy = "project")
+    private List<Phase> phases;
     /**
      * @return the projectId
      */
@@ -140,4 +142,17 @@ public class Project extends AbstractItem {
         this.projectPlannedDate = projectPlannedDate;
     }
 
+    /**
+     * @return the phases
+     */
+    public List<Phase> getPhases() {
+        return phases;
+    }
+
+    /**
+     * @param phases the phases to set
+     */
+    public void setPhases(List<Phase> phases) {
+        this.phases = phases;
+    }
 }
