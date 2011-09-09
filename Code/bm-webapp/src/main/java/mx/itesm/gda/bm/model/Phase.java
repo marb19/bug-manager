@@ -14,10 +14,12 @@
 
 package mx.itesm.gda.bm.model;
 
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.OneToMany;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -44,6 +46,9 @@ public class Phase extends AbstractItem {
     private Project project;
 
     private int projectOrder;
+
+    @OneToMany(mappedBy = "phase")
+    private List<Task> tasks;
 
     /**
      * @return the taskId
@@ -99,5 +104,19 @@ public class Phase extends AbstractItem {
      */
     public void setProjectOrder(int projectOrder) {
         this.projectOrder = projectOrder;
+    }
+
+     /**
+     * @return the tasks
+     */
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    /**
+     * @param tasks the tasks to set
+     */
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
     }
 }

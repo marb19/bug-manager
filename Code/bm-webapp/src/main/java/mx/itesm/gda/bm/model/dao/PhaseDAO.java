@@ -26,6 +26,6 @@ public interface PhaseDAO extends BaseItemDAO<Phase> {
 
     public Phase findById(int phase_id);
 
-    public List<Phase> searchByPhaseName(String phase_name);
+    public List<Phase> searchByPhaseName(String phase_name);    
 
 }

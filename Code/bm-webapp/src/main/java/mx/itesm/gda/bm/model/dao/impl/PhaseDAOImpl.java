@@ -55,5 +55,4 @@ public class PhaseDAOImpl extends BaseItemDAOImpl<Phase> implements PhaseDAO {
                 setParameter("name", "%" + phase_name + "%").getResultList();
         return phases;
     }
-
 }

@@ -51,6 +51,9 @@ public class Task extends AbstractItem {
     private String taskDescription;
 
     @ManyToOne(optional = false)
+    private Phase phase;
+
+    @ManyToOne(optional = false)
     private Project project;
 
     @ManyToOne
@@ -72,6 +75,8 @@ public class Task extends AbstractItem {
     private int investedHours;
 
     private int remainingHours;
+
+    private int taskSize;
 
     @Enumerated(EnumType.ORDINAL)
     @Column(nullable = false)
@@ -123,6 +128,20 @@ public class Task extends AbstractItem {
      */
     public void setTaskDescription(String taskDescription) {
         this.taskDescription = taskDescription;
+    }
+
+    /**
+     * @return the phase
+     */
+    public Phase getPhase() {
+        return phase;
+    }
+
+    /**
+     * @param phase the phase to set
+     */
+    public void setPhase(Phase phase) {
+        this.phase = phase;
     }
 
     /**
@@ -280,4 +299,17 @@ public class Task extends AbstractItem {
         this.taskCompletionReports = taskCompletionReports;
     }
 
+     /**
+     * @return the size
+     */
+    public int getSize() {
+        return taskSize;
+    }
+
+    /**
+     * @param taskSize the size to set
+     */
+    public void setSize(int taskSize) {
+        this.taskSize = taskSize;
+    }
 }
