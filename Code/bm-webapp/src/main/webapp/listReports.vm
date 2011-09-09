@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>Reportes - All In Time System</title>
+        <title>Reportes - BUG-MANAGER</title>
         <link rel="stylesheet" href="CSS/Style.css" type="text/css" media="screen" />
         <script type="text/javascript" src="./js/jquery-1.4.2.min.js"></script>
         <script type="text/javascript" src="./js/jquery.validate.min.js"></script>
@@ -37,6 +37,9 @@
                             break;
                           case "3":
                             $("#config-report-form").attr("action","./report/earnedValue.pdf");
+                            break;
+                          case "4":
+                            $("#config-report-form").attr("action","./reportesGenerales.do");
                             break;
                           default:
                             alert("Reporte no dado de alta, seleccione uno diferente");
@@ -112,6 +115,7 @@
                                     <option value="1">Tareas en desarrollo por Proyecto</option>
                                     <option value="2">Tareas en desarrollo por Persona</option>
                                     <option value="3">Reporte y gráfica de Valor Ganado</option>
+                                    <option value="4">Reportes generales</option>
                                 </select>
                             </td>
                         </tr>
