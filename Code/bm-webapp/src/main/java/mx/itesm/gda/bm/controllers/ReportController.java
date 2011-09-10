@@ -45,8 +45,8 @@ public class ReportController extends BaseController {
     private PhaseProdReportBizOp phaseProdReport;
     @Autowired
     private PhaseTimeReportBizOp phaseTimeReport;
-    //@Autowired
-    //private PhaseYieldReportBizOp phaseYieldReport;
+    @Autowired
+    private PhaseYieldReportBizOp phaseYieldReport;
 
     private static final Map<String, String> REPORT_VIEW_MAP;
 
@@ -86,8 +86,7 @@ public class ReportController extends BaseController {
 
         String phaseProdXML = phaseProdReport.getPhaseProdReport(project_id);
         String phaseTimeXML = phaseTimeReport.getPhaseTimeReport(project_id);
-        //String phaseYieldXML = phaseYieldReport.getPhaseYieldReport(project_id);
-        String phaseYieldXML = null;
+        String phaseYieldXML = phaseYieldReport.getPhaseYieldReport(project_id);     
 
         model.put("phaseTimeXML", phaseTimeXML);
         model.put("phaseProdXML", phaseProdXML);
