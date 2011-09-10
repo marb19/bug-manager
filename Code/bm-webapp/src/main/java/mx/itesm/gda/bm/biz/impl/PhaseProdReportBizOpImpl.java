@@ -53,7 +53,7 @@ public class PhaseProdReportBizOpImpl extends AbstractBizOp implements PhaseProd
         for(Phase phase : project.getPhases()){
             Integer phaseHours = 0, phaseSize = 0;
             for (Task task : phase.getTasks()){
-                phaseHours += task.getEstimatedHours();
+                phaseHours += task.getInvestedHours();
                 phaseSize += task.getSize();
             }
             phaseNames.add(phase.getPhaseName());
@@ -70,7 +70,7 @@ public class PhaseProdReportBizOpImpl extends AbstractBizOp implements PhaseProd
             }
         }
 
-        xmlData += "<chart caption='Productividad de fase' xAxisName='Fase' yAxisName='Paginas/LOC por hora'>";
+        xmlData += "<chart caption='Productividad de fase' xAxisName='Fase' yAxisName='Paginas/LOC por hora' bgAlpha='0,0'>";
 
         for(int i = 0; i < phaseNames.size(); i++){
             xmlData += "<set label='" + phaseNames.get(i) + "' value='" + phaseProd.get(i) + "' />";

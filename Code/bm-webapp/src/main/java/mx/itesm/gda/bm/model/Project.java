@@ -58,6 +58,9 @@ public class Project extends AbstractItem {
 
     @OneToMany(mappedBy = "project")
     private List<Phase> phases;
+
+    @OneToMany(mappedBy = "project")
+    private List<Defect> defects;
     /**
      * @return the projectId
      */
@@ -154,5 +157,19 @@ public class Project extends AbstractItem {
      */
     public void setPhases(List<Phase> phases) {
         this.phases = phases;
+    }
+
+    /**
+     * @return the defects
+     */
+    public List<Defect> getDefects() {
+        return defects;
+    }
+
+    /**
+     * @param defects the defects to set
+     */
+    public void setDefects(List<Defect> defects) {
+        this.defects = defects;
     }
 }

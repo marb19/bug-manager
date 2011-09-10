@@ -56,4 +56,13 @@ public class DefectDAOImpl extends BaseItemDAOImpl<Defect> implements DefectDAO 
         return defects;
     }
 
+    @Override
+    @Transactional(readOnly = true, propagation = Propagation.MANDATORY)
+    public List<Defect> searchByDetectionPhase(Integer phase_id){
+        @SuppressWarnings("unchecked")
+        List<Defect> result = getEntityManager().createQuery("SELECT d FROM Defect d "
+                + "JOIN d.detectionPhase dp WHERE dp.phaseId = :phase_id")
+                .setParameter("phase_id", phase_id).getResultList();
+        return result;
+    }
 }
