@@ -44,7 +44,7 @@
             </div>
         </div>
         <div id="content">
-            <div id="content-header">
+            <!--<div id="content-header"> -->
                 <div id="phaseTimeChart">Phase Time Chart</div>
                 <div id="phaseProdChart">Phase Productivity Chart</div>
                 <div id="phaseYieldChart">Phase Yield Chart</div>
@@ -53,19 +53,22 @@
                         var phaseTimeChart = new FusionCharts( "Charts/Column3D.swf",
                         "myChartId", "400", "300", "0", "1" );
                         phaseTimeChart.setXMLData("$phaseTimeXML");
+                        phaseTimeChart.setTransparent(true);
                         phaseTimeChart.render("phaseTimeChart");
 
                         var phaseProdChart = new FusionCharts( "Charts/Column3D.swf",
                         "myChartId", "400", "300", "0", "1" );
                         phaseProdChart.setXMLData("$phaseProdXML");
+                        phaseProdChart.setTransparent(true);
                         phaseProdChart.render("phaseProdChart");
 
                         var phaseYieldChart = new FusionCharts( "Charts/Column3D.swf",
                         "myChartId", "400", "300", "0", "1" );
                         phaseYieldChart.setXMLData("$phaseYieldXML");
+                        phaseYieldChart.setTransparent(true);
                         phaseYieldChart.render("phaseYieldChart");
                     </script>                    
-            </div>
+            <!--</div>-->
         </div>
         </body>
 </html>
