@@ -93,4 +93,16 @@ public class ReportController extends BaseController {
         model.put("phaseYieldXML", phaseYieldXML);
         return null;
     }
+
+    @RequestMapping(value = "/densidadDefectosUsuario",
+    method = { RequestMethod.POST, RequestMethod.GET })
+    @UserLogged
+    @Transactional
+    public String createDefectDensityReport(ModelMap model,
+            @RequestParam String username){
+        String defectDensityXML = null;
+
+        model.put("defectDensityXML", defectDensityXML);
+        return null;
+    }
 }
