@@ -22,8 +22,11 @@
                           username: {
                               required: function(element) {
                                 return (this.$("#reportType").val() == "2");
+                              },
+                              required: function(element) {
+                                return (this.$("#reportType").val() == "5");
                               }
-                          }
+                          }     
                        }
                    });
                    $("#config-report-form").submit(function() {
@@ -41,6 +44,9 @@
                           case "4":
                             $("#config-report-form").attr("action","./reportesGenerales.do");
                             break;
+                          case "5":
+                            $("#config-report-form").attr("action","./densidadDefectosUsuario.do");
+                            break;
                           default:
                             alert("Reporte no dado de alta, seleccione uno diferente");
                             return false;
@@ -49,27 +55,57 @@
                     });
                     $("#reportType").change(function() {
                         if (this.value == "2") {
+                            $("#selectedProjectLabel").show("fast");
+                            $("#project_id").show("fast");
+                            $("#project_id").removeAttr("disabled");
                             $("#selectedUserLabel").show("fast");
                             $("#username").show("fast");
                             $("#username").removeAttr("disabled");
+                        }
+                        else if (this.value == "5") {
+                            $("#selectedUserLabel").show("fast");
+                            $("#username").show("fast");
+                            $("#username").removeAttr("disabled");
+                            $("#selectedProjectLabel").hide("fast");
+                            $("#project_id").hide("fast");
+                            $("#project_id").val("");
+                            $("#project_id").attr("disabled", "true");
                         }
                         else {
                             $("#selectedUserLabel").hide("fast");
                             $("#username").hide("fast");
                             $("#username").val("");
                             $("#username").attr("disabled", "true");
+                            $("#selectedProjectLabel").show("fast");
+                            $("#project_id").show("fast");
+                            $("#project_id").removeAttr("disabled");
                         }
                     });
                     if ($("#reportType").val() == "2") {
+                            $("#selectedProjectLabel").show("fast");
+                            $("#project_id").show("fast");
+                            $("#project_id").removeAttr("disabled");
                             $("#selectedUserLabel").show("fast");
                             $("#username").show("fast");
                             $("#username").removeAttr("disabled");
+                        }
+                        else if ($("#reportType").val() == "5"){
+                            $("#selectedUserLabel").show("fast");
+                            $("#username").show("fast");
+                            $("#username").removeAttr("disabled");
+                            $("#selectedProjectLabel").hide("fast");
+                            $("#project_id").hide("fast");
+                            $("#project_id").val("");
+                            $("#project_id").attr("disabled", "true");
                         }
                         else {
                             $("#selectedUserLabel").hide("fast");
                             $("#username").hide("fast");
                             $("#username").val("");
                             $("#username").attr("disabled", "true");
+                            $("#selectedProjectLabel").show("fast");
+                            $("#project_id").show("fast");
+                            $("#project_id").removeAttr("disabled");
                         }
                  });
         </script>
@@ -116,6 +152,7 @@
                                     <option value="2">Tareas en desarrollo por Persona</option>
                                     <option value="3">Reporte y gráfica de Valor Ganado</option>
                                     <option value="4">Reportes generales</option>
+                                    <option value="5">Densidad de defectos por usuario</option>
                                 </select>
                             </td>
                         </tr>
