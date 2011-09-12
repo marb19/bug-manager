@@ -65,4 +65,5 @@ public class DefectDAOImpl extends BaseItemDAOImpl<Defect> implements DefectDAO 
                 .setParameter("phase_id", phase_id).getResultList();
         return result;
     }
+
 }

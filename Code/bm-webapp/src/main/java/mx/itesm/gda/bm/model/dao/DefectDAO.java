@@ -29,4 +29,5 @@ public interface DefectDAO extends BaseItemDAO<Defect> {
     public List<Defect> searchByDefectName(String defect_name);
 
     public List<Defect> searchByDetectionPhase(Integer phase_id);
+    
 }
