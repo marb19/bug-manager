@@ -22,10 +22,7 @@
                           username: {
                               required: function(element) {
                                 return (this.$("#reportType").val() == "2");
-                              },
-                              required: function(element) {
-                                return (this.$("#reportType").val() == "5");
-                              }
+                              }                              
                           }     
                        }
                    });
@@ -63,9 +60,10 @@
                             $("#username").removeAttr("disabled");
                         }
                         else if (this.value == "5") {
-                            $("#selectedUserLabel").show("fast");
-                            $("#username").show("fast");
-                            $("#username").removeAttr("disabled");
+                            $("#selectedUserLabel").hide("fast");
+                            $("#username").hide("fast");
+                            $("#username").val("");
+                            $("#username").attr("disabled", "true");
                             $("#selectedProjectLabel").hide("fast");
                             $("#project_id").hide("fast");
                             $("#project_id").val("");
@@ -90,9 +88,10 @@
                             $("#username").removeAttr("disabled");
                         }
                         else if ($("#reportType").val() == "5"){
-                            $("#selectedUserLabel").show("fast");
-                            $("#username").show("fast");
-                            $("#username").removeAttr("disabled");
+                            $("#selectedUserLabel").hide("fast");
+                            $("#username").hide("fast");
+                            $("#username").val("");
+                            $("#username").attr("disabled", "true");
                             $("#selectedProjectLabel").hide("fast");
                             $("#project_id").hide("fast");
                             $("#project_id").val("");
