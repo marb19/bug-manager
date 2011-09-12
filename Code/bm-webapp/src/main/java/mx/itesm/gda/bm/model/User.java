@@ -63,6 +63,9 @@ public class User extends AbstractItem {
     @OneToMany(mappedBy = "assignedUser")
     private List<Task> assignedTasks;
 
+    @OneToMany(mappedBy = "assignedUser")
+    private List<Defect> assignedDefects;
+
     @OneToMany(mappedBy = "author")
     private List<TaskComment> authoredComments;
 
@@ -217,4 +220,17 @@ public class User extends AbstractItem {
         this.passwordRecoveryExpiration = passwordRecoveryExpiration;
     }
 
+    /**
+     * @return the assignedDefects
+     */
+    public List<Defect> getAssignedDefects() {
+        return assignedDefects;
+    }
+
+    /**
+     * @param assignedDefects the assignedDefects to set
+     */
+    public void setAssignedDefects(List<Defect> assignedDefects) {
+        this.assignedDefects = assignedDefects;
+    }
 }

@@ -20,6 +20,7 @@ import java.util.Map;
 import mx.itesm.gda.bm.biz.PhaseProdReportBizOp;
 import mx.itesm.gda.bm.biz.PhaseTimeReportBizOp;
 import mx.itesm.gda.bm.biz.PhaseYieldReportBizOp;
+import mx.itesm.gda.bm.biz.DefectDensityUserReportBizOp;
 import mx.itesm.gda.bm.utils.UserLogged;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -47,6 +48,8 @@ public class ReportController extends BaseController {
     private PhaseTimeReportBizOp phaseTimeReport;
     @Autowired
     private PhaseYieldReportBizOp phaseYieldReport;
+    @Autowired
+    private DefectDensityUserReportBizOp defectDensityReport;
 
     private static final Map<String, String> REPORT_VIEW_MAP;
 
@@ -98,9 +101,8 @@ public class ReportController extends BaseController {
     method = { RequestMethod.POST, RequestMethod.GET })
     @UserLogged
     @Transactional
-    public String createDefectDensityReport(ModelMap model,
-            @RequestParam String username){
-        String defectDensityXML = null;
+    public String createDefectDensityReport(ModelMap model){
+        String defectDensityXML = defectDensityReport.getDefectDensityReport();
 
         model.put("defectDensityXML", defectDensityXML);
         return null;
