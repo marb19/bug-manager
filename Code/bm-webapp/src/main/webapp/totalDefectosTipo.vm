@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>Densidad de defectos por Usuario - BUG-MANAGER</title>
+        <title>Total de Defectos por Tipo - BUG-MANAGER</title>
         <link rel="stylesheet" href="CSS/Style.css" type="text/css" media="screen" />
         <script type="text/javascript" src="./js/jquery-1.4.2.min.js"></script>
         <script type="text/javascript" src="./js/jquery.validate.min.js"></script>
@@ -45,15 +45,15 @@
         </div>
         <div id="content">
             <!--<div id="content-header"> -->
-                <span id="defectDensityChart">Defect Density Chart</span>
+                <span id="totalDefectsType">Total Defects by Type Chart</span>
 
                     <script type="text/javascript">
-                        var defectDensityChart = new FusionCharts( "Charts/Column3D.swf",
+                        var totalDefectsChart = new FusionCharts( "Charts/Column3D.swf",
                         "myChartId", "400", "300", "0", "1" );
-                        defectDensityChart.setXMLData("$defectDensityXML");
-                        defectDensityChart.setTransparent(true);
-                        defectDensityChart.render("defectDensityChart");
-                    </script>        
+                        totalDefectsChart.setXMLData("$totalDefectsXML");
+                        totalDefectsChart.setTransparent(true);
+                        totalDefectsChart.render("totalDefectsType");
+                    </script>
             <!--</div>-->
         </div>
         </body>
