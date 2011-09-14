@@ -107,4 +107,22 @@ public class ReportController extends BaseController {
         model.put("defectDensityXML", defectDensityXML);
         return null;
     }
+
+    @RequestMapping(value = "/totalDefectosTipo",
+    method = { RequestMethod.POST, RequestMethod.GET })
+    @UserLogged
+    @Transactional
+    public String createTotalDefectsTypeReport(ModelMap model,
+            @RequestParam(value= "level") int level,
+            @RequestParam(value= "project_id", defaultValue = "0", required = false) int project_id,
+            @RequestParam(value = "username", defaultValue = "", required = false) String username){
+        
+        if(project_id == 0 && username.equals("")){
+            throw new ControllerException("Valores incorrectos para proyecto y/o persona");
+        }
+
+        String totalDefectsXML = null;
+        model.put("totalDefectsXML", totalDefectsXML);
+        return null;
+    }
 }
