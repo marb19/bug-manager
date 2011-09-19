@@ -47,6 +47,9 @@ public class Project extends AbstractItem {
     @OneToMany(mappedBy = "project")
     private List<Task> tasks;
 
+    @OneToMany(mappedBy = "project")
+    private List<Defect> defects;
+    
     @Column(length = 4095, nullable = false)
     private String projectDescription;
 
@@ -59,8 +62,8 @@ public class Project extends AbstractItem {
     @OneToMany(mappedBy = "project")
     private List<Phase> phases;
 
-    @OneToMany(mappedBy = "project")
-    private List<Defect> defects;
+   /* @OneToMany(mappedBy = "project")
+    private List<Defect> defects;*/
     /**
      * @return the projectId
      */
@@ -103,6 +106,20 @@ public class Project extends AbstractItem {
         this.tasks = tasks;
     }
 
+    /**
+     * @return the tasks
+     */
+    public List<Defect> getDefects() {
+        return defects;
+    }
+
+    /**
+     * @param tasks the tasks to set
+     */
+    public void setDefects(List<Defect> defects) {
+        this.defects = defects;
+    }
+    
     /**
      * @return the projectDescription
      */
@@ -157,19 +174,5 @@ public class Project extends AbstractItem {
      */
     public void setPhases(List<Phase> phases) {
         this.phases = phases;
-    }
-
-    /**
-     * @return the defects
-     */
-    public List<Defect> getDefects() {
-        return defects;
-    }
-
-    /**
-     * @param defects the defects to set
-     */
-    public void setDefects(List<Defect> defects) {
-        this.defects = defects;
     }
 }

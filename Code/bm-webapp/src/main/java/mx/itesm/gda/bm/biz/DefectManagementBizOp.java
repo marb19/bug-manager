@@ -16,17 +16,18 @@ public interface DefectManagementBizOp extends BizOp{
     
     public List<Map<String, ?>> retrieveAllDefects();
     
-    public List<Map<String, ?>> retrieveProjectDefects(int projectID);
+    public List<Map<String, ?>> retrieveProjectDefects(int projectId);
     
-    public int createDefect(String defectTypeName, String defectName, String defectDescription, int projectID, int detectionPhaseID, int detectionTask);
+    public int createDefect(int defectTypeId, String defectName, String defectDescription, int projectID, int detectionPhaseID, int detectionTask);
     
     public void modifyDefect(int defectID, String defectName, String defectDescription, int detectionPhaseID, int detectionTaskID, int inyectionPhaseID, int inyectionTaskID, int remotionPhaseID,
-            String defectTrigger, String impact, int defectTypeID, String qualifier, String age, String source, int investedhours, String assignedUser, Date openDate);
+            String defectTrigger, String impact, int defectTypeID, String qualifier, String age, String source, String reference, int investedhours, String assignedUser, Date openDate, String status);
     
     public void deleteDefect(int defectID);
     
-    public Map<String, ?> getDefect(int defectID);
+    public Map<String, ?> getDefect(int defectId);
     
     public int addComment(int defectID, String commentAuthor, String newComment);
     
+    public List<Map<String, ?>> retrieveComments(int defectId);
 }
