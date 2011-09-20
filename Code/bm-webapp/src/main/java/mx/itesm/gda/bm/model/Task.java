@@ -50,7 +50,7 @@ public class Task extends AbstractItem {
     @Column(length = 4095, nullable = false)
     private String taskDescription;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = true)
     private Phase phase;
 
     @ManyToOne(optional = false)
