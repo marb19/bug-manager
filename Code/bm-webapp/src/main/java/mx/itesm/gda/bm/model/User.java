@@ -21,6 +21,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -71,6 +72,9 @@ public class User extends AbstractItem {
 
     @OneToMany(mappedBy = "reportingUser")
     private List<TaskCompletionReport> authoredCompletionReports;
+
+    @ManyToMany()
+    private List<Project> projects;
 
     /**
      * @return the userName
@@ -232,5 +236,19 @@ public class User extends AbstractItem {
      */
     public void setAssignedDefects(List<Defect> assignedDefects) {
         this.assignedDefects = assignedDefects;
+    }
+
+    /**
+     * @return the projects
+     */
+    public List<Project> getProjects() {
+        return projects;
+    }
+
+    /**
+     * @param projects the projects to set
+     */
+    public void setProjects(List<Project> assignedProjects) {
+        this.projects = projects;
     }
 }

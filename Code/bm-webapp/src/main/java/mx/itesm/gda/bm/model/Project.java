@@ -21,6 +21,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -61,6 +62,9 @@ public class Project extends AbstractItem {
 
     @OneToMany(mappedBy = "project")
     private List<Phase> phases;
+
+    @ManyToMany()
+    private List<User> users;
 
    /* @OneToMany(mappedBy = "project")
     private List<Defect> defects;*/
@@ -174,5 +178,19 @@ public class Project extends AbstractItem {
      */
     public void setPhases(List<Phase> phases) {
         this.phases = phases;
+    }
+
+    /**
+     * @return the users
+     */
+    public List<User> getUsers() {
+        return users;
+    }
+
+    /**
+     * @param users the users to set
+     */
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 }
