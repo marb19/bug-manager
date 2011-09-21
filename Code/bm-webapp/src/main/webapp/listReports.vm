@@ -50,6 +50,9 @@
                           case "6":
                             $("#config-report-form").attr("action","./totalDefectosTipo.do");
                             break;
+                          case "7":
+                            $("#config-report-form").attr("action","./defectosInyectadosRemovidos.do");
+                            break;
                           default:
                             alert("Reporte no dado de alta, seleccione uno diferente");
                             return false;
@@ -83,7 +86,7 @@
                             $("#level").val("");
                             $("#level").attr("disabled", "true");
                         }
-                        else if (this.value == "6") {
+                        else if (this.value == "6" || this.value == "7") {
                             $("#selectedLevelLabel").show("fast");
                             $("#level").show("fast");
                             $("#level").removeAttr("disabled");
@@ -136,7 +139,7 @@
                             $("#level").val("");
                             $("#level").attr("disabled", "true");
                         }
-                        else if (this.value == "6") {
+                        else if ($("#reportType").val() == "6" || $("#reportType").val() == "7") {
                             $("#selectedLevelLabel").show("fast");
                             $("#level").show("fast");
                             $("#level").removeAttr("disabled");
@@ -239,6 +242,7 @@
                                     <option value="4">Reportes generales</option>
                                     <option value="5">Densidad de defectos por usuario</option>
                                     <option value="6">Total de defectos por tipo</option>
+                                    <option value="7">Defectos inyectados y removidos por fase</option>
                                 </select>
                             </td>
                         </tr>
