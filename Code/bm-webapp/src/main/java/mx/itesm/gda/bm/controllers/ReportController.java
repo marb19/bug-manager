@@ -21,6 +21,7 @@ import mx.itesm.gda.bm.biz.PhaseProdReportBizOp;
 import mx.itesm.gda.bm.biz.PhaseTimeReportBizOp;
 import mx.itesm.gda.bm.biz.PhaseYieldReportBizOp;
 import mx.itesm.gda.bm.biz.DefectDensityUserReportBizOp;
+import mx.itesm.gda.bm.biz.TotalDefectsTypeReportBizOp;
 import mx.itesm.gda.bm.utils.UserLogged;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -50,6 +51,8 @@ public class ReportController extends BaseController {
     private PhaseYieldReportBizOp phaseYieldReport;
     @Autowired
     private DefectDensityUserReportBizOp defectDensityReport;
+    @Autowired
+    private TotalDefectsTypeReportBizOp totalDefectsType;
 
     private static final Map<String, String> REPORT_VIEW_MAP;
 
@@ -115,13 +118,10 @@ public class ReportController extends BaseController {
     public String createTotalDefectsTypeReport(ModelMap model,
             @RequestParam(value= "level") int level,
             @RequestParam(value= "project_id", defaultValue = "0", required = false) int project_id,
-            @RequestParam(value = "username", defaultValue = "", required = false) String username){
-        
-        if(project_id == 0 && username.equals("")){
-            throw new ControllerException("Valores incorrectos para proyecto y/o persona");
-        }
+            @RequestParam(value = "username", defaultValue = "", required = false) String username){                
 
-        String totalDefectsXML = null;
+        String totalDefectsXML = totalDefectsType.getTotalDefectsTypeReport(level, project_id, username);
+
         model.put("totalDefectsXML", totalDefectsXML);
         return null;
     }
