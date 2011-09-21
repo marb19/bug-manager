@@ -22,13 +22,14 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.ArrayList;
-import java.text.DecimalFormat;
 import mx.itesm.gda.bm.model.Defect;
 import mx.itesm.gda.bm.model.dao.DefectDAO;
 import mx.itesm.gda.bm.model.DefectType;
 import mx.itesm.gda.bm.model.dao.DefectTypeDAO;
 import mx.itesm.gda.bm.model.User;
 import mx.itesm.gda.bm.model.dao.UserDAO;
+import mx.itesm.gda.bm.model.Project;
+import mx.itesm.gda.bm.model.dao.ProjectDAO;
 /**
  *
  * @author $Author: lalo.campos@gmail.com $
@@ -46,6 +47,9 @@ public class TotalDefectsTypeReportBizOpImpl extends AbstractBizOp implements To
 
     @Autowired
     private UserDAO userDAO;
+
+    @Autowired
+    private ProjectDAO projectDAO;
 
     @Override
     @Transactional(readOnly = true, propagation = Propagation.MANDATORY)
@@ -69,11 +73,6 @@ public class TotalDefectsTypeReportBizOpImpl extends AbstractBizOp implements To
         }
 
         return xmlData;
-    }
-
-    private double roundNumber(double d){
-        DecimalFormat twoDecimals = new DecimalFormat("#.##");
-        return Double.valueOf(twoDecimals.format(d));
     }
     
     private String getReportByUser(List<DefectType> listOfTypes, String username){
@@ -103,11 +102,49 @@ public class TotalDefectsTypeReportBizOpImpl extends AbstractBizOp implements To
     private String getReportByProject(List<DefectType> listOfTypes, int project_id){
         String xmlData = null;
 
+        ArrayList<Integer> totalDefectsByType = new ArrayList<Integer>();
+        ArrayList<String> defectTypes = new ArrayList<String>();
+
+        Project project = projectDAO.findById(project_id);
+        String projectName = project.getProjectName();
+        for(DefectType dType : listOfTypes){
+            defectTypes.add(dType.getDefectTypeName());
+            int defectType = dType.getDefectTypeId();
+            List<Defect> defectsByTypeAndUser = defectByUserDAO.searchByTypeAndProject(defectType, project_id);
+            totalDefectsByType.add(defectsByTypeAndUser.size());
+        }
+
+        xmlData += "<chart caption='Total de defectos por tipo para el proyecto " +  projectName + "'" + "xAxisName='Tipo de defecto' yAxisName='Cantidad' bgAlpha='0,0'>";
+
+        for(int i = 0; i < defectTypes.size(); i++){
+            xmlData += "<set label='" + defectTypes.get(i) + "' value='" + totalDefectsByType.get(i) + "' />";
+        }
+
+        xmlData+= "</chart>";
+
         return xmlData;
     }
 
     private String getReportByCompany(List<DefectType> listOfTypes){
         String xmlData = null;
+
+        ArrayList<Integer> totalDefectsByType = new ArrayList<Integer>();
+        ArrayList<String> defectTypes = new ArrayList<String>();
+
+        for(DefectType dType : listOfTypes){
+            defectTypes.add(dType.getDefectTypeName());
+            int defectType = dType.getDefectTypeId();
+            List<Defect> defectsByTypeAndUser = defectByUserDAO.searchByType(defectType);
+            totalDefectsByType.add(defectsByTypeAndUser.size());
+        }
+
+        xmlData += "<chart caption='Total de defectos por tipo para la empresa' xAxisName='Tipo de defecto' yAxisName='Cantidad' bgAlpha='0,0'>";
+
+        for(int i = 0; i < defectTypes.size(); i++){
+            xmlData += "<set label='" + defectTypes.get(i) + "' value='" + totalDefectsByType.get(i) + "' />";
+        }
+
+        xmlData+= "</chart>";
 
         return xmlData;
     }

@@ -71,10 +71,34 @@ public class DefectDAOImpl extends BaseItemDAOImpl<Defect> implements DefectDAO 
     public List<Defect> searchByTypeAndUser(int defectType_id, String username){
         @SuppressWarnings("unchecked")
         List<Defect> result = getEntityManager().createQuery("SELECT d FROM Defect d "
-                + "JOIN d.defectType dt, d.assignedUser u WHERE "
-                + "dt.defectTypeId = : defectType_id AND u.userName = :username")
+                + "JOIN d.defectType dt JOIN d.assignedUser u WHERE "
+                + "dt.defectTypeId = :defectType_id AND u.userName = :username")
                 .setParameter("defectType_id", defectType_id)
                 .setParameter("username", username)
+                .getResultList();
+        return result;
+    }
+
+    @Override
+    @Transactional(readOnly = true, propagation = Propagation.MANDATORY)
+    public List<Defect> searchByTypeAndProject(int defectType_id, int project_id){
+        @SuppressWarnings("unchecked")
+        List<Defect> result = getEntityManager().createQuery("SELECT d FROM Defect d "
+                + "JOIN d.defectType dt JOIN d.project p WHERE "
+                + "dt.defectTypeId = :defectType_id AND p.projectId = :project_id")
+                .setParameter("defectType_id", defectType_id)
+                .setParameter("project_id", project_id)
+                .getResultList();
+        return result;
+    }
+
+    @Override
+    @Transactional(readOnly = true, propagation = Propagation.MANDATORY)
+    public List<Defect> searchByType(int defectType_id){
+        @SuppressWarnings("unchecked")
+        List<Defect> result = getEntityManager().createQuery("SELECT d FROM Defect d "
+                + "JOIN d.defectType dt WHERE dt.defectTypeId = :defectType_id")
+                .setParameter("defectType_id", defectType_id)
                 .getResultList();
         return result;
     }
