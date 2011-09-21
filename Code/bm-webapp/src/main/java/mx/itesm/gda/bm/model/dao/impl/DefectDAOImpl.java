@@ -66,4 +66,16 @@ public class DefectDAOImpl extends BaseItemDAOImpl<Defect> implements DefectDAO 
         return result;
     }
 
+    @Override
+    @Transactional(readOnly = true, propagation = Propagation.MANDATORY)
+    public List<Defect> searchByTypeAndUser(int defectType_id, String username){
+        @SuppressWarnings("unchecked")
+        List<Defect> result = getEntityManager().createQuery("SELECT d FROM Defect d "
+                + "JOIN d.defectType dt, d.assignedUser u WHERE "
+                + "dt.defectTypeId = : defectType_id AND u.userName = :username")
+                .setParameter("defectType_id", defectType_id)
+                .setParameter("username", username)
+                .getResultList();
+        return result;
+    }
 }
