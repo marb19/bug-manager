@@ -22,6 +22,7 @@ import mx.itesm.gda.bm.biz.PhaseTimeReportBizOp;
 import mx.itesm.gda.bm.biz.PhaseYieldReportBizOp;
 import mx.itesm.gda.bm.biz.DefectDensityUserReportBizOp;
 import mx.itesm.gda.bm.biz.TotalDefectsTypeReportBizOp;
+import mx.itesm.gda.bm.biz.DefectsInyRemBizOp;
 import mx.itesm.gda.bm.utils.UserLogged;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -53,6 +54,8 @@ public class ReportController extends BaseController {
     private DefectDensityUserReportBizOp defectDensityReport;
     @Autowired
     private TotalDefectsTypeReportBizOp totalDefectsType;
+    @Autowired
+    private DefectsInyRemBizOp defectsInyectedRemoved;
 
     private static final Map<String, String> REPORT_VIEW_MAP;
 
@@ -123,6 +126,21 @@ public class ReportController extends BaseController {
         String totalDefectsXML = totalDefectsType.getTotalDefectsTypeReport(level, project_id, username);
 
         model.put("totalDefectsXML", totalDefectsXML);
+        return null;
+    }
+
+    @RequestMapping(value = "/defectosInyectadosRemovidos",
+    method = { RequestMethod.POST, RequestMethod.GET })
+    @UserLogged
+    @Transactional
+    public String createDefectsInyectedRemovedReport(ModelMap model,
+            @RequestParam(value= "level") int level,
+            @RequestParam(value= "project_id", defaultValue = "0", required = false) int project_id,
+            @RequestParam(value = "username", defaultValue = "", required = false) String username){
+
+        String defectsInyectedRemovedXML = defectsInyectedRemoved.getDefectsInyRemReport(level, project_id, username);
+
+        model.put("defectsInyectedRemovedXML", defectsInyectedRemovedXML);
         return null;
     }
 }
