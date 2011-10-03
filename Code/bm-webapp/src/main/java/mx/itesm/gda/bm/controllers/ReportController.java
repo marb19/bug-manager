@@ -55,36 +55,7 @@ public class ReportController extends BaseController {
     @Autowired
     private TotalDefectsTypeReportBizOp totalDefectsType;
     @Autowired
-    private DefectsInyRemBizOp defectsInyectedRemoved;
-
-    private static final Map<String, String> REPORT_VIEW_MAP;
-
-    static {
-        Map<String, String> m = new HashMap<String, String>();
-        m.put("earnedValue", "EV");
-        m.put("tasksByProject", "avanceProyecto");
-        m.put("tasksByUser", "avancePersona");
-        REPORT_VIEW_MAP = Collections.unmodifiableMap(m);
-    }
-
-    @RequestMapping(value = "/report/{report}.{format}",
-    method = { RequestMethod.POST, RequestMethod.GET })
-    @UserLogged
-    @Transactional
-    public ModelAndView buildReport(
-            @PathVariable String report, @PathVariable String format,
-            @RequestParam int project_id,
-            @RequestParam(required = false) String username) {
-
-        Map<String, Object> model = new HashMap<String, Object>();
-        model.put("format", format);
-        model.put("project_id", project_id);
-        model.put("username", username);
-
-        String viewname = REPORT_VIEW_MAP.get(report);
-
-        return new ModelAndView(viewname, model);
-    }
+    private DefectsInyRemBizOp defectsInyectedRemoved;     
 
     @RequestMapping(value = "/reportesGenerales",
     method = { RequestMethod.POST, RequestMethod.GET })
@@ -139,8 +110,21 @@ public class ReportController extends BaseController {
             @RequestParam(value = "username", defaultValue = "", required = false) String username){
 
         String defectsInyectedRemovedXML = defectsInyectedRemoved.getDefectsInyRemReport(level, project_id, username);
-
+        
         model.put("defectsInyectedRemovedXML", defectsInyectedRemovedXML);
+        return null;
+    }
+
+    @RequestMapping(value = "/productividadCompuesta",
+    method = { RequestMethod.POST, RequestMethod.GET })
+    @UserLogged
+    @Transactional
+    public String createProductividadCompuestaReport(ModelMap model,
+            @RequestParam(value= "justlevel") int justlevel){
+
+        String productividadCompuestaXML = null;
+
+        model.put("productividadCompuestaXML", productividadCompuestaXML);
         return null;
     }
 }

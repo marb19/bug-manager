@@ -47,7 +47,7 @@ public class DefectDensityUserReportBizOpImpl extends AbstractBizOp implements D
         ArrayList<String> usersNames = new ArrayList<String>();
         ArrayList<Double> defectDensityByUsername = new ArrayList<Double>();
 
-        List<User> allUsers = userDAO.getAll();
+        List<User> allUsers = userDAO.getAllDevelopers();
         for(User user : allUsers){
             usersNames.add(user.getFullName());
             List<Defect> defectsByUser = user.getAssignedDefects();

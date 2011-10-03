@@ -45,6 +45,12 @@ public class DefectsInyRemBizOpImpl extends AbstractBizOp implements DefectsInyR
     @Autowired
     private ProjectDAO projectDAO;
 
+    @Autowired
+    private UserDAO userDAO;
+
+    @Autowired
+    private DefectDAO defectDAO;
+
     @Override
     @Transactional(readOnly = true, propagation = Propagation.MANDATORY)
     public String getDefectsInyRemReport(int level, int project_id, String username){
@@ -59,8 +65,9 @@ public class DefectsInyRemBizOpImpl extends AbstractBizOp implements DefectsInyR
                 break;
             case 2:
                 project = projectDAO.findById(project_id);
+                String projectName = project.getProjectName();
                 phases = project.getPhases();
-                xmlData = getReportByProject(phases, project_id);
+                xmlData = getReportByProject(phases, projectName);
                 break;
             case 3:
                 phases = phaseDAO.getAll();
@@ -77,18 +84,114 @@ public class DefectsInyRemBizOpImpl extends AbstractBizOp implements DefectsInyR
 
      private String getReportByUser(List<Phase> listOfPhases, String username){
         String xmlData = null;
+        String categories = null;
+        String inyectedDefects = null;
+        String removedDefects = null;
+        ArrayList<String> phaseNames = new ArrayList<String>();
+        ArrayList<Integer> inyectionDefects = new ArrayList<Integer>();
+        ArrayList<Integer> remotionDefects = new ArrayList<Integer>();
+
+        User user = userDAO.findByUserName(username);
+        String fullName = user.getFullName();
+
+        for(Phase phase : listOfPhases){
+            phaseNames.add(phase.getPhaseName());
+            int phase_id = phase.getPhaseId();
+            List<Defect> phaseInyectionDefects = defectDAO.searchByUserAndInyPhase(phase_id, username);
+            List<Defect> phaseRemotionDefects = defectDAO.searchByUserAndRemPhase(phase_id, username);
+            inyectionDefects.add(phaseInyectionDefects.size());
+            remotionDefects.add(phaseRemotionDefects.size());
+        }
+
+        xmlData= "<chart caption='Defectos inyectados y removidos por fase para el usuario " +  fullName + "'" + " xAxisName='Fases' yAxisName='Cantidad' bgAlpha='0,0'>";
+        categories= "<categories>";
+        inyectedDefects= "<dataset seriesName='Inyected'>";
+        removedDefects= "<dataset seriesName='Removed'>";
+
+        for(int i = 0; i < phaseNames.size(); i++){
+            categories+="<category name='" + phaseNames.get(i) + "' />";
+            inyectedDefects+="<set value='" + inyectionDefects.get(i) + "' />";
+            removedDefects+="<set value='" + remotionDefects.get(i) + "' />";
+        }
+
+        categories+="</categories>";
+        inyectedDefects+="</dataset>";
+        removedDefects+="</dataset>";
+        xmlData+= categories + inyectedDefects + removedDefects + "</chart>";
 
         return xmlData;
     }
 
-    private String getReportByProject(List<Phase> listOfPhases, int project_id){
+    private String getReportByProject(List<Phase> listOfPhases, String projectName){
         String xmlData = null;
+        String categories = null;
+        String inyectedDefects = null;
+        String removedDefects = null;
+        ArrayList<String> phaseNames = new ArrayList<String>();
+        ArrayList<Integer> inyectionDefects = new ArrayList<Integer>();
+        ArrayList<Integer> remotionDefects = new ArrayList<Integer>();
+
+        for(Phase phase : listOfPhases){
+            phaseNames.add(phase.getPhaseName());
+            int phase_id = phase.getPhaseId();
+            List<Defect> phaseInyectionDefects = defectDAO.searchByInyectionPhase(phase_id);
+            List<Defect> phaseRemotionDefects = defectDAO.searchByRemotionPhase(phase_id);
+            inyectionDefects.add(phaseInyectionDefects.size());
+            remotionDefects.add(phaseRemotionDefects.size());
+        }
+
+        xmlData= "<chart caption='Defectos inyectados y removidos por fase para el proyecto " +  projectName + "'" + " xAxisName='Fases' yAxisName='Cantidad' bgAlpha='0,0'>";
+        categories= "<categories>";
+        inyectedDefects= "<dataset seriesName='Inyected'>";
+        removedDefects= "<dataset seriesName='Removed'>";
+
+        for(int i = 0; i < phaseNames.size(); i++){
+            categories+="<category name='" + phaseNames.get(i) + "' />";
+            inyectedDefects+="<set value='" + inyectionDefects.get(i) + "' />";
+            removedDefects+="<set value='" + remotionDefects.get(i) + "' />";
+        }
+
+        categories+="</categories>";
+        inyectedDefects+="</dataset>";
+        removedDefects+="</dataset>";
+        xmlData+= categories + inyectedDefects + removedDefects + "</chart>";
 
         return xmlData;
     }
 
     private String getReportByCompany(List<Phase> listOfPhases){
         String xmlData = null;
+        String categories = null;
+        String inyectedDefects = null;
+        String removedDefects = null;
+        ArrayList<String> phaseNames = new ArrayList<String>();
+        ArrayList<Integer> inyectionDefects = new ArrayList<Integer>();
+        ArrayList<Integer> remotionDefects = new ArrayList<Integer>();
+
+        for(Phase phase : listOfPhases){
+            phaseNames.add(phase.getPhaseName());
+            int phase_id = phase.getPhaseId();
+            List<Defect> phaseInyectionDefects = defectDAO.searchByInyectionPhase(phase_id);
+            List<Defect> phaseRemotionDefects = defectDAO.searchByRemotionPhase(phase_id);
+            inyectionDefects.add(phaseInyectionDefects.size());
+            remotionDefects.add(phaseRemotionDefects.size());
+        }
+
+        xmlData= "<chart caption='Defectos inyectados y removidos por fase para la empresa' xAxisName='Fases' yAxisName='Cantidad' bgAlpha='0,0'>";
+        categories= "<categories>";
+        inyectedDefects= "<dataset seriesName='Inyected'>";
+        removedDefects= "<dataset seriesName='Removed'>";
+
+        for(int i = 0; i < phaseNames.size(); i++){
+            categories+="<category name='" + phaseNames.get(i) + "' />";
+            inyectedDefects+="<set value='" + inyectionDefects.get(i) + "' />";
+            removedDefects+="<set value='" + remotionDefects.get(i) + "' />";
+        }
+
+        categories+="</categories>";
+        inyectedDefects+="</dataset>";
+        removedDefects+="</dataset>";
+        xmlData+= categories + inyectedDefects + removedDefects + "</chart>";
 
         return xmlData;
     }

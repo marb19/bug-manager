@@ -86,4 +86,13 @@ public class UserDAOImpl extends BaseItemDAOImpl<User> implements UserDAO {
         }
     }
 
+    @Override
+    @Transactional(readOnly = true, propagation = Propagation.MANDATORY)
+    public List<User> getAllDevelopers() {
+        @SuppressWarnings("unchecked")
+        List<User> result = getEntityManager().createQuery(
+                "SELECT u FROM User u WHERE u.permissions <= 10").
+                getResultList();
+        return result;
+    }
 }

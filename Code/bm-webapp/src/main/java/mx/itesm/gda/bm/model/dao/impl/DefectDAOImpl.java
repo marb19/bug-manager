@@ -102,4 +102,54 @@ public class DefectDAOImpl extends BaseItemDAOImpl<Defect> implements DefectDAO 
                 .getResultList();
         return result;
     }
+
+    @Override
+    @Transactional(readOnly = true, propagation = Propagation.MANDATORY)
+    public List<Defect> searchByUserAndInyPhase(int phase_id, String username){
+        @SuppressWarnings("unchecked")
+        List<Defect> result = getEntityManager().createQuery("SELECT d FROM Defect d "
+                + "JOIN d.inyectionPhase ip JOIN d.assignedUser u WHERE "
+                + "ip.phaseId = :phase_id AND u.userName = :username")
+                .setParameter("phase_id", phase_id)
+                .setParameter("username", username)
+                .getResultList();
+        return result;
+    }
+
+    @Override
+    @Transactional(readOnly = true, propagation = Propagation.MANDATORY)
+    public List<Defect> searchByUserAndRemPhase(int phase_id, String username){
+        @SuppressWarnings("unchecked")
+        List<Defect> result = getEntityManager().createQuery("SELECT d FROM Defect d "
+                + "JOIN d.remotionPhase ip JOIN d.assignedUser u WHERE "
+                + "ip.phaseId = :phase_id AND u.userName = :username")
+                .setParameter("phase_id", phase_id)
+                .setParameter("username", username)
+                .getResultList();
+        return result;
+    }
+
+    @Override
+    @Transactional(readOnly = true, propagation = Propagation.MANDATORY)
+    public List<Defect> searchByInyectionPhase(int phase_id){
+        @SuppressWarnings("unchecked")
+        List<Defect> result = getEntityManager().createQuery("SELECT d FROM Defect d "
+                + "JOIN d.inyectionPhase ip WHERE "
+                + "ip.phaseId = :phase_id")
+                .setParameter("phase_id", phase_id)
+                .getResultList();
+        return result;
+    }
+
+    @Override
+    @Transactional(readOnly = true, propagation = Propagation.MANDATORY)
+    public List<Defect> searchByRemotionPhase(int phase_id){
+        @SuppressWarnings("unchecked")
+        List<Defect> result = getEntityManager().createQuery("SELECT d FROM Defect d "
+                + "JOIN d.remotionPhase ip WHERE "
+                + "ip.phaseId = :phase_id")
+                .setParameter("phase_id", phase_id)
+                .getResultList();
+        return result;
+    }
 }

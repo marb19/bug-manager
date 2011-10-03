@@ -32,4 +32,6 @@ public interface UserDAO extends BaseItemDAO<User> {
 
     public List<User> getAllAdministrators();
 
+    public List<User> getAllDevelopers();
+
 }
