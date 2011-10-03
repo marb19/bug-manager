@@ -48,7 +48,7 @@
                 <span id="DefectsInyectedRemoved">Inyected and Removed Defects by Phase Chart</span>
 
                     <script type="text/javascript">
-                        var defectsInyectedRemovedChart = new FusionCharts( "Charts/Column3D.swf",
+                        var defectsInyectedRemovedChart = new FusionCharts( "Charts/MSColumn3D.swf",
                         "myChartId", "400", "300", "0", "1" );
                         defectsInyectedRemovedChart.setXMLData("$defectsInyectedRemovedXML");
                         defectsInyectedRemovedChart.setTransparent(true);

@@ -26,21 +26,17 @@
                               required: function(element) {
                                 return (this.$("#level").val() == "1");
                               }
-                          }                          
+                          },
+                          justlevel: {
+                              required: function(element) {
+                                  return (this.$("#reportType").val() == "8");
+                              }
+                          }
                        }
                    });
                    $("#config-report-form").submit(function() {
                        switch (this.reportType.value)
-                       {
-                          case "1":
-                            $("#config-report-form").attr("action","./report/tasksByProject.pdf");
-                            break;
-                          case "2":
-                            $("#config-report-form").attr("action","./report/tasksByUser.pdf");
-                            break;
-                          case "3":
-                            $("#config-report-form").attr("action","./report/earnedValue.pdf");
-                            break;
+                       {                          
                           case "4":
                             $("#config-report-form").attr("action","./reportesGenerales.do");
                             break;
@@ -53,26 +49,17 @@
                           case "7":
                             $("#config-report-form").attr("action","./defectosInyectadosRemovidos.do");
                             break;
+                          case "8":
+                            $("#config-report-form").attr("action","./productividadCompuesta.do");
+                            break;
                           default:
                             alert("Reporte no dado de alta, seleccione uno diferente");
                             return false;
                        }
                        return true;
                     });
-                    $("#reportType").change(function() {
-                        if (this.value == "2") {
-                            $("#selectedProjectLabel").show("fast");
-                            $("#project_id").show("fast");
-                            $("#project_id").removeAttr("disabled");
-                            $("#selectedUserLabel").show("fast");
-                            $("#username").show("fast");
-                            $("#username").removeAttr("disabled");
-                            $("#selectedLevelLabel").hide("fast");
-                            $("#level").hide("fast");
-                            $("#level").val("");
-                            $("#level").attr("disabled", "true");
-                        }
-                        else if (this.value == "5") {
+                    $("#reportType").change(function() {                        
+                        if (this.value == "5") {
                             $("#selectedUserLabel").hide("fast");
                             $("#username").hide("fast");
                             $("#username").val("");
@@ -85,6 +72,10 @@
                             $("#level").hide("fast");
                             $("#level").val("");
                             $("#level").attr("disabled", "true");
+                            $("#justLevelLabel").hide("fast");
+                            $("#justlevel").hide("fast");
+                            $("#justlevel").val("");
+                            $("#justlevel").attr("disabled", "true");
                         }
                         else if (this.value == "6" || this.value == "7") {
                             $("#selectedLevelLabel").show("fast");
@@ -98,6 +89,27 @@
                             $("#project_id").hide("fast");
                             $("#project_id").val("");
                             $("#project_id").attr("disabled", "true");
+                            $("#justLevelLabel").hide("fast");
+                            $("#justlevel").hide("fast");
+                            $("#justlevel").val("");
+                            $("#justlevel").attr("disabled", "true");
+                        }
+                        else if (this.value == "8") {
+                            $("#justLevelLabel").show("fast");
+                            $("#justlevel").show("fast");
+                            $("#justlevel").removeAttr("disabled");
+                            $("#selectedUserLabel").hide("fast");
+                            $("#username").hide("fast");
+                            $("#username").val("");
+                            $("#username").attr("disabled", "true");
+                            $("#selectedProjectLabel").hide("fast");
+                            $("#project_id").hide("fast");
+                            $("#project_id").val("");
+                            $("#project_id").attr("disabled", "true");
+                            $("#selectedLevelLabel").hide("fast");
+                            $("#level").hide("fast");
+                            $("#level").val("");
+                            $("#level").attr("disabled", "true");
                         }
                         else {
                             $("#selectedUserLabel").hide("fast");
@@ -111,21 +123,13 @@
                             $("#level").hide("fast");
                             $("#level").val("");
                             $("#level").attr("disabled", "true");
+                            $("#justLevelLabel").hide("fast");
+                            $("#justlevel").hide("fast");
+                            $("#justlevel").val("");
+                            $("#justlevel").attr("disabled", "true");
                         }
-                    });
-                    if ($("#reportType").val() == "2") {
-                            $("#selectedProjectLabel").show("fast");
-                            $("#project_id").show("fast");
-                            $("#project_id").removeAttr("disabled");
-                            $("#selectedUserLabel").show("fast");
-                            $("#username").show("fast");
-                            $("#username").removeAttr("disabled");
-                            $("#selectedLevelLabel").hide("fast");
-                            $("#level").hide("fast");
-                            $("#level").val("");
-                            $("#level").attr("disabled", "true");
-                        }
-                        else if ($("#reportType").val() == "5"){
+                    });                    
+                        if ($("#reportType").val() == "5"){
                             $("#selectedUserLabel").hide("fast");
                             $("#username").hide("fast");
                             $("#username").val("");
@@ -138,6 +142,10 @@
                             $("#level").hide("fast");
                             $("#level").val("");
                             $("#level").attr("disabled", "true");
+                            $("#justLevelLabel").hide("fast");
+                            $("#justlevel").hide("fast");
+                            $("#justlevel").val("");
+                            $("#justlevel").attr("disabled", "true");
                         }
                         else if ($("#reportType").val() == "6" || $("#reportType").val() == "7") {
                             $("#selectedLevelLabel").show("fast");
@@ -151,6 +159,27 @@
                             $("#project_id").hide("fast");
                             $("#project_id").val("");
                             $("#project_id").attr("disabled", "true");
+                            $("#justLevelLabel").hide("fast");
+                            $("#justlevel").hide("fast");
+                            $("#justlevel").val("");
+                            $("#justlevel").attr("disabled", "true");
+                        }
+                        else if ($("#reportType").val() == "8") {
+                            $("#justLevelLabel").show("fast");
+                            $("#justlevel").show("fast");
+                            $("#justlevel").removeAttr("disabled");
+                            $("#selectedUserLabel").hide("fast");
+                            $("#username").hide("fast");
+                            $("#username").val("");
+                            $("#username").attr("disabled", "true");
+                            $("#selectedProjectLabel").hide("fast");
+                            $("#project_id").hide("fast");
+                            $("#project_id").val("");
+                            $("#project_id").attr("disabled", "true");
+                            $("#selectedLevelLabel").hide("fast");
+                            $("#level").hide("fast");
+                            $("#level").val("");
+                            $("#level").attr("disabled", "true");
                         }
                         else {
                             $("#selectedUserLabel").hide("fast");
@@ -164,6 +193,10 @@
                             $("#level").hide("fast");
                             $("#level").val("");
                             $("#level").attr("disabled", "true");
+                            $("#justLevelLabel").hide("fast");
+                            $("#justlevel").hide("fast");
+                            $("#justlevel").val("");
+                            $("#justlevel").attr("disabled", "true");
                         }
                         $("#level").change(function() {
                         if (this.value == "1") {
@@ -235,14 +268,24 @@
                                 <label for="reportType" id="reportTypeLabel">Tipo de Reporte:</label>
                             </td>
                             <td>
-                                <select name="reportType" id="reportType">
-                                    <option value="1">Tareas en desarrollo por Proyecto</option>
-                                    <option value="2">Tareas en desarrollo por Persona</option>
-                                    <option value="3">Reporte y gráfica de Valor Ganado</option>
+                                <select name="reportType" id="reportType">                                    
                                     <option value="4">Reportes generales</option>
                                     <option value="5">Densidad de defectos por usuario</option>
                                     <option value="6">Total de defectos por tipo</option>
                                     <option value="7">Defectos inyectados y removidos por fase</option>
+                                    <option value="8">Productividad Compuesta</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="justlevel" id="justLevelLabel">Nivel:</label>
+                            </td>
+                            <td>
+                                <select name="justlevel" id="justlevel">
+                                    <option value=""> --- </option>
+                                    <option value="1"> Usuario </option>
+                                    <option value="2"> Proyecto </option>
                                 </select>
                             </td>
                         </tr>
