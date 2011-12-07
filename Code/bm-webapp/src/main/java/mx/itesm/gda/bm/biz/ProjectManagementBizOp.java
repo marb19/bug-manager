@@ -37,5 +37,7 @@ public interface ProjectManagementBizOp extends BizOp {
     public void deleteProject(int project_id);
 
     public Map<String, ?> getProject(int project_id);
+    
+    public List<Map<String, ?>> getUsers(int projectId);
 
 }

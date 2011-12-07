@@ -39,5 +39,7 @@ public interface UserManagementBizOp extends BizOp {
     public Map<String, ?> getUser(String userName);
 
     public Map<String, ?> getUserByEmail(String userName);
+    
+    public List<Map<String, ?>> getProjects(String userName);
 
 }
