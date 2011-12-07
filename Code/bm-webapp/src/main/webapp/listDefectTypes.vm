@@ -61,15 +61,13 @@
 			#else
 				<table id="content-table">
 					<tr>
-                                            <th>ID</th>
                                             <th>Nombre</th>
                                             <th>Descripción</th>
                                             <th></th>
 					</tr>
 					#foreach($dt in $defectTypes)
 					<tr>
-                                            <td><a href="modifyDefectType.do?defectTypeID=${dt.ID}">${dt.ID}</a></td>
-                                            <td>${dt.Name}</td>
+                                            <td><a href="modifyDefectType.do?defectTypeID=${dt.ID}">${dt.Name}</a></td>
                                             <td>${dt.Description}</td>
                                             <td>
                                             #if($dt.isEmpty)
@@ -84,7 +82,7 @@
 				<span class="breadcrumb-title">Estas viendo:</span>
 				<span class="breadcrumb-text">Todos los Tipos de Defectos</span>
 
-				<a href="newUser.do" id="add-icon-link">
+				<a href="newDefectType.do" id="add-icon-link">
 					<img src="images/Base/agregar.png" id="add-icon-img" />
 				</a>
                                 
