@@ -179,7 +179,7 @@ public class Defect extends AbstractItem {
         this.detectionPhase = detectionPhase;
     }
 
-         /**
+    /**
      * @return the detectionTask
      */
     public Task getDetectionTask() {
@@ -207,7 +207,7 @@ public class Defect extends AbstractItem {
         this.inyectionPhase = inyectionPhase;
     }
 
-         /**
+    /**
      * @return the inyectionTask
      */
     public Task getInyectionTask() {

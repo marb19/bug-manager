@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Agregar tarea - All In Time System</title>
+        <link rel="stylesheet" href="CSS/Style.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="CSS/redmond/jquery-ui-1.8.5.custom.css" type="text/css" media="screen" />
+        <script type="text/javascript" src="./js/jquery-1.4.2.min.js"></script>
+        <script type="text/javascript" src="./js/jquery.validate.min.js"></script>
+        <script type="text/javascript" src="./js/localization/messages_es.js"></script>
+        <script type="text/javascript" src="./js/jquery-ui-1.8.5.custom.min.js"></script>
+        <script type="text/javascript" src="./js/localization/jquery.ui.datepicker-es.js"></script>
+        <script>
+                function goToUrl(url)
+                {
+                        window.location = url;
+                }
+			
+                $(document).ready(function(){
+                        $("#task-add-form").validate({
+							rules: {
+								taskEstimatedHours: {
+									min:1
+								}
+							}
+						});
+                })				
+        </script>
+		<script type="text/javascript" src="./js/bm.tasks.js"></script>
+    </head>
+    <body>
+        <div id="header">
+            <img src="images/Login/bm-logo.png"  alt="BM logo" id="base-bmlogo"/>
+            <div id="base-header-text">
+				Hoy es $dateLong.format($date.systemDate)<br/>
+				Bienvenido, ${user.fullName}<br/>
+                <a href='userLogin.do?op=logout'>Salir</a>
+            </div>
+            <div id="base-menu">
+                <div id="base-menu-bar">
+                    <img src="images/Base/Menu1.png" id="base-menu-left" />
+                    <div id="base-menu-center">
+                        <ul>
+                            <li class='ProyectosVisitando' onclick="goToUrl('listProjects.do')" >
+                            </li>
+                            <li class='Reportes' onclick="goToUrl('listReports.do')" >
+                            </li>
+                            #if($user.administrator)
+                            <li class='Usuarios' onclick="goToUrl('listUsers.do')" >
+                            </li>
+                            #end
+                        </ul>
+                    </div>
+                    <img src="images/Base/Menu3.png" id="base-menu-right" />
+                </div>
+            </div>
+        </div>
+        <div id="content"> <!--AQUI METER TODOS LOS INPUT, LABELS etc-->
+            <div id="task">
+                <form action="newTask.do?project_id=${project_id}" method="POST" id="task-add-form">
+                    <h3 id="form-title">Nueva Tarea</h3>
+                    <table id="task-add">
+                        <tr>
+                            <td>
+                                <label for ="taskName" id="taskNameLabel">Nombre de la Tarea:</label>
+                            </td>
+                            <td>
+                                <input type="text" name="taskName" id="taskName" class="required" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for ="taskDescription" id="taskDescriptionLabel">Descripci&oacute;n:</label>
+                            </td>
+                            <td>
+                                <textarea cols="30" rows="6" name="taskDescription" id="taskDescription"></textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for ="taskEstimatedHours" id="taskEstimatedHours">Esfuerzo Planeado:</label>
+                            </td>
+                            <td>
+                                <input type="text" name="taskEstimatedHours" id="taskEstimatedHours" class="required digits" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for ="assignedUser" id="assignedUserLabel">Responsable:</label>
+                            </td>
+                            <td>
+                                <select name="assignedUser" id="assignedUser" class="required">
+                                    <option value="" selected>-- Seleccionar --</option>
+									#foreach($u in $users)
+                                    <option value="${u.userName}">${u.fullName}</option>
+									#end
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for ="startDate" id="startDateLabel">Fecha de Inicio:</label>
+                            </td>
+                            <td>
+                                <input type="text" name="startDate" id="startDate" class="required hasDatePicker" readonly="readonly" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for ="endDate" id="endDateLabel">Fecha Meta:</label>
+                            </td>
+                            <td>
+                                <input type="text" name="endDate" id="endDate" class="required hasDatePicker" readonly="readonly" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><a href="listTasks.do?project_id=${project_id}" id="cancel-link">Cancelar</a></td>
+                            <td>
+                                <input type="image" value="Aceptar" src="images/Base/aceptar.png" id="accept-button" />
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
