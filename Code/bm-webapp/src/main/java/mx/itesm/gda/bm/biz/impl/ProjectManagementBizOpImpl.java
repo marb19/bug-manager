@@ -141,4 +141,29 @@ public class ProjectManagementBizOpImpl extends AbstractBizOp implements
         return p;
     }
 
+    @Override
+    public List<Map<String, ?>> getUsers(int projectId) {
+        
+        List<Map<String, ?>> ret = new ArrayList<Map<String, ?>>();
+        
+        Project project = new Project();
+        project = projectDAO.findById(projectId);
+        
+        for(User user : project.getUsers()) {
+            Map<String, Object> u = new HashMap<String, Object>();
+            u.put("userName", user.getUserName());
+            u.put("isAdministrator", user.isAdministrator());
+            u.put("permissions", user.getPermissions());
+            u.put("fullName", user.getFullName());
+            u.put("email", user.getEmail());
+            boolean isEmpty=(user.getAssignedTasks().isEmpty() && 
+                    user.getAuthoredComments().isEmpty() &&
+                    user.getAuthoredCompletionReports().isEmpty());
+            u.put("isEmpty", isEmpty);
+            ret.add(u);
+        }
+
+        return ret;
+    }
+
 }

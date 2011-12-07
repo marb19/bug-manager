@@ -20,7 +20,9 @@ import java.util.List;
 import java.util.Map;
 import mx.itesm.gda.bm.biz.BizException;
 import mx.itesm.gda.bm.biz.UserManagementBizOp;
+import mx.itesm.gda.bm.model.Project;
 import mx.itesm.gda.bm.model.User;
+import mx.itesm.gda.bm.model.dao.ProjectDAO;
 import mx.itesm.gda.bm.model.dao.UserDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -40,6 +42,9 @@ public class UserManagementBizOpImpl extends AbstractBizOp implements
 
     @Autowired
     UserDAO userDAO;
+    
+    @Autowired
+    ProjectDAO projectDAO;
 
     @Override
     @Transactional(readOnly = true, propagation = Propagation.MANDATORY)
@@ -142,6 +147,32 @@ public class UserManagementBizOpImpl extends AbstractBizOp implements
         u.put("fullName", user.getFullName());
         u.put("email", user.getEmail());
         return u;
+    }
+    
+    @Override
+    @Transactional(readOnly = true, propagation = Propagation.MANDATORY)
+    public List<Map<String, ?>> getProjects(String userName){
+        
+        List<Map<String, ?>> ret = new ArrayList<Map<String, ?>>();
+        User user = userDAO.findByUserName(userName);
+
+        if(user != null) {
+            List<Project> projects;
+            projects = user.getProjects();
+
+            for(Project project : projects) {
+                Map<String, Object> p = new HashMap<String, Object>();
+                p.put("projectId", project.getProjectId());
+                p.put("projectName", project.getProjectName());
+                p.put("projectDescription", project.getProjectDescription());
+                p.put("projectDueDate", project.getProjectDueDate());
+                p.put("projectPlannedDate", project.getProjectPlannedDate());
+                p.put("empty", project.getTasks().isEmpty());
+                ret.add(p);
+            }
+        }
+
+        return ret;
     }
 
 }

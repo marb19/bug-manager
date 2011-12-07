@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Defectos - Bug Manager</title>
+        <link rel="stylesheet" href="CSS/Style.css" type="text/css" media="screen" />
+        <script>
+                function goToUrl(url)
+                {
+                        window.location = url;
+                }
+
+                function confirmErase(taskId)
+                {
+                    if (confirm("¿Estás seguro que deseas borrar la tarea?"))
+                    {
+                        window.location = "deleteTask.do?taskID=" + taskId;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+        </script>
+    </head>
+    <body>
+        <div id="header">
+            <img src="images/Login/bm-logo.png"  alt="BM logo" id="base-bmlogo"/>
+            <div id="base-header-text">
+				Hoy es $dateLong.format($date.systemDate)<br/>
+				Bienvenido, ${user.fullName}<br/>
+                <a href='userLogin.do?op=logout'>Salir</a>
+            </div>
+            <div id="base-menu">
+                <div id="base-menu-bar">
+                    <img src="images/Base/Menu1.png" id="base-menu-left" />
+                    <div id="base-menu-center">
+                        <ul>
+                            <li class='ProyectosVisitando' onclick="goToUrl('listProjects.do')" >
+                            </li>
+                            <li class='Reportes' onclick="goToUrl('listReports.do')" >
+                            </li>
+                            #if($user.administrator)
+                            <li class='Usuarios' onclick="goToUrl('listUsers.do')" >
+                            </li>
+                            #end
+                        </ul>
+                    </div>
+                    <img src="images/Base/Menu3.png" id="base-menu-right" />
+                </div>
+            </div>
+        </div>
+		<div id="content"> <!--AQUI METER TODOS LOS INPUT, LABELS etc-->
+			<div id="content-header">
+				<span class="breadcrumb-title">Estas viendo:</span>
+				<span class="breadcrumb-text">${project.projectName} > Todas los defectos</span>
+				<a href="newDefect.do?project_id=${project.projectId}" id="add-icon-link">
+					<img src="images/Base/agregar.png" id="add-icon-img" />
+				</a>
+                                <br/>
+                                <a href="listDefects.do?project_id=${project.projectId}&filter=1" id="filter-icon-link">
+                                    <img src="images/Base/filtrar.png" id="filter-icon-img" />
+                                </a>
+			</div>
+			#if ($defects.empty)
+				<h3 id="form-title">No existen defectos registrados para este proyecto.</h3>
+			#else
+				<table id="content-table">
+					<tr>
+						<th>Tarea</th>
+						<th>Encargado</th>
+						<th>Esfuerzo Planeado</th>
+						<th>Esfuerzo Acumulado</th>
+                                                <th>Esfuerzo Restante</th>
+                                                <th>Porcentaje de Avance</th>
+						<th>Estatus</th>
+						<th>Fecha Inicio</th>
+						<th>Fecha Fin</th>
+						#if($user.administrator)
+						<th>Acciones</th>
+						#end
+					</tr>
+					#foreach($t in $tasks)
+					<tr>
+                                            #if($filter == 0 || ($user.userName == $t.assignedUser.userName && $filter == 1))
+						#if($user.administrator || $t.assignedUser.userName == $user.userName)
+						<td><a href="viewTask.do?project_id=${project.projectId}&task_id=${t.taskID}">${t.taskName}</a></td>
+						#else
+						<td>$display.truncate($t.taskName,20)</td>
+						#end
+						<td>${t.assignedUser.fullName}</td>
+						<td>${t.estimatedHours}</td>
+						<td>${t.investedHours}</td>
+                                                <td>${t.remainingHours}</td>
+                                                #set( $investedHours = $t.investedHours + 0.0 )
+                                                #set( $remainingHours = $t.remainingHours + 0.0 )
+                                                #set( $per = $investedHours/($investedHours + $remainingHours) )
+                                                #set( $per = $math.roundTo(2,$per) * 100 )
+                                                #set( $per = $math.toInteger($per) )
+                                                <td>${per} %</td>
+						#if($t.status == "NOT_STARTED")
+						<td>NO_INICIADA</td>
+						#elseif($t.status == "STARTED")
+						<td>INICIADA</td>
+						#elseif($t.status == "COMPLETED")
+						<td>COMPLETADA</td>
+                                                #elseif($t.status == "CANCELED")
+						<td>CANCELADA</td>
+						#end
+						<td>$date.format(${t.startDate})</td>
+						<td>$date.format(${t.endDate})</td>
+						#if($user.administrator && $t.investedHours == 0 && $t.commentsNumber == 0)
+						<td><a href="#" onclick="confirmErase(${t.taskID})">Borrar</a></td>
+						#end
+                                            #end
+					</tr>
+					#end
+				</table>
+			#end
+			<div id="content-footer">
+				<span class="breadcrumb-title">Estas viendo:</span>
+				<span class="breadcrumb-text">${project.projectName} > Todas las tareas</span>
+				#if($user.administrator)
+				<a href="newTask.do?project_id=${project.projectId}" id="add-icon-link">
+					<img src="images/Base/agregar.png" id="add-icon-img" />
+				</a>
+				#end
+                                #if($filter == 0)
+                                <a href="listTasks.do?project_id=${project.projectId}&filter=1" id="filter-icon-link-bottom">
+                                    <img src="images/Base/filtrar.png" id="filter-icon-img-bottom" />
+                                </a>
+                                #elseif($filter == 1)
+                                <a href="listTasks.do?project_id=${project.projectId}&filter=0" id="seeAll-icon-link-bottom">
+                                    <img src="images/Base/verTodas.png" id="seeAll-icon-img-bottom" />
+                                </a>
+                                #end
+			</div>
+		</div>
+    </body>
+</html>
