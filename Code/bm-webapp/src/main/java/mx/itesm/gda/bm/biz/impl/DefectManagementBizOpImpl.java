@@ -203,15 +203,13 @@ public class DefectManagementBizOpImpl extends AbstractBizOp implements
     }
 
     @Override
-    public int createDefect(int defectTypeId, String defectName, String defectDescription, int projectId, int detectionPhaseId, int detectionTaskId) {
+    public int createDefect(String defectName, String defectDescription, int projectId, int detectionPhaseId, int detectionTaskId) {
         
         Project p = projectDAO.findById(projectId);
-        DefectType dt = defectTypeDAO.findById(defectTypeId);
         Phase dp = phaseDAO.findById(detectionPhaseId);
         Task dTask = taskDAO.findById(detectionTaskId);
      
         Defect d = new Defect();
-        d.setDefectType(dt);
         d.setDefectName(defectName);
         d.setDefectDescription(defectDescription);
         d.setProject(p);
