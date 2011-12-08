@@ -13,8 +13,12 @@
  * ************************************************************************ */
 package mx.itesm.gda.bm.controllers;
 
+import java.util.List;
+import java.util.Map;
 import mx.itesm.gda.bm.biz.DefectManagementBizOp;
 import mx.itesm.gda.bm.biz.DefectTypeManagementBizOp;
+import mx.itesm.gda.bm.biz.ProjectManagementBizOp;
+import mx.itesm.gda.bm.biz.TaskManagementBizOp;
 import mx.itesm.gda.bm.utils.UserLogged;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -38,10 +42,27 @@ public class NewDefectController extends BaseController{
     @Autowired
     private DefectManagementBizOp defectMgr;
 
+    @Autowired
+    private TaskManagementBizOp taskMgr;
+    
+    @Autowired
+    private ProjectManagementBizOp projMgr;
+    
     @RequestMapping(method = RequestMethod.GET)
     @Transactional(readOnly = true)
     @UserLogged(adminRequired = true)
-    public String displayForm(ModelMap model) {
+    public String displayForm(@RequestParam("project_id") int projectID, ModelMap model) {
+        
+        if(projectID <= 0){
+            throw new ControllerException("ID de proyecto fuera de rango");
+        }
+        
+        Map<String, ?> project = projMgr.getProject(projectID);
+        //TODO este método tiene que cambiarse por el cual también utiliza la fase actual, el cambio se hará cuando estén las correcciones del proyecto
+        List<Map<String, ?>> tasks = taskMgr.retrieveTasks(projectID);
+        model.put("tasks", tasks);
+        model.put("project", project);
+        
         return null;
     }
 

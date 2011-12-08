@@ -23,6 +23,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -60,6 +61,9 @@ public class Project extends AbstractItem {
     @Temporal(TemporalType.DATE)
     private Date projectPlannedDate;
 
+    @OneToOne(optional = false)
+    private Phase actualPhase;
+    
     @OneToMany(mappedBy = "project")
     private List<Phase> phases;
 
@@ -166,6 +170,20 @@ public class Project extends AbstractItem {
         this.projectPlannedDate = projectPlannedDate;
     }
 
+    /**
+     * @return the actualPhase
+     */
+    public Phase getActualPhase() {
+        return actualPhase;
+    }
+
+    /**
+     * @param actualPhase the actualPhase to set
+     */
+    public void setActualPhase(Phase actualPhase) {
+        this.actualPhase = actualPhase;
+    }
+    
     /**
      * @return the phases
      */
