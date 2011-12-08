@@ -36,6 +36,8 @@ public interface TaskManagementBizOp extends BizOp {
     public void deleteTask(Integer taskID);
 
     public List<Map<String, ?>> retrieveTasks(int projectID);
+    
+    public List<Map<String, ?>> retrieveTasks(int projectID, int phaseID);
 
     public int addComment(int taskID, String commentAuthor, String newComment);
 

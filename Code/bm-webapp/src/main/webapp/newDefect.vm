@@ -58,23 +58,23 @@
         </div>
         <div id="content"> <!--AQUI METER TODOS LOS INPUT, LABELS etc-->
             <div id="task">
-                <form action="newTask.do?project_id=${project_id}" method="POST" id="task-add-form">
-                    <h3 id="form-title">Nueva Tarea</h3>
+                <form action="newDefect.do?project_id=${project_id}" method="POST" id="task-add-form">
+                    <h3 id="form-title">Nuevo Defecto</h3>
                     <table id="task-add">
                         <tr>
                             <td>
-                                <label for ="taskName" id="taskNameLabel">Nombre de la Tarea:</label>
+                                <label for ="defectName" id="defectNameLabel">Nombre del Defecto:</label>
                             </td>
                             <td>
-                                <input type="text" name="taskName" id="taskName" class="required" />
+                                <input type="text" name="defectName" id="defectName" class="required" />
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <label for ="taskDescription" id="taskDescriptionLabel">Descripci&oacute;n:</label>
+                                <label for ="defectDescription" id="defectDescriptionLabel">Descripci&oacute;n:</label>
                             </td>
                             <td>
-                                <textarea cols="30" rows="6" name="taskDescription" id="taskDescription"></textarea>
+                                <textarea cols="30" rows="6" name="defectDescription" id="defectDescription"></textarea>
                             </td>
                         </tr>
                         <tr>

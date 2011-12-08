@@ -239,4 +239,31 @@ public class TaskManagementBizOpImpl extends AbstractBizOp implements
         taskCommentDAO.save(newTaskComment);
         return newTaskComment.getTaskCommentId();
     }
+
+    @Override
+    public List<Map<String, ?>> retrieveTasks(int projectID, int phaseID) {
+        List<Map<String, ?>> ret = new ArrayList<Map<String, ?>>();
+        Project project = projectDAO.findById(projectID);
+
+        for(Task task : project.getTasks()) {
+            if(task.getPhase().getPhaseId() == phaseID){
+                Map<String, Object> t = new HashMap<String, Object>();
+                t.put("taskID", task.getTaskId());
+                t.put("taskName", task.getTaskName());
+                t.put("project", mapProject(task.getProject()));
+                t.put("assignedUser", mapUser(task.getAssignedUser()));
+                t.put("startDate", task.getStartDate());
+                t.put("endDate", task.getEndDate());
+                t.put("investedHours", task.getInvestedHours());
+                t.put("estimatedHours", task.getEstimatedHours());
+                t.put("remainingHours", task.getRemainingHours());
+                t.put("completionDate", task.getCompletionDate());
+                t.put("status", task.getTaskState().name());
+                t.put("commentsNumber", task.getTaskComments().size());
+                ret.add(t);
+            }
+        }
+        
+        return ret;
+    }
 }
