@@ -41,6 +41,9 @@ public class Phase extends AbstractItem {
 
     @Column(length = 255, nullable = false)
     private String phaseName;
+    
+    @Column(length = 4095, nullable = false)
+    private String phaseDescription;
 
     @ManyToOne(optional = false)
     private Project project;
@@ -74,8 +77,16 @@ public class Phase extends AbstractItem {
     /**
      * @param taskName the taskName to set
      */
-    public void setPhaseName(String defectTypeName) {
+    public void setPhaseName(String phaseName) {
         this.phaseName = phaseName;
+    }
+    
+    public String getPhaseDescription() {
+        return phaseDescription;
+    }
+
+    public void setPhaseDescription(String phaseDescription) {
+        this.phaseDescription = phaseDescription;
     }
 
     /**
