@@ -58,7 +58,7 @@
         </div>
         <div id="content"> <!--AQUI METER TODOS LOS INPUT, LABELS etc-->
             <div id="task">
-                <form action="newDefect.do?project_id=${project_id}" method="POST" id="task-add-form">
+                <form action="newDefect.do?project_id=${project_id}&defectPhase=${phase.phaseID}" method="POST" id="defect-add-form">
                     <h3 id="form-title">Nuevo Defecto</h3>
                     <table id="task-add">
                         <tr>
@@ -79,43 +79,29 @@
                         </tr>
                         <tr>
                             <td>
-                                <label for ="taskEstimatedHours" id="taskEstimatedHours">Esfuerzo Planeado:</label>
+                                <label for ="defectPhase" id="defectPhaseLabel">Fase:</label>
                             </td>
                             <td>
-                                <input type="text" name="taskEstimatedHours" id="taskEstimatedHours" class="required digits" />
+                                ${phase.phaseName}
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <label for ="assignedUser" id="assignedUserLabel">Responsable:</label>
+                                <label for ="defectTask" id="defectTaskLabel">Tarea:</label>
                             </td>
                             <td>
-                                <select name="assignedUser" id="assignedUser" class="required">
+                                <select name="defectTask" id="defectTask" class="required">
                                     <option value="" selected>-- Seleccionar --</option>
-									#foreach($u in $users)
-                                    <option value="${u.userName}">${u.fullName}</option>
-									#end
+                                    #foreach($t in $tasks)
+                                    <option value="${t.taskID}">${t.taskName}</option>
+                                    #end
                                 </select>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <label for ="startDate" id="startDateLabel">Fecha de Inicio:</label>
+                                <a href="listTasks.do?project_id=${project_id}" id="cancel-link">Cancelar</a>
                             </td>
-                            <td>
-                                <input type="text" name="startDate" id="startDate" class="required hasDatePicker" readonly="readonly" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label for ="endDate" id="endDateLabel">Fecha Meta:</label>
-                            </td>
-                            <td>
-                                <input type="text" name="endDate" id="endDate" class="required hasDatePicker" readonly="readonly" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><a href="listTasks.do?project_id=${project_id}" id="cancel-link">Cancelar</a></td>
                             <td>
                                 <input type="image" value="Aceptar" src="images/Base/aceptar.png" id="accept-button" />
                             </td>

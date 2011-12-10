@@ -61,8 +61,8 @@ public class Project extends AbstractItem {
     @Temporal(TemporalType.DATE)
     private Date projectPlannedDate;
 
-    @OneToOne(optional = false)
-    private Phase actualPhase;
+    @Column(nullable = true)
+    private Integer actualPhase;
     
     @OneToMany(mappedBy = "project")
     private List<Phase> phases;
@@ -173,14 +173,14 @@ public class Project extends AbstractItem {
     /**
      * @return the actualPhase
      */
-    public Phase getActualPhase() {
+    public Integer getActualPhase() {
         return actualPhase;
     }
 
     /**
      * @param actualPhase the actualPhase to set
      */
-    public void setActualPhase(Phase actualPhase) {
+    public void setActualPhase(Integer actualPhase) {
         this.actualPhase = actualPhase;
     }
     

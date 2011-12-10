@@ -74,6 +74,7 @@ public class ProjectManagementBizOpImpl extends AbstractBizOp implements
                 p.put("projectDescription", project.getProjectDescription());
                 p.put("projectDueDate", project.getProjectDueDate());
                 p.put("projectPlannedDate", project.getProjectPlannedDate());
+                p.put("projectActualPhase", project.getActualPhase());
                 p.put("empty", project.getTasks().isEmpty());
                 ret.add(p);
             }
@@ -92,6 +93,7 @@ public class ProjectManagementBizOpImpl extends AbstractBizOp implements
         p.setProjectDescription(projectDescription);
         p.setProjectDueDate(projectDueDate);
         p.setProjectPlannedDate(projectPlannedDate);
+        p.setActualPhase(0);
         projectDAO.save(p);
         return p.getProjectId();
     }
@@ -136,6 +138,7 @@ public class ProjectManagementBizOpImpl extends AbstractBizOp implements
             p.put("projectDescription", project.getProjectDescription());
             p.put("projectDueDate", project.getProjectDueDate());
             p.put("projectPlannedDate", project.getProjectPlannedDate());
+            p.put("projectActualPhase", project.getActualPhase());
             p.put("empty", project.getTasks().isEmpty());
         }
         return p;

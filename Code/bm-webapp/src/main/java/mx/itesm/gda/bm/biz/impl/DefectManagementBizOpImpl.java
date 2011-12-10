@@ -215,6 +215,9 @@ public class DefectManagementBizOpImpl extends AbstractBizOp implements
         d.setProject(p);
         d.setDetectionPhase(dp);
         d.setDetectionTask(dTask);
+        d.setDefectState(DefectState.SUBMITTED);
+        d.setOpenDate(new Date());
+        defectDAO.save(d);
         
         return d.getDefectId();
     }

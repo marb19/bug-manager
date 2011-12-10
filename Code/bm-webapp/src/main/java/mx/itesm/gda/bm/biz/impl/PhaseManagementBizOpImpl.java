@@ -14,11 +14,15 @@ import mx.itesm.gda.bm.model.Project;
 import mx.itesm.gda.bm.model.dao.PhaseDAO;
 import mx.itesm.gda.bm.model.dao.ProjectDAO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author CDE-Marco
  */
+@Scope("prototype")
+@Component
 public class PhaseManagementBizOpImpl extends AbstractBizOp implements PhaseManagementBizOp{
 
     @Autowired
@@ -71,6 +75,7 @@ public class PhaseManagementBizOpImpl extends AbstractBizOp implements PhaseMana
         ph.setPhaseDescription(phaseDescription);
         ph.setProject(p);
         ph.setProjectOrder(projectOrder);
+        phaseDAO.save(ph);
         
         return ph.getPhaseId();
     }

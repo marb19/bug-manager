@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 import mx.itesm.gda.bm.biz.DefectManagementBizOp;
 import mx.itesm.gda.bm.biz.DefectTypeManagementBizOp;
+import mx.itesm.gda.bm.biz.PhaseManagementBizOp;
 import mx.itesm.gda.bm.biz.ProjectManagementBizOp;
 import mx.itesm.gda.bm.biz.TaskManagementBizOp;
 import mx.itesm.gda.bm.utils.UserLogged;
@@ -48,6 +49,9 @@ public class NewDefectController extends BaseController{
     @Autowired
     private ProjectManagementBizOp projMgr;
     
+    @Autowired
+    private PhaseManagementBizOp phaseMgr;
+    
     @RequestMapping(method = RequestMethod.GET)
     @Transactional(readOnly = true)
     @UserLogged(adminRequired = true)
@@ -58,10 +62,12 @@ public class NewDefectController extends BaseController{
         }
         
         Map<String, ?> project = projMgr.getProject(projectID);
-        //TODO este método tiene que cambiarse por el cual también utiliza la fase actual, el cambio se hará cuando estén las correcciones del proyecto
-        List<Map<String, ?>> tasks = taskMgr.retrieveTasks(projectID);
+        Map<String, ?> phase = phaseMgr.getPhase((Integer) project.get("projectActualPhase") );
+        List<Map<String, ?>> tasks = taskMgr.retrieveTasks(projectID, (Integer)phase.get("phaseID"));
         model.put("tasks", tasks);
         model.put("project", project);
+        model.put("phase", phase);
+        model.put("project_id", projectID);
         
         return null;
     }
@@ -72,7 +78,7 @@ public class NewDefectController extends BaseController{
     public String newDefect(
             @RequestParam("defectName") String defectName,
             @RequestParam("defectDescription") String defectDescription,
-            @RequestParam("projectID") int projectID,
+            @RequestParam("project_id") int projectID,
             @RequestParam("defectPhase") int defectPhase,
             @RequestParam("defectTask") int defectTask,
             ModelMap model) {
