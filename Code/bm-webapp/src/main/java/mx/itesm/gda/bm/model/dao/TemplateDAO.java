@@ -16,6 +16,7 @@ package mx.itesm.gda.bm.model.dao;
 
 import java.util.List;
 import mx.itesm.gda.bm.model.Template;
+import mx.itesm.gda.bm.model.User;
 
 /**
  *
@@ -24,12 +25,10 @@ import mx.itesm.gda.bm.model.Template;
  */
 public interface TemplateDAO extends BaseItemDAO<Template> {
 
-    public Template findById(int defect_id);
+    public Template findById(int template_id);
 
-    public List<Template> searchByTemplateName(String defect_name);
+    public List<Template> searchByTemplateName(String template_name);
 
-    public List<Template> searchByUser(String username);
-
-    public List<Template> searchByReviewType(int reviewType);
+    public List<Template> searchByUser(User assignedUser);
 
 }

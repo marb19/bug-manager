@@ -20,6 +20,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import mx.itesm.gda.bm.model.utils.BusinessKey;
 
@@ -53,8 +54,8 @@ public class Template extends AbstractItem {
     @Column(nullable = false)
     private boolean templatePublic;
 
-    @Column(length = 255, nullable = false)
-    private String userName;
+    @ManyToOne
+    private User assignedUser;
 
     /**
      * @return the templateId
@@ -143,14 +144,14 @@ public class Template extends AbstractItem {
     /**
      * @return the userName
      */
-    public String getUserName() {
-        return userName;
+    public User getAssignedUser() {
+        return assignedUser;
     }
 
     /**
      * @param userName the userName to set
      */
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setAssignedUser(User assignedUser) {
+        this.assignedUser = assignedUser;
     }
 }
