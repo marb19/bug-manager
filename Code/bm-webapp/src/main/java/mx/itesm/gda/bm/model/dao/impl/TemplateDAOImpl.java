@@ -16,6 +16,7 @@ package mx.itesm.gda.bm.model.dao.impl;
 
 import java.util.List;
 import mx.itesm.gda.bm.model.Template;
+import mx.itesm.gda.bm.model.User;
 import mx.itesm.gda.bm.model.dao.TemplateDAO;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
@@ -58,22 +59,11 @@ public class TemplateDAOImpl extends BaseItemDAOImpl<Template> implements Templa
 
     @Override
     @Transactional(readOnly = true, propagation = Propagation.MANDATORY)
-    public List<Template> searchByUser(String username){
+    public List<Template> searchByUser(User assignedUser){
         @SuppressWarnings("unchecked")
         List<Template> result = getEntityManager().createQuery("SELECT t FROM Template t "
                 + "WHERE u.userName = :username")
-                .setParameter("username", username)
-                .getResultList();
-        return result;
-    }
-
-    @Override
-    @Transactional(readOnly = true, propagation = Propagation.MANDATORY)
-    public List<Template> searchByReviewType(int templateReviewType){
-        @SuppressWarnings("unchecked")
-        List<Template> result = getEntityManager().createQuery("SELECT t FROM Template t "
-                + "WHERE rt.templateReviewType = :templateReviewType")
-                .setParameter("templateReviewType", templateReviewType)
+                .setParameter("username", assignedUser.getUserName())
                 .getResultList();
         return result;
     }
