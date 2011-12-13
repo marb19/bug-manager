@@ -25,6 +25,11 @@ import java.util.List;
 import java.util.Map;
 import mx.itesm.gda.bm.biz.BizException;
 import mx.itesm.gda.bm.biz.DefectManagementBizOp;
+import mx.itesm.gda.bm.biz.DefectTypeManagementBizOp;
+import mx.itesm.gda.bm.biz.PhaseManagementBizOp;
+import mx.itesm.gda.bm.biz.ProjectManagementBizOp;
+import mx.itesm.gda.bm.biz.TaskManagementBizOp;
+import mx.itesm.gda.bm.biz.UserManagementBizOp;
 import mx.itesm.gda.bm.model.Defect;
 import mx.itesm.gda.bm.model.DefectComment;
 import mx.itesm.gda.bm.model.DefectState;
@@ -76,6 +81,21 @@ public class DefectManagementBizOpImpl extends AbstractBizOp implements
     @Autowired
     private DefectCommentDAO defectCommentDAO;
     
+    @Autowired
+    private ProjectManagementBizOp projMgr;
+    
+    @Autowired
+    private PhaseManagementBizOp phaseMgr;
+    
+    @Autowired
+    private TaskManagementBizOp taskMgr;
+    
+    @Autowired
+    private DefectTypeManagementBizOp defectTypeMgr;
+    
+    @Autowired
+    private UserManagementBizOp userMgr;
+    
     @Override
     @Transactional(readOnly = true, propagation = Propagation.MANDATORY)
     public List<Map<String, ?>> retrieveAllDefects() {
@@ -89,83 +109,77 @@ public class DefectManagementBizOpImpl extends AbstractBizOp implements
             d.put("defectId", defect.getDefectId());
             d.put("defectName", defect.getDefectName());
             d.put("defectDesc", defect.getDefectDescription());
-            d.put("project", mapProject(defect.getProject()));
-            d.put("detectionPhase", mapPhase(defect.getDetectionPhase()));
-            d.put("detectionTask", mapTask(defect.getDetectionTask()));
-            d.put("inyectionPhase", mapPhase(defect.getInyectionPhase()));
-            d.put("inyectionTask", mapTask(defect.getInyectionTask()));
-            d.put("remotionPhase", mapPhase(defect.getRemotionPhase()));
-            d.put("defectTrigger", defect.getDefectTrigger());
-            d.put("impact", defect.getImpact());
-            d.put("defectType", mapDefectType(defect.getDefectType()));
-            d.put("qualifier", defect.getQualifier());
-            d.put("age", defect.getAge());
-            d.put("source", defect.getSource());
-            d.put("reference", defect.getReference());
+            d.put("project", projMgr.getProject(defect.getProject().getProjectId()));
+            d.put("detectionPhase", phaseMgr.getPhase(defect.getDetectionPhase().getPhaseId()));
+            d.put("detectionTask", taskMgr.getTask(defect.getDetectionTask().getTaskId()));
+            if(defect.getInyectionPhase() != null){
+                d.put("inyectionPhase", phaseMgr.getPhase(defect.getInyectionPhase().getPhaseId()));
+            } else{
+                d.put("inyectionPhase", "NULL");
+            }
+            if(defect.getInyectionTask() != null){
+                d.put("inyectionTask", taskMgr.getTask(defect.getInyectionTask().getTaskId()));
+            } else{
+                d.put("inyectionTask","NULL");
+            }  
+            if(defect.getRemotionPhase() != null){
+                d.put("remotionPhase", phaseMgr.getPhase(defect.getRemotionPhase().getPhaseId()));
+            }else{
+                d.put("remotionPhase", "NULL");
+            }
+            if(defect.getDefectTrigger() != null){
+                d.put("defectTrigger", defect.getDefectTrigger());
+            } else{
+                d.put("defectTrigger", "NULL");
+            }
+            if(defect.getImpact() != null){
+                d.put("impact", defect.getImpact());
+            } else{
+                d.put("impact", "NULL");
+            }
+            if(defect.getDefectType() != null){
+                d.put("defectType", defectTypeMgr.getDefectType(defect.getDefectType().getDefectTypeId()));
+            } else{
+                d.put("defectType", "NULL");
+            }
+            if(defect.getQualifier() != null){
+                d.put("qualifier", defect.getQualifier());
+            } else{
+                d.put("qualifier", "NULL");
+            }
+            if(defect.getAge() != null){
+                d.put("age", defect.getAge());
+            } else{
+                d.put("age", "NULL");
+            }
+            if(defect.getSource() != null){
+                d.put("source", defect.getSource());
+            } else{
+                d.put("source", "NULL");
+            }
+            if(defect.getReference() != null){
+                d.put("reference", defect.getReference());
+            } else{
+                d.put("reference", "NULL");
+            }
             d.put("investedHours", defect.getInvestedHours());
-            d.put("assignedUser", mapUser(defect.getAssignedUser()));
+            if(defect.getAssignedUser() != null){
+                d.put("assignedUser", userMgr.getUser(defect.getAssignedUser().getUserName()));
+            } else{
+                d.put("assignedUser", "NULL");
+            }
             d.put("openDate", defect.getOpenDate());
-            d.put("closeDate", defect.getCloseDate());
+            if(defect.getCloseDate() != null){
+                d.put("closeDate", defect.getCloseDate());
+            } else{
+                d.put("closeDate", "NULL");
+            }
             d.put("defectState", defect.getDefectState().name());
             d.put("commentsNumber", defect.getDefectComments().size());
             ret.add(d);
         }
 
         return ret;
-    }
-
-    private Map<String, ?> mapUser(User user) {
-        Map<String, Object> u = new HashMap<String, Object>();
-        u.put("userName", user.getUserName());
-        u.put("fullName", user.getFullName());
-        u.put("email", user.getEmail());
-        return u;
-    }
-
-    private Map<String, ?> mapProject(Project project) {
-        Map<String, Object> p = new HashMap<String, Object>();
-        p.put("projectId", project.getProjectId());
-        p.put("projectName", project.getProjectName());
-        p.put("projectDescription", project.getProjectDescription());
-        p.put("projectDueDate", project.getProjectDueDate());
-        p.put("projectPlannedDate", project.getProjectPlannedDate());
-        p.put("empty", project.getTasks().isEmpty());
-        return p;
-    }
-
-    private Map<String, ?> mapPhase(Phase phase) {
-        Map<String, Object> p = new HashMap<String, Object>();
-        p.put("phaseId", phase.getPhaseId());
-        p.put("phaseName", phase.getPhaseName());
-        p.put("projectId", phase.getProject().getProjectId());
-        p.put("projectOrder", phase.getProjectOrder());
-        return p;
-    }
-
-    private Map<String, ?> mapTask(Task task) {
-        Map<String, Object> t = new HashMap<String, Object>();
-        t.put("taskId", task.getTaskId());
-        t.put("taskName", task.getTaskName());
-        t.put("taskDescription", task.getTaskDescription());
-        t.put("projectId", task.getProject().getProjectId());
-        t.put("assignedUser", task.getAssignedUser().getUserName());
-        t.put("startDate", task.getStartDate());
-        t.put("endDate", task.getEndDate());
-        t.put("completionDate", task.getCompletionDate());
-        t.put("estimatedHours", task.getEstimatedHours());
-        t.put("investedHourS", task.getInvestedHours());
-        t.put("remainingHours", task.getInvestedHours());
-        t.put("taskState", task.getTaskState());
-        t.put("taskComments", task.getTaskComments());
-        return t;
-    }
-
-    private Map<String, ?> mapDefectType(DefectType defectType) {
-        Map<String, Object> dt = new HashMap<String, Object>();
-        dt.put("defectTypeId", defectType.getDefectTypeId());
-        dt.put("defectTypeName", defectType.getDefectTypeName());
-        dt.put("defectTypeDescription", defectType.getDefectTypeDescription());
-        return dt;
     }
 
     @Override
@@ -178,23 +192,71 @@ public class DefectManagementBizOpImpl extends AbstractBizOp implements
             d.put("defectId", defect.getDefectId());
             d.put("defectName", defect.getDefectName());
             d.put("defectDesc", defect.getDefectDescription());
-            d.put("project", mapProject(defect.getProject()));
-            d.put("detectionPhase", mapPhase(defect.getDetectionPhase()));
-            d.put("detectionTask", mapTask(defect.getDetectionTask()));
-            d.put("inyectionPhase", mapPhase(defect.getInyectionPhase()));
-            d.put("inyectionTask", mapTask(defect.getInyectionTask()));
-            d.put("remotionPhase", mapPhase(defect.getRemotionPhase()));
-            d.put("defectTrigger", defect.getDefectTrigger());
-            d.put("impact", defect.getImpact());
-            d.put("defectType", mapDefectType(defect.getDefectType()));
-            d.put("qualifier", defect.getQualifier());
-            d.put("age", defect.getAge());
-            d.put("source", defect.getSource());
-            d.put("reference", defect.getReference());
+            d.put("project", projMgr.getProject(projectId));
+            d.put("detectionPhase", phaseMgr.getPhase(defect.getDetectionPhase().getPhaseId()));
+            d.put("detectionTask", taskMgr.getTask(defect.getDetectionTask().getTaskId()));
+            if(defect.getInyectionPhase() != null){
+                d.put("inyectionPhase", phaseMgr.getPhase(defect.getInyectionPhase().getPhaseId()));
+            } else{
+                d.put("inyectionPhase", "NULL");
+            }
+            if(defect.getInyectionTask() != null){
+                d.put("inyectionTask", taskMgr.getTask(defect.getInyectionTask().getTaskId()));
+            } else{
+                d.put("inyectionTask","NULL");
+            }  
+            if(defect.getRemotionPhase() != null){
+                d.put("remotionPhase", phaseMgr.getPhase(defect.getRemotionPhase().getPhaseId()));
+            }else{
+                d.put("remotionPhase", "NULL");
+            }
+            if(defect.getDefectTrigger() != null){
+                d.put("defectTrigger", defect.getDefectTrigger());
+            } else{
+                d.put("defectTrigger", "NULL");
+            }
+            if(defect.getImpact() != null){
+                d.put("impact", defect.getImpact());
+            } else{
+                d.put("impact", "NULL");
+            }
+            if(defect.getDefectType() != null){
+                d.put("defectType", defectTypeMgr.getDefectType(defect.getDefectType().getDefectTypeId()));
+            } else{
+                d.put("defectType", "NULL");
+            }
+            if(defect.getQualifier() != null){
+                d.put("qualifier", defect.getQualifier());
+            } else{
+                d.put("qualifier", "NULL");
+            }
+            if(defect.getAge() != null){
+                d.put("age", defect.getAge());
+            } else{
+                d.put("age", "NULL");
+            }
+            if(defect.getSource() != null){
+                d.put("source", defect.getSource());
+            } else{
+                d.put("source", "NULL");
+            }
+            if(defect.getReference() != null){
+                d.put("reference", defect.getReference());
+            } else{
+                d.put("reference", "NULL");
+            }
             d.put("investedHours", defect.getInvestedHours());
-            d.put("assignedUser", mapUser(defect.getAssignedUser()));
+            if(defect.getAssignedUser() != null){
+                d.put("assignedUser", userMgr.getUser(defect.getAssignedUser().getUserName()));
+            } else{
+                d.put("assignedUser", "NULL");
+            }
             d.put("openDate", defect.getOpenDate());
-            d.put("closeDate", defect.getCloseDate());
+            if(defect.getCloseDate() != null){
+                d.put("closeDate", defect.getCloseDate());
+            } else{
+                d.put("closeDate", "NULL");
+            }
             d.put("defectState", defect.getDefectState().name());
             d.put("commentsNumber", defect.getDefectComments().size());
             ret.add(d);
@@ -320,27 +382,75 @@ public class DefectManagementBizOpImpl extends AbstractBizOp implements
         Defect defect = defectDAO.findById(defectID);
         Map<String, Object> d = new HashMap<String, Object>();
         d.put("defectId", defect.getDefectId());
-        d.put("defectName", defect.getDefectName());
-        d.put("defectDesc", defect.getDefectDescription());
-        d.put("project", mapProject(defect.getProject()));
-        d.put("detectionPhase", mapPhase(defect.getDetectionPhase()));
-        d.put("detectionTask", mapTask(defect.getDetectionTask()));
-        d.put("inyectionPhase", mapPhase(defect.getInyectionPhase()));
-        d.put("inyectionTask", mapTask(defect.getInyectionTask()));
-        d.put("remotionPhase", mapPhase(defect.getRemotionPhase()));
-        d.put("defectTrigger", defect.getDefectTrigger());
-        d.put("impact", defect.getImpact());
-        d.put("defectType", mapDefectType(defect.getDefectType()));
-        d.put("qualifier", defect.getQualifier());
-        d.put("age", defect.getAge());
-        d.put("source", defect.getSource());
-        d.put("reference", defect.getReference());
-        d.put("investedHours", defect.getInvestedHours());
-        d.put("assignedUser", mapUser(defect.getAssignedUser()));
-        d.put("openDate", defect.getOpenDate());
-        d.put("closeDate", defect.getCloseDate());
-        d.put("defectState", defect.getDefectState().name());
-        d.put("commentsNumber", defect.getDefectComments().size());
+            d.put("defectName", defect.getDefectName());
+            d.put("defectDesc", defect.getDefectDescription());
+            d.put("project", projMgr.getProject(defect.getProject().getProjectId()));
+            d.put("detectionPhase", phaseMgr.getPhase(defect.getDetectionPhase().getPhaseId()));
+            d.put("detectionTask", taskMgr.getTask(defect.getDetectionTask().getTaskId()));
+            if(defect.getInyectionPhase() != null){
+                d.put("inyectionPhase", phaseMgr.getPhase(defect.getInyectionPhase().getPhaseId()));
+            } else{
+                d.put("inyectionPhase", "NULL");
+            }
+            if(defect.getInyectionTask() != null){
+                d.put("inyectionTask", taskMgr.getTask(defect.getInyectionTask().getTaskId()));
+            } else{
+                d.put("inyectionTask","NULL");
+            }  
+            if(defect.getRemotionPhase() != null){
+                d.put("remotionPhase", phaseMgr.getPhase(defect.getRemotionPhase().getPhaseId()));
+            }else{
+                d.put("remotionPhase", "NULL");
+            }
+            if(defect.getDefectTrigger() != null){
+                d.put("defectTrigger", defect.getDefectTrigger());
+            } else{
+                d.put("defectTrigger", "NULL");
+            }
+            if(defect.getImpact() != null){
+                d.put("impact", defect.getImpact());
+            } else{
+                d.put("impact", "NULL");
+            }
+            if(defect.getDefectType() != null){
+                d.put("defectType", defectTypeMgr.getDefectType(defect.getDefectType().getDefectTypeId()));
+            } else{
+                d.put("defectType", "NULL");
+            }
+            if(defect.getQualifier() != null){
+                d.put("qualifier", defect.getQualifier());
+            } else{
+                d.put("qualifier", "NULL");
+            }
+            if(defect.getAge() != null){
+                d.put("age", defect.getAge());
+            } else{
+                d.put("age", "NULL");
+            }
+            if(defect.getSource() != null){
+                d.put("source", defect.getSource());
+            } else{
+                d.put("source", "NULL");
+            }
+            if(defect.getReference() != null){
+                d.put("reference", defect.getReference());
+            } else{
+                d.put("reference", "NULL");
+            }
+            d.put("investedHours", defect.getInvestedHours());
+            if(defect.getAssignedUser() != null){
+                d.put("assignedUser", userMgr.getUser(defect.getAssignedUser().getUserName()));
+            } else{
+                d.put("assignedUser", "NULL");
+            }
+            d.put("openDate", defect.getOpenDate());
+            if(defect.getCloseDate() != null){
+                d.put("closeDate", defect.getCloseDate());
+            } else{
+                d.put("closeDate", "NULL");
+            }
+            d.put("defectState", defect.getDefectState().name());
+            d.put("commentsNumber", defect.getDefectComments().size());
 
         return d;
     }

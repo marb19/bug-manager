@@ -49,7 +49,6 @@ public class ListDefectController {
     @Transactional
     @UserLogged()
     public String listDefects(@RequestParam("project_id") int projectID,
-                            @RequestParam(value = "filter", defaultValue = "") String filter,
                             ModelMap model) {
 
         if(projectID <= 0){
@@ -60,7 +59,6 @@ public class ListDefectController {
         Map<String, ?> project = projMgr.getProject(projectID);
         model.put("defects", defects);
         model.put("project", project);
-        model.put("filter", filter);
 
         return null;
     }

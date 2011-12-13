@@ -89,6 +89,6 @@ public class NewDefectController extends BaseController{
         
         int d = defectMgr.createDefect(defectName, defectDescription, projectID, defectPhase, defectTask);
 
-        return "redirect:listDefects.do";
+        return "redirect:listDefects.do?project_id=" + projectID;
     }
 }
