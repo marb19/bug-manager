@@ -44,7 +44,7 @@ public aspect BizLogicWatchDogAspect {
     declare error : bizopModelLeakage() :
             "BizOps cannot return DAO model values";
 
-    declare error : bizopIndependence() : "BizOps cannot call other BizOps";
+    /*declare error : bizopIndependence() : "BizOps cannot call other BizOps";*/
 
     declare warning : callSysOutPrint() : "Invalid System.out interaction";
 
@@ -57,8 +57,8 @@ public aspect BizLogicWatchDogAspect {
     pointcut bizopModelLeakage() :
             execution(public mx.itesm.gda.bm.model..* BizOp+.*(..));
 
-    pointcut bizopIndependence() :
-            within(BizOp+) && call(public * BizOp+.*(..));
+    /*pointcut bizopIndependence() :
+            within(BizOp+) && call(public * BizOp+.*(..));*/
 
     pointcut bizOpCall() : execution(public * BizOp+.*(..));
 
@@ -94,10 +94,10 @@ public aspect BizLogicWatchDogAspect {
                 thisJoinPointStaticPart);
     }
 
-    before() : bizopIndependence() {
+    /*before() : bizopIndependence() {
         actuallyThrowException("BizOps cannot call other BizOps",
                 thisJoinPointStaticPart);
-    }
+    }*/
 
     before() : systemOutPrint(PrintStream+) {
         actuallyThrowException("Invalid System.out interaction",
