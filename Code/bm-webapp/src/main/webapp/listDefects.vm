@@ -11,11 +11,11 @@
                         window.location = url;
                 }
 
-                function confirmErase(taskId)
+                function confirmErase(defectID)
                 {
-                    if (confirm("¿Estás seguro que deseas borrar la tarea?"))
+                    if (confirm("¿Estás seguro que deseas borrar el defecto?"))
                     {
-                        window.location = "deleteTask.do?taskID=" + taskId;
+                        window.location = "deleteDefect.do?defectID=" + defectID;
                     }
                     else
                     {
@@ -92,7 +92,7 @@
                                             <td>CANCELADO</td>
                                             #end
                                             <td>${d.openDate}</td>
-                                            #if($user.administrator)
+                                            #if($user.administrator && $d.defectState == "SUBMITTED")
                                             <td><a href="#" onclick="confirmErase(${d.defectID})">Borrar</a></td>
                                             #end
                                         </tr>
