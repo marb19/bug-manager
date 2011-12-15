@@ -82,6 +82,10 @@ public class Task extends AbstractItem {
     @Column(nullable = false)
     private TaskState taskState;
 
+    @Enumerated(EnumType.ORDINAL)
+    @Column(nullable = false)
+    private TaskType taskType;
+
     @OneToMany(mappedBy = "task")
     private List<TaskComment> taskComments;
 
@@ -268,6 +272,20 @@ public class Task extends AbstractItem {
      */
     public void setTaskState(TaskState taskState) {
         this.taskState = taskState;
+    }
+
+    /**
+     * @return the taskType
+     */
+    public TaskType getTaskType() {
+        return taskType;
+    }
+
+    /**
+     * @param taskType the taskType to set
+     */
+    public void setTaskType(TaskType taskType) {
+        this.taskType = taskType;
     }
 
     /**

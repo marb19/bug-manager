@@ -8,225 +8,400 @@
         <script type="text/javascript" src="./js/jquery-1.4.2.min.js"></script>
         <script type="text/javascript" src="./js/jquery.validate.min.js"></script>
         <script type="text/javascript" src="./js/localization/messages_es.js"></script>
-        <script type="text/javascript">
+        <script type="text/javascript">                
                 function goToUrl(url)
                 {
                    window.location = url;
                 }
 
                 $(document).ready(function(){
-                   $("#selectedUserLabel").hide();
-                   $("#username").hide();
+                   genReports = {"1":"Tiempo por fase","2":"Productividad por fase","3":"Yield por fase",
+                   "4":"Resumen general"};
+                   costReports = {"5":"Productividad Compuesta","6":"ROI de proyecto","7":"ROI de técnicas de detección",
+                   "8":"COQ vs CNQ"};
+                   tecReports = {"9":"Yield por técnica de detección","10":"Esfuerzo por técnica de detección",
+                   "11":"Eficiencia por técnica de detección","12":"Razón de revisión por técnica de detección",
+                   "13":"Pareto por técnica de detección"};
+                   defectReports = {"14":"Densidad de defectos por usuario","15":"Número de defectos por tipo",
+                   "16":"Defectos inyectados y removidos por fase"};
+                   level = {"1":"Usuario","2":"Proyecto","3":"Empresa"};
+                   level2 = {"2":"Proyecto","3":"Empresa"};
+
+                   $("#report").empty();
+                   for (key in genReports){
+                        $("#report").append('<option value="' + key + '">' + genReports[key] + '</option>');
+                   }
+
+                   $("#userLabel").hide();
+                   $("#username").hide();                   
+                   $("#levelLabel").hide();
+                   $("#level").hide();                   
+
                    $("#config-report-form").validate({
-                       rules: {
-                          username: {
-                              required: function(element) {
-                                return (this.$("#reportType").val() == "2");
-                              },
-                              required: function(element) {
-                                return (this.$("#level").val() == "1");
-                              }
-                          },
-                          justlevel: {
-                              required: function(element) {
-                                  return (this.$("#reportType").val() == "8");
-                              }
-                          }
+                       rules: {                                                   
                        }
-                   });
+                   });                  
                    $("#config-report-form").submit(function() {
-                       switch (this.reportType.value)
+                       switch (this.report.value)
                        {                          
-                          case "4":
+                          case "1":
                             $("#config-report-form").attr("action","./reportesGenerales.do");
                             break;
+                          case "2":
+                            $("#config-report-form").attr("action","./reportesGenerales.do");
+                            break;
+                          case "3":
+                            $("#config-report-form").attr("action","./reportesGenerales.do");
+                            break;
+                          case "4":
+                            $("#config-report-form").attr("action","./reportesGenerales.do");
+                            break;                          
                           case "5":
+                            $("#config-report-form").attr("action","./productividadCompuesta.do");
+                            break;
+                          case "9":
+                            $("#config-report-form").attr("action","./tecnicasDeteccion.do");
+                            break;
+                          case "10":
+                            $("#config-report-form").attr("action","./tecnicasDeteccion.do");
+                            break;
+                          case "11":
+                            $("#config-report-form").attr("action","./tecnicasDeteccion.do");
+                            break;
+                          case "12":
+                            $("#config-report-form").attr("action","./tecnicasDeteccion.do");
+                            break;
+                          case "13":
+                            $("#config-report-form").attr("action","./tecnicasDeteccion.do");
+                            break;
+                          case "14":
                             $("#config-report-form").attr("action","./densidadDefectosUsuario.do");
                             break;
-                          case "6":
+                          case "15":
                             $("#config-report-form").attr("action","./totalDefectosTipo.do");
                             break;
-                          case "7":
+                          case "16":
                             $("#config-report-form").attr("action","./defectosInyectadosRemovidos.do");
-                            break;
-                          case "8":
-                            $("#config-report-form").attr("action","./productividadCompuesta.do");
                             break;
                           default:
                             alert("Reporte no dado de alta, seleccione uno diferente");
                             return false;
                        }
                        return true;
-                    });
-                    $("#reportType").change(function() {                        
-                        if (this.value == "5") {
-                            $("#selectedUserLabel").hide("fast");
-                            $("#username").hide("fast");
-                            $("#username").val("");
-                            $("#username").attr("disabled", "true");
-                            $("#selectedProjectLabel").hide("fast");
-                            $("#project_id").hide("fast");
-                            $("#project_id").val("");
-                            $("#project_id").attr("disabled", "true");
-                            $("#selectedLevelLabel").hide("fast");
-                            $("#level").hide("fast");
-                            $("#level").val("");
-                            $("#level").attr("disabled", "true");
-                            $("#justLevelLabel").hide("fast");
-                            $("#justlevel").hide("fast");
-                            $("#justlevel").val("");
-                            $("#justlevel").attr("disabled", "true");
-                        }
-                        else if (this.value == "6" || this.value == "7") {
-                            $("#selectedLevelLabel").show("fast");
-                            $("#level").show("fast");
-                            $("#level").removeAttr("disabled");
-                            $("#selectedUserLabel").hide("fast");
-                            $("#username").hide("fast");
-                            $("#username").val("");
-                            $("#username").attr("disabled", "true");
-                            $("#selectedProjectLabel").hide("fast");
-                            $("#project_id").hide("fast");
-                            $("#project_id").val("");
-                            $("#project_id").attr("disabled", "true");
-                            $("#justLevelLabel").hide("fast");
-                            $("#justlevel").hide("fast");
-                            $("#justlevel").val("");
-                            $("#justlevel").attr("disabled", "true");
-                        }
-                        else if (this.value == "8") {
-                            $("#justLevelLabel").show("fast");
-                            $("#justlevel").show("fast");
-                            $("#justlevel").removeAttr("disabled");
-                            $("#selectedUserLabel").hide("fast");
-                            $("#username").hide("fast");
-                            $("#username").val("");
-                            $("#username").attr("disabled", "true");
-                            $("#selectedProjectLabel").hide("fast");
-                            $("#project_id").hide("fast");
-                            $("#project_id").val("");
-                            $("#project_id").attr("disabled", "true");
-                            $("#selectedLevelLabel").hide("fast");
-                            $("#level").hide("fast");
-                            $("#level").val("");
-                            $("#level").attr("disabled", "true");
-                        }
-                        else {
-                            $("#selectedUserLabel").hide("fast");
-                            $("#username").hide("fast");
-                            $("#username").val("");
-                            $("#username").attr("disabled", "true");
-                            $("#selectedProjectLabel").show("fast");
-                            $("#project_id").show("fast");
-                            $("#project_id").removeAttr("disabled");
-                            $("#selectedLevelLabel").hide("fast");
-                            $("#level").hide("fast");
-                            $("#level").val("");
-                            $("#level").attr("disabled", "true");
-                            $("#justLevelLabel").hide("fast");
-                            $("#justlevel").hide("fast");
-                            $("#justlevel").val("");
-                            $("#justlevel").attr("disabled", "true");
-                        }
                     });                    
-                        if ($("#reportType").val() == "5"){
-                            $("#selectedUserLabel").hide("fast");
+                    $("#category").change(function() {                                                                        
+                        $("#userLabel").hide("fast");
+                        $("#username").hide("fast");
+                        $("#username").val("");
+                        $("#username").attr("disabled", "true");
+                        $("#projectLabel").hide("fast");
+                        $("#project_id").hide("fast");
+                        $("#project_id").val("");
+                        $("#project_id").attr("disabled", "true");
+                        $("#levelLabel").hide("fast");
+                        $("#level").hide("fast");
+                        $("#level").val("");
+                        $("#level").attr("disabled", "true");
+                        if(this.value == "1"){
+                            $("#report").empty();
+                            for (key in genReports){
+                                $("#report").append('<option value="' + key + '">' + genReports[key] + '</option>');
+                            }
+                        }
+                        else if (this.value == "2"){
+                            $("#report").empty();
+                            for (key in costReports){
+                                $("#report").append('<option value="' + key + '">' + costReports[key] + '</option>');
+                            }
+                        }
+                        else if (this.value == "3"){
+                            $("#report").empty();
+                            for (key in tecReports){
+                                $("#report").append('<option value="' + key + '">' + tecReports[key] + '</option>');
+                            }
+                        }
+                        else {
+                            $("#report").empty();
+                            for (key in defectReports){
+                                $("#report").append('<option value="' + key + '">' + defectReports[key] + '</option>');
+                            }
+                        }
+                        if($("#report").val() == "1" || $("#report").val() == "2" ||
+                           $("#report").val() == "3" || $("#report").val() == "4"){
+
+                            $("#userLabel").hide("fast");
                             $("#username").hide("fast");
                             $("#username").val("");
                             $("#username").attr("disabled", "true");
-                            $("#selectedProjectLabel").hide("fast");
-                            $("#project_id").hide("fast");
-                            $("#project_id").val("");
-                            $("#project_id").attr("disabled", "true");
-                            $("#selectedLevelLabel").hide("fast");
+                            $("#projectLabel").show("fast");
+                            $("#project_id").show("fast");
+                            $("#project_id").removeAttr("disabled");
+                            $("#levelLabel").hide("fast");
                             $("#level").hide("fast");
                             $("#level").val("");
                             $("#level").attr("disabled", "true");
-                            $("#justLevelLabel").hide("fast");
-                            $("#justlevel").hide("fast");
-                            $("#justlevel").val("");
-                            $("#justlevel").attr("disabled", "true");
                         }
-                        else if ($("#reportType").val() == "6" || $("#reportType").val() == "7") {
-                            $("#selectedLevelLabel").show("fast");
+                        else if ($("#report").val() == "14"){
+                            $("#userLabel").hide("fast");
+                            $("#username").hide("fast");
+                            $("#username").val("");
+                            $("#username").attr("disabled", "true");
+                            $("#projectLabel").hide("fast");
+                            $("#project_id").hide("fast");
+                            $("#project_id").val("");
+                            $("#project_id").attr("disabled", "true");
+                            $("#levelLabel").hide("fast");
+                            $("#level").hide("fast");
+                            $("#level").val("");
+                            $("#level").attr("disabled", "true");
+                        }
+                        else if ($("#report").val() == "5" || $("#report").val() == "7" || $("#report").val() == "8"
+                        || $("#report").val() == "15" || $("#report").val() == "16") {
+                            $("#level").empty();
+                            for (key in level){
+                                $("#level").append('<option value="' + key + '">' + level[key] + '</option>');
+                            }
+                            $("#userLabel").hide("fast");
+                            $("#username").hide("fast");
+                            $("#username").val("");
+                            $("#username").attr("disabled", "true");
+                            $("#projectLabel").hide("fast");
+                            $("#project_id").hide("fast");
+                            $("#project_id").val("");
+                            $("#project_id").attr("disabled", "true");
+                            $("#levelLabel").show("fast");
                             $("#level").show("fast");
                             $("#level").removeAttr("disabled");
-                            $("#selectedUserLabel").hide("fast");
-                            $("#username").hide("fast");
-                            $("#username").val("");
-                            $("#username").attr("disabled", "true");
-                            $("#selectedProjectLabel").hide("fast");
-                            $("#project_id").hide("fast");
-                            $("#project_id").val("");
-                            $("#project_id").attr("disabled", "true");
-                            $("#justLevelLabel").hide("fast");
-                            $("#justlevel").hide("fast");
-                            $("#justlevel").val("");
-                            $("#justlevel").attr("disabled", "true");
+
+                            if ($("#level").val() == "1"){
+                                $("#projectLabel").hide("fast");
+                                $("#project_id").hide("fast");
+                                $("#project_id").val("");
+                                $("#project_id").attr("disabled", "true");
+                                $("#userLabel").show("fast");
+                                $("#username").show("fast");
+                                $("#username").removeAttr("disabled");
+                            }
+                            else if ($("#level").val() == "2"){
+                                $("#userLabel").hide("fast");
+                                $("#username").hide("fast");
+                                $("#username").val("");
+                                $("#username").attr("disabled", "true");
+                                $("#projectLabel").show("fast");
+                                $("#project_id").show("fast");
+                                $("#project_id").removeAttr("disabled");
+                            }
+                            else{
+                                $("#projectLabel").hide("fast");
+                                $("#project_id").hide("fast");
+                                $("#project_id").val("");
+                                $("#project_id").attr("disabled", "true");
+                                $("#userLabel").hide("fast");
+                                $("#username").hide("fast");
+                                $("#username").val("");
+                                $("#username").attr("disabled", "true");
+                            }
                         }
-                        else if ($("#reportType").val() == "8") {
-                            $("#justLevelLabel").show("fast");
-                            $("#justlevel").show("fast");
-                            $("#justlevel").removeAttr("disabled");
-                            $("#selectedUserLabel").hide("fast");
+                        else if ($("#report").val() == "6" || $("#report").val() == "9" || $("#report").val() == "10"
+                        || $("#report").val() == "11" || $("#report").val() == "12" || $("#report").val() == "13") {
+                            $("#level").empty();
+                            for (key in level2){
+                                $("#level").append('<option value="' + key + '">' + level2[key] + '</option>');
+                            }
+                            $("#userLabel").hide("fast");
                             $("#username").hide("fast");
                             $("#username").val("");
                             $("#username").attr("disabled", "true");
-                            $("#selectedProjectLabel").hide("fast");
+                            $("#projectLabel").hide("fast");
                             $("#project_id").hide("fast");
                             $("#project_id").val("");
                             $("#project_id").attr("disabled", "true");
-                            $("#selectedLevelLabel").hide("fast");
+                            $("#levelLabel").show("fast");
+                            $("#level").show("fast");
+                            $("#level").removeAttr("disabled");
+
+                            if ($("#level").val() == "1"){
+                                $("#projectLabel").hide("fast");
+                                $("#project_id").hide("fast");
+                                $("#project_id").val("");
+                                $("#project_id").attr("disabled", "true");
+                                $("#userLabel").show("fast");
+                                $("#username").show("fast");
+                                $("#username").removeAttr("disabled");
+                            }
+                            else if ($("#level").val() == "2"){
+                                $("#userLabel").hide("fast");
+                                $("#username").hide("fast");
+                                $("#username").val("");
+                                $("#username").attr("disabled", "true");
+                                $("#projectLabel").show("fast");
+                                $("#project_id").show("fast");
+                                $("#project_id").removeAttr("disabled");
+                            }
+                            else{
+                                $("#projectLabel").hide("fast");
+                                $("#project_id").hide("fast");
+                                $("#project_id").val("");
+                                $("#project_id").attr("disabled", "true");
+                                $("#userLabel").hide("fast");
+                                $("#username").hide("fast");
+                                $("#username").val("");
+                                $("#username").attr("disabled", "true");
+                            }
+                        }
+                    });
+                    $("#report").change(function() {
+                        if(this.value == "1" || this.value == "2" || this.value == "3" || this.value == "4"){
+                            $("#userLabel").hide("fast");
+                            $("#username").hide("fast");
+                            $("#username").val("");
+                            $("#username").attr("disabled", "true");
+                            $("#projectLabel").show("fast");
+                            $("#project_id").show("fast");
+                            $("#project_id").removeAttr("disabled");
+                            $("#levelLabel").hide("fast");
                             $("#level").hide("fast");
                             $("#level").val("");
                             $("#level").attr("disabled", "true");
                         }
-                        else {
-                            $("#selectedUserLabel").hide("fast");
+                        else if (this.value == "14"){
+                            $("#userLabel").hide("fast");
                             $("#username").hide("fast");
                             $("#username").val("");
                             $("#username").attr("disabled", "true");
-                            $("#selectedProjectLabel").show("fast");
-                            $("#project_id").show("fast");
-                            $("#project_id").removeAttr("disabled");
-                            $("#selectedLevelLabel").hide("fast");
+                            $("#projectLabel").hide("fast");
+                            $("#project_id").hide("fast");
+                            $("#project_id").val("");
+                            $("#project_id").attr("disabled", "true");
+                            $("#levelLabel").hide("fast");
                             $("#level").hide("fast");
                             $("#level").val("");
                             $("#level").attr("disabled", "true");
-                            $("#justLevelLabel").hide("fast");
-                            $("#justlevel").hide("fast");
-                            $("#justlevel").val("");
-                            $("#justlevel").attr("disabled", "true");
                         }
-                        $("#level").change(function() {
-                        if (this.value == "1") {
-                            $("#selectedUserLabel").show("fast");
-                            $("#username").show("fast");
-                            $("#username").removeAttr("disabled");
-                            $("#selectedProjectLabel").hide("fast");
-                            $("#project_id").hide("fast");
-                            $("#project_id").val("");
-                            $("#project_id").attr("disabled", "true");
-                        }
-                        else if (this.value == "2") {
-                            $("#selectedProjectLabel").show("fast");
-                            $("#project_id").show("fast");
-                            $("#project_id").removeAttr("disabled");
-                            $("#selectedUserLabel").hide("fast");
+                        else if (this.value == "5" || this.value == "7" || this.value == "8"
+                        || this.value == "15" || this.value == "16") {
+                            $("#level").empty();
+                            for (key in level){
+                                $("#level").append('<option value="' + key + '">' + level[key] + '</option>');
+                            }
+                            $("#userLabel").hide("fast");
                             $("#username").hide("fast");
                             $("#username").val("");
                             $("#username").attr("disabled", "true");
-                        }
-                        else {
-                            $("#selectedUserLabel").hide("fast");
-                            $("#username").hide("fast");
-                            $("#username").val("");
-                            $("#username").attr("disabled", "true");
-                            $("#selectedProjectLabel").hide("fast");
+                            $("#projectLabel").hide("fast");
                             $("#project_id").hide("fast");
                             $("#project_id").val("");
                             $("#project_id").attr("disabled", "true");
+                            $("#levelLabel").show("fast");
+                            $("#level").show("fast");
+                            $("#level").removeAttr("disabled");
+
+                            if ($("#level").val() == "1"){
+                                $("#projectLabel").hide("fast");
+                                $("#project_id").hide("fast");
+                                $("#project_id").val("");
+                                $("#project_id").attr("disabled", "true");
+                                $("#userLabel").show("fast");
+                                $("#username").show("fast");
+                                $("#username").removeAttr("disabled");
+                            }
+                            else if ($("#level").val() == "2"){
+                                $("#userLabel").hide("fast");
+                                $("#username").hide("fast");
+                                $("#username").val("");
+                                $("#username").attr("disabled", "true");
+                                $("#projectLabel").show("fast");
+                                $("#project_id").show("fast");
+                                $("#project_id").removeAttr("disabled");
+                            }
+                            else{
+                                $("#projectLabel").hide("fast");
+                                $("#project_id").hide("fast");
+                                $("#project_id").val("");
+                                $("#project_id").attr("disabled", "true");
+                                $("#userLabel").hide("fast");
+                                $("#username").hide("fast");
+                                $("#username").val("");
+                                $("#username").attr("disabled", "true");
+                            }
                         }
+                        else if (this.value == "6" || this.value == "9" || this.value == "10"
+                        || this.value == "11" || this.value == "12" || this.value == "13") {
+                            $("#level").empty();
+                            for (key in level2){
+                                $("#level").append('<option value="' + key + '">' + level2[key] + '</option>');
+                            }
+                            $("#userLabel").hide("fast");
+                            $("#username").hide("fast");
+                            $("#username").val("");
+                            $("#username").attr("disabled", "true");
+                            $("#projectLabel").hide("fast");
+                            $("#project_id").hide("fast");
+                            $("#project_id").val("");
+                            $("#project_id").attr("disabled", "true");
+                            $("#levelLabel").show("fast");
+                            $("#level").show("fast");
+                            $("#level").removeAttr("disabled");
+
+                            if ($("#level").val() == "1"){
+                                $("#projectLabel").hide("fast");
+                                $("#project_id").hide("fast");
+                                $("#project_id").val("");
+                                $("#project_id").attr("disabled", "true");
+                                $("#userLabel").show("fast");
+                                $("#username").show("fast");
+                                $("#username").removeAttr("disabled");
+                            }
+                            else if ($("#level").val() == "2"){
+                                $("#userLabel").hide("fast");
+                                $("#username").hide("fast");
+                                $("#username").val("");
+                                $("#username").attr("disabled", "true");
+                                $("#projectLabel").show("fast");
+                                $("#project_id").show("fast");
+                                $("#project_id").removeAttr("disabled");
+                            }
+                            else{
+                                $("#projectLabel").hide("fast");
+                                $("#project_id").hide("fast");
+                                $("#project_id").val("");
+                                $("#project_id").attr("disabled", "true");
+                                $("#userLabel").hide("fast");
+                                $("#username").hide("fast");
+                                $("#username").val("");
+                                $("#username").attr("disabled", "true");
+                            }
+                        }                        
+                    });
+                    $("#level").change(function() {
+                       if (this.value == "1"){
+                           $("#projectLabel").hide("fast");
+                           $("#project_id").hide("fast");
+                           $("#project_id").val("");
+                           $("#project_id").attr("disabled", "true");
+                           $("#userLabel").show("fast");
+                           $("#username").show("fast");
+                           $("#username").removeAttr("disabled");
+                       }
+                       else if (this.value == "2"){
+                           $("#userLabel").hide("fast");
+                           $("#username").hide("fast");
+                           $("#username").val("");
+                           $("#username").attr("disabled", "true");
+                           $("#projectLabel").show("fast");
+                           $("#project_id").show("fast");
+                           $("#project_id").removeAttr("disabled");
+                       }
+                       else{
+                           $("#projectLabel").hide("fast");
+                           $("#project_id").hide("fast");
+                           $("#project_id").val("");
+                           $("#project_id").attr("disabled", "true");
+                           $("#userLabel").hide("fast");
+                           $("#username").hide("fast");
+                           $("#username").val("");
+                           $("#username").attr("disabled", "true");
+                       }
                     });
                  });
         </script>
@@ -259,52 +434,46 @@
             </div>
         </div>
         <div id="content">
-            <div id="content-header">
+            <div id="content-header">                
                 <form action="#" method="POST" id="config-report-form">
-                    <h3 id="form-title">Generar Reporte</h3>
+                    <h3 id="form-title">Reportes y Estadísticas</h3>
                     <table id="user-modify">
                         <tr>
                             <td>
-                                <label for="reportType" id="reportTypeLabel">Tipo de Reporte:</label>
+                                <label for="category" id="categoryLabel">Categoría:</label>
                             </td>
                             <td>
-                                <select name="reportType" id="reportType">                                    
-                                    <option value="4">Reportes generales</option>
-                                    <option value="5">Densidad de defectos por usuario</option>
-                                    <option value="6">Total de defectos por tipo</option>
-                                    <option value="7">Defectos inyectados y removidos por fase</option>
-                                    <option value="8">Productividad Compuesta</option>
+                                <select name="category" id="category">
+                                    <option value="1">Generales</option>
+                                    <option value="2">Costo de la Calidad</option>
+                                    <option value="3">Técnicas de Detección de Defectos</option>
+                                    <option value="4">Caracterización de Defectos</option>
                                 </select>
                             </td>
-                        </tr>
+                        </tr>                        
                         <tr>
                             <td>
-                                <label for="justlevel" id="justLevelLabel">Nivel:</label>
+                                <label for="report" id="reportLabel">Reporte:</label>
                             </td>
                             <td>
-                                <select name="justlevel" id="justlevel">
+                                <select name="report" id="report">
                                     <option value=""> --- </option>
-                                    <option value="1"> Usuario </option>
-                                    <option value="2"> Proyecto </option>
                                 </select>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <label for="level" id="selectedLevelLabel">Nivel:</label>
+                                <label for="level" id="levelLabel">Nivel:</label>
                             </td>
                             <td>
                                 <select name="level" id="level">
-                                    <option value=""> --- </option>
-                                    <option value="1"> Usuario </option>
-                                    <option value="2"> Proyecto </option>
-                                    <option value="3"> Empresa </option>
+                                    <option value=""> --- </option>                                    
                                 </select>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <label for="project_id" id="selectedProjectLabel">Proyecto:</label>
+                                <label for="project_id" id="projectLabel">Proyecto:</label>
                             </td>
                             <td>
                                 <select name="project_id" id="project_id" class="required">
@@ -317,7 +486,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <label for="username" id="selectedUserLabel">Usuario:</label>
+                                <label for="username" id="userLabel">Usuario:</label>
                             </td>
                             <td>
                                 <select name="username" id="username">
