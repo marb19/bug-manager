@@ -45,28 +45,14 @@
         </div>
         <div id="content">
             <!--<div id="content-header"> -->
-                <span id="phaseTimeChart">Phase Time Chart</span>
-                <span id="phaseProdChart">Phase Productivity Chart</span>
-                <span id="phaseYieldChart">Phase Yield Chart</span>
+                <span id="reportChart">Phase Time Chart</span>
 
                     <script type="text/javascript">
-                        var phaseTimeChart = new FusionCharts( "Charts/Column3D.swf",
+                        var reportChart = new FusionCharts( "Charts/Column3D.swf",
                         "myChartId", "400", "300", "0", "1" );
-                        phaseTimeChart.setXMLData("$phaseTimeXML");
-                        phaseTimeChart.setTransparent(true);
-                        phaseTimeChart.render("phaseTimeChart");
-
-                        var phaseProdChart = new FusionCharts( "Charts/Column3D.swf",
-                        "myChartId", "400", "300", "0", "1" );
-                        phaseProdChart.setXMLData("$phaseProdXML");
-                        phaseProdChart.setTransparent(true);
-                        phaseProdChart.render("phaseProdChart");
-
-                        var phaseYieldChart = new FusionCharts( "Charts/Column3D.swf",
-                        "myChartId", "400", "300", "0", "1" );
-                        phaseYieldChart.setXMLData("$phaseYieldXML");
-                        phaseYieldChart.setTransparent(true);
-                        phaseYieldChart.render("phaseYieldChart");
+                        reportChart.setXMLData("$reportXML");
+                        reportChart.setTransparent(true);
+                        reportChart.render("reportChart");
                     </script>                    
             <!--</div>-->
         </div>
