@@ -14,9 +14,6 @@
 
 package mx.itesm.gda.bm.controllers;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
 import mx.itesm.gda.bm.biz.PhaseProdReportBizOp;
 import mx.itesm.gda.bm.biz.PhaseTimeReportBizOp;
 import mx.itesm.gda.bm.biz.PhaseYieldReportBizOp;
@@ -32,11 +29,9 @@ import mx.itesm.gda.bm.utils.UserLogged;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
 
@@ -73,7 +68,7 @@ public class ReportController extends BaseController {
     private ReviewsParetoBizOp reviewsPareto;
 
     @RequestMapping(value = "/reportesGenerales",
-    method = { RequestMethod.POST, RequestMethod.GET })
+    method = { RequestMethod.POST })
     @UserLogged
     @Transactional
     public String createGeneralReports(ModelMap model,
@@ -99,7 +94,7 @@ public class ReportController extends BaseController {
     }
 
     @RequestMapping(value = "/densidadDefectosUsuario",
-    method = { RequestMethod.POST, RequestMethod.GET})
+    method = { RequestMethod.POST })
     @UserLogged
     @Transactional
     public String createDefectDensityReport(ModelMap model){
@@ -110,7 +105,7 @@ public class ReportController extends BaseController {
     }
 
     @RequestMapping(value = "/totalDefectosTipo",
-    method = { RequestMethod.POST, RequestMethod.GET })
+    method = { RequestMethod.POST })
     @UserLogged
     @Transactional
     public String createTotalDefectsTypeReport(ModelMap model,
@@ -125,7 +120,7 @@ public class ReportController extends BaseController {
     }
 
     @RequestMapping(value = "/defectosInyectadosRemovidos",
-    method = { RequestMethod.POST, RequestMethod.GET })
+    method = { RequestMethod.POST })
     @UserLogged
     @Transactional
     public String createDefectsInyectedRemovedReport(ModelMap model,
@@ -140,7 +135,7 @@ public class ReportController extends BaseController {
     }
 
     @RequestMapping(value = "/productividadCompuesta",
-    method = { RequestMethod.POST, RequestMethod.GET })
+    method = { RequestMethod.POST })
     @UserLogged
     @Transactional
     public String createProductividadCompuestaReport(ModelMap model,
@@ -153,7 +148,7 @@ public class ReportController extends BaseController {
     }
 
     @RequestMapping(value = "/tecnicasDeteccion",
-    method = { RequestMethod.POST, RequestMethod.GET })
+    method = { RequestMethod.POST })
     @UserLogged
     @Transactional
     public String createReviewsReport(ModelMap model,
@@ -169,7 +164,7 @@ public class ReportController extends BaseController {
                     ReviewsXML = reviewsYield.getReviewsYieldReport(project_id);
                 }
                 else {
-                    ReviewsXML = reviewsYield.getReviewsYieldReport();
+                    ReviewsXML = reviewsYield.getReviewsYieldReport(0);
                 }
                 break;
             case 10:
@@ -177,7 +172,7 @@ public class ReportController extends BaseController {
                     ReviewsXML = reviewsEffort.getReviewsEffortReport(project_id);
                 }
                 else {
-                    ReviewsXML = reviewsEffort.getReviewsEffortReport();
+                    ReviewsXML = reviewsEffort.getReviewsEffortReport(0);
                 }
                 break;
             case 11:
@@ -185,7 +180,7 @@ public class ReportController extends BaseController {
                     ReviewsXML = reviewsEfficiency.getReviewsEfficiencyReport(project_id);
                 }
                 else {
-                    ReviewsXML = reviewsEfficiency.getReviewsEfficiencyReport();
+                    ReviewsXML = reviewsEfficiency.getReviewsEfficiencyReport(0);
                 }
                 break;
             case 12:
@@ -193,7 +188,7 @@ public class ReportController extends BaseController {
                     ReviewsXML = reviewsSpeed.getReviewsSpeedReport(project_id);
                 }
                 else {
-                    ReviewsXML = reviewsSpeed.getReviewsSpeedReport();
+                    ReviewsXML = reviewsSpeed.getReviewsSpeedReport(0);
                 }
                 break;
             case 13:
@@ -201,11 +196,12 @@ public class ReportController extends BaseController {
                     ReviewsXML = reviewsPareto.getReviewsParetoReport(project_id);
                 }
                 else {
-                    ReviewsXML = reviewsPareto.getReviewsParetoReport();
+                    ReviewsXML = reviewsPareto.getReviewsParetoReport(0);
                 }
                 break;
         }
 
+        model.put("report", report);
         model.put("ReviewsXML", ReviewsXML);
         return null;
     }
