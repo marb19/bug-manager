@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Tareas - All In Time System</title>
+        <link rel="stylesheet" href="CSS/Style.css" type="text/css" media="screen" />
+        <script>
+                function goToUrl(url)
+                {
+                        window.location = url;
+                }
+
+                function confirmErase(templateId, userName)
+                {
+                    if (confirm("¿Estás seguro que deseas borrar la plantilla?"))
+                    {
+                        window.location = "deleteTemplate.do?templateId=" + templateId + "&userName=" + userName;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+        </script>
+    </head>
+    <body>
+        <div id="header">
+            <img src="images/Login/bm-logo.png"  alt="BM logo" id="base-bmlogo"/>
+            <div id="base-header-text">
+				Hoy es $dateLong.format($date.systemDate)<br/>
+				Bienvenido, ${user.fullName}<br/>
+                <a href='userLogin.do?op=logout'>Salir</a>
+            </div>
+            <div id="base-menu">
+                <div id="base-menu-bar">
+                    <img src="images/Base/Menu1.png" id="base-menu-left" />
+                    <div id="base-menu-center">
+                        <ul>
+                            <li class='ProyectosVisitando' onclick="goToUrl('listProjects.do')" >
+                            </li>
+                            <li class='Reportes' onclick="goToUrl('listReports.do')" >
+                            </li>
+                            #if($user.administrator)
+                            <li class='Usuarios' onclick="goToUrl('listUsers.do')" >
+                            </li>
+                            #end
+                        </ul>
+                    </div>
+                    <img src="images/Base/Menu3.png" id="base-menu-right" />
+                </div>
+            </div>
+        </div>
+		<div id="content"> <!--AQUI METER TODOS LOS INPUT, LABELS etc-->
+			<div id="content-header">
+				<span class="breadcrumb-title">Templates</span>
+				<a href="newTemplate.do" id="add-icon-link">
+					<img src="images/Base/agregar.png" id="add-icon-img" />
+				</a>
+			</div>
+			#if ($templates.empty)
+				<h3 id="form-title">No existen plantillas registradas.</h3>
+			#else
+				<table id="content-table">
+					<tr>
+						<th>Plantilla</th>
+						<th>Descripcion</th>
+						<th>Tipo de Revision</th>
+					</tr>
+					#foreach($t in $templates)
+					<tr>
+						<td><a href="modifyTemplate.do?templateId=${t.templateId}">${t.templateName}</a></td>
+						<td>${t.templateDescription}</td>
+						<td>${t.templateReviewType}</td>
+						#if(!$t.templatePublic && $t.assignedUser == $user.userName)
+						<td><a href="#" onclick="confirmErase('${t.templateId}', '${user.userName}');">Borrar</a></td>
+						#end
+					</tr>
+					#end
+				</table>
+			#end
+			<div id="content-footer">
+				<a href="newTemplate.do?" id="add-icon-link">
+					<img src="images/Base/agregar.png" id="add-icon-img" />
+				</a>
+			</div>
+		</div>
+    </body>
+</html>

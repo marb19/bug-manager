@@ -14,7 +14,9 @@
 
 package mx.itesm.gda.bm.biz.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import mx.itesm.gda.bm.biz.BizException;
 import mx.itesm.gda.bm.model.User;
@@ -71,7 +73,7 @@ public class TemplateManagementBizOpImpl extends AbstractBizOp implements
     @Override
     @Transactional(readOnly = true, propagation = Propagation.MANDATORY)
     public int createTemplate(String templateName, String templateDescription,
-            int templateReviewType, byte [] templateBlob, boolean templatePublic,
+            int templateReviewType, boolean templatePublic,
             String assignedUser) {
 
         User u = userDAO.findByUserName(assignedUser);
@@ -80,7 +82,6 @@ public class TemplateManagementBizOpImpl extends AbstractBizOp implements
         t.setTemplateName(templateName);
         t.setTemplateDescription(templateDescription);
         t.setTemplateReviewType(templateReviewType);
-        t.setTemplateBlob(templateBlob);
         t.setTemplatePublic(templatePublic);
         t.setAssignedUser(u);
         templateDAO.save(t);
@@ -102,7 +103,7 @@ public class TemplateManagementBizOpImpl extends AbstractBizOp implements
 
     @Override
     public int modifyTemplate(int templateId, String templateName, String templateDescription,
-            int templateReviewType, byte [] templateBlob, boolean templatePublic,
+            int templateReviewType, boolean templatePublic,
             String assignedUser) {
         Template t = templateDAO.findById(templateId);
         User u = userDAO.findByUserName(assignedUser);
@@ -111,12 +112,31 @@ public class TemplateManagementBizOpImpl extends AbstractBizOp implements
         t.setTemplateDescription(templateDescription);
         t.setAssignedUser(u);
         t.setTemplateReviewType(templateReviewType);
-        t.setTemplateBlob(templateBlob);
         t.setTemplatePublic(templatePublic);
 
         templateDAO.update(t);
 
         return t.getTemplateId();
+    }
+
+    @Override
+    public List<Map<String, ?>> retrieveTemplates(String userName) {
+        List<Map<String, ?>> ret = new ArrayList<Map<String, ?>>();
+
+        for(Template template : templateDAO.getAll()) {
+            if(template.getAssignedUser().getUserName().equals(userName)){
+                Map<String, Object> t = new HashMap<String, Object>();
+                t.put("templateId", template.getTemplateId());
+                t.put("templateName", template.getTemplateName());
+                t.put("templateDescription", template.getTemplateDescription());
+                t.put("templateReviewType", template.getTemplateReviewType());
+                t.put("templatePublic", template.getTemplatePublic());
+                t.put("assignedUser", userName);
+                ret.add(t);
+            }
+        }
+
+        return ret;
     }
 
 }

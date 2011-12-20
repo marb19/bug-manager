@@ -19,7 +19,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import mx.itesm.gda.bm.model.utils.BusinessKey;
@@ -47,15 +46,11 @@ public class Template extends AbstractItem {
     @Column(nullable=false)
     private int templateReviewType;
 
-    @Column(nullable=false)
-    @Lob
-    private byte[] templateBlob;
-
     @Column(nullable = false)
     private boolean templatePublic;
 
     @ManyToOne
-    private User assignedUser;
+    private User userName;
 
     /**
      * @return the templateId
@@ -114,20 +109,6 @@ public class Template extends AbstractItem {
     }
 
     /**
-     * @return the templateBlob
-     */
-    public byte[] getTemplateBlob() {
-        return templateBlob;
-    }
-
-    /**
-     * @param templateBlob the templateBlob to set
-     */
-    public void setTemplateBlob(byte[] templateBlob) {
-        this.templateBlob = templateBlob;
-    }
-
-    /**
      * @return the templatePublic
      */
     public boolean getTemplatePublic() {
@@ -145,13 +126,13 @@ public class Template extends AbstractItem {
      * @return the userName
      */
     public User getAssignedUser() {
-        return assignedUser;
+        return userName;
     }
 
     /**
      * @param userName the userName to set
      */
-    public void setAssignedUser(User assignedUser) {
-        this.assignedUser = assignedUser;
+    public void setAssignedUser(User userName) {
+        this.userName = userName;
     }
 }
