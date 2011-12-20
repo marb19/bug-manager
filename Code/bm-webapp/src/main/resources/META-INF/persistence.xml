@@ -24,6 +24,7 @@
     <class>mx.itesm.gda.bm.model.TaskCompletionReport</class>
     <class>mx.itesm.gda.bm.model.User</class>
     <class>mx.itesm.gda.bm.model.Template</class>
+    <class>mx.itesm.gda.bm.model.TemplateElement</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
   </persistence-unit>
 </persistence>

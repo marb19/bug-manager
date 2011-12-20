@@ -14,6 +14,7 @@
 
 package mx.itesm.gda.bm.biz;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -24,15 +25,17 @@ import java.util.Map;
 public interface TemplateManagementBizOp extends BizOp {
 
     public int createTemplate(String templateName, String templateDescription,
-            int templateReviewType, byte [] templateBlob, boolean templatePublic,
+            int templateReviewType, boolean templatePublic,
             String assignedUser);
 
     public int modifyTemplate(int templateId, String templateName, String templateDescription,
-            int templateReviewType, byte [] templateBlob, boolean templatePublic,
+            int templateReviewType, boolean templatePublic,
             String assignedUser);
     
     public Map<String, ?> getTemplate(Integer templateId);
 
     public void deleteTemplate(Integer templateId);
+
+    public List<Map<String, ?>> retrieveTemplates(String userName);
 
 }
