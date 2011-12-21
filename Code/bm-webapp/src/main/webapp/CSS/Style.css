@@ -145,8 +145,25 @@ body
 	margin-right:-20px;
 	margin-top:-40px;
 }
-#content
+#text-content
 {
+        text-align:center;        
+        font-size:14px;
+	font-weight:bold;
+        color:royalblue;
+        margin-left:10px;
+	margin-right:10px;
+	width:100%;
+	min-width:731px;
+	position:relative;
+}
+#chart-content
+{
+        text-align: center;
+        margin: 30px;
+}
+#content
+{        
 	margin:30px;
 }
 #content-header
