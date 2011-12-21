@@ -161,6 +161,20 @@ public class TemplateManagementBizOpImpl extends AbstractBizOp implements
     }
 
     @Override
+    public Map<String, ?> getTemplateElement(Integer templateElementId) {
+
+        TemplateElement templateElement = templateElementDAO.findById(templateElementId);
+        Map<String, Object> t = new HashMap<String, Object>();
+            t.put("elementId", templateElement.getElementId());
+            t.put("templateId", templateElement.getTemplate().getTemplateId());
+            t.put("defectTypeId", templateElement.getDefectType().getDefectTypeId());
+            t.put("defectTypeName", templateElement.getDefectType().getDefectTypeName());
+            t.put("elementDescription", templateElement.getElementDescription());
+
+        return t;
+    }
+
+    @Override
     public List<Map<String, ?>> getTemplateElements (Integer templateId){
         List<Map<String, ?>> ret = new ArrayList<Map<String, ?>>();
         Template template = templateDAO.findById(templateId);
@@ -187,5 +201,18 @@ public class TemplateManagementBizOpImpl extends AbstractBizOp implements
         newTemplateElement.setElementDescription(elementDescription);
         templateElementDAO.save(newTemplateElement);
         return newTemplateElement.getElementId();
+    }
+
+    @Override
+    public int modifyTemplateElement(int templateElementId, int defectTypeId, String elementDescription){
+        TemplateElement element = templateElementDAO.findById(templateElementId);
+        DefectType dt = defectTypeDAO.findById(defectTypeId);
+
+        element.setDefectType(dt);
+        element.setElementDescription(elementDescription);
+
+        templateElementDAO.update(element);
+
+        return element.getElementId();
     }
 }

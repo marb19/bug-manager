@@ -3,7 +3,7 @@
  *   Confidential and Proprietary
  *   All Rights Reserved
  *
- * @(#)$Id: NewTaskController.java 398 2011-11-21 22:10:10Z zerocoolx@gmail.com $
+ * @(#)$Id: ModifyTemplateElementController.java 398 2011-11-21 22:10:10Z zerocoolx@gmail.com $
  * Last Revised By   : $Author: zerocoolx@gmail.com $
  * Last Checked In   : $Date: 2011-11-21 16:10:10 -0600 (Mon, 21 Nov 2011) $
  * Last Version      : $Revision: 398 $
@@ -14,10 +14,9 @@
 
 package mx.itesm.gda.bm.controllers;
 
-import java.util.List;
 import java.util.Map;
+import mx.itesm.gda.bm.biz.DefectTypeManagementBizOp;
 import mx.itesm.gda.bm.biz.TemplateManagementBizOp;
-import mx.itesm.gda.bm.biz.UserManagementBizOp;
 import mx.itesm.gda.bm.utils.UserLogged;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -35,24 +34,26 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @Scope("request")
 @Controller
-@RequestMapping("/modifyTemplate")
-public class ModifyTemplateController extends BaseController {
+@RequestMapping("/modifyTemplateElement")
+public class ModifyTemplateElementController extends BaseController {
 
     @Autowired
     private TemplateManagementBizOp templateMgr;
 
     @Autowired
-    private UserManagementBizOp userMgr;
+    private DefectTypeManagementBizOp defectTypeMgr;
 
     @RequestMapping(method = RequestMethod.GET)
     @Transactional(readOnly = true)
     @UserLogged(adminRequired = true)
-    public String getTemplateData(@RequestParam("templateId") int templateId,
+    public String getTemplateData(
+            @RequestParam("templateElementId") int templateElementId,
+            @RequestParam("templateId") int templateId,
             ModelMap model) {
-        Map<String, ?> t = templateMgr.getTemplate(templateId);
-        List<Map<String, ?>> elements = templateMgr.getTemplateElements(templateId);
-        model.put("t", t);
-        model.put("elements", elements);
+        Map<String, ?> element = templateMgr.getTemplateElement(templateElementId);
+        model.put("element", element);
+        model.put("defectTypes", defectTypeMgr.retrieveDefectTypes());
+        model.put("templateId", templateId);
         return null;
     }
 
@@ -60,35 +61,23 @@ public class ModifyTemplateController extends BaseController {
     @Transactional
     @UserLogged(adminRequired = true)
     public String modifyTemplate(
+            @RequestParam("templateElementId") int templateElementId,
             @RequestParam("templateId") int templateId,
-            @RequestParam("templateName") String templateName,
-            @RequestParam("templateDescription") String templateDescription,
-            @RequestParam("templateReviewType") int templateReviewType,
-            @RequestParam(value = "templatePublic", defaultValue = "false") boolean templatePublic,
-            @RequestParam("assignedUser") String assignedUser,
+            @RequestParam("defectTypeId") int defectTypeId,
+            @RequestParam("elementDescription") String elementDescription,
             ModelMap model) {
 
-        if(templateName.equals("")){
+        if(defectTypeId < 0){
+            throw new ControllerException("ID de tipo de defecto invalido");
+        }
+
+        if(elementDescription.equals("")){
             throw new ControllerException("No se admiten campos vacios");
         }
 
+        int templateElement = templateMgr.modifyTemplateElement(templateElementId, defectTypeId, elementDescription);
 
-        if(templateDescription.equals("")){
-            throw new ControllerException("No se admiten campos vacios");
-        }
-
-        if(assignedUser.equals("")){
-            throw new ControllerException("No se admiten campos vacios");
-        }
-
-        if(userMgr.getUser(assignedUser) == null) {
-            throw new ControllerException("Usuario inexistente");
-        }
-
-        int template = templateMgr.modifyTemplate(templateId, templateName, templateDescription,
-                templateReviewType, templatePublic, assignedUser);
-
-        return "redirect:listTemplates.do";
+        return "redirect:modifyTemplate.do?templateId="+templateId;
     }
 
 }
