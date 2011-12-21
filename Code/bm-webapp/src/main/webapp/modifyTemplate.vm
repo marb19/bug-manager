@@ -92,14 +92,14 @@
 						</tr>
                                                 <tr>
                                                         <td>
-                                                                <a href="addTemplateElement.do?userName=${user.userName}&templateId=${t.templateId}" id="add-element">Añadir elemento</a>
+                                                                <a href="newTemplateElement.do?templateId=${t.templateId}" id="add-element">Añadir elemento</a>
                                                         </td>
                                                         <td>
                                                             
                                                         </td>
                                                 </tr>
 						<tr>
-							<td><a href="listTemplates.do?userName=${user.userName}" id="cancel-link">Cancelar</a></td>
+							<td><a href="listTemplates.do" id="cancel-link">Cancelar</a></td>
 							<td>
                                                                 <input type="hidden" name="templateId" value="${t.templateId}"></input>
                                                                 <input type="hidden" name="assignedUser" value="${user.userName}"></input>
@@ -119,8 +119,8 @@
                                                 </tr>
                                                 #foreach($e in $elements)
                                                 <tr>
-                                                    <th>${e.defectTypeName}</th>
-                                                    <th>${e.elementDescription}</th>
+                                                    <td>${e.defectTypeName}</td>
+                                                    <td>${e.elementDescription}</td>
                                                 </tr>
                                                 #end
                                             </table>

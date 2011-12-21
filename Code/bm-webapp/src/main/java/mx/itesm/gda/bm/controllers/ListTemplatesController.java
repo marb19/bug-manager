@@ -17,6 +17,7 @@ package mx.itesm.gda.bm.controllers;
 import java.util.List;
 import java.util.Map;
 import mx.itesm.gda.bm.biz.TemplateManagementBizOp;
+import mx.itesm.gda.bm.session.UserLoginSession;
 import mx.itesm.gda.bm.utils.UserLogged;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -40,13 +41,15 @@ public class ListTemplatesController {
     @Autowired
     private TemplateManagementBizOp templateMgr;
 
+    @Autowired
+    private UserLoginSession loginSession;
+
     @RequestMapping(method = RequestMethod.GET)
     @Transactional
     @UserLogged()
-    public String listTemplates(@RequestParam("userName") String userName,
-                            ModelMap model) {
+    public String listTemplates(ModelMap model) {
 
-        List<Map<String, ?>> templates = templateMgr.retrieveTemplates(userName);
+        List<Map<String, ?>> templates = templateMgr.retrieveTemplates(loginSession.getLoggedUserName());
         model.put("templates", templates);
 
         return null;

@@ -53,6 +53,7 @@ public class ModifyTemplateController extends BaseController {
         List<Map<String, ?>> elements = templateMgr.getTemplateElements(templateId);
         model.put("t", t);
         model.put("elements", elements);
+        model.put("size", elements.size());
         return null;
     }
 
@@ -88,7 +89,7 @@ public class ModifyTemplateController extends BaseController {
         int template = templateMgr.modifyTemplate(templateId, templateName, templateDescription,
                 templateReviewType, templatePublic, assignedUser);
 
-        return "redirect:listTemplates.do?userName="+assignedUser;
+        return "redirect:listTemplates.do";
     }
 
 }

@@ -163,15 +163,29 @@ public class TemplateManagementBizOpImpl extends AbstractBizOp implements
     @Override
     public List<Map<String, ?>> getTemplateElements (Integer templateId){
         List<Map<String, ?>> ret = new ArrayList<Map<String, ?>>();
-        for(TemplateElement templateElement : templateDAO.findById(templateId).getTemplateElements()) {
+        Template template = templateDAO.findById(templateId);
+        for(TemplateElement templateElement : template.getTemplateElements()) {
             Map<String, Object> t = new HashMap<String, Object>();
             t.put("elementId", templateElement.getElementId());
             t.put("templateId", templateElement.getTemplate().getTemplateId());
             t.put("defectTypeId", templateElement.getDefectType().getDefectTypeId());
             t.put("defectTypeName", templateElement.getDefectType().getDefectTypeName());
             t.put("elementDescription", templateElement.getElementDescription());
+            ret.add(t);
         }
 
         return ret;
+    }
+
+    @Override
+    public int addElement(int templateId, int defectTypeId, String elementDescription){
+        Template t = templateDAO.findById(templateId);
+        DefectType dt = defectTypeDAO.findById(defectTypeId);
+        TemplateElement newTemplateElement = new TemplateElement();
+        newTemplateElement.setTemplate(t);
+        newTemplateElement.setDefectType(dt);
+        newTemplateElement.setElementDescription(elementDescription);
+        templateElementDAO.save(newTemplateElement);
+        return newTemplateElement.getElementId();
     }
 }
