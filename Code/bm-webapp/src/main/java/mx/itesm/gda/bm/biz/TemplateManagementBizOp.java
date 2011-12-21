@@ -43,4 +43,6 @@ public interface TemplateManagementBizOp extends BizOp {
     public void saveElement (int templateId, int defectTypeId, String elementDescription);
 
     public List<Map<String, ?>> getTemplateElements (Integer templateId);
+
+    public int addElement(int templateId, int defectTypeId, String elementDescription);
 }
