@@ -23,5 +23,6 @@ import mx.itesm.gda.bm.model.TemplateElement;
  */
 public interface TemplateElementDAO extends BaseItemDAO<TemplateElement> {
 
+    public TemplateElement findById(int templateElementId);
 
 }

@@ -121,6 +121,8 @@
                                                 <tr>
                                                     <td>${e.defectTypeName}</td>
                                                     <td>${e.elementDescription}</td>
+                                                    <td><a href="modifyTemplateElement.do?templateId=${e.templateId}&templateElementId=${e.elementId}">Modificar</a></td>
+                                                    <td><a href="">Borrar</a></td>
                                                 </tr>
                                                 #end
                                             </table>

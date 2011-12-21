@@ -40,6 +40,10 @@ public class TemplateElementDAOImpl extends BaseItemDAOImpl<TemplateElement> imp
         return defects;
     }
 
-
+    @Override
+    @Transactional(readOnly = true, propagation = Propagation.MANDATORY)
+    public TemplateElement findById(int templateElementId) {
+        return getEntityManager().find(TemplateElement.class, templateElementId);
+    }
 
 }
