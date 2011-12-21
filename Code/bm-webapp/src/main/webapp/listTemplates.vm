@@ -53,7 +53,8 @@
         </div>
 		<div id="content"> <!--AQUI METER TODOS LOS INPUT, LABELS etc-->
 			<div id="content-header">
-				<span class="breadcrumb-title">Templates</span>
+				<span class="breadcrumb-title">Estas viendo:</span>
+                                <span class="breadcrumb-text">Todas las plantillas</span>
 				<a href="newTemplate.do" id="add-icon-link">
 					<img src="images/Base/agregar.png" id="add-icon-img" />
 				</a>

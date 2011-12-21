@@ -22,7 +22,11 @@ import mx.itesm.gda.bm.biz.BizException;
 import mx.itesm.gda.bm.model.User;
 import mx.itesm.gda.bm.model.dao.TemplateDAO;
 import mx.itesm.gda.bm.biz.TemplateManagementBizOp;
+import mx.itesm.gda.bm.model.DefectType;
 import mx.itesm.gda.bm.model.Template;
+import mx.itesm.gda.bm.model.TemplateElement;
+import mx.itesm.gda.bm.model.dao.DefectTypeDAO;
+import mx.itesm.gda.bm.model.dao.TemplateElementDAO;
 import mx.itesm.gda.bm.model.dao.UserDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Propagation;
@@ -42,6 +46,12 @@ public class TemplateManagementBizOpImpl extends AbstractBizOp implements
 
     @Autowired
     TemplateDAO templateDAO;
+
+    @Autowired
+    TemplateElementDAO templateElementDAO;
+
+    @Autowired
+    DefectTypeDAO defectTypeDAO;
 
     @Autowired
     private UserDAO userDAO;
@@ -139,4 +149,29 @@ public class TemplateManagementBizOpImpl extends AbstractBizOp implements
         return ret;
     }
 
+    @Override
+    public void saveElement (int templateId, int defectTypeId, String elementDescription){
+        Template t = templateDAO.findById(templateId);
+        DefectType d = defectTypeDAO.findById(defectTypeId);
+        TemplateElement te = new TemplateElement();
+        te.setTemplate(t);
+        te.setDefectType(d);
+        te.setElementDescription(elementDescription);
+        templateElementDAO.save(te);
+    }
+
+    @Override
+    public List<Map<String, ?>> getTemplateElements (Integer templateId){
+        List<Map<String, ?>> ret = new ArrayList<Map<String, ?>>();
+        for(TemplateElement templateElement : templateDAO.findById(templateId).getTemplateElements()) {
+            Map<String, Object> t = new HashMap<String, Object>();
+            t.put("elementId", templateElement.getElementId());
+            t.put("templateId", templateElement.getTemplate().getTemplateId());
+            t.put("defectTypeId", templateElement.getDefectType().getDefectTypeId());
+            t.put("defectTypeName", templateElement.getDefectType().getDefectTypeName());
+            t.put("elementDescription", templateElement.getElementDescription());
+        }
+
+        return ret;
+    }
 }

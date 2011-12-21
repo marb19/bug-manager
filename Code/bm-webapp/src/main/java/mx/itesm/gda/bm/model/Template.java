@@ -14,12 +14,14 @@
 
 package mx.itesm.gda.bm.model;
 
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import mx.itesm.gda.bm.model.utils.BusinessKey;
 
@@ -51,6 +53,9 @@ public class Template extends AbstractItem {
 
     @ManyToOne
     private User userName;
+
+    @OneToMany (mappedBy = "template")
+    private List<TemplateElement> templateElements;
 
     /**
      * @return the templateId
@@ -134,5 +139,19 @@ public class Template extends AbstractItem {
      */
     public void setAssignedUser(User userName) {
         this.userName = userName;
+    }
+
+        /**
+     * @return the templateElements
+     */
+    public List<TemplateElement> getTemplateElements() {
+        return templateElements;
+    }
+
+    /**
+     * @param templateElements the templateElements to set
+     */
+    public void setTemplateElements(List<TemplateElement> templateElements) {
+        this.templateElements = templateElements;
     }
 }

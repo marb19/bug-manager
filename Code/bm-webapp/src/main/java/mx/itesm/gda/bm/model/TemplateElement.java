@@ -19,6 +19,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import mx.itesm.gda.bm.model.utils.BusinessKey;
@@ -38,9 +39,11 @@ public class TemplateElement extends AbstractItem {
     private Integer elementId;
 
     @ManyToOne
+    @JoinColumn(name = "templateId")
     private Template template;
 
     @ManyToOne
+    @JoinColumn(name = "defectTypeId")
     private DefectType defectType;
 
     @Column(length = 4095, nullable = false)
