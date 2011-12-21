@@ -75,20 +75,29 @@ public class ReportController extends BaseController {
             @RequestParam(value= "report", defaultValue = "0", required = true) int report,
             @RequestParam(value= "project_id", defaultValue = "0", required = true) int project_id){
 
-        String reportXML;
+        String reportXML = null, text = null;
         if (report == 1){            
             reportXML = phaseTimeReport.getPhaseTimeReport(project_id);
+            text = "En la gráfica se muestra el porcentaje de tiempo invertido "
+                    + "en cada fase del proyecto. La suma de todas las fases debe ser 100.";
         }
         else if (report == 2){
             reportXML = phaseProdReport.getPhaseProdReport(project_id);
+            text = "La gráfica representa el número de productos que se realizan por hora. "
+                    + "Para la etapa de diseño puede ser documentos, para la de pruebas "
+                    + "casos de prueba y para la de codificación líneas de código.";
         }
         else if (report == 3){
-            reportXML = phaseYieldReport.getPhaseYieldReport(project_id); 
+            reportXML = phaseYieldReport.getPhaseYieldReport(project_id);
+            text = "La gráfica muestra el porcentaje de defectos encontrados en "
+                    + "cada fase del proyecto respecto al total de defectos encontrados en el mismo. ";
         }
         else{
             reportXML = phaseTimeReport.getPhaseTimeReport(project_id);
+            text = "El reporte muestra un resumen general del proyecto por etapas.";
         }
 
+        model.put("text", text);
         model.put("reportXML", reportXML);
         return null;
     }
@@ -98,8 +107,12 @@ public class ReportController extends BaseController {
     @UserLogged
     @Transactional
     public String createDefectDensityReport(ModelMap model){
-        String defectDensityXML = defectDensityReport.getDefectDensityReport();
 
+        String defectDensityXML = defectDensityReport.getDefectDensityReport();
+        String text = "La cantidad de defectos que se cometen por unidad de medida. "
+                + "Pueden ser LOC, puntos de función, etc.";
+
+        model.put("text", text);
         model.put("defectDensityXML", defectDensityXML);
         return null;
     }
@@ -114,7 +127,10 @@ public class ReportController extends BaseController {
             @RequestParam(value = "username", defaultValue = "", required = false) String username){                
 
         String totalDefectsXML = totalDefectsType.getTotalDefectsTypeReport(level, project_id, username);
+        String text = "El total de defectos que se cometen, organizados por tipo de defectos, "
+                + "ya sea a nivel usuario, proyecto o empresa.";
 
+        model.put("text", text);
         model.put("totalDefectsXML", totalDefectsXML);
         return null;
     }
@@ -129,7 +145,10 @@ public class ReportController extends BaseController {
             @RequestParam(value = "username", defaultValue = "", required = false) String username){
 
         String defectsInyectedRemovedXML = defectsInyectedRemoved.getDefectsInyRemReport(level, project_id, username);
-        
+        String text = "Total de defectos inyectados y removidos por fase, "
+                + "ya sea a nivel usuario, proyecto o empresa.";
+
+        model.put("text", text);
         model.put("defectsInyectedRemovedXML", defectsInyectedRemovedXML);
         return null;
     }
@@ -156,51 +175,72 @@ public class ReportController extends BaseController {
             @RequestParam(value= "level") int level,
             @RequestParam(value= "project_id", defaultValue = "0", required = false) int project_id){
 
-        String ReviewsXML = null;
+        String ReviewsXML = null, text = null;
 
         switch (report){
             case 9:
                 if (level == 2){
                     ReviewsXML = reviewsYield.getReviewsYieldReport(project_id);
+                    text = "La gráfica muestra el porcentaje de defectos encontrados "
+                            + "por cada técnica de detección respecto al total de defectos del proyecto.";
                 }
                 else {
                     ReviewsXML = reviewsYield.getReviewsYieldReport(0);
+                    text = "La gráfica muestra el porcentaje de defectos encontrados "
+                            + "por cada técnica de detección respecto al total de defectos de la empresa.";
                 }
                 break;
             case 10:
                 if (level == 2){
                     ReviewsXML = reviewsEffort.getReviewsEffortReport(project_id);
+                    text = "La gráfica muestra el porcentaje de esfuerzo por cada "
+                            + "técnica de detección respecto al total de esfuerzo del proyecto.";
                 }
                 else {
                     ReviewsXML = reviewsEffort.getReviewsEffortReport(0);
+                    text = "La gráfica muestra el porcentaje de esfuerzo por cada "
+                            + "técnica de detección respecto al total de esfuerzo de la empresa.";
                 }
                 break;
             case 11:
                 if (level == 2){
                     ReviewsXML = reviewsEfficiency.getReviewsEfficiencyReport(project_id);
+                    text = "La gráfica muestra el número de defectos removidos por hora "
+                            + "por cada técnica de detección para el proyecto.";
                 }
                 else {
                     ReviewsXML = reviewsEfficiency.getReviewsEfficiencyReport(0);
+                    text = "La gráfica muestra el número de defectos removidos por hora "
+                            + "por cada técnica de detección para la empresa.";
                 }
                 break;
             case 12:
                 if (level == 2){
                     ReviewsXML = reviewsSpeed.getReviewsSpeedReport(project_id);
+                    text = "La gráfica muestra la velocidad de revisión "
+                            + "de cada técnica de detección para el proyecto.";
                 }
                 else {
                     ReviewsXML = reviewsSpeed.getReviewsSpeedReport(0);
+                    text = "La gráfica muestra la velocidad de revisión "
+                            + "de cada técnica de detección para la empresa.";
                 }
                 break;
             case 13:
                 if (level == 2){
                     ReviewsXML = reviewsPareto.getReviewsParetoReport(project_id);
+                    text = "En la gráfica se muestra la cantidad de defectos removidos "
+                            + "por cada técnica de detección (de mayor a menor) para el proyecto.";
                 }
                 else {
                     ReviewsXML = reviewsPareto.getReviewsParetoReport(0);
+                    text = "En la gráfica se muestra la cantidad de defectos removidos "
+                            + "por cada técnica de detección (de mayor a menor) para la empresa.";
                 }
                 break;
         }
 
+        model.put("text", text);
         model.put("report", report);
         model.put("ReviewsXML", ReviewsXML);
         return null;
