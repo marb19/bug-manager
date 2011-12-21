@@ -14,6 +14,7 @@
 
 package mx.itesm.gda.bm.controllers;
 
+import java.util.List;
 import java.util.Map;
 import mx.itesm.gda.bm.biz.TemplateManagementBizOp;
 import mx.itesm.gda.bm.biz.UserManagementBizOp;
@@ -49,7 +50,9 @@ public class ModifyTemplateController extends BaseController {
     public String getTemplateData(@RequestParam("templateId") int templateId,
             ModelMap model) {
         Map<String, ?> t = templateMgr.getTemplate(templateId);
+        List<Map<String, ?>> elements = templateMgr.getTemplateElements(templateId);
         model.put("t", t);
+        model.put("elements", elements);
         return null;
     }
 

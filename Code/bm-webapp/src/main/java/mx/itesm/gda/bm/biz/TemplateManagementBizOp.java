@@ -16,6 +16,8 @@ package mx.itesm.gda.bm.biz;
 
 import java.util.List;
 import java.util.Map;
+import mx.itesm.gda.bm.model.DefectType;
+import mx.itesm.gda.bm.model.Template;
 
 /**
  *
@@ -38,4 +40,7 @@ public interface TemplateManagementBizOp extends BizOp {
 
     public List<Map<String, ?>> retrieveTemplates(String userName);
 
+    public void saveElement (int templateId, int defectTypeId, String elementDescription);
+
+    public List<Map<String, ?>> getTemplateElements (Integer templateId);
 }
