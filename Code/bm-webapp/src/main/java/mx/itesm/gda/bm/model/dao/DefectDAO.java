@@ -16,7 +16,7 @@ package mx.itesm.gda.bm.model.dao;
 
 import java.util.List;
 import mx.itesm.gda.bm.model.Defect;
-
+import mx.itesm.gda.bm.model.DefectState;
 /**
  *
  * @author $Author: zerocoolx@gmail.com $
@@ -43,4 +43,8 @@ public interface DefectDAO extends BaseItemDAO<Defect> {
     public List<Defect> searchByInyectionPhase(int phase_id);
 
     public List<Defect> searchByRemotionPhase(int phase_id);
+
+    public List<Defect> searchByState(DefectState defectState);
+
+    public List<Defect> searchByStateAndProject(DefectState state, int project_id);
 }

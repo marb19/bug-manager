@@ -15,6 +15,7 @@
                 }
 
                 $(document).ready(function(){
+
                    genReports = {"1":"Tiempo por fase","2":"Productividad por fase","3":"Yield por fase",
                    "4":"Resumen general"};
                    costReports = {"5":"Productividad Compuesta","6":"ROI de proyecto","7":"ROI de técnicas de detección",
@@ -35,13 +36,39 @@
                    $("#userLabel").hide();
                    $("#username").hide();                   
                    $("#levelLabel").hide();
-                   $("#level").hide();                   
+                   $("#level").hide();
+                   $("#levelLabel2").hide();
+                   $("#level2").hide();
 
-                   $("#config-report-form").validate({
-                       rules: {                                                   
+                   function validate(){
+                       if ($("#report").val() == "14" || $("#report").val() == "5"){
+                           
                        }
-                   });                  
+                       else if ($("#report").val() == "1" || $("#report").val() == "2" || $("#report").val() == "3"
+                       || $("#report").val() == "4"){
+                            if ($("#project_id").val() == ""){
+                                alert("Es necesario escoger un proyecto.")
+                                return false;
+                            }
+                       }    
+                       else {
+                           if ($("#level").val() == "1" && $("#username").val() == ""){
+                               alert("Es necesario escoger un usuario.")
+                               return false;
+                           }
+                           if ($("#level").val() == "2" && $("#project_id").val() == ""){
+                               alert("Es necesario escoger un proyecto.")
+                               return false;
+                           }
+                       }
+                       return true;
+                   };
+                   
                    $("#config-report-form").submit(function() {
+                       var validation = validate();
+                       if (validation == false){
+                           return false;
+                       }
                        switch (this.report.value)
                        {                          
                           case "1":
@@ -140,6 +167,27 @@
                             $("#level").hide("fast");
                             $("#level").val("");
                             $("#level").attr("disabled", "true");
+                            $("#levelLabel2").hide("fast");
+                            $("#level2").hide("fast");
+                            $("#level2").val("");
+                            $("#level2").attr("disabled", "true");
+                        }
+                        else if ($("#report").val() == "5"){
+                            $("#userLabel").hide("fast");
+                            $("#username").hide("fast");
+                            $("#username").val("");
+                            $("#username").attr("disabled", "true");
+                            $("#projectLabel").hide("fast");
+                            $("#project_id").hide("fast");
+                            $("#project_id").val("");
+                            $("#project_id").attr("disabled", "true");
+                            $("#levelLabel").hide("fast");
+                            $("#level").hide("fast");
+                            $("#level").val("");
+                            $("#level").attr("disabled", "true");
+                            $("#levelLabel2").show("fast");
+                            $("#level2").show("fast");
+                            $("#level2").removeAttr("disabled");
                         }
                         else if ($("#report").val() == "14"){
                             $("#userLabel").hide("fast");
@@ -155,7 +203,7 @@
                             $("#level").val("");
                             $("#level").attr("disabled", "true");
                         }
-                        else if ($("#report").val() == "5" || $("#report").val() == "7" || $("#report").val() == "8"
+                        else if ($("#report").val() == "7" || $("#report").val() == "8"
                         || $("#report").val() == "15" || $("#report").val() == "16") {
                             $("#level").empty();
                             for (key in level){
@@ -172,6 +220,10 @@
                             $("#levelLabel").show("fast");
                             $("#level").show("fast");
                             $("#level").removeAttr("disabled");
+                            $("#levelLabel2").hide("fast");
+                            $("#level2").hide("fast");
+                            $("#level2").val("");
+                            $("#level2").attr("disabled", "true");
 
                             if ($("#level").val() == "1"){
                                 $("#projectLabel").hide("fast");
@@ -219,6 +271,10 @@
                             $("#levelLabel").show("fast");
                             $("#level").show("fast");
                             $("#level").removeAttr("disabled");
+                            $("#levelLabel2").hide("fast");
+                            $("#level2").hide("fast");
+                            $("#level2").val("");
+                            $("#level2").attr("disabled", "true");
 
                             if ($("#level").val() == "1"){
                                 $("#projectLabel").hide("fast");
@@ -263,6 +319,27 @@
                             $("#level").hide("fast");
                             $("#level").val("");
                             $("#level").attr("disabled", "true");
+                            $("#levelLabel2").hide("fast");
+                            $("#level2").hide("fast");
+                            $("#level2").val("");
+                            $("#level2").attr("disabled", "true");
+                        }
+                        else if (this.value == "5"){
+                            $("#userLabel").hide("fast");
+                            $("#username").hide("fast");
+                            $("#username").val("");
+                            $("#username").attr("disabled", "true");
+                            $("#projectLabel").hide("fast");
+                            $("#project_id").hide("fast");
+                            $("#project_id").val("");
+                            $("#project_id").attr("disabled", "true");
+                            $("#levelLabel").hide("fast");
+                            $("#level").hide("fast");
+                            $("#level").val("");
+                            $("#level").attr("disabled", "true");
+                            $("#levelLabel2").show("fast");
+                            $("#level2").show("fast");
+                            $("#level2").removeAttr("disabled");
                         }
                         else if (this.value == "14"){
                             $("#userLabel").hide("fast");
@@ -277,8 +354,12 @@
                             $("#level").hide("fast");
                             $("#level").val("");
                             $("#level").attr("disabled", "true");
+                            $("#levelLabel2").hide("fast");
+                            $("#level2").hide("fast");
+                            $("#level2").val("");
+                            $("#level2").attr("disabled", "true");
                         }
-                        else if (this.value == "5" || this.value == "7" || this.value == "8"
+                        else if (this.value == "7" || this.value == "8"
                         || this.value == "15" || this.value == "16") {
                             $("#level").empty();
                             for (key in level){
@@ -295,6 +376,10 @@
                             $("#levelLabel").show("fast");
                             $("#level").show("fast");
                             $("#level").removeAttr("disabled");
+                            $("#levelLabel2").hide("fast");
+                            $("#level2").hide("fast");
+                            $("#level2").val("");
+                            $("#level2").attr("disabled", "true");
 
                             if ($("#level").val() == "1"){
                                 $("#projectLabel").hide("fast");
@@ -342,6 +427,10 @@
                             $("#levelLabel").show("fast");
                             $("#level").show("fast");
                             $("#level").removeAttr("disabled");
+                            $("#levelLabel2").hide("fast");
+                            $("#level2").hide("fast");
+                            $("#level2").val("");
+                            $("#level2").attr("disabled", "true");
 
                             if ($("#level").val() == "1"){
                                 $("#projectLabel").hide("fast");
@@ -473,10 +562,22 @@
                         </tr>
                         <tr>
                             <td>
+                                <label for="level2" id="levelLabel2">Nivel:</label>
+                            </td>
+                            <td>
+                                <select name="level2" id="level2">
+                                    <option value="1">Usuario</option>
+                                    <option value="2">Proyecto</option>
+                                    <option value="3">Empresa</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
                                 <label for="project_id" id="projectLabel">Proyecto:</label>
                             </td>
                             <td>
-                                <select name="project_id" id="project_id" class="required">
+                                <select name="project_id" id="project_id">
                                     <option value=""> --- </option>
                                     #foreach($p in $projects)
                                         <option value="${p.projectId}">${p.projectName}</option>

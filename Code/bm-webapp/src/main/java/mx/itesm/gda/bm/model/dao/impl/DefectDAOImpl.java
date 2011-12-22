@@ -21,7 +21,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
+import mx.itesm.gda.bm.model.DefectState;
 /**
  *
  * @author $Author: zerocoolx@gmail.com $
@@ -150,6 +150,34 @@ public class DefectDAOImpl extends BaseItemDAOImpl<Defect> implements DefectDAO 
                 + "ip.phaseId = :phase_id")
                 .setParameter("phase_id", phase_id)
                 .getResultList();
+        return result;
+    }
+
+    @Override
+    @Transactional(readOnly = true, propagation = Propagation.MANDATORY)
+    public List<Defect> searchByState(DefectState defectState){
+        @SuppressWarnings("unchecked")        
+        
+        List<Defect> result = getEntityManager().createQuery("SELECT d FROM Defect d "
+                + "WHERE d.defectState = :defectState")
+                .setParameter("defectState", defectState)
+                .getResultList();
+        
+        return result;
+    }
+
+    @Override
+    @Transactional(readOnly = true, propagation = Propagation.MANDATORY)
+    public List<Defect> searchByStateAndProject(DefectState defectState, int project_id){
+        @SuppressWarnings("unchecked")
+
+        List<Defect> result = getEntityManager().createQuery("SELECT d FROM Defect d "
+                + "JOIN d.project p WHERE d.defectState = :defectState "
+                + "AND p.projectId = :project_id")
+                .setParameter("defectState", defectState)
+                .setParameter("project_id", project_id)
+                .getResultList();
+
         return result;
     }
 }

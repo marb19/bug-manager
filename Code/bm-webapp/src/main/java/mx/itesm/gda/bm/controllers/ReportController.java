@@ -14,6 +14,7 @@
 
 package mx.itesm.gda.bm.controllers;
 
+import mx.itesm.gda.bm.biz.ComposedProdBizOp;
 import mx.itesm.gda.bm.biz.PhaseProdReportBizOp;
 import mx.itesm.gda.bm.biz.PhaseTimeReportBizOp;
 import mx.itesm.gda.bm.biz.PhaseYieldReportBizOp;
@@ -66,6 +67,8 @@ public class ReportController extends BaseController {
     private ReviewsSpeedBizOp reviewsSpeed;
     @Autowired
     private ReviewsParetoBizOp reviewsPareto;
+    @Autowired
+    private ComposedProdBizOp composedProd;
 
     @RequestMapping(value = "/reportesGenerales",
     method = { RequestMethod.POST })
@@ -158,10 +161,17 @@ public class ReportController extends BaseController {
     @UserLogged
     @Transactional
     public String createProductividadCompuestaReport(ModelMap model,
-            @RequestParam(value= "level") int level){
+            @RequestParam(value= "level2") int level){
 
         String productividadCompuestaXML = null;
+        String text = "La gráfica compara la productividad de un programador "
+                + "contra su productividad compuesta. La productividad compuesta está "
+                + "ponderada con el tiempo que se tomó en corregir los defectos que inyectó al momento de programar."
+                + " La gráfica se muestra a nivel usuario, proyecto o empresa.";
 
+        productividadCompuestaXML = composedProd.getComposedProdReport(level);
+
+        model.put("text", text);
         model.put("productividadCompuestaXML", productividadCompuestaXML);
         return null;
     }

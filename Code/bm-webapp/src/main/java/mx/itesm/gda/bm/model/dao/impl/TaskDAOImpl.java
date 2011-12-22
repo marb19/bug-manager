@@ -21,7 +21,8 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
+import mx.itesm.gda.bm.model.TaskState;
+import mx.itesm.gda.bm.model.TaskType;
 /**
  *
  * @author $Author: alex.vc@gmail.com $
@@ -53,6 +54,61 @@ public class TaskDAOImpl extends BaseItemDAOImpl<Task> implements TaskDAO {
         List<Task> tasks = (List<Task>)getEntityManager().createQuery(
                 "SELECT t FROM Task t WHERE t.taskName LIKE :name").
                 setParameter("name", "%" + task_name + "%").getResultList();
+        return tasks;
+    }
+
+    @Override
+    @Transactional(readOnly = true, propagation = Propagation.MANDATORY)
+    public List<Task> getTasksByType(TaskType type){
+        @SuppressWarnings("unchecked")        
+
+        List<Task> tasks = (List<Task>)getEntityManager().createQuery("SELECT t FROM Task t "
+                + "WHERE t.taskType = :type")
+                .setParameter("type", type)
+                .getResultList();
+        return tasks;
+    }
+
+    @Override
+    @Transactional(readOnly = true, propagation = Propagation.MANDATORY)
+    public List<Task> getTasksByState(TaskState state){
+        @SuppressWarnings("unchecked")        
+
+        List<Task> tasks = (List<Task>)getEntityManager().createQuery("SELECT t FROM Task t "
+                + "WHERE t.taskState = :state")
+                .setParameter("state", state)
+                .getResultList();
+
+        return tasks;
+    }
+
+    @Override
+    @Transactional(readOnly = true, propagation = Propagation.MANDATORY)
+    public List<Task> getTasksByTypeAndState(TaskType type, TaskState state){
+        @SuppressWarnings("unchecked")
+                
+        List<Task> tasks = (List<Task>)getEntityManager().createQuery("SELECT t FROM Task t "
+                + "WHERE t.taskType = :type AND t.taskState = :state")
+                .setParameter("type", type)
+                .setParameter("state", state)
+                .getResultList();
+                      
+        return tasks;
+    }
+
+    @Override
+    @Transactional(readOnly = true, propagation = Propagation.MANDATORY)
+    public List<Task> getTasksByTypeStateProject(TaskType type, TaskState state, int project_id){
+        @SuppressWarnings("unchecked")
+
+        List<Task> tasks = (List<Task>)getEntityManager().createQuery("SELECT t FROM Task t "
+                + "JOIN t.project p WHERE t.taskType = :type AND t.taskState = :state "
+                + "AND p.projectId = :project_id")
+                .setParameter("type", type)
+                .setParameter("state", state)
+                .setParameter("project_id", project_id)
+                .getResultList();
+
         return tasks;
     }
 
