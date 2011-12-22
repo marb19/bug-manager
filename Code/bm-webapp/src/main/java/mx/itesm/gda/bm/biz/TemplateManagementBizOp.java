@@ -47,4 +47,6 @@ public interface TemplateManagementBizOp extends BizOp {
     public List<Map<String, ?>> getTemplateElements (Integer templateId);
 
     public int addElement(int templateId, int defectTypeId, String elementDescription);
+
+    public void deleteTemplateElement(Integer templateElementId);
 }

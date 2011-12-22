@@ -3,10 +3,10 @@
  *   Confidential and Proprietary
  *   All Rights Reserved
  *
- * @(#)$Id: ListTasksController.java 308 2010-11-10 00:58:54Z zerocoolx@gmail.com $
- * Last Revised By   : $Author: zerocoolx@gmail.com $
- * Last Checked In   : $Date: 2010-11-09 18:58:54 -0600 (Tue, 09 Nov 2010) $
- * Last Version      : $Revision: 308 $
+ * @(#)$Id: DeleteTemplateElementController.java 314 2010-11-12 01:13:22Z inzunzo $
+ * Last Revised By   : $Author: inzunzo $
+ * Last Checked In   : $Date: 2010-11-11 19:13:22 -0600 (Thu, 11 Nov 2010) $
+ * Last Version      : $Revision: 314 $
  *
  * Original Author   : Humberto Garcia Robles
  * Notes             :
@@ -14,8 +14,6 @@
 
 package mx.itesm.gda.bm.controllers;
 
-import java.util.List;
-import java.util.Map;
 import mx.itesm.gda.bm.biz.TemplateManagementBizOp;
 import mx.itesm.gda.bm.session.UserLoginSession;
 import mx.itesm.gda.bm.utils.UserLogged;
@@ -26,16 +24,17 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
- * @author $Author: zerocoolx@gmail.com $
- * @version $Revision: 308 $
+ * @author $Author: inzunzo $
+ * @version $Revision: 314 $
  */
 @Scope("request")
 @Controller
-@RequestMapping("/listTemplates")
-public class ListTemplatesController {
+@RequestMapping("/deleteTemplateElement")
+public class DeleteTemplateElementController extends BaseController {
 
     @Autowired
     private TemplateManagementBizOp templateMgr;
@@ -45,13 +44,17 @@ public class ListTemplatesController {
 
     @RequestMapping(method = RequestMethod.GET)
     @Transactional
-    @UserLogged()
-    public String listTemplates(ModelMap model) {
+    @UserLogged(adminRequired = true)
+    public String deleteUser(
+            @RequestParam("templateElementId") int templateElementId,
+            @RequestParam("templateId") int templateId,
+            ModelMap model) {
+        if(templateElementId<0){
+        throw new ControllerException("Invalid template ID");
+        }
 
-        List<Map<String, ?>> templates = templateMgr.retrieveTemplates(loginSession.getLoggedUserName());
-        model.put("templates", templates);
-
-        return null;
+        templateMgr.deleteTemplateElement(templateElementId);
+        return "redirect:modifyTemplate.do?templateId="+templateId;
     }
 
 }
