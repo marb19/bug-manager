@@ -15,7 +15,7 @@
                 {
                     if (confirm("¿Estás seguro que deseas borrar la plantilla?"))
                     {
-                        window.location = "deleteTemplate.do?templateId=" + templateId + "&userName=" + userName;
+                        window.location = "deleteTemplate.do?templateId=" + templateId;
                     }
                     else
                     {
@@ -74,7 +74,7 @@
 						<td>${t.templateDescription}</td>
 						<td>${t.templateReviewType}</td>
 						#if(!$t.templatePublic && $t.assignedUser == $user.userName)
-						<td><a href="#" onclick="confirmErase('${t.templateId}', '${user.userName}');">Borrar</a></td>
+						<td><a href="#" onclick="confirmErase('${t.templateId}');">Borrar</a></td>
 						#end
 					</tr>
 					#end

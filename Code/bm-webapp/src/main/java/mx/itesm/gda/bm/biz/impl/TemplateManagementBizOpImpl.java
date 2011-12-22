@@ -108,6 +108,10 @@ public class TemplateManagementBizOpImpl extends AbstractBizOp implements
             throw new BizException("Cannot delete non-existing template");
         }
 
+        for (TemplateElement te : t.getTemplateElements()){
+            deleteTemplateElement(te.getElementId());
+        }
+
         templateDAO.delete(t);
     }
 
@@ -214,5 +218,17 @@ public class TemplateManagementBizOpImpl extends AbstractBizOp implements
         templateElementDAO.update(element);
 
         return element.getElementId();
+    }
+
+    @Override
+    @Transactional(readOnly = true, propagation = Propagation.MANDATORY)
+    public void deleteTemplateElement(Integer templateElementID) {
+        TemplateElement te = templateElementDAO.findById(templateElementID);
+
+        if (te == null){
+            throw new BizException("Cannot delete non-existing template element");
+        }
+
+        templateElementDAO.delete(te);
     }
 }

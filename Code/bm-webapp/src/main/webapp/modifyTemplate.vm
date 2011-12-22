@@ -13,6 +13,17 @@
 			{
 				window.location = url;
 			}
+                        function confirmErase(templateElementId, templateId)
+                        {
+                            if (confirm("¿Estás seguro que deseas borrar el elemento?"))
+                            {
+                                window.location = "deleteTemplateElement.do?templateElementId=" + templateElementId + "&templateId=" + templateId;
+                            }
+                            else
+                            {
+                                return false;
+                            }
+                        }
 		</script>
     </head>
 	<body>
@@ -122,7 +133,7 @@
                                                     <td>${e.defectTypeName}</td>
                                                     <td>${e.elementDescription}</td>
                                                     <td><a href="modifyTemplateElement.do?templateId=${e.templateId}&templateElementId=${e.elementId}">Modificar</a></td>
-                                                    <td><a href="">Borrar</a></td>
+                                                    <td><a href="#" onclick="confirmErase('${e.elementId}', '${e.templateId}');">Borrar</a></td>
                                                 </tr>
                                                 #end
                                             </table>
