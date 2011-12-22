@@ -21,6 +21,7 @@ import mx.itesm.gda.bm.biz.PhaseYieldReportBizOp;
 import mx.itesm.gda.bm.biz.DefectDensityUserReportBizOp;
 import mx.itesm.gda.bm.biz.TotalDefectsTypeReportBizOp;
 import mx.itesm.gda.bm.biz.DefectsInyRemBizOp;
+import mx.itesm.gda.bm.biz.ROIProjectBizOp;
 import mx.itesm.gda.bm.biz.ReviewsEfficiencyBizOp;
 import mx.itesm.gda.bm.biz.ReviewsEffortBizOp;
 import mx.itesm.gda.bm.biz.ReviewsParetoBizOp;
@@ -69,6 +70,8 @@ public class ReportController extends BaseController {
     private ReviewsParetoBizOp reviewsPareto;
     @Autowired
     private ComposedProdBizOp composedProd;
+    @Autowired
+    private ROIProjectBizOp roiProject;
 
     @RequestMapping(value = "/reportesGenerales",
     method = { RequestMethod.POST })
@@ -173,6 +176,34 @@ public class ReportController extends BaseController {
 
         model.put("text", text);
         model.put("productividadCompuestaXML", productividadCompuestaXML);
+        return null;
+    }
+
+    @RequestMapping(value = "/roiProyecto",
+    method = { RequestMethod.POST })
+    @UserLogged
+    @Transactional
+    public String createROIProyectoReport(ModelMap model,
+            @RequestParam(value= "level") int level,
+            @RequestParam(value= "project_id", defaultValue = "0", required = false) int project_id){
+
+        String roiProyectoXML = null;
+        String text = "Este reporte es un análisis del retorno de inversión de las actividades "
+                + "de calidad del proyecto. Te ayuda a saber que tantos recursos se ahorraron "
+                + "gracias a la implementación de estas técnicas de calidad. Te "
+                + "ayuda a comparar en el caso que no se hubieran "
+                + "utilizado las actividades de calidad y los defectos se hubieran encontrado "
+                + "en pruebas o en producción.";
+
+        if (level == 2){
+            roiProyectoXML = roiProject.getROIProjectReport(project_id);
+        }
+        else {
+            roiProyectoXML = roiProject.getROIProjectReport(0);
+        }
+
+        model.put("text", text);
+        model.put("roiProyectoXML", roiProyectoXML);
         return null;
     }
 

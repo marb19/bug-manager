@@ -18,7 +18,7 @@
 
                    genReports = {"1":"Tiempo por fase","2":"Productividad por fase","3":"Yield por fase",
                    "4":"Resumen general"};
-                   costReports = {"5":"Productividad Compuesta","6":"ROI de proyecto","7":"ROI de técnicas de detección",
+                   costReports = {"5":"Productividad Compuesta","6":"ROI de proyecto/empresa","7":"ROI de técnicas de detección",
                    "8":"COQ vs CNQ"};
                    tecReports = {"9":"Yield por técnica de detección","10":"Esfuerzo por técnica de detección",
                    "11":"Eficiencia por técnica de detección","12":"Razón de revisión por técnica de detección",
@@ -85,6 +85,9 @@
                             break;                          
                           case "5":
                             $("#config-report-form").attr("action","./productividadCompuesta.do");
+                            break;
+                          case "6":
+                            $("#config-report-form").attr("action","./roiProyecto.do");
                             break;
                           case "9":
                             $("#config-report-form").attr("action","./tecnicasDeteccion.do");
@@ -203,7 +206,7 @@
                             $("#level").val("");
                             $("#level").attr("disabled", "true");
                         }
-                        else if ($("#report").val() == "7" || $("#report").val() == "8"
+                        else if ( $("#report").val() == "8"
                         || $("#report").val() == "15" || $("#report").val() == "16") {
                             $("#level").empty();
                             for (key in level){
@@ -255,7 +258,8 @@
                             }
                         }
                         else if ($("#report").val() == "6" || $("#report").val() == "9" || $("#report").val() == "10"
-                        || $("#report").val() == "11" || $("#report").val() == "12" || $("#report").val() == "13") {
+                        || $("#report").val() == "11" || $("#report").val() == "12" || $("#report").val() == "13"
+                        || $("#report").val() == "7") {
                             $("#level").empty();
                             for (key in level2){
                                 $("#level").append('<option value="' + key + '">' + level2[key] + '</option>');
@@ -359,7 +363,7 @@
                             $("#level2").val("");
                             $("#level2").attr("disabled", "true");
                         }
-                        else if (this.value == "7" || this.value == "8"
+                        else if (this.value == "8"
                         || this.value == "15" || this.value == "16") {
                             $("#level").empty();
                             for (key in level){
@@ -411,7 +415,8 @@
                             }
                         }
                         else if (this.value == "6" || this.value == "9" || this.value == "10"
-                        || this.value == "11" || this.value == "12" || this.value == "13") {
+                        || this.value == "11" || this.value == "12" || this.value == "13"
+                        || this.value == "7") {
                             $("#level").empty();
                             for (key in level2){
                                 $("#level").append('<option value="' + key + '">' + level2[key] + '</option>');
