@@ -43,8 +43,7 @@
                 </div>
             </div>
         </div>
-        <div id="content">
-            <!--<div id="content-header"> -->
+        <div id="chart-content">
                 <span id="ProductividadCompuesta">Productividad Compuesta Chart</span>
 
                     <script type="text/javascript">
@@ -53,8 +52,10 @@
                         productividadCompuestaChart.setXMLData("$productividadCompuestaXML");
                         productividadCompuestaChart.setTransparent(true);
                         productividadCompuestaChart.render("ProductividadCompuesta");
-                    </script>
-            <!--</div>-->
+                    </script>            
+        </div>
+        <div id="text-content">
+            <p>$text</p>
         </div>
         </body>
 </html>
