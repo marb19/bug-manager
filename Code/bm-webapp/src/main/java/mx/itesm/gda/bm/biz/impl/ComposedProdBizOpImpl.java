@@ -23,6 +23,8 @@ import mx.itesm.gda.bm.model.TaskType;
 import mx.itesm.gda.bm.model.dao.DefectDAO;
 import mx.itesm.gda.bm.model.Project;
 import mx.itesm.gda.bm.model.dao.ProjectDAO;
+import mx.itesm.gda.bm.model.User;
+import mx.itesm.gda.bm.model.dao.UserDAO;
 /**
  *
  * @author Administrator
@@ -39,6 +41,9 @@ public class ComposedProdBizOpImpl extends AbstractBizOp implements ComposedProd
 
     @Autowired
     private ProjectDAO projectDAO;
+
+    @Autowired
+    private UserDAO userDAO;
 
     @Override
     @Transactional(readOnly = true, propagation = Propagation.MANDATORY)
@@ -65,6 +70,62 @@ public class ComposedProdBizOpImpl extends AbstractBizOp implements ComposedProd
 
     private String getReportByUser(){
         String xmlData = null;
+        String category, productivity, composedProductivity;
+        ArrayList<String> usersNames = new ArrayList<String>();
+        ArrayList<Double> prods = new ArrayList<Double>();
+        ArrayList<Double> composedProds = new ArrayList<Double>();
+
+        List<User> allUsers = userDAO.getAllDevelopers();
+
+        for(User singleUser : allUsers){
+            long LOC = 0, effort = 0, correctionEffort = 0;            
+
+            String username = singleUser.getUserName();
+            usersNames.add(singleUser.getFullName());
+
+            List<Task> allTasks = taskDAO.getTasksByTypeStateUser(TaskType.DEVELOPMENT, TaskState.COMPLETED, username);
+            List<Defect> allDefects = defectDAO.searchByStateAndUser(DefectState.FIXED, username);
+
+            for(Task singleTask : allTasks){
+                LOC = LOC + singleTask.getSize();
+                effort = effort + singleTask.getInvestedHours();
+            }
+
+            for (Defect singleDefect : allDefects){
+                correctionEffort = correctionEffort + singleDefect.getInvestedHours();
+            }
+
+            if (effort == 0){
+                prods.add(0.0);
+            }
+            else
+            {
+                prods.add(roundNumber((double)LOC / (double)effort));
+            }
+            if (effort == 0 && correctionEffort == 0){
+                composedProds.add(0.0);
+            }
+            else
+            {
+                composedProds.add(roundNumber(((double)LOC) / ((double)effort + (double)correctionEffort)));
+            }
+        }
+
+        xmlData= "<chart caption='Productividad y productividad compuesta por usuario(s)' xAxisName='' yAxisName='LOC' bgAlpha='0,0'>";
+        category= "<categories>";
+        productivity= "<dataset seriesName='Productividad'>";
+        composedProductivity= "<dataset seriesName='Productividad Compuesta'>";
+
+        for(int i = 0; i < usersNames.size(); i++){
+            category+="<category name='" + usersNames.get(i) + "' />";
+            productivity+="<set value='" + prods.get(i) + "' />";
+            composedProductivity+="<set value='" + composedProds.get(i) + "' />";
+        }
+
+        category+="</categories>";
+        productivity+="</dataset>";
+        composedProductivity+="</dataset>";
+        xmlData+= category + productivity + composedProductivity + "</chart>";
 
         return xmlData;
     }
@@ -79,8 +140,7 @@ public class ComposedProdBizOpImpl extends AbstractBizOp implements ComposedProd
         List<Project> allProjects = projectDAO.getAll();
 
         for(Project singleProject : allProjects){
-            long LOC = 0, effort = 0, correctionEffort = 0;
-            double prod = 0, composedProd = 0;
+            long LOC = 0, effort = 0, correctionEffort = 0;            
 
             int project_id = singleProject.getProjectId();
             projectsNames.add(singleProject.getProjectName());

@@ -22,6 +22,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import mx.itesm.gda.bm.model.DefectState;
+import mx.itesm.gda.bm.model.PhaseType;
 /**
  *
  * @author $Author: zerocoolx@gmail.com $
@@ -175,6 +176,53 @@ public class DefectDAOImpl extends BaseItemDAOImpl<Defect> implements DefectDAO 
                 + "JOIN d.project p WHERE d.defectState = :defectState "
                 + "AND p.projectId = :project_id")
                 .setParameter("defectState", defectState)
+                .setParameter("project_id", project_id)
+                .getResultList();
+
+        return result;
+    }
+
+    @Override
+    @Transactional(readOnly = true, propagation = Propagation.MANDATORY)
+    public List<Defect> searchByStateAndUser(DefectState defectState, String username){
+        @SuppressWarnings("unchecked")
+
+        List<Defect> result = getEntityManager().createQuery("SELECT d FROM Defect d "
+                + "JOIN d.assignedUser u WHERE d.defectState = :defectState "
+                + "AND u.userName = :username")
+                .setParameter("defectState", defectState)
+                .setParameter("username", username)
+                .getResultList();
+
+        return result;
+    }
+
+    @Override
+    @Transactional(readOnly = true, propagation = Propagation.MANDATORY)
+    public List<Defect> searchByStateAndPhaseType(DefectState defectState, PhaseType type){
+        @SuppressWarnings("unchecked")
+
+        List<Defect> result = getEntityManager().createQuery("SELECT d FROM Defect d "
+                + "JOIN d.remotionPhase p WHERE d.defectState = :defectState AND p.phaseType = :type")
+                .setParameter("defectState", defectState)
+                .setParameter("type", type)
+                .getResultList();
+
+        return result;
+    }
+
+    @Override
+    @Transactional(readOnly = true, propagation = Propagation.MANDATORY)
+    public List<Defect> searchByStatePhaseTypeProject(DefectState defectState, PhaseType type,
+            int project_id){
+        @SuppressWarnings("unchecked")
+
+        List<Defect> result = getEntityManager().createQuery("SELECT d FROM Defect d "
+                + "JOIN d.remotionPhase p JOIN d.project pr WHERE "
+                + "d.defectState = :defectState AND p.phaseType = :type "
+                + "AND pr.projectId = :project_id")
+                .setParameter("defectState", defectState)
+                .setParameter("type", type)
                 .setParameter("project_id", project_id)
                 .getResultList();
 

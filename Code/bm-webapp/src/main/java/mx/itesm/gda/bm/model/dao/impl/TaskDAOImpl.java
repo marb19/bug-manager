@@ -23,6 +23,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import mx.itesm.gda.bm.model.TaskState;
 import mx.itesm.gda.bm.model.TaskType;
+import mx.itesm.gda.bm.model.PhaseType;
 /**
  *
  * @author $Author: alex.vc@gmail.com $
@@ -112,4 +113,53 @@ public class TaskDAOImpl extends BaseItemDAOImpl<Task> implements TaskDAO {
         return tasks;
     }
 
+    @Override
+    @Transactional(readOnly = true, propagation = Propagation.MANDATORY)
+    public List<Task> getTasksByTypeStateUser(TaskType type, TaskState state, String username){
+        @SuppressWarnings("unchecked")
+
+        List<Task> tasks = (List<Task>)getEntityManager().createQuery("SELECT t FROM Task t "
+                + "JOIN t.assignedUser u WHERE t.taskType = :type AND t.taskState = :state "
+                + "AND u.userName = :username")
+                .setParameter("type", type)
+                .setParameter("state", state)
+                .setParameter("username", username)
+                .getResultList();
+
+        return tasks;
+    }
+
+    @Override
+    @Transactional(readOnly = true, propagation = Propagation.MANDATORY)
+    public List<Task> getQualityTasksByStatePhaseType(TaskState state, PhaseType type){
+        @SuppressWarnings("unchecked")
+
+        List<Task> tasks = (List<Task>)getEntityManager().createQuery("SELECT t FROM Task t "
+                + "JOIN t.phase p WHERE p.phaseType = :type AND (t.taskType = 'PERSONAL_REVIEW' "
+                + "OR t.taskType = 'PEER_REVIEW' OR t.taskType = 'WALKTHROUGH' "
+                + "OR t.taskType = 'INSPECTION') AND t.taskState = :state")
+                .setParameter("type", type)
+                .setParameter("state", state)
+                .getResultList();
+
+        return tasks;
+    }
+
+    @Override
+    @Transactional(readOnly = true, propagation = Propagation.MANDATORY)
+    public List<Task> getQualityTasksByStatePhaseTypeProject(TaskState state, PhaseType type, int project_id){
+        @SuppressWarnings("unchecked")
+
+        List<Task> tasks = (List<Task>)getEntityManager().createQuery("SELECT t FROM Task t "
+                + "JOIN t.phase p JOIN t.project pr WHERE pr.projectId = :project_id AND "
+                + "p.phaseType = :type AND (t.taskType = 'PERSONAL_REVIEW' "
+                + "OR t.taskType = 'PEER_REVIEW' OR t.taskType = 'WALKTHROUGH' "
+                + "OR t.taskType = 'INSPECTION') AND t.taskState = :state")
+                .setParameter("type", type)
+                .setParameter("project_id", project_id)
+                .setParameter("state", state)
+                .getResultList();
+
+        return tasks;
+    }
 }

@@ -18,6 +18,7 @@ import java.util.List;
 import mx.itesm.gda.bm.model.Task;
 import mx.itesm.gda.bm.model.TaskType;
 import mx.itesm.gda.bm.model.TaskState;
+import mx.itesm.gda.bm.model.PhaseType;
 /**
  *
  * @author $Author: alex.vc@gmail.com $
@@ -37,5 +38,11 @@ public interface TaskDAO extends BaseItemDAO<Task> {
 
     public List<Task> getTasksByTypeStateProject(TaskType type,
             TaskState state, int project_id);
-    
+
+    public List<Task> getTasksByTypeStateUser(TaskType type, TaskState state,
+            String username);
+
+    public List<Task> getQualityTasksByStatePhaseType(TaskState state, PhaseType type);
+
+    public List<Task> getQualityTasksByStatePhaseTypeProject(TaskState state, PhaseType type, int project_id);
 }

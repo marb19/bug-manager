@@ -17,6 +17,8 @@ package mx.itesm.gda.bm.model;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
+import javax.persistence.EnumType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.OneToMany;
@@ -49,6 +51,10 @@ public class Phase extends AbstractItem {
     private Project project;
 
     private int projectOrder;
+
+    @Enumerated(EnumType.ORDINAL)
+    @Column(nullable = false)
+    private PhaseType phaseType;
 
     @OneToMany(mappedBy = "phase")
     private List<Task> tasks;
@@ -129,5 +135,19 @@ public class Phase extends AbstractItem {
      */
     public void setTasks(List<Task> tasks) {
         this.tasks = tasks;
+    }
+
+    /**
+     * @return the type
+     */
+    public PhaseType getType() {
+        return phaseType;
+    }
+
+    /**
+     * @param phaseType the type to set
+     */
+    public void setType(PhaseType phaseType) {
+        this.phaseType = phaseType;
     }
 }
