@@ -59,7 +59,7 @@ public class ROIProjectBizOpImpl extends AbstractBizOp implements ROIProjectBizO
             codingTasks = taskDAO.getQualityTasksByStatePhaseType(TaskState.COMPLETED, PhaseType.CODING);
 
             xmlData+= "<chart caption='ROI de la Empresa' xAxisName='Fase' yAxisName='ROI' "
-                    + "showValues='0' formatNumberScale='0' labelDisplay='Rotate'>";
+                    + "showValues='0' formatNumberScale='0' labelDisplay='Rotate' bgAlpha='0,0'>";
         }
         else {
             Project project = projectDAO.findById(project_id);
@@ -80,9 +80,8 @@ public class ROIProjectBizOpImpl extends AbstractBizOp implements ROIProjectBizO
                     PhaseType.CODING, project_id);
 
             xmlData+= "<chart caption='ROI del Proyecto " + projectName + "' xAxisName='Fase' yAxisName='ROI' "
-                    + "showValues='0' formatNumberScale='0' labelDisplay='Rotate'>";
+                    + "showValues='0' formatNumberScale='0' labelDisplay='Rotate' bgAlpha='0,0'>";
         }
-
 
         for (Defect singleDefect : requirementsDefects){
             requirementsEffort = requirementsEffort + singleDefect.getInvestedHours();

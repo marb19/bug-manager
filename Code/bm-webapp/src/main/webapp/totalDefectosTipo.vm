@@ -48,7 +48,7 @@
 
                     <script type="text/javascript">
                         var totalDefectsChart = new FusionCharts( "Charts/Column3D.swf",
-                        "myChartId", "400", "300", "0", "1" );
+                        "myChartId", "700", "400", "0", "1" );
                         totalDefectsChart.setXMLData("$totalDefectsXML");
                         totalDefectsChart.setTransparent(true);
                         totalDefectsChart.render("totalDefectsType");

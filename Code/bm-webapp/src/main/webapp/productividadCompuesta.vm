@@ -48,7 +48,7 @@
 
                     <script type="text/javascript">
                         var productividadCompuestaChart = new FusionCharts( "Charts/MSColumn3D.swf",
-                        "myChartId", "400", "300", "0", "1" );
+                        "myChartId", "700", "400", "0", "1" );
                         productividadCompuestaChart.setXMLData("$productividadCompuestaXML");
                         productividadCompuestaChart.setTransparent(true);
                         productividadCompuestaChart.render("ProductividadCompuesta");
