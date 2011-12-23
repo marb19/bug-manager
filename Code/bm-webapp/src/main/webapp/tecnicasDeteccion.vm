@@ -50,11 +50,11 @@
                     var ReviewsChart;
                     if ("$report" == "13"){
                         ReviewsChart = new FusionCharts( "Charts/Pareto3D.swf",
-                    "myChartId", "400", "300", "0", "1" );
+                    "myChartId", "700", "400", "0", "1" );
                     }
                     else {
                         ReviewsChart = new FusionCharts( "Charts/Column3D.swf",
-                    "myChartId", "400", "300", "0", "1" );
+                    "myChartId", "700", "400", "0", "1" );
                     }
                     ReviewsChart.setXMLData("$ReviewsXML");
                     ReviewsChart.setTransparent(true);

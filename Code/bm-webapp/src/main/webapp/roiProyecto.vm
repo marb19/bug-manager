@@ -45,26 +45,22 @@
         </div>
         <div id="chart-content">
                 <span id="roiProyecto">ROI Proyecto Chart</span>
-
-                    <script type="text/javascript">
-                        var roiProyectoChart = new FusionCharts( "Charts/Column3D.swf",
-                        "myChartId", "300", "200", "0", "1" );
-                        roiProyectoChart.setXMLData("$roiProyectoXML");
-                        roiProyectoChart.setTransparent(true);
-                        roiProyectoChart.render("roiProyecto");
-                    </script>
-        </div>
-        <div id="chart-content">
                 <span id="roiProyecto2">ROI Proyecto Chart</span>
 
                     <script type="text/javascript">
+                        var roiProyectoChart = new FusionCharts( "Charts/Column3D.swf",
+                        "myChartId", "600", "400", "0", "1" );
+                        roiProyectoChart.setXMLData("$roiProyectoXML");
+                        roiProyectoChart.setTransparent(true);
+                        roiProyectoChart.render("roiProyecto");
+
                         var roiProyectoGrid = new FusionCharts( "Charts/SSGrid.swf",
-                        "myGridId", "300", "200", "0", "1" );
+                        "myGridId", "600", "400", "0", "1" );
                         roiProyectoGrid.setXMLData("$roiProyectoXML");
                         roiProyectoGrid.setTransparent(true);
                         roiProyectoGrid.render("roiProyecto2");
                     </script>
-        </div>
+        </div>        
         <div id="text-content">
             <p>$text</p>
         </div>

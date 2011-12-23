@@ -68,6 +68,9 @@ public class Defect extends AbstractItem {
     @ManyToOne(optional = true)
     private Phase remotionPhase;
 
+    @ManyToOne(optional = true)
+    private Task remotionTask;
+
     @Column(length = 255, nullable = true)
     private String defectTrigger;
 
@@ -233,6 +236,20 @@ public class Defect extends AbstractItem {
      */
     public void setRemotionPhase(Phase remotionPhase) {
         this.remotionPhase = remotionPhase;
+    }
+
+    /**
+     * @return the remotionTask
+     */
+    public Task getRemotionTask() {
+        return remotionTask;
+    }
+
+    /**
+     * @param remotionTask the remotionTask to set
+     */
+    public void setRemotionTask(Task remotionTask) {
+        this.remotionTask = remotionTask;
     }
 
     /**

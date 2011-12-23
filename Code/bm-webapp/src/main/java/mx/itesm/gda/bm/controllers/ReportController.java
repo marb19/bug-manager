@@ -21,7 +21,9 @@ import mx.itesm.gda.bm.biz.PhaseYieldReportBizOp;
 import mx.itesm.gda.bm.biz.DefectDensityUserReportBizOp;
 import mx.itesm.gda.bm.biz.TotalDefectsTypeReportBizOp;
 import mx.itesm.gda.bm.biz.DefectsInyRemBizOp;
+import mx.itesm.gda.bm.biz.QualityCostBizOp;
 import mx.itesm.gda.bm.biz.ROIProjectBizOp;
+import mx.itesm.gda.bm.biz.ROITecnicasBizOp;
 import mx.itesm.gda.bm.biz.ReviewsEfficiencyBizOp;
 import mx.itesm.gda.bm.biz.ReviewsEffortBizOp;
 import mx.itesm.gda.bm.biz.ReviewsParetoBizOp;
@@ -72,6 +74,10 @@ public class ReportController extends BaseController {
     private ComposedProdBizOp composedProd;
     @Autowired
     private ROIProjectBizOp roiProject;
+    @Autowired
+    private ROITecnicasBizOp roiTecnicas;
+    @Autowired
+    private QualityCostBizOp qualityCost;
 
     @RequestMapping(value = "/reportesGenerales",
     method = { RequestMethod.POST })
@@ -204,6 +210,54 @@ public class ReportController extends BaseController {
 
         model.put("text", text);
         model.put("roiProyectoXML", roiProyectoXML);
+        return null;
+    }
+
+    @RequestMapping(value = "/roiTecnicas",
+    method = { RequestMethod.POST })
+    @UserLogged
+    @Transactional
+    public String createROITecnicasReport(ModelMap model,
+            @RequestParam(value= "level") int level,
+            @RequestParam(value= "project_id", defaultValue = "0", required = false) int project_id){
+
+        String roiTecnicasXML = null;
+        String text = "Este reporte nos ayuda a comparar el esfuerzo que tomó cierta actividad "
+                + "de calidad, contra el tiempo que ahorró en caso de que los errores encontrados "
+                + "con la respectiva técnica hubieran pasado a producción.";
+
+        if (level == 2){
+            roiTecnicasXML = roiTecnicas.getROITecnicasReport(project_id);
+        }
+        else {
+            roiTecnicasXML = roiTecnicas.getROITecnicasReport(0);
+        }
+
+        model.put("text", text);
+        model.put("roiTecnicasXML", roiTecnicasXML);
+        return null;
+    }
+
+    @RequestMapping(value = "/costoCalidad",
+    method = { RequestMethod.POST })
+    @UserLogged
+    @Transactional
+    public String createQualityCostReport(ModelMap model,
+            @RequestParam(value= "level") int level,
+            @RequestParam(value= "project_id", defaultValue = "0", required = false) int project_id){
+
+        String qualityCostXML = null;
+        String text = "Esta gráfica nos ayuda a comparar los costos de la conformidad y no conformidad.";
+
+        if (level == 2){
+            qualityCostXML = qualityCost.getQualityCostReport(project_id);
+        }
+        else {
+            qualityCostXML = qualityCost.getQualityCostReport(0);
+        }
+
+        model.put("text", text);
+        model.put("qualityCostXML", qualityCostXML);
         return null;
     }
 

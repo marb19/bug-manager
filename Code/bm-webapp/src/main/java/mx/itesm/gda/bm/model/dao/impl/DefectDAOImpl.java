@@ -23,6 +23,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import mx.itesm.gda.bm.model.DefectState;
 import mx.itesm.gda.bm.model.PhaseType;
+import mx.itesm.gda.bm.model.TaskType;
 /**
  *
  * @author $Author: zerocoolx@gmail.com $
@@ -222,6 +223,39 @@ public class DefectDAOImpl extends BaseItemDAOImpl<Defect> implements DefectDAO 
                 + "d.defectState = :defectState AND p.phaseType = :type "
                 + "AND pr.projectId = :project_id")
                 .setParameter("defectState", defectState)
+                .setParameter("type", type)
+                .setParameter("project_id", project_id)
+                .getResultList();
+
+        return result;
+    }
+
+    @Override
+    @Transactional(readOnly = true, propagation = Propagation.MANDATORY)
+    public List<Defect> searchByStateAndTaskType(DefectState state, TaskType type){
+        @SuppressWarnings("unchecked")
+
+        List<Defect> result = getEntityManager().createQuery("SELECT d FROM Defect d "
+                + "JOIN d.remotionTask t WHERE "
+                + "d.defectState = :state AND t.taskType = :type")
+                .setParameter("state", state)
+                .setParameter("type", type)
+                .getResultList();
+
+        return result;
+    }
+
+    @Override
+    @Transactional(readOnly = true, propagation = Propagation.MANDATORY)
+    public List<Defect> searchByStateTaskTypeProject(DefectState state,
+            TaskType type, int project_id){
+        @SuppressWarnings("unchecked")
+
+        List<Defect> result = getEntityManager().createQuery("SELECT d FROM Defect d "
+                + "JOIN d.remotionTask t JOIN d.project p WHERE "
+                + "d.defectState = :state AND t.taskType = :type "
+                + "AND p.projectId = :project_id")
+                .setParameter("state", state)
                 .setParameter("type", type)
                 .setParameter("project_id", project_id)
                 .getResultList();
