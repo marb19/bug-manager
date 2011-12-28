@@ -47,29 +47,30 @@ public class PhaseYieldReportBizOpImpl extends AbstractBizOp implements PhaseYie
     @Transactional(readOnly = true, propagation = Propagation.MANDATORY)
     public String getPhaseYieldReport(int project_id){
         String xmlData = null;
-        ArrayList<String> phaseNames = new ArrayList<String>();
-        ArrayList<Integer> phaseDefectsNumber = new ArrayList<Integer>();
+        ArrayList<String> phaseNames = new ArrayList<String>();        
         ArrayList<Double> phaseYield = new ArrayList<Double>();
+        int acumInyected = 0, acumRemoved = 0, escaped = 0, goal = 0;
 
-        Project project = projectDAO.findById(project_id);
-        List<Defect> projectDefects = project.getDefects();
-        int totalDefects = projectDefects.size();
+        Project project = projectDAO.findById(project_id);        
+        List<Phase> allPhases = project.getPhases();
         
-        for(Phase phase : project.getPhases()){
+        for(Phase phase : allPhases){
             phaseNames.add(phase.getPhaseName());
             Integer phase_id = phase.getPhaseId();
-            List<Defect> phaseDefects = defectDAO.searchByDetectionPhase(phase_id);
-            phaseDefectsNumber.add(phaseDefects.size());        
-        }        
-
-        for(int i = 0; i < phaseDefectsNumber.size(); i++){
-            if (totalDefects == 0){
+            List<Defect> inyectedDefects = defectDAO.searchByInyectionPhase(phase_id);
+            List<Defect> removedDefects = defectDAO.searchByRemotionPhase(phase_id);
+            acumInyected = acumInyected + inyectedDefects.size();
+            acumRemoved = acumRemoved + removedDefects.size();
+            escaped = acumInyected - acumRemoved;
+            goal = removedDefects.size() + escaped;
+            if (goal == 0){
                 phaseYield.add(0.0);
             }
-            else{
-                phaseYield.add(roundNumber(100*((double)phaseDefectsNumber.get(i)/(double)totalDefects)));
+            else {
+                phaseYield.add(roundNumber(100*((double)removedDefects.size()/(double)goal)));
             }
-        }
+        }        
+        
         xmlData += "<chart caption='Yield de fase' xAxisName='Fase' yAxisName='Porcentaje' bgAlpha='0,0'>";
 
         for(int i = 0; i < phaseNames.size(); i++){

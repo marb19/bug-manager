@@ -40,8 +40,7 @@ public class ReviewsParetoBizOpImpl extends AbstractBizOp implements ReviewsPare
         int perReviewDefects = 0, peerReviewDefects = 0, walkDefects = 0, inspectionDefects = 0;
         List<Defect> allDefects;
         ArrayList<String> reviewsNames = new ArrayList<String>();
-        ArrayList<Integer> reviewsDefects = new ArrayList<Integer>();
-        ArrayList<Double> reviewsYields = new ArrayList<Double>();
+        ArrayList<Integer> reviewsDefects = new ArrayList<Integer>();        
 
         reviewsNames.add("Revisión Personal");
         reviewsNames.add("Revisión de Colegas");

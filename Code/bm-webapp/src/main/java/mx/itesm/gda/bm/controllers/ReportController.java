@@ -21,6 +21,7 @@ import mx.itesm.gda.bm.biz.PhaseYieldReportBizOp;
 import mx.itesm.gda.bm.biz.DefectDensityUserReportBizOp;
 import mx.itesm.gda.bm.biz.TotalDefectsTypeReportBizOp;
 import mx.itesm.gda.bm.biz.DefectsInyRemBizOp;
+import mx.itesm.gda.bm.biz.GeneralSummaryBizOp;
 import mx.itesm.gda.bm.biz.QualityCostBizOp;
 import mx.itesm.gda.bm.biz.ROIProjectBizOp;
 import mx.itesm.gda.bm.biz.ROITecnicasBizOp;
@@ -38,6 +39,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -78,6 +81,8 @@ public class ReportController extends BaseController {
     private ROITecnicasBizOp roiTecnicas;
     @Autowired
     private QualityCostBizOp qualityCost;
+    @Autowired
+    private GeneralSummaryBizOp generalSummary;
 
     @RequestMapping(value = "/reportesGenerales",
     method = { RequestMethod.POST })
@@ -103,14 +108,28 @@ public class ReportController extends BaseController {
             reportXML = phaseYieldReport.getPhaseYieldReport(project_id);
             text = "La gráfica muestra el porcentaje de defectos encontrados en "
                     + "cada fase del proyecto respecto al total de defectos encontrados en el mismo. ";
-        }
-        else{
-            reportXML = phaseTimeReport.getPhaseTimeReport(project_id);
-            text = "El reporte muestra un resumen general del proyecto por etapas.";
-        }
+        }        
 
         model.put("text", text);
         model.put("reportXML", reportXML);
+        return null;
+    }
+
+    @RequestMapping(value = "/resumenGeneral",
+    method = { RequestMethod.POST })
+    @UserLogged
+    @Transactional
+    public String createSummaryReport(ModelMap model, 
+            @RequestParam(value= "project_id", defaultValue = "0",
+            required = true) int project_id){
+        
+        String text = "La tabla representa un resumen general del proyecto por fases.";
+        List<Map<String, ?>> summary = generalSummary.getSummaryReport(project_id);
+        String projectName = generalSummary.getProjectName(project_id);
+
+        model.put("text", text);
+        model.put("projectName", projectName);
+        model.put("summary", summary);
         return null;
     }
 

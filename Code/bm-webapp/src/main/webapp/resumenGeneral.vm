@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Reportes Generales - BUG-MANAGER</title>
+        <link rel="stylesheet" href="CSS/Style.css" type="text/css" media="screen" />
+        <script type="text/javascript" src="./js/jquery-1.4.2.min.js"></script>
+        <script type="text/javascript" src="./js/jquery.validate.min.js"></script>
+        <script type="text/javascript" src="./js/localization/messages_es.js"></script>
+        <script type="text/javascript" src="./js/FusionCharts.js"></script>
+        <script type="text/javascript">
+                function goToUrl(url)
+                {
+                   window.location = url;
+                }
+        </script>
+        </head>
+    <body>
+        <div id="header">
+            <img src="images/Login/bm-logo.png"  alt="BM logo" id="base-bmlogo"/>
+            <div id="base-header-text">
+				Hoy es $dateLong.format($date.systemDate)<br/>
+				Bienvenido, ${user.fullName}<br/>
+                <a href='userLogin.do?op=logout'>Salir</a>
+            </div>
+            <div id="base-menu">
+                <div id="base-menu-bar">
+                    <img src="images/Base/Menu1.png" id="base-menu-left" />
+                    <div id="base-menu-center">
+                        <ul>
+                            <li class='Proyectos' onclick="goToUrl('listProjects.do')" >
+                            </li>
+                            <li class='ReportesVisitando' onclick="goToUrl('listReports.do')" >
+                            </li>
+                            #if($user.administrator)
+                            <li class='Usuarios' onclick="goToUrl('listUsers.do')" >
+                            </li>
+                            #end
+                        </ul>
+                    </div>
+                    <img src="images/Base/Menu3.png" id="base-menu-right" />
+                </div>
+            </div>
+        </div>        
+        <div id="content">
+            <div id="content-header">
+                <form action="#" method="POST" id="config-report-form">
+                    <h3 id="form-title">Resumen General del Proyecto ${projectName}</h3>
+                    <table id="user-modify" border="1">
+                        <tr>
+                            <th></th>
+                            <th>Defectos</th>
+                            <th></th>
+                            <th></th>
+                            <th>Velocidad</th>
+                            <th>Tiempo</th>
+                            <th>Defectos remv</th>
+                            <th>Defectos remv</th>
+                            <th>Appraisal</th>
+                            <th>Fallas</th>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <th>Inyectados</th>
+                            <th>Removidos</th>
+                            <th>Yield</th>
+                            <th>Revisión</th>
+                            <th>Fase</th>
+                            <th>Eficiencia</th>
+                            <th>Leverage</th>
+                            <th>Costo</th>
+                            <th>Costo</th>
+                            <th>a/fr</th>
+                        </tr>
+                        <tr>
+                            <th>FASE</th>
+                            <th></th>
+                            <th></th>
+                            <th>% Efect</th>
+                            <th>LOC/hr</th>
+                            <th></th>
+                            <th>Remv/hr</th>
+                            <th>DRE F1/DRE UT</th>
+                            <th></th>
+                            <th></th>
+                            <th>Approx:2</th>
+                        </tr>
+                        #foreach($s in $summary)
+                        <tr align="center">
+                            <td>${s.phase}</td>
+                            <td>${s.inyectedDefects}</td>
+                            <td>${s.removedDefects}</td>
+                            <td>${s.yield}</td>
+                            <td>${s.speed}</td>
+                            <td>${s.time}</td>
+                            <td>${s.defectEfficiency}</td>
+                            <td>${s.defectLeverage}</td>
+                            <td>${s.appraisalCost}</td>
+                            <td>${s.failureCost}</td>
+                            <td>${s.afr}</td>
+                        </tr>
+                        #end
+                    </table>
+                </form>
+            </div>
+        </div>
+        <div id="text-content">
+            <p>$text</p>
+        </div>
+    </body>
+</html>

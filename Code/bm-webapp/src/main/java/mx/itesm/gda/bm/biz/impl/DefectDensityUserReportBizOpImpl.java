@@ -27,6 +27,7 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 import mx.itesm.gda.bm.biz.DefectDensityUserReportBizOp;
+import mx.itesm.gda.bm.model.TaskType;
 
 /**
  *
