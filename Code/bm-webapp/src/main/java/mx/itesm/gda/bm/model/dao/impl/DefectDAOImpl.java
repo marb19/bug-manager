@@ -262,4 +262,38 @@ public class DefectDAOImpl extends BaseItemDAOImpl<Defect> implements DefectDAO 
 
         return result;
     }
+
+    @Override
+    @Transactional(readOnly = true, propagation = Propagation.MANDATORY)
+    public List<Defect> searchByStateInyPhaseProject(DefectState state, int phase_id, int project_id){
+        @SuppressWarnings("unchecked")
+        List<Defect> result = getEntityManager().createQuery("SELECT d FROM Defect d "
+                + "JOIN d.inyectionPhase ph JOIN d.project p WHERE "
+                + "d.defectState = :state AND ph.phaseId = :phase_id "
+                + "AND p.projectId = :project_id")
+                .setParameter("state", state)
+                .setParameter("phase_id", phase_id)
+                .setParameter("project_id", project_id)
+                .getResultList();
+
+        return result;
+
+    }
+
+    @Override
+    @Transactional(readOnly = true, propagation = Propagation.MANDATORY)
+    public List<Defect> searchByStateRemPhaseProject(DefectState state, int phase_id, int project_id){
+        @SuppressWarnings("unchecked")
+        List<Defect> result = getEntityManager().createQuery("SELECT d FROM Defect d "
+                + "JOIN d.remotionPhase ph JOIN d.project p WHERE "
+                + "d.defectState = :state AND ph.phaseId = :phase_id "
+                + "AND p.projectId = :project_id")
+                .setParameter("state", state)
+                .setParameter("phase_id", phase_id)
+                .setParameter("project_id", project_id)
+                .getResultList();
+
+        return result;
+
+    }
 }

@@ -63,7 +63,7 @@ public class PhaseProdReportBizOpImpl extends AbstractBizOp implements PhaseProd
 
         for(int i = 0; i < phaseTimes.size(); i++){
             if (phaseTimes.get(i) != 0){
-                phaseProd.add(roundNumber(60 * ((double)phaseSizes.get(i)/(double)phaseTimes.get(i))));
+                phaseProd.add(roundNumber((double)phaseSizes.get(i)/(double)phaseTimes.get(i)));
             }
             else {
                 phaseProd.add(0.0);

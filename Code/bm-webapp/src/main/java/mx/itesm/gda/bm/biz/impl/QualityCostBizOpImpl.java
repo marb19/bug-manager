@@ -42,24 +42,26 @@ public class QualityCostBizOpImpl extends AbstractBizOp implements QualityCostBi
     @Transactional(readOnly = true, propagation = Propagation.MANDATORY)
     public String getQualityCostReport(int project_id){
         String xmlData = null, categories = null, defects = null, tasks = null;
-        long requirementsEffort = 0, designEffort = 0, codingEffort = 0,
+        long requirementsEffort = 0, designEffort = 0, codingEffort = 0, reviewEffort = 0,
                 testingEffort = 0, maintenanceEffort = 0, COQEffort = 0, CNQEffort = 0;
-        long taskReqEffort = 0, taskDesignEffort = 0, taskCodingEffort = 0,
+        long taskReqEffort = 0, taskDesignEffort = 0, taskCodingEffort = 0, taskReviewEffort = 0,
                 taskTestingEffort = 0, taskMaintenanceEffort = 0, taskCOQEffort = 0, taskCNQEffort = 0;
-        List<Defect> requirementsDefects, designDefects, codingDefects,
+        List<Defect> requirementsDefects, designDefects, codingDefects, reviewDefects,
                 testingDefects, maintenanceDefects;
-        List<Task> reqTasks, designTasks, codingTasks, testingTasks, maintenaceTasks;
+        List<Task> reqTasks, designTasks, codingTasks, reviewTasks, testingTasks, maintenaceTasks;
 
         if (project_id == 0){
             requirementsDefects = defectDAO.searchByStateAndPhaseType(DefectState.FIXED, PhaseType.REQUIREMENTS);
             designDefects = defectDAO.searchByStateAndPhaseType(DefectState.FIXED, PhaseType.DESIGN);
             codingDefects = defectDAO.searchByStateAndPhaseType(DefectState.FIXED, PhaseType.CODING);
+            reviewDefects = defectDAO.searchByStateAndPhaseType(DefectState.FIXED, PhaseType.REVIEW);
             testingDefects = defectDAO.searchByStateAndPhaseType(DefectState.FIXED, PhaseType.TESTING);
             maintenanceDefects = defectDAO.searchByStateAndPhaseType(DefectState.FIXED, PhaseType.MAINTENANCE);
 
             reqTasks = taskDAO.getQualityTasksByStatePhaseType(TaskState.COMPLETED, PhaseType.REQUIREMENTS);
             designTasks = taskDAO.getQualityTasksByStatePhaseType(TaskState.COMPLETED, PhaseType.DESIGN);
             codingTasks = taskDAO.getQualityTasksByStatePhaseType(TaskState.COMPLETED, PhaseType.CODING);
+            reviewTasks = taskDAO.getQualityTasksByStatePhaseType(TaskState.COMPLETED, PhaseType.REVIEW);
             testingTasks = taskDAO.getQualityTasksByStatePhaseType(TaskState.COMPLETED, PhaseType.TESTING);
             maintenaceTasks = taskDAO.getQualityTasksByStatePhaseType(TaskState.COMPLETED, PhaseType.MAINTENANCE);
 
@@ -76,6 +78,8 @@ public class QualityCostBizOpImpl extends AbstractBizOp implements QualityCostBi
                 PhaseType.DESIGN, project_id);
             codingDefects = defectDAO.searchByStatePhaseTypeProject(DefectState.FIXED,
                 PhaseType.CODING, project_id);
+            reviewDefects = defectDAO.searchByStatePhaseTypeProject(DefectState.FIXED,
+                    PhaseType.REVIEW, project_id);
             testingDefects = defectDAO.searchByStatePhaseTypeProject(DefectState.FIXED,
                     PhaseType.TESTING, project_id);
             maintenanceDefects = defectDAO.searchByStatePhaseTypeProject(DefectState.FIXED,
@@ -87,6 +91,8 @@ public class QualityCostBizOpImpl extends AbstractBizOp implements QualityCostBi
                     PhaseType.DESIGN, project_id);
             codingTasks = taskDAO.getQualityTasksByStatePhaseTypeProject(TaskState.COMPLETED,
                     PhaseType.CODING, project_id);
+            reviewTasks = taskDAO.getQualityTasksByStatePhaseTypeProject(TaskState.COMPLETED,
+                    PhaseType.REVIEW, project_id);
             testingTasks = taskDAO.getQualityTasksByStatePhaseTypeProject(TaskState.COMPLETED,
                     PhaseType.TESTING, project_id);
             maintenaceTasks = taskDAO.getQualityTasksByStatePhaseTypeProject(TaskState.COMPLETED,
@@ -105,6 +111,9 @@ public class QualityCostBizOpImpl extends AbstractBizOp implements QualityCostBi
         for (Defect singleDefect : codingDefects){
             codingEffort = codingEffort + singleDefect.getInvestedHours();
         }
+        for (Defect singleDefect : reviewDefects){
+            reviewEffort = reviewEffort + singleDefect.getInvestedHours();
+        }
         for (Defect singleDefect : testingDefects){
             testingEffort = testingEffort + singleDefect.getInvestedHours();
         }
@@ -121,6 +130,9 @@ public class QualityCostBizOpImpl extends AbstractBizOp implements QualityCostBi
         for (Task singleTask : codingTasks){
             taskCodingEffort = taskCodingEffort + singleTask.getInvestedHours();
         }
+        for (Task singleTask : reviewTasks){
+            taskReviewEffort = taskReviewEffort + singleTask.getInvestedHours();
+        }
         for (Task singleTask : testingTasks){
             taskTestingEffort = taskTestingEffort + singleTask.getInvestedHours();
         }
@@ -128,9 +140,9 @@ public class QualityCostBizOpImpl extends AbstractBizOp implements QualityCostBi
             taskMaintenanceEffort = taskMaintenanceEffort + singleTask.getInvestedHours();
         }
 
-        COQEffort = requirementsEffort + designEffort + codingEffort;
+        COQEffort = requirementsEffort + designEffort + codingEffort + reviewEffort;
 
-        taskCOQEffort = taskReqEffort + taskDesignEffort + taskCodingEffort;
+        taskCOQEffort = taskReqEffort + taskDesignEffort + taskCodingEffort + taskReviewEffort;
 
         CNQEffort = testingEffort + maintenanceEffort;
 

@@ -22,11 +22,12 @@ package mx.itesm.gda.bm.model;
 
 public enum PhaseType {
 
-    REQUIREMENTS(true, false, false, false, false),
-    DESIGN(false, true, false, false, false),
-    CODING(false, false, true, false, false),
-    TESTING(false, false, false, true, false),
-    MAINTENANCE(false, false, false, false, true);
+    REQUIREMENTS(true, false, false, false, false, false),
+    DESIGN(false, true, false, false, false, false),
+    CODING(false, false, true, false, false, false),
+    REVIEW(false, false, false, true, false, false),
+    TESTING(false, false, false, false, true, false),
+    MAINTENANCE(false, false, false, false, false, true);
 
     private final boolean requirements;
 
@@ -34,15 +35,18 @@ public enum PhaseType {
 
     private final boolean coding;
 
+    private final boolean review;
+
     private final boolean testing;
 
     private final boolean maintenance;
 
-    PhaseType(boolean my_requirements, boolean my_design, boolean my_coding,
+    PhaseType(boolean my_requirements, boolean my_design, boolean my_coding, boolean my_review,
             boolean my_testing, boolean my_maintenance){
         requirements = my_requirements;
         design = my_design;
         coding = my_coding;
+        review = my_review;
         testing = my_testing;
         maintenance = my_maintenance;
     }
@@ -66,6 +70,13 @@ public enum PhaseType {
      */
     public boolean isCoding(){
         return coding;
+    }
+
+    /**
+     * @return the review phase
+     */
+    public boolean isReview(){
+        return review;
     }
 
     /**
