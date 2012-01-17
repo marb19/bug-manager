@@ -67,12 +67,14 @@ public class ViewTaskController extends BaseController {
         Map<String, ?> task = taskMgr.getTask(taskID);
         List<Map<String, ?>> users = userMgr.retrieveUsers();
         List<Map<String, ?>> comments = taskMgr.retrieveComments(taskID);
+        List<String> taskTypes = taskMgr.getTypes();
 
         model.put("users", users);
         model.put("task", task);
         model.put("comments", comments);
         model.put("project_id", projectID);
         model.put("task_id", taskID);
+        model.put("taskTypes", taskTypes);
 
         return null;
     }
@@ -93,6 +95,7 @@ public class ViewTaskController extends BaseController {
             @RequestParam("startDate") Date startDate,
             @RequestParam("endDate") Date endDate,
             @RequestParam("newComment") String newComment,
+            @RequestParam("taskType") String taskType,
             ModelMap model) {
 
         if(projectID <= 0){
@@ -154,6 +157,20 @@ public class ViewTaskController extends BaseController {
             throw new ControllerException("Usuario inexistente");
         }
 
+        if(taskType.equals("")){
+            throw new ControllerException("No se admiten campos vacios");
+        }
+
+        boolean wrongType = true;
+        for (String type : taskMgr.getTypes()){
+            if (taskType.equals(type)){
+                wrongType=false;
+            }
+        }
+        if (wrongType){
+            throw new ControllerException("Tipo de tarea inexistente");
+        }
+
         Map<String, ?> t = taskMgr.getTask(taskID);
         if((investedHours + Integer.parseInt(""+t.get("investedHours"))) <= 0 && remainingHours <= 0){
             throw new ControllerException("No se puede completar una tarea sin haber invertido tiempo.");
@@ -161,7 +178,7 @@ public class ViewTaskController extends BaseController {
 
         int task = taskMgr.modifyTask(taskID, taskName, description,
                 assignedUser, status, estimatedHours, investedHours, remainingHours, startDate,
-                endDate);
+                endDate, taskType);
 
         if(!newComment.equals("")) {
             taskMgr.addComment(taskID, session.getLoggedUserName(), newComment);

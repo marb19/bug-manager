@@ -71,6 +71,18 @@
                         </tr>
                         <tr>
                             <td>
+                                <label for ="taskType" id="taskTypeLabel">Tipo:</label>
+                            </td>
+                            <td>
+                                <select name="taskType" id="taskType" class="required">
+                                    #foreach($type in $taskTypes)
+                                    <option value="${type}">${type}</option>
+                                    #end
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
                                 <label for ="taskDescription" id="taskDescriptionLabel">Descripci&oacute;n:</label>
                             </td>
                             <td>
