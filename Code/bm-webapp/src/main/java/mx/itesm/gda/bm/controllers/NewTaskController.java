@@ -60,8 +60,10 @@ public class NewTaskController extends BaseController {
         }
 
         List<Map<String, ?>> users = userMgr.retrieveUsers();
+        List<String> taskTypes = taskMgr.getTypes();
         model.put("users", users);
         model.put("project_id", projectID);
+        model.put("taskTypes", taskTypes);
 
         return null;
     }
@@ -77,6 +79,7 @@ public class NewTaskController extends BaseController {
             @RequestParam("taskEstimatedHours") int estimatedHours,
             @RequestParam("startDate") Date startDate,
             @RequestParam("endDate") Date endDate,
+            @RequestParam("taskType") String taskType,
             ModelMap model) {
 
         if(taskName.equals("")){
@@ -110,9 +113,23 @@ public class NewTaskController extends BaseController {
         if(endDate == null){
             throw new ControllerException("No se admiten campos vacios");
         }
+
+        if(taskType.equals("")){
+            throw new ControllerException("No se admiten campos vacios");
+        }
+
+        boolean wrongType = true;
+        for (String type : taskMgr.getTypes()){
+            if (taskType.equals(type)){
+                wrongType=false;
+            }
+        }
+        if (wrongType){
+            throw new ControllerException("Tipo de tarea inexistente");
+        }
         
         int task = taskMgr.createTask(taskName, projectID, description,
-                assignedUser, estimatedHours, startDate, endDate);
+                assignedUser, estimatedHours, startDate, endDate, taskType);
 
         return "redirect:listTasks.do?project_id=" + projectID;
     }

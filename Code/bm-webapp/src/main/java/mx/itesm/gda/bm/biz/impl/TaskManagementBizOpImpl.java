@@ -28,6 +28,7 @@ import mx.itesm.gda.bm.model.Task;
 import mx.itesm.gda.bm.model.TaskComment;
 import mx.itesm.gda.bm.model.TaskCompletionReport;
 import mx.itesm.gda.bm.model.TaskState;
+import mx.itesm.gda.bm.model.TaskType;
 import mx.itesm.gda.bm.model.dao.ProjectDAO;
 import mx.itesm.gda.bm.model.dao.TaskCommentDAO;
 import mx.itesm.gda.bm.model.dao.TaskCompletionReportDAO;
@@ -82,6 +83,7 @@ public class TaskManagementBizOpImpl extends AbstractBizOp implements
             t.put("remainingHours", task.getRemainingHours());
             t.put("completionDate", task.getCompletionDate());
             t.put("status", task.getTaskState().name());
+            t.put("taskType", task.getTaskType().name());
             t.put("commentsNumber", task.getTaskComments().size());
             ret.add(t);
         }
@@ -142,6 +144,7 @@ public class TaskManagementBizOpImpl extends AbstractBizOp implements
         t.put("investedHours", task.getInvestedHours());
         t.put("remainingHours", task.getRemainingHours());
         t.put("status", task.getTaskState().name());
+        t.put("taskType", task.getTaskType().name());
 
         return t;
     }
@@ -149,7 +152,7 @@ public class TaskManagementBizOpImpl extends AbstractBizOp implements
     @Override
     @Transactional(readOnly = true, propagation = Propagation.MANDATORY)
     public int createTask(String taskName, int project, String description,
-            String assignedUser, int estimatedHours, Date startDate, Date endDate) {
+            String assignedUser, int estimatedHours, Date startDate, Date endDate, String taskType) {
 
         User u = userDAO.findByUserName(assignedUser);
         Project p = projectDAO.findById(project);
@@ -164,6 +167,7 @@ public class TaskManagementBizOpImpl extends AbstractBizOp implements
         t.setStartDate(startDate);
         t.setEndDate(endDate);
         t.setTaskState(TaskState.NOT_STARTED);
+        t.setTaskType(TaskType.valueOf(taskType));
         taskDAO.save(t);
         return t.getTaskId();
     }
@@ -185,7 +189,7 @@ public class TaskManagementBizOpImpl extends AbstractBizOp implements
     }
 
     @Override
-    public int modifyTask(int taskID, String taskName, String description, String assignedUser, String status, int estimatedHours, int investedHours, int remainingHours, Date startDate, Date endDate) {
+    public int modifyTask(int taskID, String taskName, String description, String assignedUser, String status, int estimatedHours, int investedHours, int remainingHours, Date startDate, Date endDate, String taskType) {
         Task t = taskDAO.findById(taskID);
         User u = userDAO.findByUserName(assignedUser);
 
@@ -195,6 +199,7 @@ public class TaskManagementBizOpImpl extends AbstractBizOp implements
         t.setTaskState(TaskState.valueOf(status));
         t.setEstimatedHours(estimatedHours);
         t.setRemainingHours(remainingHours);
+        t.setTaskType(TaskType.valueOf(taskType));
         
         if(TaskState.valueOf(status) != TaskState.COMPLETED && TaskState.valueOf(status) != TaskState.CANCELED){
             t.setInvestedHours(t.getInvestedHours() + investedHours);
@@ -265,5 +270,15 @@ public class TaskManagementBizOpImpl extends AbstractBizOp implements
         }
         
         return ret;
+    }
+
+    @Override
+    @Transactional(readOnly = true, propagation = Propagation.MANDATORY)
+    public List<String> getTypes() {
+        List<String> taskTypes = new ArrayList<String>() {};
+        for (TaskType taskType : TaskType.values()){
+            taskTypes.add(taskType.name());
+        }
+        return taskTypes;
     }
 }
