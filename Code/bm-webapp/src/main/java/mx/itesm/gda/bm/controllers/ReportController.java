@@ -123,13 +123,15 @@ public class ReportController extends BaseController {
             @RequestParam(value= "project_id", defaultValue = "0",
             required = true) int project_id){
         
-        String text = "La tabla representa un resumen general del proyecto por fases.";
+        String text = "Las tablas representan un resumen general del proyecto por fases.";
         List<Map<String, ?>> summary = generalSummary.getSummaryReport(project_id);
         String projectName = generalSummary.getProjectName(project_id);
+        Map<String, ?> defectSummary = generalSummary.getDefectSummary(project_id);
 
         model.put("text", text);
         model.put("projectName", projectName);
         model.put("summary", summary);
+        model.put("defectSummary", defectSummary);
         return null;
     }
 

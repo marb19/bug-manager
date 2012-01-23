@@ -15,4 +15,6 @@ public interface GeneralSummaryBizOp extends BizOp{
     public List<Map<String, ?>> getSummaryReport(int project_id);
 
     public String getProjectName(int project_id);
+
+    public Map<String, ?> getDefectSummary(int project_id);
 }
