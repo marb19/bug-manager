@@ -103,6 +103,20 @@
                         </tr>
                         #end
                     </table>
+                    <table id="user-modify" border="1">
+                        <tr>
+                            <th>Densidad de Defectos:</th>
+                            <td>${defectSummary.density}</td>
+                        </tr>
+                        <tr>
+                            <th>Total de defectos:</th>
+                            <td>${defectSummary.defects}</td>
+                        </tr>
+                        <tr>
+                            <th>LOC:</th>
+                            <td>${defectSummary.LOC}</td>
+                        </tr>
+                    </table>
                 </form>
             </div>
         </div>

@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import mx.itesm.gda.bm.model.dao.TaskDAO;
 import mx.itesm.gda.bm.model.Task;
 import mx.itesm.gda.bm.model.TaskState;
 import mx.itesm.gda.bm.model.Defect;
@@ -56,7 +55,7 @@ public class GeneralSummaryBizOpImpl extends AbstractBizOp implements GeneralSum
         Map<String, Object> totalRow = new HashMap<String, Object>();
         long totalInyDefects = 0, totalRemDefects = 0, totalTime = 0,
                 totalAppraisalCost = 0, totalFailureCost = 0;
-        int acumInyected = 0, acumRemoved = 0, escaped = 0, goal = 0, remDefects = 0, timePhase = 0;;
+        int acumInyected = 0, acumRemoved = 0, escaped = 0, goal = 0, remDefects = 0, timePhase = 0;
         double yield = 0, afr = 0, testingEfficiency = 0;
 
         Project project = projectDAO.findById(project_id);
@@ -197,6 +196,40 @@ public class GeneralSummaryBizOpImpl extends AbstractBizOp implements GeneralSum
         totalRow.put("defectLeverage", "");
         summary.add(totalRow);
         return summary;
+    }
+
+    @Override
+    @Transactional(readOnly = true, propagation = Propagation.MANDATORY)
+    public Map<String, ?> getDefectSummary(int project_id){
+        Map<String, Object> row = new HashMap<String, Object>();
+        int totalInyDefects = 0;
+        long totalSize = 0;
+
+        Project singleProject = projectDAO.findById(project_id);
+        List<Defect> allDefects = singleProject.getDefects();
+        for (Defect singleDefect : allDefects){
+            if (singleDefect.getDefectState() == DefectState.ACCEPTED){
+                totalInyDefects++;
+            }
+        }
+        List<Task> allTasks = singleProject.getTasks();
+        for (Task singleTask : allTasks){
+            if (singleTask.getTaskType() == TaskType.DEVELOPMENT &&
+                    singleTask.getTaskState() == TaskState.STARTED){
+                totalSize = totalSize + singleTask.getSize();
+            }
+        }
+
+        if(totalSize == 0){
+            row.put("density", 0);
+        }
+        else {
+            row.put("density", roundNumber(1000 * (totalInyDefects/totalSize)));
+        }
+        row.put("defects", totalInyDefects);
+        row.put("LOC", totalSize);
+
+        return row;
     }
 
     private String getSpeedByPhase(Phase singlePhase){

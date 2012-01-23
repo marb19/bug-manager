@@ -44,7 +44,7 @@
             </div>
         </div>
         <div id="chart-content">
-                <span id="roiTecnicas">ROI Tecnicas Chart</span>
+                <span id="roiTecnicas">ROI Tecnicas Chart</span>                
 
                     <script type="text/javascript">
                         var roiTecnicasChart = new FusionCharts( "Charts/MSColumn3D.swf",
@@ -52,10 +52,10 @@
                         roiTecnicasChart.setXMLData("$roiTecnicasXML");
                         roiTecnicasChart.setTransparent(true);
                         roiTecnicasChart.render("roiTecnicas");
-                    </script>
-        </div>
+                    </script>                
+        </div>        
         <div id="text-content">
             <p>$text</p>
-        </div>
-        </body>
+        </div>        
+    </body>
 </html>
