@@ -131,14 +131,48 @@ public class TaskDAOImpl extends BaseItemDAOImpl<Task> implements TaskDAO {
 
     @Override
     @Transactional(readOnly = true, propagation = Propagation.MANDATORY)
+    public List<Task> getTasksByStatePhaseType(TaskState state, PhaseType type){
+        @SuppressWarnings("unchecked")
+
+        List<Task> tasks = (List<Task>)getEntityManager().createQuery("SELECT t FROM Task t "
+                + "JOIN t.phase p WHERE p.phaseType = :type AND t.taskState = :state")
+                .setParameter("type", type)
+                .setParameter("state", state)
+                .getResultList();
+
+        return tasks;
+    }
+
+    @Override
+    @Transactional(readOnly = true, propagation = Propagation.MANDATORY)
     public List<Task> getQualityTasksByStatePhaseType(TaskState state, PhaseType type){
         @SuppressWarnings("unchecked")
 
         List<Task> tasks = (List<Task>)getEntityManager().createQuery("SELECT t FROM Task t "
-                + "JOIN t.phase p WHERE p.phaseType = :type AND (t.taskType = 'PERSONAL_REVIEW' "
-                + "OR t.taskType = 'PEER_REVIEW' OR t.taskType = 'WALKTHROUGH' "
-                + "OR t.taskType = 'INSPECTION') AND t.taskState = :state")
+                + "JOIN t.phase p WHERE p.phaseType = :type AND (t.taskType = :personalReview "
+                + "OR t.taskType = :peerReview OR t.taskType = :walk "
+                + "OR t.taskType = :inspection) AND t.taskState = :state")
                 .setParameter("type", type)
+                .setParameter("state", state)
+                .setParameter("personalReview", TaskType.PERSONAL_REVIEW)
+                .setParameter("peerReview", TaskType.PEER_REVIEW)
+                .setParameter("walk", TaskType.WALKTHROUGH)
+                .setParameter("inspection", TaskType.INSPECTION)
+                .getResultList();
+
+        return tasks;
+    }
+
+    @Override
+    @Transactional(readOnly = true, propagation = Propagation.MANDATORY)
+    public List<Task> getTasksByStatePhaseTypeProject(TaskState state, PhaseType type, int project_id){
+        @SuppressWarnings("unchecked")
+
+        List<Task> tasks = (List<Task>)getEntityManager().createQuery("SELECT t FROM Task t "
+                + "JOIN t.phase p JOIN t.project pr WHERE pr.projectId = :project_id AND "
+                + "p.phaseType = :type AND t.taskState = :state")
+                .setParameter("type", type)
+                .setParameter("project_id", project_id)
                 .setParameter("state", state)
                 .getResultList();
 
@@ -152,12 +186,16 @@ public class TaskDAOImpl extends BaseItemDAOImpl<Task> implements TaskDAO {
 
         List<Task> tasks = (List<Task>)getEntityManager().createQuery("SELECT t FROM Task t "
                 + "JOIN t.phase p JOIN t.project pr WHERE pr.projectId = :project_id AND "
-                + "p.phaseType = :type AND (t.taskType = 'PERSONAL_REVIEW' "
-                + "OR t.taskType = 'PEER_REVIEW' OR t.taskType = 'WALKTHROUGH' "
-                + "OR t.taskType = 'INSPECTION') AND t.taskState = :state")
+                + "p.phaseType = :type AND (t.taskType = :personalReview "
+                + "OR t.taskType = :peerReview OR t.taskType = :walk "
+                + "OR t.taskType = :inspection) AND t.taskState = :state")
                 .setParameter("type", type)
                 .setParameter("project_id", project_id)
                 .setParameter("state", state)
+                .setParameter("personalReview", TaskType.PERSONAL_REVIEW)
+                .setParameter("peerReview", TaskType.PEER_REVIEW)
+                .setParameter("walk", TaskType.WALKTHROUGH)
+                .setParameter("inspection", TaskType.INSPECTION)
                 .getResultList();
 
         return tasks;

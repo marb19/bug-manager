@@ -105,8 +105,8 @@ public class DefectsInyRemBizOpImpl extends AbstractBizOp implements DefectsInyR
 
         xmlData= "<chart caption='Defectos inyectados y removidos por fase para el usuario " +  fullName + "'" + " xAxisName='Fases' yAxisName='Cantidad' bgAlpha='0,0'>";
         categories= "<categories>";
-        inyectedDefects= "<dataset seriesName='Inyected'>";
-        removedDefects= "<dataset seriesName='Removed'>";
+        inyectedDefects= "<dataset seriesName='Inyectados'>";
+        removedDefects= "<dataset seriesName='Removidos'>";
 
         for(int i = 0; i < phaseNames.size(); i++){
             categories+="<category name='" + phaseNames.get(i) + "' />";

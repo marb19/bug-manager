@@ -42,7 +42,11 @@ public interface TaskDAO extends BaseItemDAO<Task> {
     public List<Task> getTasksByTypeStateUser(TaskType type, TaskState state,
             String username);
 
+    public List<Task> getTasksByStatePhaseType(TaskState state, PhaseType type);
+
     public List<Task> getQualityTasksByStatePhaseType(TaskState state, PhaseType type);
+
+    public List<Task> getTasksByStatePhaseTypeProject(TaskState state, PhaseType type, int project_id);
 
     public List<Task> getQualityTasksByStatePhaseTypeProject(TaskState state, PhaseType type, int project_id);
 }
