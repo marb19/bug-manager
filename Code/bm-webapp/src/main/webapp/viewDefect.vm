@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>Ver/Modificar tarea - All In Time System</title>
+        <title>Ver/Modificar Defect - Bug Manager</title>
         <link rel="stylesheet" href="CSS/Style.css" type="text/css" media="screen" />
         <link rel="stylesheet" href="CSS/redmond/jquery-ui-1.8.5.custom.css" type="text/css" media="screen" />
         <script type="text/javascript" src="./js/jquery-1.4.2.min.js"></script>
@@ -18,21 +18,15 @@
                 }
 
                 $(document).ready(function(){
-                    $("#task-modify-form").validate({
+                    $("#defect-modify-form").validate({
                             rules: {
-                                    estimatedHours: {
-                                            min:0
-                                    },
                                     investedHours: {
-                                            range: [0,24]
-                                    },
-                                    remainingHours: {
                                             min:0
                                     }
                             }
                     });
 
-                 $("#task-modify-form").submit(function() {
+                 $("#defect-modify-form").submit(function() {
                    if ($("#status").val() == "NOT_STARTED" && $("#investedHours").val() == 0 && $("#remainingHours").val() == 0) {
                       alert("La tarea no puede modificarse, el esfuerzo agregado y el restante no pueden ser igual a 0.");
                       return false;
@@ -79,32 +73,32 @@
         </div>
         <div id="content"> <!--AQUI METER TODOS LOS INPUT, LABELS etc-->
             <div id="task">
-                <form action="viewTask.do?project_id=${project_id}&task_id=${task_id}" method="POST" id="task-modify-form">
-                    <h3 id="form-title">Ver/Modificar Tarea</h3>
-                    <table id="task-modify">
+                <form action="viewDefect.do?project_id=${project_id}&defect_id=${defect_id}" method="POST" id="defect-modify-form">
+                    <h3 id="form-title">Ver/Modificar Defecto</h3>
+                    <table id="defect-modify">
                         <tr>
                             <td>
                                 <label for ="taskName" id="taskNameLabel">Nombre:</label>
                             </td>
                             <td>
-                                #if($user.administrator && $task.status != "CANCELED")
-                                <input type="text" name="taskName" id="taskName" class="required" value="${task.taskName}"/>
+                                #if(($user.permissions >= 20 || $defect.assignedUser == $user.userName) && $defect.defectState != "CANCELED" && $defect.defectState != "FIXED")
+                                <input type="text" name="defectName" id="defectName" class="required" value="${defect.defectName}"/>
                                 #else
-				<span>${task.taskName}</span>
-				<input type="hidden" value="${task.taskName}" name="taskName" id="taskName"  />
+				<span>${defect.defectName}</span>
+				<input type="hidden" value="${defect.defectName}" name="defectName" id="defectName"  />
                                 #end
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <label for ="taskDescription" id="taskDescriptionLabel">Descripci&oacute;n:</label>
+                                <label for ="defectDesc" id="defectDescLabel">Descripci&oacute;n:</label>
                             </td>
                             <td>
-                                #if($user.administrator && $task.status != "CANCELED")
-                                <textarea cols="30" rows="6" name="taskDescription" id="taskDescription">${task.description}</textarea>
+                                #if(($user.permissions >= 20 || $defect.assignedUser == $user.userName) && $defect.defectState != "CANCELED" && $defect.defectState != "FIXED")
+                                <textarea cols="30" rows="6" name="defectDesc" id="defectDesc">${defect.defectDesc}</textarea>
                                 #else
-				<span>${task.description}</span>
-				<input type="hidden" value="${task.description}" name="taskDescription" id="taskDescription"  />
+				<span>${defect.defectDesc}</span>
+				<input type="hidden" value="${defect.defectDesc}" name="defectDesc" id="defectDesc"  />
                                 #end
                             </td>
                         </tr>
@@ -113,32 +107,203 @@
                                 <label for ="assignedUser" id="assignedUserLabel">Responsable:</label>
                             </td>
                             <td>
-                                #if($user.administrator && $task.status != "CANCELED")
-                                <select name="assignedUser" id="assignedUser" class="required">
-                                    <option value="${task.assignedUser.userName}" selected="selected">${task.assignedUser.fullName}</option>
-                                    #foreach($u in $users)
-                                        #if($u.userName != $task.assignedUser.userName)
-                                        <option value="${u.userName}">${u.fullName}</option>
+                                #if(($user.permissions >= 20 || $defect.assignedUser == $user.userName) && $defect.defectState != "CANCELED" && $defect.defectState != "FIXED")
+                                <select name="assignedUser" id="assignedUser">
+                                    #if($defect.assignedUser != "")
+                                        <option value="${defect.assignedUser.userName}" selected="selected">${defect.assignedUser.fullName}</option>
+                                        #foreach($u in $users)
+                                            #if($u.userName != $defect.assignedUser.userName)
+                                            <option value="${u.userName}">${u.fullName}</option>
+                                            #end
+                                        #end
+                                    #else
+                                        <option value="" selected="selected"></option>
+                                        #foreach($u in $users)
+                                            <option value="${u.userName}">${u.fullName}</option>
                                         #end
                                     #end
                                 </select>
                                 #else
-                                <select name="assignedUser" id="assignedUser" class="required">
-                                    <option value="${task.assignedUser.userName}" selected="selected">${task.assignedUser.fullName}</option>
-                                </select>
+                                    #if($defect.assignedUser != "")
+                                    <span>${u.userName}</span>
+                                    <input type="hidden" value="${defect.assignedUser.userName}" name="assignedUser" id="assignedUser"  />
+                                    #else
+                                    <span></span>
+                                    #end
                                 #end
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <label for ="estimatedHours" id="estimatedHoursLabel">Esfuerzo Planeado:</label>
+                                <label for ="openDate" id="openDateLabel">Fecha de Apertura:</label>
                             </td>
                             <td>
-                                #if($user.administrator && $task.status != "CANCELED")
-                                <input type="text" name="estimatedHours" id="estimatedHours" class="required digits" value="${task.estimatedHours}"/>
+				<span>$dateShort.format($defect.openDate)</span>
+				<input type="hidden" value="$dateShort.format($defect.openDate)" name="openDate" id="openDate"  />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for ="closeDate" id="closeDateLabel">Fecha de Cierre:</label>
+                            </td>
+                            <td>
+                                #if($defect.closeDate != "")
+                                    <span>$dateShort.format($defect.closeDate)</span>
                                 #else
-				<span>${task.estimatedHours} horas.</span>
-				<input type="hidden" value="${task.estimatedHours}" name="estimatedHours" id="estimatedHours"  />
+                                    <span></span>
+                                #end
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for ="detectionPhase" id="detectionPhaseLabel">Fase de Detección:</label>
+                            </td>
+                            <td>
+				<span>${defect.detectionPhase.phaseName}</span>
+				<input type="hidden" value="${defect.detectionPhase.phaseID}" name="detectionPhase" id="detectionPhase"  />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for ="detectionTask" id="detectionTaskLabel">Tarea de Detección:</label>
+                            </td>
+                            <td>
+                                #if(($user.permissions >= 20 || $defect.assignedUser == $user.userName) && $defect.defectState != "CANCELED" && $defect.defectState != "FIXED")
+                                <select name="detectionTask" id="detectionTask" class="required">
+                                    <option value="${defect.detectionTask.taskID}" selected="selected">${defect.detectionTask.taskName}</option>
+                                    #foreach($t in $tasks)
+                                        #if($t.taskID != $defect.detectionTask.taskID)
+                                        <option value="${t.taskID}">${t.taskName}</option>
+                                        #end
+                                    #end
+                                </select>
+                                #else
+                                <span>${defect.detectionTask.taskName}</span>
+                                <input type="hidden" value="${defect.detectionTask.taskID}" name="detectionTask" id="detectionTask"  />
+                                #end
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for ="inyectionPhase" id="inyectionPhaseLabel">Fase de Inyección:</label>
+                            </td>
+                            <td>
+                                #if(($user.permissions >= 20 || $defect.assignedUser == $user.userName) && $defect.defectState != "CANCELED" && $defect.defectState != "FIXED")
+                                <select name="inyectionPhase" id="inyectionPhase">
+                                    #if($defect.inyectionPhase != "")
+                                        <option value="${defect.inyectionPhase.phaseID}" selected="selected">${defect.inyectionPhase.phaseName}</option>
+                                        #foreach($p in $phases)
+                                            #if($p.phaseID != $defect.inyectionPhase.phaseID)
+                                            <option value="${p.phaseID}">${p.phaseName}</option>
+                                            #end
+                                        #end
+                                    #else
+                                        <option value="0" selected="selected"></option>
+                                        #foreach($p in $phases)
+                                            <option value="${p.phaseID}">${p.phaseName}</option>
+                                        #end
+                                    #end
+                                </select>
+                                #else
+                                    #if($defect.inyectionPhase != "")
+                                    <span>${defect.inyectionPhase.phaseName}</span>
+                                    <input type="hidden" value="${defect.inyectionPhase.phaseID}" name="inyectionPhase" id="inyectionPhase"  />
+                                    #else
+                                    <span></span>
+                                    #end
+                                #end
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for ="inyectionTask" id="detectionTaskLabel">Tarea de Inyección:</label>
+                            </td>
+                            <td>
+                                #if(($user.permissions >= 20 || $defect.assignedUser == $user.userName) && $defect.defectState != "CANCELED" && $defect.defectState != "FIXED")
+                                <select name="inyectionTask" id="inyectionTask">
+                                    #if($defect.inyectionTask != "")
+                                        <option value="${defect.inyectionTask.taskID}" selected="selected">${defect.inyectionTask.taskName}</option>
+                                        #foreach($t in $tasks)
+                                            #if($t.taskID != $defect.inyectionTask.taskID)
+                                            <option value="${t.taskID}">${t.taskName}</option>
+                                            #end
+                                        #end
+                                    #else
+                                        <option value="0" selected="selected"></option>
+                                        #foreach($t in $tasks)
+                                            <option value="${t.taskID}">${t.taskName}</option>
+                                        #end
+                                    #end
+                                </select>
+                                #else
+                                    #if($defect.inyectionTask != "")
+                                    <span>${defect.inyectionTask.taskName}</span>
+                                    <input type="hidden" value="${defect.inyectionTask.taskID}" name="inyectionTask" id="inyectionTask"  />
+                                    #else
+                                    <span></span>
+                                    #end
+                                #end
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for ="remotionPhase" id="remotionPhaseLabel">Fase de Remoción:</label>
+                            </td>
+                            <td>
+                                #if(($user.permissions >= 20 || $defect.assignedUser == $user.userName) && $defect.defectState != "CANCELED" && $defect.defectState != "FIXED")
+                                <select name="remotionPhase" id="remotionPhase">
+                                    #if($defect.remotionPhase != "")
+                                        <option value="${defect.remotionPhase.phaseID}" selected="selected">${defect.remotionPhase.phaseName}</option>
+                                        #foreach($p in $phases)
+                                            #if($p.phaseID != $defect.remotionPhase.phaseID)
+                                            <option value="${p.phaseID}">${p.phaseName}</option>
+                                            #end
+                                        #end
+                                    #else
+                                        <option value="0" selected="selected"></option>
+                                        #foreach($p in $phases)
+                                            <option value="${p.phaseID}">${p.phaseName}</option>
+                                        #end
+                                    #end
+                                </select>
+                                #else
+                                    #if($defect.remotionPhase!= "")
+                                    <span>${defect.remotionPhase.phaseName}</span>
+                                    <input type="hidden" value="${defect.remotionPhase.phaseID}" name="remotionPhase" id="remotionPhase"  />
+                                    #else
+                                    <span></span>
+                                    #end
+                                #end
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for ="remotionTask" id="remotionTaskLabel">Tarea de Remoción:</label>
+                            </td>
+                            <td>
+                                #if(($user.permissions >= 20 || $defect.assignedUser == $user.userName) && $defect.defectState != "CANCELED" && $defect.defectState != "FIXED")
+                                <select name="remotionTask" id="remotionTask">
+                                    #if($defect.remotionTask != "")
+                                        <option value="${defect.remotionTask.taskID}" selected="selected">${defect.remotionTask.taskName}</option>
+                                        #foreach($t in $tasks)
+                                            #if($t.taskID != $defect.remotionTask.taskID)
+                                            <option value="${t.taskID}">${t.taskName}</option>
+                                            #end
+                                        #end
+                                    #else
+                                        <option value="0" selected="selected"></option>
+                                        #foreach($t in $tasks)
+                                            <option value="${t.taskID}">${t.taskName}</option>
+                                        #end
+                                    #end
+                                </select>
+                                #else
+                                    #if($defect.remotionTask != "")
+                                    <span>${defect.remotionTask.taskName}</span>
+                                    <input type="hidden" value="${defect.remotionTask.taskID}" name="remotionTask" id="inyectionTask"  />
+                                    #else
+                                    <span></span>
+                                    #end
                                 #end
                             </td>
                         </tr>
@@ -147,7 +312,7 @@
                                 <label for ="acumulatedHours" id="acumulatedHoursLabel">Esfuerzo Acumulado:</label>
                             </td>
                             <td>
-                                ${task.investedHours}
+                                ${defect.investedHours}
                             </td>
                         </tr>
                         <tr>
@@ -155,22 +320,10 @@
                                 <label for ="investedHours" id="investedHoursLabel">Agregar Esfuerzo:</label>
                             </td>
                             <td>
-                                #if($task.status != "COMPLETED"  && $task.status != "CANCELED")
+                                #if(($user.permissions >= 20 || $defect.assignedUser == $user.userName) && $defect.defectState != "CANCELED" && $defect.defectState != "FIXED")
                                 <input type="text" name="investedHours" id="investedHours" class="required digits" value="0"/>
                                 #else
-                                <input type="text" name="investedHours" id="investedHours" class="digits" value="0" readonly="readonly"/>
-                                #end
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label for ="ramainingHours" id="ramainingHoursLabel">Esfuerzo Restante:</label>
-                            </td>
-                            <td>
-                                #if($task.status != "COMPLETED"  && $task.status != "CANCELED")
-                                <input type="text" name="remainingHours" id="remainingHours" class="required digits" value="${task.remainingHours}"/>
-                                #else
-                                <input type="text" name="remainingHours" id="remainingHours" class="digits" value="${task.remainingHours}" readonly="readonly"/>
+                                <input type="text" name="investedHours" id="investedHours" class="required digits" value="0" disabled="disabled"/>
                                 #end
                             </td>
                         </tr>
@@ -179,61 +332,167 @@
                                 <label for ="status" id="statusLabel">Estatus:</label>
                             </td>
                             <td>
-                                #if($user.administrator && $task.status != "COMPLETED"  && $task.status != "CANCELED")
+                                #if(($user.permissions >= 20 || $defect.assignedUser == $user.userName))
                                 <select name="status" id="status" class="required">
-                                    #if($task.status == "NOT_STARTED")
-                                    <option value="${task.status}" selected="selected">NO_INICIADA</option>
-                                    <option value="STARTED">INICIADA</option>
-                                    <option value="COMPLETED">COMPLETADA</option>
-                                    <option value="CANCELED">CANCELADA</option>
-                                    #elseif($task.status == "STARTED")
-                                    <option value="${task.status}" selected="selected">INICIADA</option>                                 
-                                    <option value="NOT_STARTED">NO_INICIADA</option>
-                                    <option value="COMPLETED">COMPLETADA</option>
-                                    <option value="CANCELED">CANCELADA</option>
+                                    #if($defect.defectState == "SUBMITTED")
+                                    <option value="${defect.defectState}" selected="selected">ENVIADO</option>
+                                    <option value="ACCEPTED">ACEPTADO</option>
+                                    <option value="FIXED">CORREGIDO</option>
+                                    <option value="CANCELED">CANCELADO</option>
+                                    #elseif($defect.defectState == "ACCEPTED")
+                                    <option value="${defect.defectState}" selected="selected">ACEPTADO</option>                                 
+                                    <option value="FIXED">CORREGIDO</option>
+                                    <option value="CANCELED">CANCELADO</option>
+                                    #elseif($defect.defectState == "FIXED")
+                                    <option value="ACCEPTED">ACEPTADO</option>                                 
+                                    <option value="${defect.defectState}" selected="selected">CORREGIDO</option>
+                                    <option value="CANCELED">CANCELADO</option>
+                                    #elseif($defect.defectState == "CANCELED")
+                                    <option value="ACCEPTED">ACEPTADO</option>                                 
+                                    <option value="FIXED">CORREGIDO</option>
+                                    <option value="${defect.defectState}" selected="selected">CANCELADO</option>
                                     #end
                                 </select>
-                                #elseif($task.status != "COMPLETED"  && $task.status != "CANCELED")
-                                <select name="status" id="status" class="required">
-                                    #if($task.status == "NOT_STARTED")
-                                    <option value="${task.status}" selected="selected">NO_INICIADA</option>
-                                    <option value="STARTED">INICIADA</option>
-                                    <option value="COMPLETED">COMPLETADA</option>
-                                    #elseif($task.status == "STARTED")
-                                    <option value="${task.status}" selected="selected">INICIADA</option>
-                                    <option value="COMPLETED">COMPLETADA</option>
-                                    #end
-                                </select>
-                                #elseif($task.status == "COMPLETED")
-                                COMPLETADA
-                                #elseif($task.status == "CANCELED")
-                                CANCELADA
                                 #end
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <label for ="startDate" id="startDateLabel">Fecha de Inicio:</label>
+                                <label for ="defectType" id="defectTypeLabel">Tipo de Defecto:</label>
                             </td>
                             <td>
-                                #if($user.administrator && $task.status != "CANCELED")
-                                <input type="text" name="startDate" id="startDate" class="required hasDatePicker" value="$dateShort.format($task.startDate)"/>
+                                #if(($user.permissions >= 20 || $defect.assignedUser == $user.userName) && $defect.defectState != "CANCELED" && $defect.defectState != "FIXED")
+                                <select name="defectType" id="defectType">
+                                    #if($defect.defectType != "")
+                                        <option value="${defect.defectType.ID}" selected="selected">${defect.defectType.Name}</option>
+                                        #foreach($dt in $defectTypes)
+                                            #if($dt.ID != $defect.defectType.ID)
+                                            <option value="${dt.ID}">${dt.Name}</option>
+                                            #end
+                                        #end
+                                    #else
+                                        <option value="0" selected="selected"></option>
+                                        #foreach($dt in $defectTypes)
+                                            <option value="${dt.ID}">${dt.Name}</option>
+                                        #end
+                                    #end
+                                </select>
                                 #else
-				<span>$dateShort.format($task.startDate)</span>
-				<input type="hidden" value="$dateShort.format($task.startDate)" name="startDate" id="startDate"  />
+                                    #if($defect.defectType != "")
+                                    <span>${defect.defectType.Name}</span>
+                                    <input type="hidden" value="${defect.defectType.ID}" name="defectType" id="defectType"  />
+                                    #else
+                                    <span></span>
+                                    #end
                                 #end
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <label for ="endDate" id="endDateLabel">Fecha de Fin:</label>
+                                <label for ="age" id="ageLabel">Edad:</label>
                             </td>
                             <td>
-                                #if($user.administrator && $task.status != "CANCELED")
-                                <input type="text" name="endDate" id="endDate" class="required hasDatePicker" value="$dateShort.format($task.endDate)"/>
+                                #if(($user.permissions >= 20 || $defect.assignedUser == $user.userName) && $defect.status != "CANCELED" && $defect.defectState != "FIXED")
+                                <select name="age" id="age">
+                                    #if($defect.age == "")
+                                    <option value="" selected="selected"></option>
+                                    <option value="BASE">BASE</option>
+                                    <option value="NEWDEFECT">DEFECTO NUEVO</option>
+                                    <option value="REWRITTEN">RE-ESCRITO</option>
+                                    <option value="REFIXED">RE-CORREGIDO</option>
+                                    #elseif($defect.age == "BASE")
+                                    <option value="${defect.age}" selected="selected">BASE</option>
+                                    <option value="NEWDEFECT">DEFECTO NUEVO</option>
+                                    <option value="REWRITTEN">RE-ESCRITO</option>
+                                    <option value="REFIXED">RE-CORREGIDO</option>
+                                    #elseif($defect.age == "NEWDEFECT")
+                                    <option value="BASE">BASE</option>
+                                    <option value="${defect.age}" selected="selected">DEFECTO NUEVO</option>
+                                    <option value="REWRITTEN">RE-ESCRITO</option>
+                                    <option value="REFIXED">RE-CORREGIDO</option>
+                                    #elseif($defect.age == "REWRITTEN")
+                                    <option value="BASE">BASE</option>
+                                    <option value="NEWDEFECT">DEFECTO NUEVO</option>
+                                    <option value="${defect.age}" selected="selected">RE-ESCRITO</option>
+                                    <option value="REFIXED">RE-CORREGIDO</option>
+                                    #elseif($defect.age == "REFIXED")
+                                    <option value="BASE">BASE</option>
+                                    <option value="NEWDEFECT">DEFECTO NUEVO</option>
+                                    <option value="REWRITTEN">RE-ESCRITO</option>
+                                    <option value="${defect.age}" selected="selected">RE-CORREGIDO</option>
+                                    #end
+                                </select>
+                                #end
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for ="source" id="sourceLabel">Fuente:</label>
+                            </td>
+                            <td>
+                                #if(($user.permissions >= 20 || $defect.assignedUser == $user.userName) && $defect.status != "CANCELED" && $defect.defectState != "FIXED")
+                                <select name="source" id="source">
+                                    #if($defect.source == "")
+                                    <option value="" selected="selected"></option>
+                                    <option value="INHOUSE">DE CASA</option>
+                                    <option value="LIBRARY">LIBRERÍA</option>
+                                    <option value="OUTSOURCED">FUENTE EXTERNA</option>
+                                    <option value="PORTED">PORTADO</option>
+                                    #elseif($defect.source == "INHOUSE")
+                                    <option value="${defect.source}" selected="selected">DE CASA</option>
+                                    <option value="LIBRARY">LIBRERÍA</option>
+                                    <option value="OUTSOURCED">FUENTE EXTERNA</option>
+                                    <option value="PORTED">PORTADO</option>
+                                    #elseif($defect.source == "LIBRARY")
+                                    <option value="BASE">DE CASA</option>
+                                    <option value="${defect.source}" selected="selected">DE CASA</option>
+                                    <option value="LIBRARY">RE-ESCRITO</option>
+                                    <option value="PORTED">PORTADO</option>
+                                    #elseif($defect.source == "OUTSOURCED")
+                                    <option value="BASE">DE CASA</option>
+                                    <option value="NEWDEFECT">LIBRERÍA</option>
+                                    <option value="${defect.source}" selected="selected">FUENTE EXTERNA</option>
+                                    <option value="PORTED">PORTADO</option>
+                                    #elseif($defect.source == "PORTED")
+                                    <option value="BASE">DE CASA</option>
+                                    <option value="LIBRARY">LIBRERÍA</option>
+                                    <option value="OUTSOURCED">FUENTE EXTERNA</option>
+                                    <option value="${defect.source}" selected="selected">PORTADO</option>
+                                    #end
+                                </select>
+                                #end
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for ="reference" id="referenceLabel">Referencia:</label>
+                            </td>
+                            <td>
+                                #if(($user.permissions >= 20 || $defect.assignedUser == $user.userName) && $defect.defectState != "CANCELED" && $defect.defectState != "FIXED")
+                                <select name="reference" id="reference">
+                                    #if($defect.reference != "" && $reference != "")
+                                        <option value="${reference.defectID}" selected="selected">${reference.defectName}</option>
+                                        #foreach($d in $defects)
+                                            #if($d.defectID != $reference.defectID && $d.defectID != $defect.defectID)
+                                            <option value="${d.defectID}">${d.defectName}</option>
+                                            #end
+                                        #end
+                                    #else
+                                        <option value="0" selected="selected"></option>
+                                        #foreach($d in $defects)
+                                            #if($d.defectID != $defect.defectID)
+                                            <option value="${d.defectID}">${d.defectName}</option>
+                                            #end
+                                        #end
+                                    #end
+                                </select>
                                 #else
-				<span>$dateShort.format($task.endDate)</span>
-				<input type="hidden" value="$dateShort.format($task.endDate)" name="endDate" id="endDate"  />
+                                    #if($reference != "")
+                                    <span>${reference.defectName}</span>
+                                    <input type="hidden" value="${reference.defectID}" name="reference" id="reference"  />
+                                    #else
+                                    <span></span>
+                                    #end
                                 #end
                             </td>
                         </tr>
@@ -257,7 +516,7 @@
                                 <label for ="newComment" id="newCommentLabel">Agregar Comentario:</label>
                             </td>
                             <td>
-                                #if($task.status != "CANCELED")
+                                #if(($user.permissions >= 20 || $defect.assignedUser == $user.userName))
                                 <textarea cols="30" rows="6" name="newComment" id="newComment"></textarea>
                                 #else
                                 <textarea cols="30" rows="6" name="newComment" id="newComment" readonly="readonly"></textarea>
@@ -265,7 +524,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td><a href="listTasks.do?project_id=${project_id}" id="cancel-link">Cancelar</a></td>
+                            <td><a href="listDefects.do?project_id=${project_id}" id="cancel-link">Cancelar</a></td>
                             <td>
                                 #if($user.administrator)
                                 <input type="image" value="Aceptar" src="images/Base/aceptar.png" id="accept-button" />

@@ -31,7 +31,9 @@ import mx.itesm.gda.bm.biz.ProjectManagementBizOp;
 import mx.itesm.gda.bm.biz.TaskManagementBizOp;
 import mx.itesm.gda.bm.biz.UserManagementBizOp;
 import mx.itesm.gda.bm.model.Defect;
+import mx.itesm.gda.bm.model.DefectAge;
 import mx.itesm.gda.bm.model.DefectComment;
+import mx.itesm.gda.bm.model.DefectSource;
 import mx.itesm.gda.bm.model.DefectState;
 import mx.itesm.gda.bm.model.DefectType;
 import mx.itesm.gda.bm.model.Phase;
@@ -104,64 +106,69 @@ public class DefectManagementBizOpImpl extends AbstractBizOp implements
             if (defect.getInyectionPhase() != null) {
                 d.put("inyectionPhase", phaseMgr.getPhase(defect.getInyectionPhase().getPhaseId()));
             } else {
-                d.put("inyectionPhase", "NULL");
+                d.put("inyectionPhase", "");
             }
             if (defect.getInyectionTask() != null) {
                 d.put("inyectionTask", taskMgr.getTask(defect.getInyectionTask().getTaskId()));
             } else {
-                d.put("inyectionTask", "NULL");
+                d.put("inyectionTask", "");
             }
             if (defect.getRemotionPhase() != null) {
                 d.put("remotionPhase", phaseMgr.getPhase(defect.getRemotionPhase().getPhaseId()));
             } else {
-                d.put("remotionPhase", "NULL");
+                d.put("remotionPhase", "");
+            }
+            if (defect.getRemotionTask() != null) {
+                d.put("remotionTask", taskMgr.getTask(defect.getRemotionTask().getTaskId()));
+            } else {
+                d.put("remotionTask", "");
             }
             if (defect.getDefectTrigger() != null) {
                 d.put("defectTrigger", defect.getDefectTrigger());
             } else {
-                d.put("defectTrigger", "NULL");
+                d.put("defectTrigger", "");
             }
             if (defect.getImpact() != null) {
                 d.put("impact", defect.getImpact());
             } else {
-                d.put("impact", "NULL");
+                d.put("impact", "");
             }
             if (defect.getDefectType() != null) {
                 d.put("defectType", defectTypeMgr.getDefectType(defect.getDefectType().getDefectTypeId()));
             } else {
-                d.put("defectType", "NULL");
+                d.put("defectType", "");
             }
             if (defect.getQualifier() != null) {
                 d.put("qualifier", defect.getQualifier());
             } else {
-                d.put("qualifier", "NULL");
+                d.put("qualifier", "");
             }
             if (defect.getAge() != null) {
                 d.put("age", defect.getAge());
             } else {
-                d.put("age", "NULL");
+                d.put("age", "");
             }
             if (defect.getSource() != null) {
                 d.put("source", defect.getSource());
             } else {
-                d.put("source", "NULL");
+                d.put("source", "");
             }
             if (defect.getReference() != null) {
                 d.put("reference", defect.getReference());
             } else {
-                d.put("reference", "NULL");
+                d.put("reference", "");
             }
             d.put("investedHours", defect.getInvestedHours());
             if (defect.getAssignedUser() != null) {
                 d.put("assignedUser", userMgr.getUser(defect.getAssignedUser().getUserName()));
             } else {
-                d.put("assignedUser", "NULL");
+                d.put("assignedUser", "");
             }
             d.put("openDate", defect.getOpenDate());
             if (defect.getCloseDate() != null) {
                 d.put("closeDate", defect.getCloseDate());
             } else {
-                d.put("closeDate", "NULL");
+                d.put("closeDate", "");
             }
             d.put("defectState", defect.getDefectState().name());
             d.put("commentsNumber", defect.getDefectComments().size());
@@ -187,64 +194,69 @@ public class DefectManagementBizOpImpl extends AbstractBizOp implements
             if (defect.getInyectionPhase() != null) {
                 d.put("inyectionPhase", phaseMgr.getPhase(defect.getInyectionPhase().getPhaseId()));
             } else {
-                d.put("inyectionPhase", "NULL");
+                d.put("inyectionPhase", "");
             }
             if (defect.getInyectionTask() != null) {
                 d.put("inyectionTask", taskMgr.getTask(defect.getInyectionTask().getTaskId()));
             } else {
-                d.put("inyectionTask", "NULL");
+                d.put("inyectionTask", "");
             }
             if (defect.getRemotionPhase() != null) {
                 d.put("remotionPhase", phaseMgr.getPhase(defect.getRemotionPhase().getPhaseId()));
             } else {
-                d.put("remotionPhase", "NULL");
+                d.put("remotionPhase", "");
+            }
+            if (defect.getRemotionTask() != null) {
+                d.put("remotionTask", taskMgr.getTask(defect.getRemotionTask().getTaskId()));
+            } else {
+                d.put("remotionTask", "");
             }
             if (defect.getDefectTrigger() != null) {
                 d.put("defectTrigger", defect.getDefectTrigger());
             } else {
-                d.put("defectTrigger", "NULL");
+                d.put("defectTrigger", "");
             }
             if (defect.getImpact() != null) {
                 d.put("impact", defect.getImpact());
             } else {
-                d.put("impact", "NULL");
+                d.put("impact", "");
             }
             if (defect.getDefectType() != null) {
                 d.put("defectType", defectTypeMgr.getDefectType(defect.getDefectType().getDefectTypeId()));
             } else {
-                d.put("defectType", "NULL");
+                d.put("defectType", "");
             }
             if (defect.getQualifier() != null) {
                 d.put("qualifier", defect.getQualifier());
             } else {
-                d.put("qualifier", "NULL");
+                d.put("qualifier", "");
             }
             if (defect.getAge() != null) {
-                d.put("age", defect.getAge());
+                d.put("age", defect.getAge().name());
             } else {
-                d.put("age", "NULL");
+                d.put("age", "");
             }
             if (defect.getSource() != null) {
-                d.put("source", defect.getSource());
+                d.put("source", defect.getSource().name());
             } else {
-                d.put("source", "NULL");
+                d.put("source", "");
             }
             if (defect.getReference() != null) {
                 d.put("reference", defect.getReference());
             } else {
-                d.put("reference", "NULL");
+                d.put("reference", "");
             }
             d.put("investedHours", defect.getInvestedHours());
             if (defect.getAssignedUser() != null) {
                 d.put("assignedUser", userMgr.getUser(defect.getAssignedUser().getUserName()));
             } else {
-                d.put("assignedUser", "NULL");
+                d.put("assignedUser", "");
             }
             d.put("openDate", defect.getOpenDate());
             if (defect.getCloseDate() != null) {
                 d.put("closeDate", defect.getCloseDate());
             } else {
-                d.put("closeDate", "NULL");
+                d.put("closeDate", "");
             }
             d.put("defectState", defect.getDefectState().name());
             d.put("commentsNumber", defect.getDefectComments().size());
@@ -274,11 +286,11 @@ public class DefectManagementBizOpImpl extends AbstractBizOp implements
     }
 
     @Override
-    public void modifyDefect(int defectID, String defectName, String defectDescription,
+    public int modifyDefect(int defectID, String defectName, String defectDescription,
             int detectionPhaseID, int detectionTaskID, int inyectionPhaseID,
-            int inyectionTaskID, int remotionPhaseID, String defectTrigger,
-            String impact, int defectTypeID, String qualifier,
-            String age, String source, String reference, int investedHours,
+            int inyectionTaskID, int remotionPhaseID, int remotionTaskID, 
+            String defectTrigger, String impact, int defectTypeID, String qualifier,
+            String age, String source, int referenceID, int investedHours,
             String assignedUser, String status) {
 
         Defect defect = defectDAO.findById(defectID);
@@ -299,12 +311,12 @@ public class DefectManagementBizOpImpl extends AbstractBizOp implements
             defect.setDefectState(DefectState.ACCEPTED);
         }
 
-        if (defect.getDefectState() == DefectState.ACCEPTED && DefectState.valueOf(status) == DefectState.FIXED) {
+        if (defect.getDefectState() == DefectState.ACCEPTED && DefectState.valueOf(status) == DefectState.FIXED && defect.getCloseDate() == null) {
             defect.setDefectState(DefectState.FIXED);
             defect.setCloseDate(new Date());
         }
 
-        if (defect.getInvestedHours() == 0 && defect.getDefectState() == DefectState.SUBMITTED && DefectState.valueOf(status) == DefectState.CANCELED) {
+        if ((defect.getDefectState() == DefectState.SUBMITTED || defect.getDefectState() == DefectState.ACCEPTED) && DefectState.valueOf(status) == DefectState.CANCELED) {
             defect.setDefectState(DefectState.CANCELED);
             defect.setCloseDate(new Date());
         }
@@ -322,6 +334,10 @@ public class DefectManagementBizOpImpl extends AbstractBizOp implements
         if (remotionPhase != null) {
             defect.setRemotionPhase(remotionPhase);
         }
+        Task remotionTask = taskDAO.findById(remotionTaskID);
+        if (remotionTask != null) {
+            defect.setRemotionTask(remotionTask);
+        }
         if (defectTrigger != null && !defectTrigger.equals("")) {
             defect.setDefectTrigger(defectTrigger);
         }
@@ -336,18 +352,42 @@ public class DefectManagementBizOpImpl extends AbstractBizOp implements
             defect.setQualifier(qualifier);
         }
         if (age != null && !age.equals("")) {
-            defect.setAge(age);
+            if(DefectAge.valueOf(age) == DefectAge.BASE){
+                defect.setAge(DefectAge.BASE);
+            }
+            else if(DefectAge.valueOf(age) == DefectAge.NEWDEFECT){
+                defect.setAge(DefectAge.NEWDEFECT);
+            }
+            else if(DefectAge.valueOf(age) == DefectAge.REFIXED){
+                defect.setAge(DefectAge.REFIXED);
+            }
+            else if(DefectAge.valueOf(age) == DefectAge.REWRITTEN){
+                defect.setAge(DefectAge.REWRITTEN);
+            }
         }
         if (source != null && !source.equals("")) {
-            defect.setSource(source);
+            if(DefectSource.valueOf(source) == DefectSource.INHOUSE){
+                defect.setSource(DefectSource.INHOUSE);
+            }
+            else if(DefectSource.valueOf(source) == DefectSource.LIBRARY){
+                defect.setSource(DefectSource.LIBRARY);
+            }
+            else if(DefectSource.valueOf(source) == DefectSource.OUTSOURCED){
+                defect.setSource(DefectSource.OUTSOURCED);
+            }
+            else if(DefectSource.valueOf(source) == DefectSource.PORTED){
+                defect.setSource(DefectSource.PORTED);
+            }
         }
-        if (reference != null && !reference.equals("")) {
-            defect.setReference(reference);
+        if (referenceID > 0 && defectID != referenceID) {
+            defect.setReference(referenceID);
         }
         User user = userDAO.findByUserName(assignedUser);
         if (user != null) {
             defect.setAssignedUser(user);
         }
+        
+        return defect.getDefectId();
     }
 
     @Override
@@ -379,64 +419,69 @@ public class DefectManagementBizOpImpl extends AbstractBizOp implements
         if (defect.getInyectionPhase() != null) {
             d.put("inyectionPhase", phaseMgr.getPhase(defect.getInyectionPhase().getPhaseId()));
         } else {
-            d.put("inyectionPhase", "NULL");
+            d.put("inyectionPhase", "");
         }
         if (defect.getInyectionTask() != null) {
             d.put("inyectionTask", taskMgr.getTask(defect.getInyectionTask().getTaskId()));
         } else {
-            d.put("inyectionTask", "NULL");
+            d.put("inyectionTask", "");
         }
         if (defect.getRemotionPhase() != null) {
             d.put("remotionPhase", phaseMgr.getPhase(defect.getRemotionPhase().getPhaseId()));
         } else {
-            d.put("remotionPhase", "NULL");
+            d.put("remotionPhase", "");
         }
+        if (defect.getRemotionTask() != null) {
+                d.put("remotionTask", taskMgr.getTask(defect.getRemotionTask().getTaskId()));
+            } else {
+                d.put("remotionTask", "");
+            }
         if (defect.getDefectTrigger() != null) {
             d.put("defectTrigger", defect.getDefectTrigger());
         } else {
-            d.put("defectTrigger", "NULL");
+            d.put("defectTrigger", "");
         }
         if (defect.getImpact() != null) {
             d.put("impact", defect.getImpact());
         } else {
-            d.put("impact", "NULL");
+            d.put("impact", "");
         }
         if (defect.getDefectType() != null) {
             d.put("defectType", defectTypeMgr.getDefectType(defect.getDefectType().getDefectTypeId()));
         } else {
-            d.put("defectType", "NULL");
+            d.put("defectType", "");
         }
         if (defect.getQualifier() != null) {
             d.put("qualifier", defect.getQualifier());
         } else {
-            d.put("qualifier", "NULL");
+            d.put("qualifier", "");
         }
         if (defect.getAge() != null) {
-            d.put("age", defect.getAge());
+            d.put("age", defect.getAge().name());
         } else {
-            d.put("age", "NULL");
+            d.put("age", "");
         }
         if (defect.getSource() != null) {
-            d.put("source", defect.getSource());
+            d.put("source", defect.getSource().name());
         } else {
-            d.put("source", "NULL");
+            d.put("source", "");
         }
         if (defect.getReference() != null) {
             d.put("reference", defect.getReference());
         } else {
-            d.put("reference", "NULL");
+            d.put("reference", "");
         }
         d.put("investedHours", defect.getInvestedHours());
         if (defect.getAssignedUser() != null) {
             d.put("assignedUser", userMgr.getUser(defect.getAssignedUser().getUserName()));
         } else {
-            d.put("assignedUser", "NULL");
+            d.put("assignedUser", "");
         }
         d.put("openDate", defect.getOpenDate());
         if (defect.getCloseDate() != null) {
             d.put("closeDate", defect.getCloseDate());
         } else {
-            d.put("closeDate", "NULL");
+            d.put("closeDate", "");
         }
         d.put("defectState", defect.getDefectState().name());
         d.put("commentsNumber", defect.getDefectComments().size());

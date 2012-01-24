@@ -4,7 +4,6 @@
  */
 package mx.itesm.gda.bm.biz;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -20,8 +19,8 @@ public interface DefectManagementBizOp extends BizOp{
     
     public int createDefect(String defectName, String defectDescription, int projectID, int detectionPhaseID, int detectionTask);
     
-    public void modifyDefect(int defectID, String defectName, String defectDescription, int detectionPhaseID, int detectionTaskID, int inyectionPhaseID, int inyectionTaskID, int remotionPhaseID,
-            String defectTrigger, String impact, int defectTypeID, String qualifier, String age, String source, String reference, int investedhours, String assignedUser, String status);
+    public int modifyDefect(int defectID, String defectName, String defectDescription, int detectionPhaseID, int detectionTaskID, int inyectionPhaseID, int inyectionTaskID, int remotionPhaseID,
+            int remotionTaskID, String defectTrigger, String impact, int defectTypeID, String qualifier, String age, String source, int referenceID, int investedhours, String assignedUser, String status);
     
     public void deleteDefect(int defectID);
     

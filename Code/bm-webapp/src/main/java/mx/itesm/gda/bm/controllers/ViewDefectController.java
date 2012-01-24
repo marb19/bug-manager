@@ -17,6 +17,10 @@ package mx.itesm.gda.bm.controllers;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import mx.itesm.gda.bm.biz.DefectManagementBizOp;
+import mx.itesm.gda.bm.biz.DefectTypeManagementBizOp;
+import mx.itesm.gda.bm.biz.PhaseManagementBizOp;
+import mx.itesm.gda.bm.biz.ProjectManagementBizOp;
 import mx.itesm.gda.bm.biz.TaskManagementBizOp;
 import mx.itesm.gda.bm.biz.UserManagementBizOp;
 import mx.itesm.gda.bm.session.UserLoginSession;
@@ -48,31 +52,67 @@ public class ViewDefectController extends BaseController {
 
     @Autowired
     private UserManagementBizOp userMgr;
-
+    
+    @Autowired
+    private DefectManagementBizOp defectMgr;
+    
+    @Autowired
+    private PhaseManagementBizOp phaseMgr;
+    
+    @Autowired
+    private ProjectManagementBizOp projMgr;
+    
+    @Autowired
+    private DefectTypeManagementBizOp defectTypeMgr;
+    
     @RequestMapping(method = RequestMethod.GET)
     @Transactional(readOnly = true)
     @UserLogged()
     public String displayForm(@RequestParam("project_id") int projectID,
-            @RequestParam("task_id") int taskID,
+            @RequestParam("defect_id") int defectID,
             ModelMap model) {
 
         if(projectID <= 0){
             throw new ControllerException("ID de proyecto fuera de rango");
         }
 
-        if(taskID <= 0){
-            throw new ControllerException("ID de tarea fuera de rango");
+        if(defectID <= 0){
+            throw new ControllerException("ID de defecto fuera de rango");
         }
 
-        Map<String, ?> task = taskMgr.getTask(taskID);
+        Map<String, ?> defect = defectMgr.getDefect(defectID);
+        List<Map<String, ?>> defects = defectMgr.retrieveProjectDefects(projectID);
         List<Map<String, ?>> users = userMgr.retrieveUsers();
-        List<Map<String, ?>> comments = taskMgr.retrieveComments(taskID);
+        List<Map<String, ?>> comments = defectMgr.retrieveComments(defectID);
+        
+        List<Map<String, ?>> phases = phaseMgr.retrieveProjectPhases(projectID);
+        List<Map<String, ?>> tasks = taskMgr.retrieveTasks(projectID);
+        List<Map<String, ?>> defectTypes = defectTypeMgr.retrieveDefectTypes();
 
+        int referenceID = 0;
+        try{
+            referenceID = (Integer)defect.get("reference");
+        }
+        catch(Exception nfe){
+            referenceID = 0;
+        }
+        if(referenceID != 0){
+            Map<String, ?> reference = defectMgr.getDefect(referenceID);
+            model.put("reference", reference);
+        }
+        else{
+            model.put("reference", "");
+        }
+        
         model.put("users", users);
-        model.put("task", task);
+        model.put("defect", defect);
+        model.put("defects", defects);
+        model.put("phases", phases);
+        model.put("tasks", tasks);
+        model.put("defectTypes", defectTypes);
         model.put("comments", comments);
         model.put("project_id", projectID);
-        model.put("task_id", taskID);
+        model.put("defect_id", defectID);
 
         return null;
     }
@@ -82,7 +122,7 @@ public class ViewDefectController extends BaseController {
     @UserLogged()
     public String modifyDefectAdmin(
             @RequestParam("project_id") int projectID,
-            @RequestParam("defectID") int defectID,
+            @RequestParam("defect_id") int defectID,
             @RequestParam("defectName") String defectName,
             @RequestParam("defectDesc") String defectDescription,
             @RequestParam("detectionPhase") int detectionPhase,
@@ -90,13 +130,14 @@ public class ViewDefectController extends BaseController {
             @RequestParam(value = "inyectionPhase", defaultValue = "0") int inyectionPhase,
             @RequestParam(value = "inyectionTask", defaultValue = "0") int inyectionTask,
             @RequestParam(value = "remotionPhase", defaultValue = "0") int remotionPhase,
+            @RequestParam(value = "remotionTask", defaultValue = "0") int remotionTask,
             @RequestParam(value = "defectTrigger", defaultValue = "") String defectTrigger,
             @RequestParam(value = "impact", defaultValue = "") String impact,
             @RequestParam(value = "defectType", defaultValue = "0") int defectType,
             @RequestParam(value = "qualifier", defaultValue = "") String qualifier,
             @RequestParam(value = "age", defaultValue = "") String age,
             @RequestParam(value = "source", defaultValue = "") String source,
-            @RequestParam(value = "reference", defaultValue = "") String reference,
+            @RequestParam(value = "reference", defaultValue = "0") int reference,
             @RequestParam(value = "investedHours", defaultValue = "0") int investedHours,
             @RequestParam(value = "assignedUser", defaultValue = "") String assignedUser,
             @RequestParam("status") String status,
@@ -127,8 +168,27 @@ public class ViewDefectController extends BaseController {
             throw new ControllerException("ID de Tarea fuera de rango");
         }
         
+        if(status.equals("")){
+            throw new ControllerException("El estatus no puede estar vacío");
+        }
         
+        if(!assignedUser.equals("") && userMgr.getUser(assignedUser) == null) {
+            throw new ControllerException("Usuario inexistente");
+        }
         
+        if(defectID == reference){
+            throw new ControllerException("Un defecto no se puede tener a sí mismo como referencia.");
+        }
+        
+        int defect = defectMgr.modifyDefect(defectID, defectName, defectDescription, 
+                detectionPhase, detectionTask, inyectionPhase, inyectionTask, 
+                remotionPhase, remotionTask, defectTrigger, impact, defectType, qualifier, 
+                age, source, reference, investedHours, assignedUser, status);
+        
+        if(!newComment.equals("")) {
+            defectMgr.addComment(defectID, session.getLoggedUserName(), newComment);
+        }
+
         return "redirect:listDefects.do?project_id=" + projectID;
     }
 

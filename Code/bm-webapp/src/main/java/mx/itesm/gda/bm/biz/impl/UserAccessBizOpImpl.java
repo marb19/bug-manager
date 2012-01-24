@@ -149,6 +149,7 @@ public class UserAccessBizOpImpl extends AbstractBizOp
             m.put("fullName", u.getFullName());
             m.put("email", u.getEmail());
             m.put("administrator", u.isAdministrator());
+            m.put("permissions", u.getPermissions());
         }
         return m;
     }

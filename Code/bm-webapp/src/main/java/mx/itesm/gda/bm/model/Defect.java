@@ -25,6 +25,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -83,14 +84,16 @@ public class Defect extends AbstractItem {
     @Column(length = 255, nullable = true)
     private String qualifier;
 
-    @Column(length = 255, nullable = true)
-    private String age;
+    @Enumerated(EnumType.ORDINAL)
+    @Column(nullable = true)
+    private DefectAge age;
 
-    @Column(length = 255, nullable = true)
-    private String source;
+    @Enumerated(EnumType.ORDINAL)
+    @Column(nullable = true)
+    private DefectSource source;
 
-    @Column(length = 255, nullable = true)
-    private String reference;
+    @Column(nullable = true)
+    private Integer reference;
 
     private int investedHours;
 
@@ -311,42 +314,42 @@ public class Defect extends AbstractItem {
     /**
      * @return the age
      */
-    public String getAge() {
+    public DefectAge getAge() {
         return age;
     }
 
     /**
      * @param age the age to set
      */
-    public void setAge(String age) {
+    public void setAge(DefectAge age) {
         this.age = age;
     }
 
     /**
      * @return the source
      */
-    public String getSource() {
+    public DefectSource getSource() {
         return source;
     }
 
     /**
      * @param source the source to set
      */
-    public void setSource(String source) {
+    public void setSource(DefectSource source) {
         this.source = source;
     }
 
     /**
      * @return the reference
      */
-    public String getReference() {
+    public Integer getReference() {
         return reference;
     }
 
     /**
      * @param reference the reference to set
      */
-    public void setReference(String reference) {
+    public void setReference(Integer reference) {
         this.reference = reference;
     }
 
