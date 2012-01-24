@@ -160,7 +160,8 @@ public class ReportController extends BaseController {
             @RequestParam(value = "username", defaultValue = "", required = false) String username){                
 
         String totalDefectsXML = totalDefectsType.getTotalDefectsTypeReport(level, project_id, username);
-        String text = "El total de defectos que se cometen, organizados por tipo de defectos, "
+        String text = "El total de defectos que se han removido y su esfuerzo de remoción, "
+                + "organizados por tipo, "
                 + "ya sea a nivel usuario, proyecto o empresa.";
 
         model.put("text", text);

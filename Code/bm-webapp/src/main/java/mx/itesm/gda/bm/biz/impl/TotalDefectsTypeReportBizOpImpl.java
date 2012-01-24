@@ -77,8 +77,10 @@ public class TotalDefectsTypeReportBizOpImpl extends AbstractBizOp implements To
     
     private String getReportByUser(List<DefectType> listOfTypes, String username){
         String xmlData = null;
+        String categories = null, totalDefects = null, totalEffort = null;
         ArrayList<Integer> totalDefectsByType = new ArrayList<Integer>();
         ArrayList<String> defectTypes = new ArrayList<String>();
+        ArrayList<Long> totalEffortByType = new ArrayList<Long>();
 
         User user = userDAO.findByUserName(username);
         String completeName = user.getFullName();
@@ -87,21 +89,35 @@ public class TotalDefectsTypeReportBizOpImpl extends AbstractBizOp implements To
             int defectType = dType.getDefectTypeId();
             List<Defect> defectsByTypeAndUser = defectByUserDAO.searchByTypeAndUser(defectType, username);
             totalDefectsByType.add(defectsByTypeAndUser.size());
+            long effortByType = 0;
+            for (Defect singleDefect : defectsByTypeAndUser){
+                effortByType = effortByType + singleDefect.getInvestedHours();
+            }
+            totalEffortByType.add(effortByType);
         }
 
-        xmlData += "<chart caption='Total de defectos por tipo para el usuario " +  completeName + "'" + "xAxisName='Tipo de defecto' yAxisName='Cantidad' bgAlpha='0,0'>";
+        xmlData="<chart caption='Total de defectos por tipo para el usuario " +  completeName + "'" + " xAxisName='Tipo de defecto' yAxisName='Cantidad y Esfuerzo' bgAlpha='0,0'>";
+        categories= "<categories>";
+        totalDefects= "<dataset seriesName='Cantidad de Defectos'>";
+        totalEffort= "<dataset seriesName='Esfuerzo de Remoción'>";
 
         for(int i = 0; i < defectTypes.size(); i++){
-            xmlData += "<set label='" + defectTypes.get(i) + "' value='" + totalDefectsByType.get(i) + "' />";
+            categories+="<category name='" + defectTypes.get(i) + "' />";
+            totalDefects+="<set value='" + totalDefectsByType.get(i) + "' />";
+            totalEffort+="<set value='" + totalEffortByType.get(i) + "' />";
         }
 
-        xmlData+= "</chart>";
+        categories+="</categories>";
+        totalDefects+="</dataset>";
+        totalEffort+="</dataset>";
+        xmlData+= categories  + totalDefects + totalEffort + "</chart>";
         return xmlData;
     }
 
     private String getReportByProject(List<DefectType> listOfTypes, int project_id){
         String xmlData = null;
-
+        String categories = null, totalDefects = null, totalEffort = null;
+        ArrayList<Long> totalEffortByType = new ArrayList<Long>();
         ArrayList<Integer> totalDefectsByType = new ArrayList<Integer>();
         ArrayList<String> defectTypes = new ArrayList<String>();
 
@@ -110,41 +126,68 @@ public class TotalDefectsTypeReportBizOpImpl extends AbstractBizOp implements To
         for(DefectType dType : listOfTypes){
             defectTypes.add(dType.getDefectTypeName());
             int defectType = dType.getDefectTypeId();
-            List<Defect> defectsByTypeAndUser = defectByUserDAO.searchByTypeAndProject(defectType, project_id);
-            totalDefectsByType.add(defectsByTypeAndUser.size());
+            List<Defect> defectsByTypeAndProject = defectByUserDAO.searchByTypeAndProject(defectType, project_id);
+            totalDefectsByType.add(defectsByTypeAndProject.size());
+            long effortByType = 0;
+            for (Defect singleDefect : defectsByTypeAndProject){
+                effortByType = effortByType + singleDefect.getInvestedHours();
+            }
+            totalEffortByType.add(effortByType);
         }
 
-        xmlData += "<chart caption='Total de defectos por tipo para el proyecto " +  projectName + "'" + "xAxisName='Tipo de defecto' yAxisName='Cantidad' bgAlpha='0,0'>";
+        xmlData = "<chart caption='Total de defectos por tipo para el proyecto " +  projectName + "'" + " xAxisName='Tipo de defecto' yAxisName='Cantidad y Esfuerzo' bgAlpha='0,0'>";
+        categories = "<categories>";
+        totalDefects = "<dataset seriesName='Cantidad de Defectos'>";
+        totalEffort = "<dataset seriesName='Esfuerzo de Remoción'>";
 
         for(int i = 0; i < defectTypes.size(); i++){
-            xmlData += "<set label='" + defectTypes.get(i) + "' value='" + totalDefectsByType.get(i) + "' />";
+            categories+="<category name='" + defectTypes.get(i) + "' />";
+            totalDefects+="<set value='" + totalDefectsByType.get(i) + "' />";
+            totalEffort+="<set value='" + totalEffortByType.get(i) + "' />";
         }
 
-        xmlData+= "</chart>";
+        categories+="</categories>";
+        totalDefects+="</dataset>";
+        totalEffort+="</dataset>";
+        xmlData+= categories  + totalDefects + totalEffort + "</chart>";        
 
         return xmlData;
     }
 
     private String getReportByCompany(List<DefectType> listOfTypes){
         String xmlData = null;
-
+        String categories = null, totalDefects = null, totalEffort = null;
         ArrayList<Integer> totalDefectsByType = new ArrayList<Integer>();
         ArrayList<String> defectTypes = new ArrayList<String>();
+        ArrayList<Long> totalEffortByType = new ArrayList<Long>();
 
         for(DefectType dType : listOfTypes){
             defectTypes.add(dType.getDefectTypeName());
             int defectType = dType.getDefectTypeId();
-            List<Defect> defectsByTypeAndUser = defectByUserDAO.searchByType(defectType);
-            totalDefectsByType.add(defectsByTypeAndUser.size());
+            List<Defect> defectsByType = defectByUserDAO.searchByType(defectType);
+            totalDefectsByType.add(defectsByType.size());
+            long effortByType = 0;
+            for (Defect singleDefect : defectsByType){
+                effortByType = effortByType + singleDefect.getInvestedHours();
+            }
+            totalEffortByType.add(effortByType);
         }
 
-        xmlData += "<chart caption='Total de defectos por tipo para la empresa' xAxisName='Tipo de defecto' yAxisName='Cantidad' bgAlpha='0,0'>";
+        xmlData += "<chart caption='Total de defectos por tipo para la empresa' xAxisName='Tipo de defecto' yAxisName='Cantidad y Esfuerzo' bgAlpha='0,0'>";
+        categories = "<categories>";
+        totalDefects = "<dataset seriesName='Cantidad de Defectos'>";
+        totalEffort = "<dataset seriesName='Esfuerzo de Remoción'>";
 
         for(int i = 0; i < defectTypes.size(); i++){
-            xmlData += "<set label='" + defectTypes.get(i) + "' value='" + totalDefectsByType.get(i) + "' />";
+            categories+="<category name='" + defectTypes.get(i) + "' />";
+            totalDefects+="<set value='" + totalDefectsByType.get(i) + "' />";
+            totalEffort+="<set value='" + totalEffortByType.get(i) + "' />";
         }
 
-        xmlData+= "</chart>";
+        categories+="</categories>";
+        totalDefects+="</dataset>";
+        totalEffort+="</dataset>";
+        xmlData+= categories  + totalDefects + totalEffort + "</chart>";        
 
         return xmlData;
     }

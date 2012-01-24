@@ -73,20 +73,20 @@ public class GeneralSummaryBizOpImpl extends AbstractBizOp implements GeneralSum
                 }
             }
         }
+
         if (timePhase == 0){
             testingEfficiency = 0;
         }
         else {
             testingEfficiency = remDefects / timePhase;
-        }
-        
+        }        
 
         // Getting the rest of the metrics
         for (Phase singlePhase : allPhases){
             double efficiency = 0, leverage = 0;
             // Getting the inyected and removed defects by phase, and their totals
             Map<String, Object> row = new HashMap<String, Object>();
-            List<Defect> inyectedDefects = defectDAO.searchByStateInyPhaseProject(DefectState.ACCEPTED, 
+            List<Defect> inyectedDefects = defectDAO.searchByStateDetPhaseProject(DefectState.ACCEPTED,
                     singlePhase.getPhaseId(), project_id);
             List<Defect> removedDefects = defectDAO.searchByStateRemPhaseProject(DefectState.FIXED, 
                     singlePhase.getPhaseId(), project_id);
@@ -136,9 +136,11 @@ public class GeneralSummaryBizOpImpl extends AbstractBizOp implements GeneralSum
             totalFailureCost = totalFailureCost + failureCostByPhase;
 
             // Getting yield by phase
-            List<Defect> inyectionDefects = defectDAO.searchByInyectionPhase(singlePhase.getPhaseId());
-            List<Defect> remotionDefects = defectDAO.searchByRemotionPhase(singlePhase.getPhaseId());
-            acumInyected = acumInyected + inyectionDefects.size();
+            List<Defect> detectionDefects = defectDAO.searchByStateDetPhaseProject(DefectState.ACCEPTED,
+                    singlePhase.getPhaseId(), project_id);
+            List<Defect> remotionDefects = defectDAO.searchByStateRemPhaseProject(DefectState.FIXED,
+                    singlePhase.getPhaseId(), project_id);
+            acumInyected = acumInyected + detectionDefects.size();
             acumRemoved = acumRemoved + remotionDefects.size();
             escaped = acumInyected - acumRemoved;
             goal = remotionDefects.size() + escaped;
@@ -157,19 +159,19 @@ public class GeneralSummaryBizOpImpl extends AbstractBizOp implements GeneralSum
             row.put("speed", speedByPhase);
             row.put("time", timeByPhase);
             if (appraisalCostByPhase == 0){
-                row.put("appraisalCost", "");
+                row.put("appraisalCost", "N/A");
             }
             else {
                 row.put("appraisalCost", appraisalCostByPhase);
             }
             if (failureCostByPhase == 0){
-                row.put("failureCost", "");
+                row.put("failureCost", "N/A");
             }
             else {
                 row.put("failureCost", failureCostByPhase);
             }
 
-            row.put("afr", "");
+            row.put("afr", "N/A");
             row.put("defectEfficiency", efficiency);
             row.put("defectLeverage", leverage);
 
@@ -186,14 +188,14 @@ public class GeneralSummaryBizOpImpl extends AbstractBizOp implements GeneralSum
         totalRow.put("phase", "Total:");
         totalRow.put("inyectedDefects", totalInyDefects);
         totalRow.put("removedDefects", totalRemDefects);
-        totalRow.put("yield", "");
-        totalRow.put("speed", "");
+        totalRow.put("yield", "N/A");
+        totalRow.put("speed", "N/A");
         totalRow.put("time", totalTime);
-        totalRow.put("appraisalCost", "");
-        totalRow.put("failureCost", "");
+        totalRow.put("appraisalCost", "N/A");
+        totalRow.put("failureCost", "N/A");
         totalRow.put("afr", afr);
-        totalRow.put("defectEfficiency", "");
-        totalRow.put("defectLeverage", "");
+        totalRow.put("defectEfficiency", "N/A");
+        totalRow.put("defectLeverage", "N/A");
         summary.add(totalRow);
         return summary;
     }

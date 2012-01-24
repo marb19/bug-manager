@@ -43,24 +43,26 @@ public class ROIProjectBizOpImpl extends AbstractBizOp implements ROIProjectBizO
     @Transactional(readOnly = true, propagation = Propagation.MANDATORY)
     public String getROIProjectReport(int project_id){
         String xmlData = null;
-        long requirementsEffort = 0, designEffort = 0, codingEffort = 0,
-                reviewEffort = 0, totalEffort = 0;
-        long taskReqEffort = 0, taskDesignEffort = 0, taskCodingEffort = 0,
-                taskReviewEffort = 0, taskTotalEffort = 0;
-        List<Defect> requirementsDefects, designDefects, codingDefects, reviewDefects;
-        List<Task> reqTasks, designTasks, codingTasks, reviewTasks;
+        long reviewEffort = 0, totalEffort = 0;
+        long taskReviewEffort = 0, taskTotalEffort = 0;
+        List<Defect> reviewDefects;
+        List<Task> reviewTasks;
         double roiMaintenance = 0, roiTesting = 0;
 
         if (project_id == 0){
+            /*
             requirementsDefects = defectDAO.searchByStateAndPhaseType(DefectState.FIXED, PhaseType.REQUIREMENTS);
             designDefects = defectDAO.searchByStateAndPhaseType(DefectState.FIXED, PhaseType.DESIGN);
             codingDefects = defectDAO.searchByStateAndPhaseType(DefectState.FIXED, PhaseType.CODING);
+             */
             reviewDefects = defectDAO.searchByStateAndPhaseType(DefectState.FIXED, PhaseType.REVIEW);
 
+            /*
             reqTasks = taskDAO.getQualityTasksByStatePhaseType(TaskState.COMPLETED, PhaseType.REQUIREMENTS);
             designTasks = taskDAO.getQualityTasksByStatePhaseType(TaskState.COMPLETED, PhaseType.DESIGN);
             codingTasks = taskDAO.getQualityTasksByStatePhaseType(TaskState.COMPLETED, PhaseType.CODING);
-            reviewTasks = taskDAO.getQualityTasksByStatePhaseType(TaskState.COMPLETED, PhaseType.REVIEW);
+             */
+            reviewTasks = taskDAO.getTasksByStatePhaseType(TaskState.COMPLETED, PhaseType.REVIEW);
 
             xmlData+= "<chart caption='ROI de la Empresa' xAxisName='Fase' yAxisName='ROI' "
                     + "showValues='0' formatNumberScale='0' labelDisplay='Rotate' bgAlpha='0,0'>";
@@ -69,28 +71,33 @@ public class ROIProjectBizOpImpl extends AbstractBizOp implements ROIProjectBizO
             Project project = projectDAO.findById(project_id);
             String projectName = project.getProjectName();
 
+            /*
             requirementsDefects = defectDAO.searchByStatePhaseTypeProject(DefectState.FIXED,
                 PhaseType.REQUIREMENTS, project_id);
             designDefects = defectDAO.searchByStatePhaseTypeProject(DefectState.FIXED,
                 PhaseType.DESIGN, project_id);
             codingDefects = defectDAO.searchByStatePhaseTypeProject(DefectState.FIXED,
                 PhaseType.CODING, project_id);
+             */
             reviewDefects = defectDAO.searchByStatePhaseTypeProject(DefectState.FIXED,
                     PhaseType.REVIEW, project_id);
 
+            /*
             reqTasks = taskDAO.getQualityTasksByStatePhaseTypeProject(TaskState.COMPLETED,
                     PhaseType.REQUIREMENTS, project_id);
             designTasks = taskDAO.getQualityTasksByStatePhaseTypeProject(TaskState.COMPLETED,
                     PhaseType.DESIGN, project_id);
             codingTasks = taskDAO.getQualityTasksByStatePhaseTypeProject(TaskState.COMPLETED,
                     PhaseType.CODING, project_id);
-            reviewTasks = taskDAO.getQualityTasksByStatePhaseTypeProject(TaskState.COMPLETED,
+             */
+            reviewTasks = taskDAO.getTasksByStatePhaseTypeProject(TaskState.COMPLETED,
                     PhaseType.REVIEW, project_id);
 
             xmlData+= "<chart caption='ROI del Proyecto " + projectName + "' xAxisName='Fase' yAxisName='ROI' "
                     + "showValues='0' formatNumberScale='0' labelDisplay='Rotate' bgAlpha='0,0'>";
         }
 
+        /*
         for (Defect singleDefect : requirementsDefects){
             requirementsEffort = requirementsEffort + singleDefect.getInvestedHours();
         }
@@ -100,10 +107,12 @@ public class ROIProjectBizOpImpl extends AbstractBizOp implements ROIProjectBizO
         for (Defect singleDefect : codingDefects){
             codingEffort = codingEffort + singleDefect.getInvestedHours();
         }
+         */
         for (Defect singleDefect : reviewDefects){
             reviewEffort = reviewEffort + singleDefect.getInvestedHours();
         }
 
+        /*
         for (Task singleTask : reqTasks){
             taskReqEffort = taskReqEffort + singleTask.getInvestedHours();
         }
@@ -113,13 +122,16 @@ public class ROIProjectBizOpImpl extends AbstractBizOp implements ROIProjectBizO
         for (Task singleTask : codingTasks){
             taskCodingEffort = taskCodingEffort + singleTask.getInvestedHours();
         }
+         */
         for (Task singleTask : reviewTasks){
             taskReviewEffort = taskReviewEffort + singleTask.getInvestedHours();
         }
 
-        totalEffort = requirementsEffort + designEffort + codingEffort + reviewEffort;
+        totalEffort = reviewEffort;
+        //totalEffort = requirementsEffort + designEffort + codingEffort + reviewEffort;
 
-        taskTotalEffort = taskReqEffort + taskDesignEffort + taskCodingEffort + taskReviewEffort;
+        taskTotalEffort = taskReviewEffort;
+        //taskTotalEffort = taskReqEffort + taskDesignEffort + taskCodingEffort + taskReviewEffort;
 
         if (taskTotalEffort == 0){
             roiMaintenance = 0.0;

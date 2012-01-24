@@ -19,6 +19,7 @@ import mx.itesm.gda.bm.biz.PhaseYieldReportBizOp;
 import mx.itesm.gda.bm.model.Project;
 import mx.itesm.gda.bm.model.dao.ProjectDAO;
 import mx.itesm.gda.bm.model.Defect;
+import mx.itesm.gda.bm.model.DefectState;
 import mx.itesm.gda.bm.model.dao.DefectDAO;
 import mx.itesm.gda.bm.model.Phase;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,9 +58,11 @@ public class PhaseYieldReportBizOpImpl extends AbstractBizOp implements PhaseYie
         for(Phase phase : allPhases){
             phaseNames.add(phase.getPhaseName());
             Integer phase_id = phase.getPhaseId();
-            List<Defect> inyectedDefects = defectDAO.searchByInyectionPhase(phase_id);
-            List<Defect> removedDefects = defectDAO.searchByRemotionPhase(phase_id);
-            acumInyected = acumInyected + inyectedDefects.size();
+            List<Defect> detectedDefects = defectDAO.searchByStateDetPhaseProject(DefectState.ACCEPTED,
+                    phase_id, project_id);
+            List<Defect> removedDefects = defectDAO.searchByStateRemPhaseProject(DefectState.FIXED,
+                    phase_id, project_id);
+            acumInyected = acumInyected + detectedDefects.size();
             acumRemoved = acumRemoved + removedDefects.size();
             escaped = acumInyected - acumRemoved;
             goal = removedDefects.size() + escaped;
