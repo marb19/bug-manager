@@ -133,7 +133,7 @@ public class TaskManagementBizOpImpl extends AbstractBizOp implements
 
         Task task = taskDAO.findById(taskID);
         Map<String, Object> t = new HashMap<String, Object>();
-
+        t.put("taskID", task.getTaskId());
         t.put("projectID", task.getProject().getProjectId());
         t.put("taskName", task.getTaskName());
         t.put("description", task.getTaskDescription());
