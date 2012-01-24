@@ -125,7 +125,7 @@
                                 </select>
                                 #else
                                     #if($defect.assignedUser != "")
-                                    <span>${u.userName}</span>
+                                    <span>${defect.assignedUser.userName}</span>
                                     <input type="hidden" value="${defect.assignedUser.userName}" name="assignedUser" id="assignedUser"  />
                                     #else
                                     <span></span>
