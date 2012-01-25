@@ -142,8 +142,7 @@ public class ReportController extends BaseController {
     public String createDefectDensityReport(ModelMap model){
 
         String defectDensityXML = defectDensityReport.getDefectDensityReport();
-        String text = "La cantidad de defectos que se cometen por unidad de medida. "
-                + "Pueden ser LOC, puntos de función, etc.";
+        String text = "La cantidad de defectos que se cometen por cada 1000 líneas de código. ";
 
         model.put("text", text);
         model.put("defectDensityXML", defectDensityXML);
@@ -196,8 +195,10 @@ public class ReportController extends BaseController {
 
         String productividadCompuestaXML = null;
         String text = "La gráfica compara la productividad de un programador "
-                + "contra su productividad compuesta. La productividad compuesta está "
-                + "ponderada con el tiempo que se tomó en corregir los defectos que inyectó al momento de programar."
+                + "contra su productividad compuesta, o la productividad de un proyecto contra su productivdad compuesta. "
+                + "La productividad compuesta está "
+                + "ponderada con el tiempo que se tomó en corregir los defectos que inyectó al momento de programar. "
+                + "Solo se consideran las actividades de desarrollo completadas, así como los defectos corregidos."
                 + " La gráfica se muestra a nivel usuario, proyecto o empresa.";
 
         productividadCompuestaXML = composedProd.getComposedProdReport(level);
@@ -221,7 +222,8 @@ public class ReportController extends BaseController {
                 + "gracias a la implementación de estas técnicas de calidad. Te "
                 + "ayuda a comparar en el caso que no se hubieran "
                 + "utilizado las actividades de calidad y los defectos se hubieran encontrado "
-                + "en pruebas o en producción.";
+                + "en pruebas o en producción. Solo se consideran actividades completadas que pertenezcan a "
+                + "fases de revisión y defectos removidos.";
 
         if (level == 2){
             roiProyectoXML = roiProject.getROIProjectReport(project_id);
@@ -246,7 +248,9 @@ public class ReportController extends BaseController {
         String roiTecnicasXML = null;
         String text = "Este reporte nos ayuda a comparar el esfuerzo que tomó cierta actividad "
                 + "de calidad, contra el tiempo que ahorró en caso de que los errores encontrados "
-                + "con la respectiva técnica hubieran pasado a producción.";
+                + "con la respectiva técnica hubieran pasado a producción (ya que se consideran las actividades de pruebas). "
+                + "Solo se toman en cuenta las actividades de revisión y pruebas completadas, así como los defectos "
+                + "corregidos por estas actividades.";
 
         if (level == 2){
             roiTecnicasXML = roiTecnicas.getROITecnicasReport(project_id);
@@ -269,7 +273,10 @@ public class ReportController extends BaseController {
             @RequestParam(value= "project_id", defaultValue = "0", required = false) int project_id){
 
         String qualityCostXML = null;
-        String text = "Esta gráfica nos ayuda a comparar los costos de la conformidad y no conformidad.";
+        String text = "Esta gráfica nos ayuda a comparar los costos de la conformidad y NO conformidad. "
+                + "En los de conformidad se consideran las actividades completadas en fases de revisión y sus defectos corregidos. "
+                + "En los de NO conformidad se consideran las actividades completadas en fases de prueba y mantenimiento "
+                + "y sus defectos corregidos en estas fases.";
 
         if (level == 2){
             qualityCostXML = qualityCost.getQualityCostReport(project_id);

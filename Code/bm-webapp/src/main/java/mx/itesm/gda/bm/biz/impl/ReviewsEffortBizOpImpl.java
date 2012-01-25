@@ -18,6 +18,7 @@ import mx.itesm.gda.bm.model.Project;
 import mx.itesm.gda.bm.model.dao.ProjectDAO;
 import mx.itesm.gda.bm.model.Task;
 import mx.itesm.gda.bm.model.TaskType;
+import mx.itesm.gda.bm.model.TaskState;
 import mx.itesm.gda.bm.model.dao.TaskDAO;
 /**
  *
@@ -37,7 +38,7 @@ public class ReviewsEffortBizOpImpl extends AbstractBizOp implements ReviewsEffo
     @Transactional(readOnly = true, propagation = Propagation.MANDATORY)
     public String getReviewsEffortReport(int project_id){
         String xmlData = null, chartTitle = null;
-        List<Task> allTasks;
+        List<Task> allTasks, finalListTasks;
         double taskEffort = 0;
         double totalEffort = 0, perReviewEffort = 0, peerReviewEffort = 0, walkEffort = 0, inspectionEffort = 0;
         ArrayList<String> reviewsNames = new ArrayList<String>();
@@ -48,6 +49,8 @@ public class ReviewsEffortBizOpImpl extends AbstractBizOp implements ReviewsEffo
         reviewsNames.add("Revisión de Colegas");
         reviewsNames.add("Caminata");
         reviewsNames.add("Inspección");
+
+        finalListTasks = new ArrayList<Task>();
 
         if (project_id == 0){
             allTasks = taskDAO.getAll();
@@ -62,24 +65,32 @@ public class ReviewsEffortBizOpImpl extends AbstractBizOp implements ReviewsEffo
                     + "xAxisName='Técnica de detección' yAxisName='Porcentaje de esfuerzo' bgAlpha='0,0'>";
         }
 
-        for(Task singleTask : allTasks){
-            taskEffort = singleTask.getInvestedHours();
-            totalEffort = totalEffort + taskEffort;
-            TaskType taskType = singleTask.getTaskType();
-            if (taskType == TaskType.PERSONAL_REVIEW){
-                perReviewEffort = perReviewEffort + taskEffort;
-            }
-            else if (taskType == TaskType.PEER_REVIEW){
-                peerReviewEffort = peerReviewEffort + taskEffort;
-            }
-            else if (taskType == TaskType.WALKTHROUGH){
-                walkEffort = walkEffort + taskEffort;
-            }
-            else if (taskType == TaskType.INSPECTION){
-                inspectionEffort = inspectionEffort + taskEffort;
+        for (Task singleTask : allTasks){
+            if (singleTask.getTaskState() == TaskState.STARTED || singleTask.getTaskState() == TaskState.COMPLETED){
+                finalListTasks.add(singleTask);
             }
         }
 
+        if (finalListTasks != null){
+            for(Task singleTask : finalListTasks){
+                taskEffort = singleTask.getInvestedHours();
+                totalEffort = totalEffort + taskEffort;
+                TaskType taskType = singleTask.getTaskType();
+                if (taskType == TaskType.PERSONAL_REVIEW){
+                    perReviewEffort = perReviewEffort + taskEffort;
+                }
+                else if (taskType == TaskType.PEER_REVIEW){
+                    peerReviewEffort = peerReviewEffort + taskEffort;
+                }
+                else if (taskType == TaskType.WALKTHROUGH){
+                    walkEffort = walkEffort + taskEffort;
+                }
+                else if (taskType == TaskType.INSPECTION){
+                    inspectionEffort = inspectionEffort + taskEffort;
+                }
+            }
+        }
+        
         reviewsEfforts.add(perReviewEffort);
         reviewsEfforts.add(peerReviewEffort);
         reviewsEfforts.add(walkEffort);

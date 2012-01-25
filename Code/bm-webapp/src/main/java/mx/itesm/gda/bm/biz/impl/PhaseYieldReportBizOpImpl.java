@@ -58,11 +58,9 @@ public class PhaseYieldReportBizOpImpl extends AbstractBizOp implements PhaseYie
         for(Phase phase : allPhases){
             phaseNames.add(phase.getPhaseName());
             Integer phase_id = phase.getPhaseId();
-            List<Defect> detectedDefects = defectDAO.searchByStateDetPhaseProject(DefectState.ACCEPTED,
-                    phase_id, project_id);
-            List<Defect> removedDefects = defectDAO.searchByStateRemPhaseProject(DefectState.FIXED,
-                    phase_id, project_id);
-            acumInyected = acumInyected + detectedDefects.size();
+            List<Defect> inyectedDefects = defectDAO.searchByInyPhaseProject(phase_id, project_id);
+            List<Defect> removedDefects = defectDAO.searchByRemPhaseProject(phase_id, project_id);
+            acumInyected = acumInyected + inyectedDefects.size();
             acumRemoved = acumRemoved + removedDefects.size();
             escaped = acumInyected - acumRemoved;
             goal = removedDefects.size() + escaped;

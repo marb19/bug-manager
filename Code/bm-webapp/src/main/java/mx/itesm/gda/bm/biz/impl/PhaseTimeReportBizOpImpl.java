@@ -20,6 +20,7 @@ import mx.itesm.gda.bm.model.Project;
 import mx.itesm.gda.bm.model.dao.ProjectDAO;
 import mx.itesm.gda.bm.model.Phase;
 import mx.itesm.gda.bm.model.Task;
+import mx.itesm.gda.bm.model.TaskState;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -53,8 +54,10 @@ public class PhaseTimeReportBizOpImpl extends AbstractBizOp implements PhaseTime
         for(Phase phase : project.getPhases()){
             Integer phaseHours = 0;
             for (Task task : phase.getTasks()){
-                totalInvestedHours += task.getInvestedHours();
-                phaseHours += task.getInvestedHours();
+                if (task.getTaskState() == TaskState.STARTED || task.getTaskState() == TaskState.COMPLETED){
+                    totalInvestedHours += task.getInvestedHours();
+                    phaseHours += task.getInvestedHours();
+                }
             }
             phaseNames.add(phase.getPhaseName());
             phaseTimes.add(phaseHours);

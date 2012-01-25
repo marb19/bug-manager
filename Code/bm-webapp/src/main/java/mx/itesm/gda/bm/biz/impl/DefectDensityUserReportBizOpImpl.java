@@ -28,6 +28,8 @@ import java.util.ArrayList;
 import java.util.List;
 import mx.itesm.gda.bm.biz.DefectDensityUserReportBizOp;
 import mx.itesm.gda.bm.model.TaskType;
+import mx.itesm.gda.bm.model.TaskState;
+import mx.itesm.gda.bm.model.DefectState;
 
 /**
  *
@@ -48,15 +50,25 @@ public class DefectDensityUserReportBizOpImpl extends AbstractBizOp implements D
         ArrayList<String> usersNames = new ArrayList<String>();
         ArrayList<Double> defectDensityByUsername = new ArrayList<Double>();
 
-        List<User> allUsers = userDAO.getAllDevelopers();
-        for(User user : allUsers){
+        List<User> allDevelopers = userDAO.getAllDevelopers();
+        for(User user : allDevelopers){
             usersNames.add(user.getFullName());
             List<Defect> defectsByUser = user.getAssignedDefects();
-            int totalDefects = defectsByUser.size();
+            int totalDefects = 0;
+            for (Defect singleDefect : defectsByUser){
+                if (singleDefect.getDefectState() == DefectState.ACCEPTED
+                        || singleDefect.getDefectState() == DefectState.FIXED){
+                    totalDefects++;
+                }
+            }
             List<Task> tasksByUser = user.getAssignedTasks();
             int totalLOC = 0;
-            for (Task task : tasksByUser){
-                totalLOC += task.getSize();
+            for (Task singleTask : tasksByUser){
+                if ((singleTask.getTaskType() == TaskType.DEVELOPMENT) &&
+                        (singleTask.getTaskState() == TaskState.STARTED
+                        || singleTask.getTaskState() == TaskState.COMPLETED)){
+                    totalLOC += singleTask.getSize();
+                }
             }
             if (totalLOC == 0){
                 defectDensityByUsername.add(0.0);
