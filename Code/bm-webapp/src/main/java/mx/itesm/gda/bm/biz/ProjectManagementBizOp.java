@@ -34,6 +34,10 @@ public interface ProjectManagementBizOp extends BizOp {
             String projectDescription, Date projectDueDate,
             Date projectPlannedDate);
 
+    public void addUser(int projectId, String userName);
+
+    public void removeUser(int projectId, String userName);
+
     public void deleteProject(int project_id);
 
     public Map<String, ?> getProject(int project_id);

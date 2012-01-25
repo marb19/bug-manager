@@ -200,4 +200,17 @@ public class TaskDAOImpl extends BaseItemDAOImpl<Task> implements TaskDAO {
 
         return tasks;
     }
+
+
+    @Override
+    @Transactional(readOnly = true, propagation = Propagation.MANDATORY)
+    public List<Task> getTasksByProjectAndUser(String userName, int projectID) {
+        @SuppressWarnings("unchecked")
+        List<Task> result = getEntityManager().createQuery("SELECT t FROM Task t "
+                + "JOIN t.assignedUser u JOIN t.project pr WHERE u.userName =:userName AND pr.projectId=:projectID")
+                .setParameter("userName", userName)
+                .setParameter("projectID", projectID)
+                .getResultList();
+        return result;
+    }
 }

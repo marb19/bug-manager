@@ -30,6 +30,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import mx.itesm.gda.bm.model.User;
+import mx.itesm.gda.bm.model.dao.DefectDAO;
+import mx.itesm.gda.bm.model.dao.TaskDAO;
 import mx.itesm.gda.bm.model.dao.UserDAO;
 
 /**
@@ -47,6 +49,12 @@ public class ProjectManagementBizOpImpl extends AbstractBizOp implements
 
     @Autowired
     private ProjectDAO projectDAO;
+
+    @Autowired
+    private TaskDAO taskDAO;
+
+    @Autowired
+    private DefectDAO defectDAO;
 
     @Autowired
     private MessageSourceAccessor msgSource;
@@ -159,9 +167,8 @@ public class ProjectManagementBizOpImpl extends AbstractBizOp implements
             u.put("permissions", user.getPermissions());
             u.put("fullName", user.getFullName());
             u.put("email", user.getEmail());
-            boolean isEmpty=(user.getAssignedTasks().isEmpty() && 
-                    user.getAuthoredComments().isEmpty() &&
-                    user.getAuthoredCompletionReports().isEmpty());
+            boolean isEmpty=(taskDAO.getTasksByProjectAndUser(user.getUserName(),projectId).isEmpty() &&
+                    defectDAO.searchByProjectAndUser(projectId,user.getUserName()).isEmpty());
             u.put("isEmpty", isEmpty);
             ret.add(u);
         }
@@ -169,4 +176,29 @@ public class ProjectManagementBizOpImpl extends AbstractBizOp implements
         return ret;
     }
 
+    @Override
+    @Transactional(propagation = Propagation.MANDATORY)
+    public void addUser(int projectId, String userName){
+        Project project = new Project();
+        project = projectDAO.findById(projectId);
+        User user = userDAO.findByUserName(userName);
+
+        List<User> users = project.getUsers();
+        users.add(user);
+        project.setUsers(users);
+        projectDAO.update(project);
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.MANDATORY)
+    public void removeUser(int projectId, String userName){
+        Project project = new Project();
+        project = projectDAO.findById(projectId);
+        User user = userDAO.findByUserName(userName);
+
+        List<User> users = project.getUsers();
+        users.remove(user);
+        project.setUsers(users);
+        projectDAO.update(project);
+    }
 }
