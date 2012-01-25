@@ -283,15 +283,16 @@ public class DefectDAOImpl extends BaseItemDAOImpl<Defect> implements DefectDAO 
 
     @Override
     @Transactional(readOnly = true, propagation = Propagation.MANDATORY)
-    public List<Defect> searchByStateInyPhaseProject(DefectState state, int phase_id, int project_id){
+    public List<Defect> searchByInyPhaseProject(int phase_id, int project_id){
         @SuppressWarnings("unchecked")
         List<Defect> result = getEntityManager().createQuery("SELECT d FROM Defect d "
                 + "JOIN d.inyectionPhase ph JOIN d.project p WHERE "
-                + "d.defectState = :state AND ph.phaseId = :phase_id "
-                + "AND p.projectId = :project_id")
-                .setParameter("state", state)
+                + "ph.phaseId = :phase_id AND p.projectId = :project_id "
+                + "AND (d.defectState = :accepted OR d.defectState = :fixed)")
                 .setParameter("phase_id", phase_id)
                 .setParameter("project_id", project_id)
+                .setParameter("accepted", DefectState.ACCEPTED)
+                .setParameter("fixed", DefectState.FIXED)
                 .getResultList();
 
         return result;
@@ -300,15 +301,16 @@ public class DefectDAOImpl extends BaseItemDAOImpl<Defect> implements DefectDAO 
 
     @Override
     @Transactional(readOnly = true, propagation = Propagation.MANDATORY)
-    public List<Defect> searchByStateDetPhaseProject(DefectState state, int phase_id, int project_id){
+    public List<Defect> searchByDetPhaseProject(int phase_id, int project_id){
         @SuppressWarnings("unchecked")
         List<Defect> result = getEntityManager().createQuery("SELECT d FROM Defect d "
                 + "JOIN d.detectionPhase ph JOIN d.project p WHERE "
-                + "d.defectState = :state AND ph.phaseId = :phase_id "
-                + "AND p.projectId = :project_id")
-                .setParameter("state", state)
+                + "ph.phaseId = :phase_id AND p.projectId = :project_id "
+                + "AND (d.defectState = :accepted OR d.defectState = :fixed)")
                 .setParameter("phase_id", phase_id)
                 .setParameter("project_id", project_id)
+                .setParameter("accepted", DefectState.ACCEPTED)
+                .setParameter("fixed", DefectState.FIXED)
                 .getResultList();
 
         return result;
@@ -317,15 +319,15 @@ public class DefectDAOImpl extends BaseItemDAOImpl<Defect> implements DefectDAO 
 
     @Override
     @Transactional(readOnly = true, propagation = Propagation.MANDATORY)
-    public List<Defect> searchByStateRemPhaseProject(DefectState state, int phase_id, int project_id){
+    public List<Defect> searchByRemPhaseProject(int phase_id, int project_id){
         @SuppressWarnings("unchecked")
         List<Defect> result = getEntityManager().createQuery("SELECT d FROM Defect d "
                 + "JOIN d.remotionPhase ph JOIN d.project p WHERE "
-                + "d.defectState = :state AND ph.phaseId = :phase_id "
-                + "AND p.projectId = :project_id")
-                .setParameter("state", state)
+                + "ph.phaseId = :phase_id AND p.projectId = :project_id "
+                + "AND d.defectState = :fixed")
                 .setParameter("phase_id", phase_id)
                 .setParameter("project_id", project_id)
+                .setParameter("fixed", DefectState.FIXED)
                 .getResultList();
 
         return result;

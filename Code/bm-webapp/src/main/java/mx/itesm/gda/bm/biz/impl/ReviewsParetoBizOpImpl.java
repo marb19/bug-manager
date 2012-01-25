@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.ArrayList;
 import mx.itesm.gda.bm.biz.ReviewsParetoBizOp;
 import mx.itesm.gda.bm.model.Defect;
+import mx.itesm.gda.bm.model.DefectState;
 import mx.itesm.gda.bm.model.dao.DefectDAO;
 import mx.itesm.gda.bm.model.Project;
 import mx.itesm.gda.bm.model.dao.ProjectDAO;
@@ -38,7 +39,7 @@ public class ReviewsParetoBizOpImpl extends AbstractBizOp implements ReviewsPare
     public String getReviewsParetoReport(int project_id){
         String xmlData = null, chartTitle = null;
         int perReviewDefects = 0, peerReviewDefects = 0, walkDefects = 0, inspectionDefects = 0;
-        List<Defect> allDefects;
+        List<Defect> allDefects, finalListDefects;
         ArrayList<String> reviewsNames = new ArrayList<String>();
         ArrayList<Integer> reviewsDefects = new ArrayList<Integer>();        
 
@@ -46,6 +47,8 @@ public class ReviewsParetoBizOpImpl extends AbstractBizOp implements ReviewsPare
         reviewsNames.add("Revisión de Colegas");
         reviewsNames.add("Caminata");
         reviewsNames.add("Inspección");
+
+        finalListDefects = new ArrayList<Defect>();
 
         if (project_id == 0){
             allDefects = defectDAO.getAll();
@@ -61,20 +64,28 @@ public class ReviewsParetoBizOpImpl extends AbstractBizOp implements ReviewsPare
                     + "xAxisName='Técnica de detección' PYAxisName='Cantidad de defectos' bgAlpha='0,0'>";
         }
 
-        for(Defect singleDefect : allDefects){
-            Task detectionTask = singleDefect.getDetectionTask();
-            TaskType taskType = detectionTask.getTaskType();
-            if (taskType == TaskType.PERSONAL_REVIEW){
-                perReviewDefects++;
+        for (Defect singleDefect : allDefects){
+            if (singleDefect.getDefectState() == DefectState.ACCEPTED || singleDefect.getDefectState() == DefectState.FIXED){
+                finalListDefects.add(singleDefect);
             }
-            else if (taskType == TaskType.PEER_REVIEW){
-                peerReviewDefects++;
-            }
-            else if (taskType == TaskType.WALKTHROUGH){
-                walkDefects++;
-            }
-            else if (taskType == TaskType.INSPECTION){
-                inspectionDefects++;
+        }
+
+        if(finalListDefects != null){
+            for(Defect singleDefect : finalListDefects){
+                Task detectionTask = singleDefect.getDetectionTask();
+                TaskType taskType = detectionTask.getTaskType();
+                if (taskType == TaskType.PERSONAL_REVIEW){
+                    perReviewDefects++;
+                }
+                else if (taskType == TaskType.PEER_REVIEW){
+                    peerReviewDefects++;
+                }
+                else if (taskType == TaskType.WALKTHROUGH){
+                    walkDefects++;
+                }
+                else if (taskType == TaskType.INSPECTION){
+                    inspectionDefects++;
+                }
             }
         }
 

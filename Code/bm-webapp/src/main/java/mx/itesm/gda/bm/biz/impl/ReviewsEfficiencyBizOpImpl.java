@@ -15,12 +15,14 @@ import java.util.List;
 import java.util.ArrayList;
 import mx.itesm.gda.bm.biz.ReviewsEfficiencyBizOp;
 import mx.itesm.gda.bm.model.Defect;
+import mx.itesm.gda.bm.model.DefectState;
 import mx.itesm.gda.bm.model.dao.DefectDAO;
 import mx.itesm.gda.bm.model.Project;
 import mx.itesm.gda.bm.model.dao.ProjectDAO;
 import mx.itesm.gda.bm.model.Task;
 import mx.itesm.gda.bm.model.dao.TaskDAO;
 import mx.itesm.gda.bm.model.TaskType;
+import mx.itesm.gda.bm.model.TaskState;
 /**
  *
  * @author Administrator
@@ -45,8 +47,8 @@ public class ReviewsEfficiencyBizOpImpl extends AbstractBizOp implements Reviews
         int perReviewDefects = 0, peerReviewDefects = 0, walkDefects = 0, inspectionDefects = 0;
         double taskEffort = 0;
         double perReviewEffort = 0, peerReviewEffort = 0, walkEffort = 0, inspectionEffort = 0;
-        List<Defect> allDefects;
-        List<Task> allTasks;
+        List<Defect> allDefects, finalListDefects;
+        List<Task> allTasks, finalListTasks;
         ArrayList<String> reviewsNames = new ArrayList<String>();
         ArrayList<Integer> reviewsDefects = new ArrayList<Integer>();
         ArrayList<Double> reviewsEfforts = new ArrayList<Double>();
@@ -56,6 +58,9 @@ public class ReviewsEfficiencyBizOpImpl extends AbstractBizOp implements Reviews
         reviewsNames.add("Revisión de Colegas");
         reviewsNames.add("Caminata");
         reviewsNames.add("Inspección");
+
+        finalListTasks = new ArrayList<Task>();
+        finalListDefects = new ArrayList<Defect>();
 
         if (project_id == 0){
             allDefects = defectDAO.getAll();
@@ -73,37 +78,53 @@ public class ReviewsEfficiencyBizOpImpl extends AbstractBizOp implements Reviews
                     + "xAxisName='Número de defectos detectados por hora' yAxisName='Porcentaje de defectos' bgAlpha='0,0'>";
         }
 
-        for(Defect singleDefect : allDefects){
-            Task detectionTask = singleDefect.getDetectionTask();
-            TaskType taskType = detectionTask.getTaskType();
-            if (taskType == TaskType.PERSONAL_REVIEW){
-                perReviewDefects++;
-            }
-            else if (taskType == TaskType.PEER_REVIEW){
-                peerReviewDefects++;
-            }
-            else if (taskType == TaskType.WALKTHROUGH){
-                walkDefects++;
-            }
-            else if (taskType == TaskType.INSPECTION){
-                inspectionDefects++;
+        for (Defect singleDefect : allDefects){
+            if (singleDefect.getDefectState() == DefectState.ACCEPTED || singleDefect.getDefectState() == DefectState.FIXED){
+                finalListDefects.add(singleDefect);
             }
         }
 
-        for(Task singleTask : allTasks){
-            taskEffort = singleTask.getInvestedHours();
-            TaskType taskType = singleTask.getTaskType();
-            if (taskType == TaskType.PERSONAL_REVIEW){
-                perReviewEffort = perReviewEffort + taskEffort;
+        if(finalListDefects != null){
+            for(Defect singleDefect : finalListDefects){
+                Task detectionTask = singleDefect.getDetectionTask();
+                TaskType taskType = detectionTask.getTaskType();
+                if (taskType == TaskType.PERSONAL_REVIEW){
+                    perReviewDefects++;
+                }
+                else if (taskType == TaskType.PEER_REVIEW){
+                    peerReviewDefects++;
+                }
+                else if (taskType == TaskType.WALKTHROUGH){
+                    walkDefects++;
+                }
+                else if (taskType == TaskType.INSPECTION){
+                    inspectionDefects++;
+                }
             }
-            else if (taskType == TaskType.PEER_REVIEW){
-                peerReviewEffort = peerReviewEffort + taskEffort;
+        }
+
+        for (Task singleTask : allTasks){
+            if (singleTask.getTaskState() == TaskState.STARTED || singleTask.getTaskState() == TaskState.COMPLETED){
+                finalListTasks.add(singleTask);
             }
-            else if (taskType == TaskType.WALKTHROUGH){
-                walkEffort = walkEffort + taskEffort;
-            }
-            else if (taskType == TaskType.INSPECTION){
-                inspectionEffort = inspectionEffort + taskEffort;
+        }
+
+        if(finalListTasks != null){
+            for(Task singleTask : finalListTasks){
+                taskEffort = singleTask.getInvestedHours();
+                TaskType taskType = singleTask.getTaskType();
+                if (taskType == TaskType.PERSONAL_REVIEW){
+                    perReviewEffort = perReviewEffort + taskEffort;
+                }
+                else if (taskType == TaskType.PEER_REVIEW){
+                    peerReviewEffort = peerReviewEffort + taskEffort;
+                }
+                else if (taskType == TaskType.WALKTHROUGH){
+                    walkEffort = walkEffort + taskEffort;
+                }
+                else if (taskType == TaskType.INSPECTION){
+                    inspectionEffort = inspectionEffort + taskEffort;
+                }
             }
         }
 

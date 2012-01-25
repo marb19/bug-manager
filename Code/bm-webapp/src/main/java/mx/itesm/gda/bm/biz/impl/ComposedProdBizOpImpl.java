@@ -75,9 +75,9 @@ public class ComposedProdBizOpImpl extends AbstractBizOp implements ComposedProd
         ArrayList<Double> prods = new ArrayList<Double>();
         ArrayList<Double> composedProds = new ArrayList<Double>();
 
-        List<User> allUsers = userDAO.getAllDevelopers();
+        List<User> allDevelopers = userDAO.getAllDevelopers();
 
-        for(User singleUser : allUsers){
+        for(User singleUser : allDevelopers){
             long LOC = 0, effort = 0, correctionEffort = 0;            
 
             String username = singleUser.getUserName();

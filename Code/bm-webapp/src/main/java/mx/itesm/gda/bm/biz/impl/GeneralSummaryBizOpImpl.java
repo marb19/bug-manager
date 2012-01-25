@@ -64,8 +64,7 @@ public class GeneralSummaryBizOpImpl extends AbstractBizOp implements GeneralSum
         // Getting testing efficiency
         for (Phase singlePhase : allPhases){
             if (singlePhase.getType() == PhaseType.TESTING){
-                List<Defect> removedDefects = defectDAO.searchByStateRemPhaseProject(DefectState.FIXED,
-                    singlePhase.getPhaseId(), project_id);
+                List<Defect> removedDefects = defectDAO.searchByRemPhaseProject(singlePhase.getPhaseId(), project_id);
                 remDefects = remDefects + removedDefects.size();
                 List<Task> tasksByPhase = singlePhase.getTasks();
                 for (Task singleTask : tasksByPhase){
@@ -86,10 +85,8 @@ public class GeneralSummaryBizOpImpl extends AbstractBizOp implements GeneralSum
             double efficiency = 0, leverage = 0;
             // Getting the inyected and removed defects by phase, and their totals
             Map<String, Object> row = new HashMap<String, Object>();
-            List<Defect> inyectedDefects = defectDAO.searchByStateDetPhaseProject(DefectState.ACCEPTED,
-                    singlePhase.getPhaseId(), project_id);
-            List<Defect> removedDefects = defectDAO.searchByStateRemPhaseProject(DefectState.FIXED, 
-                    singlePhase.getPhaseId(), project_id);
+            List<Defect> inyectedDefects = defectDAO.searchByInyPhaseProject(singlePhase.getPhaseId(), project_id);
+            List<Defect> removedDefects = defectDAO.searchByRemPhaseProject(singlePhase.getPhaseId(), project_id);
             totalInyDefects = totalInyDefects + inyectedDefects.size();
             totalRemDefects = totalRemDefects + removedDefects.size();
 
@@ -136,10 +133,8 @@ public class GeneralSummaryBizOpImpl extends AbstractBizOp implements GeneralSum
             totalFailureCost = totalFailureCost + failureCostByPhase;
 
             // Getting yield by phase
-            List<Defect> detectionDefects = defectDAO.searchByStateDetPhaseProject(DefectState.ACCEPTED,
-                    singlePhase.getPhaseId(), project_id);
-            List<Defect> remotionDefects = defectDAO.searchByStateRemPhaseProject(DefectState.FIXED,
-                    singlePhase.getPhaseId(), project_id);
+            List<Defect> detectionDefects = defectDAO.searchByInyPhaseProject(singlePhase.getPhaseId(), project_id);
+            List<Defect> remotionDefects = defectDAO.searchByRemPhaseProject(singlePhase.getPhaseId(), project_id);
             acumInyected = acumInyected + detectionDefects.size();
             acumRemoved = acumRemoved + remotionDefects.size();
             escaped = acumInyected - acumRemoved;
@@ -210,14 +205,14 @@ public class GeneralSummaryBizOpImpl extends AbstractBizOp implements GeneralSum
         Project singleProject = projectDAO.findById(project_id);
         List<Defect> allDefects = singleProject.getDefects();
         for (Defect singleDefect : allDefects){
-            if (singleDefect.getDefectState() == DefectState.ACCEPTED){
+            if (singleDefect.getDefectState() == DefectState.ACCEPTED || singleDefect.getDefectState() == DefectState.FIXED){
                 totalInyDefects++;
             }
         }
         List<Task> allTasks = singleProject.getTasks();
         for (Task singleTask : allTasks){
             if (singleTask.getTaskType() == TaskType.DEVELOPMENT &&
-                    singleTask.getTaskState() == TaskState.STARTED){
+                    (singleTask.getTaskState() == TaskState.STARTED || singleTask.getTaskState() == TaskState.COMPLETED)){
                 totalSize = totalSize + singleTask.getSize();
             }
         }

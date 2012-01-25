@@ -20,6 +20,7 @@ import mx.itesm.gda.bm.model.Project;
 import mx.itesm.gda.bm.model.dao.ProjectDAO;
 import mx.itesm.gda.bm.model.Phase;
 import mx.itesm.gda.bm.model.Task;
+import mx.itesm.gda.bm.model.TaskState;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -53,8 +54,10 @@ public class PhaseProdReportBizOpImpl extends AbstractBizOp implements PhaseProd
         for(Phase phase : project.getPhases()){
             Integer phaseHours = 0, phaseSize = 0;
             for (Task task : phase.getTasks()){
-                phaseHours += task.getInvestedHours();
-                phaseSize += task.getSize();
+                if (task.getTaskState() == TaskState.STARTED || task.getTaskState() == TaskState.COMPLETED){
+                    phaseHours += task.getInvestedHours();
+                    phaseSize += task.getSize();
+                }
             }
             phaseNames.add(phase.getPhaseName());
             phaseTimes.add(phaseHours);
