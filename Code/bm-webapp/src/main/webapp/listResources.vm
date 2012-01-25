@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>Usuarios por proyecto- All In Time System</title>
+		<link rel="stylesheet" href="CSS/Style.css" type="text/css" media="screen" />
+		<script>
+			function goToUrl(url)
+			{
+				window.location = url;
+			}
+		</script>
+    </head>
+	<body>
+		<div id="header">
+			<img src="images/Login/bm-logo.png"  alt="BM logo" id="base-bmlogo"/>
+			<div id="base-header-text">
+				Hoy es $dateLong.format($date.systemDate)<br/>
+				Bienvenido, ${user.fullName}<br/>
+				<a href='userLogin.do?op=logout'>Salir</a>
+			</div>
+			<div id="base-menu">
+				<div id="base-menu-bar">
+					<img src="images/Base/Menu1.png" id="base-menu-left" />
+					<div id="base-menu-center">
+						<ul>
+							<li class='Proyectos' onclick="goToUrl('listProjects.do')" >
+							</li>
+                                                        <li class='Reportes' onclick="goToUrl('listReports.do')" >
+                                                        </li>
+                                                    #if($user.administrator)
+							<li class='UsuariosVisitando' onclick="goToUrl('listUsers.do')" >
+							</li>
+                                                    #end
+						</ul>
+					</div>
+					<img src="images/Base/Menu3.png" id="base-menu-right" />
+				</div>
+			</div>
+		</div>
+		<div id="content"> 
+			<div id="content-header">
+				<h3 id="form-title">Usuarios asignados al proyecto</h3>
+
+				<a href="newUser.do" id="add-icon-link">
+					<img src="images/Base/agregar.png" id="add-icon-img" />
+				</a>
+			</div>
+			#if ($projectUsers.empty)
+				<h3 id="form-title">No existen usuarios registrados en este proyecto.</h3>
+			#else
+				<table id="content-table">
+					<tr>
+						<th>Usuario</th>
+											<th>Nombre completo</th>
+						<th>Permisos</th>
+						<th>E-mail</th>
+											<th></th>
+						<th></th>
+					</tr>
+					#foreach($u in $projectUsers)
+					<tr>
+						<td>${u.userName}</td>
+						<td>${u.fullName}</td>
+						<td>
+                                                    #if($u.permissions=='30')
+                                                    Administrador/Gerente
+                                                    #else
+                                                        #if($u.permissions=='20')
+                                                        Líder de proyecto
+                                                        #else
+                                                        Usuario
+                                                        #end
+                                                    #end
+                                                </td>
+						<td>${u.email}</td>
+						<td>
+                                                    #if($u.isEmpty)
+                                                    <a href="removeResource.do?project_id=${project_id}&userName=${u.userName}">Remover</a>
+                                                    #end
+						</td>
+					</tr>
+					#end
+				</table>
+			#end
+
+                        <h3 id="form-title">Usuarios disponibles</h3>
+                        #if ($availableUsers.empty)
+				<h3 id="form-title">No existen usuarios disponibles.</h3>
+			#else
+				<table id="content-table">
+					<tr>
+						<th>Usuario</th>
+											<th>Nombre completo</th>
+						<th>Permisos</th>
+						<th>E-mail</th>
+											<th></th>
+						<th></th>
+					</tr>
+					#foreach($u in $availableUsers)
+					<tr>
+						<td>${u.userName}</td>
+						<td>${u.fullName}</td>
+						<td>
+                                                    #if($u.permissions=='30')
+                                                    Administrador/Gerente
+                                                    #else
+                                                        #if($u.permissions=='20')
+                                                        Líder de proyecto
+                                                        #else
+                                                        Usuario
+                                                        #end
+                                                    #end
+                                                </td>
+						<td>${u.email}</td>
+						<td>
+                                                    <a href="addResource.do?project_id=${project_id}&userName=${u.userName}">Añadir</a>
+						</td>
+					</tr>
+					#end
+				</table>
+			#end
+
+			<div id="content-footer">
+				<span class="breadcrumb-title">Estas viendo:</span>
+				<span class="breadcrumb-text">Usuarios por proyecto</span>
+
+				<a href="newUser.do" id="add-icon-link">
+					<img src="images/Base/agregar.png" id="add-icon-img" />
+				</a>
+                                
+			</div>
+		</div>
+    </body>
+</html>

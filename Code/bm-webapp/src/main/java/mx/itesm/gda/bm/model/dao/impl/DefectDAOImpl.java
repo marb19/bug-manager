@@ -331,4 +331,16 @@ public class DefectDAOImpl extends BaseItemDAOImpl<Defect> implements DefectDAO 
         return result;
 
     }
+
+    @Override
+    @Transactional(readOnly = true, propagation = Propagation.MANDATORY)
+    public List<Defect> searchByProjectAndUser(int projectID, String userName){
+        @SuppressWarnings("unchecked")
+        List<Defect> result = getEntityManager().createQuery("SELECT d FROM Defect d "
+                + "JOIN d.assignedUser u JOIN d.project pr WHERE u.userName =:userName AND pr.projectId=:projectID")
+                .setParameter("projectID", projectID)
+                .setParameter("userName", userName)
+                .getResultList();
+        return result;
+    }
 }

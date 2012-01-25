@@ -59,7 +59,7 @@ public class NewTaskController extends BaseController {
             throw new ControllerException("ID de proyecto fuera de rango");
         }
 
-        List<Map<String, ?>> users = userMgr.retrieveUsers();
+        List<Map<String, ?>> users = projMgr.getUsers(projectID);
         List<String> taskTypes = taskMgr.getTypes();
         model.put("users", users);
         model.put("project_id", projectID);

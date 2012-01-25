@@ -67,4 +67,6 @@ public interface DefectDAO extends BaseItemDAO<Defect> {
     public List<Defect> searchByStateDetPhaseProject(DefectState state, int phase_id, int project_id);
 
     public List<Defect> searchByStateRemPhaseProject(DefectState state, int phase_id, int project_id);
+
+    public List<Defect> searchByProjectAndUser(int projectID, String username);
 }
