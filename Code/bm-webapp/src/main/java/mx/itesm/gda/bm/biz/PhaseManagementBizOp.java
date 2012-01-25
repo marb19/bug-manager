@@ -18,11 +18,15 @@ public interface PhaseManagementBizOp extends BizOp{
     
     public List<Map<String, ?>> retrieveProjectPhases(int projectId);
     
-    public int createPhase(String phaseName, String phaseDescription, int projectID, int projectOrder);
+    public int createPhase(String phaseName, String phaseDescription, int projectID, int projectOrder, String phaseType);
     
-    public void modifyPhase(int phaseID, String phaseName, String phaseDescription, int projectOrder);
+    public void modifyPhase(int phaseID, String phaseName, String phaseDescription, int projectOrder, String phaseType);
     
     public void deletePhase(int phaseID);
     
     public Map<String, ?> getPhase(int phaseId);
+    
+    public List<String> getTypes();
+    
+    public void modifyOrder(int projectID, int order);
 }

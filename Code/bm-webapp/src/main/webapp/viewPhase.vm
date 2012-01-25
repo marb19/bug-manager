@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Ver/Modificar tarea - All In Time System</title>
+        <link rel="stylesheet" href="CSS/Style.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="CSS/redmond/jquery-ui-1.8.5.custom.css" type="text/css" media="screen" />
+        <script type="text/javascript" src="./js/jquery-1.4.2.min.js"></script>
+        <script type="text/javascript" src="./js/jquery.validate.min.js"></script>
+        <script type="text/javascript" src="./js/localization/messages_es.js"></script>
+        <script type="text/javascript" src="./js/jquery-ui-1.8.5.custom.min.js"></script>
+        <script type="text/javascript" src="./js/localization/jquery.ui.datepicker-es.js"></script>
+        <script>
+                function goToUrl(url)
+                {
+                        window.location = url;
+                }
+
+                $(document).ready(function(){
+                    $("#task-modify-form").validate({
+                            rules: {
+                                    estimatedHours: {
+                                            min:0
+                                    },
+                                    investedHours: {
+                                            range: [0,24]
+                                    },
+                                    remainingHours: {
+                                            min:0
+                                    }
+                            }
+                    });
+
+                 $("#task-modify-form").submit(function() {
+                   if ($("#status").val() == "NOT_STARTED" && $("#investedHours").val() == 0 && $("#remainingHours").val() == 0) {
+                      alert("La tarea no puede modificarse, el esfuerzo agregado y el restante no pueden ser igual a 0.");
+                      return false;
+                   }
+                   if ($("#remainingHours").val() <= 0) {
+                    if (confirm("Esta tarea será marcada como completada, porque el esfuerzo restante es 0")) {
+                      return true;
+                    }
+                    else {
+                      return false;
+                    }
+                   }
+                 });
+                });
+        </script>
+		<script type="text/javascript" src="./js/bm.tasks.js"></script>
+    </head>
+    <body>
+        <div id="header">
+            <img src="images/Login/bm-logo.png"  alt="BM logo" id="base-bmlogo"/>
+            <div id="base-header-text">
+				Hoy es $dateLong.format($date.systemDate)<br/>
+				Bienvenido, ${user.fullName}<br/>
+                <a href='userLogin.do?op=logout'>Salir</a>
+            </div>
+            <div id="base-menu">
+                <div id="base-menu-bar">
+                    <img src="images/Base/Menu1.png" id="base-menu-left" />
+                    <div id="base-menu-center">
+                        <ul>
+                            <li class='ProyectosVisitando' onclick="goToUrl('listProjects.do')" >
+                            </li>
+                            <li class='Reportes' onclick="goToUrl('listReports.do')" >
+                            </li>
+                            #if($user.administrator)
+                            <li class='Usuarios' onclick="goToUrl('listUsers.do')" >
+                            </li>
+                            #end
+                        </ul>
+                    </div>
+                    <img src="images/Base/Menu3.png" id="base-menu-right" />
+                </div>
+            </div>
+        </div>
+        <div id="content"> <!--AQUI METER TODOS LOS INPUT, LABELS etc-->
+            <div id="task">
+                <form action="viewTask.do?project_id=${project_id}&task_id=${task_id}" method="POST" id="task-modify-form">
+                    <h3 id="form-title">Ver/Modificar Tarea</h3>
+                    <table id="task-modify">
+                        <tr>
+                            <td>
+                                <label for ="taskName" id="taskNameLabel">Nombre:</label>
+                            </td>
+                            <td>
+                                #if($user.administrator && $task.status != "CANCELED")
+                                <input type="text" name="taskName" id="taskName" class="required" value="${task.taskName}"/>
+                                #else
+				<span>${task.taskName}</span>
+				<input type="hidden" value="${task.taskName}" name="taskName" id="taskName"  />
+                                #end
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for ="taskType" id="taskTypeLabel">Tipo:</label>
+                            </td>
+                            <td>
+                                <select name="taskType" id="taskType" class="required">
+                                    #foreach($type in $taskTypes)
+                                    #if($task.taskType == $type)
+                                    <option value="${type}" selected="selected">${type}</option>
+                                    #else
+                                    <option value="${type}">${type}</option>
+                                    #end
+                                    #end
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for ="taskDescription" id="taskDescriptionLabel">Descripci&oacute;n:</label>
+                            </td>
+                            <td>
+                                #if($user.administrator && $task.status != "CANCELED")
+                                <textarea cols="30" rows="6" name="taskDescription" id="taskDescription">${task.description}</textarea>
+                                #else
+				<span>${task.description}</span>
+				<input type="hidden" value="${task.description}" name="taskDescription" id="taskDescription"  />
+                                #end
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for ="assignedUser" id="assignedUserLabel">Responsable:</label>
+                            </td>
+                            <td>
+                                #if($user.administrator && $task.status != "CANCELED")
+                                <select name="assignedUser" id="assignedUser" class="required">
+                                    <option value="${task.assignedUser.userName}" selected="selected">${task.assignedUser.fullName}</option>
+                                    #foreach($u in $users)
+                                        #if($u.userName != $task.assignedUser.userName)
+                                        <option value="${u.userName}">${u.fullName}</option>
+                                        #end
+                                    #end
+                                </select>
+                                #else
+                                <select name="assignedUser" id="assignedUser" class="required">
+                                    <option value="${task.assignedUser.userName}" selected="selected">${task.assignedUser.fullName}</option>
+                                </select>
+                                #end
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for ="estimatedHours" id="estimatedHoursLabel">Esfuerzo Planeado:</label>
+                            </td>
+                            <td>
+                                #if($user.administrator && $task.status != "CANCELED")
+                                <input type="text" name="estimatedHours" id="estimatedHours" class="required digits" value="${task.estimatedHours}"/>
+                                #else
+				<span>${task.estimatedHours} horas.</span>
+				<input type="hidden" value="${task.estimatedHours}" name="estimatedHours" id="estimatedHours"  />
+                                #end
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for ="acumulatedHours" id="acumulatedHoursLabel">Esfuerzo Acumulado:</label>
+                            </td>
+                            <td>
+                                ${task.investedHours}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for ="investedHours" id="investedHoursLabel">Agregar Esfuerzo:</label>
+                            </td>
+                            <td>
+                                #if($task.status != "COMPLETED"  && $task.status != "CANCELED")
+                                <input type="text" name="investedHours" id="investedHours" class="required digits" value="0"/>
+                                #else
+                                <input type="text" name="investedHours" id="investedHours" class="digits" value="0" readonly="readonly"/>
+                                #end
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for ="ramainingHours" id="ramainingHoursLabel">Esfuerzo Restante:</label>
+                            </td>
+                            <td>
+                                #if($task.status != "COMPLETED"  && $task.status != "CANCELED")
+                                <input type="text" name="remainingHours" id="remainingHours" class="required digits" value="${task.remainingHours}"/>
+                                #else
+                                <input type="text" name="remainingHours" id="remainingHours" class="digits" value="${task.remainingHours}" readonly="readonly"/>
+                                #end
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for ="status" id="statusLabel">Estatus:</label>
+                            </td>
+                            <td>
+                                #if($user.administrator && $task.status != "COMPLETED"  && $task.status != "CANCELED")
+                                <select name="status" id="status" class="required">
+                                    #if($task.status == "NOT_STARTED")
+                                    <option value="${task.status}" selected="selected">NO_INICIADA</option>
+                                    <option value="STARTED">INICIADA</option>
+                                    <option value="COMPLETED">COMPLETADA</option>
+                                    <option value="CANCELED">CANCELADA</option>
+                                    #elseif($task.status == "STARTED")
+                                    <option value="${task.status}" selected="selected">INICIADA</option>                                 
+                                    <option value="NOT_STARTED">NO_INICIADA</option>
+                                    <option value="COMPLETED">COMPLETADA</option>
+                                    <option value="CANCELED">CANCELADA</option>
+                                    #end
+                                </select>
+                                #elseif($task.status != "COMPLETED"  && $task.status != "CANCELED")
+                                <select name="status" id="status" class="required">
+                                    #if($task.status == "NOT_STARTED")
+                                    <option value="${task.status}" selected="selected">NO_INICIADA</option>
+                                    <option value="STARTED">INICIADA</option>
+                                    <option value="COMPLETED">COMPLETADA</option>
+                                    #elseif($task.status == "STARTED")
+                                    <option value="${task.status}" selected="selected">INICIADA</option>
+                                    <option value="COMPLETED">COMPLETADA</option>
+                                    #end
+                                </select>
+                                #elseif($task.status == "COMPLETED")
+                                COMPLETADA
+                                #elseif($task.status == "CANCELED")
+                                CANCELADA
+                                #end
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for ="startDate" id="startDateLabel">Fecha de Inicio:</label>
+                            </td>
+                            <td>
+                                #if($user.administrator && $task.status != "CANCELED")
+                                <input type="text" name="startDate" id="startDate" class="required hasDatePicker" value="$dateShort.format($task.startDate)"/>
+                                #else
+				<span>$dateShort.format($task.startDate)</span>
+				<input type="hidden" value="$dateShort.format($task.startDate)" name="startDate" id="startDate"  />
+                                #end
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for ="endDate" id="endDateLabel">Fecha de Fin:</label>
+                            </td>
+                            <td>
+                                #if($user.administrator && $task.status != "CANCELED")
+                                <input type="text" name="endDate" id="endDate" class="required hasDatePicker" value="$dateShort.format($task.endDate)"/>
+                                #else
+				<span>$dateShort.format($task.endDate)</span>
+				<input type="hidden" value="$dateShort.format($task.endDate)" name="endDate" id="endDate"  />
+                                #end
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for ="taskCommentaries" id="taskCommentariesLabel">Comentarios:</label>
+                            </td>
+                            <td>
+                                #foreach($c in $comments)
+                                   <span class="task-comment">
+                                        Autor: ${c.author}<br/>
+                                        Fecha: $dateShort.format($c.date)<br/>
+                                        Comentario: ${c.text}<br/>
+                                        ---<br/>
+                                    </span>
+                                #end
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for ="newComment" id="newCommentLabel">Agregar Comentario:</label>
+                            </td>
+                            <td>
+                                #if($task.status != "CANCELED")
+                                <textarea cols="30" rows="6" name="newComment" id="newComment"></textarea>
+                                #else
+                                <textarea cols="30" rows="6" name="newComment" id="newComment" readonly="readonly"></textarea>
+                                #end
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><a href="listTasks.do?project_id=${project_id}" id="cancel-link">Cancelar</a></td>
+                            <td>
+                                #if($user.administrator)
+                                <input type="image" value="Aceptar" src="images/Base/aceptar.png" id="accept-button" />
+                                #elseif(!$user.administrator && $task.status != "CANCELED")
+                                <input type="image" value="Aceptar" src="images/Base/aceptar.png" id="accept-button" />
+                                #end
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
