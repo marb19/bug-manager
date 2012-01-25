@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Ciclo de Vida - Bug Manager</title>
+        <link rel="stylesheet" href="CSS/Style.css" type="text/css" media="screen" />
+        <script>
+                function goToUrl(url)
+                {
+                        window.location = url;
+                }
+
+                function confirmErase(phaseId)
+                {
+                    if (confirm("¿Estás seguro que deseas borrar la fase?"))
+                    {
+                        window.location = "deletePhase.do?phase_id=" + phaseId;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                
+                $(document).ready(function(){
+                        $("#phase-add-form").validate({
+							rules: {
+
+							}
+						});
+                })
+        </script>
+    </head>
+    <body>
+        <div id="header">
+            <img src="images/Login/bm-logo.png"  alt="BM logo" id="base-bmlogo"/>
+            <div id="base-header-text">
+				Hoy es $dateLong.format($date.systemDate)<br/>
+				Bienvenido, ${user.fullName}<br/>
+                <a href='userLogin.do?op=logout'>Salir</a>
+            </div>
+            <div id="base-menu">
+                <div id="base-menu-bar">
+                    <img src="images/Base/Menu1.png" id="base-menu-left" />
+                    <div id="base-menu-center">
+                        <ul>
+                            <li class='ProyectosVisitando' onclick="goToUrl('listProjects.do')" >
+                            </li>
+                            <li class='Reportes' onclick="goToUrl('listReports.do')" >
+                            </li>
+                            #if($user.administrator)
+                            <li class='Usuarios' onclick="goToUrl('listUsers.do')" >
+                            </li>
+                            #end
+                        </ul>
+                    </div>
+                    <img src="images/Base/Menu3.png" id="base-menu-right" />
+                </div>
+            </div>
+        </div>
+		<div id="content"> <!--AQUI METER TODOS LOS INPUT, LABELS etc-->
+			<div id="content-header">
+				<span class="breadcrumb-title">Estas viendo:</span>
+				<span class="breadcrumb-text">El ciclo de vida del proyecto ${project.projectName}</span>
+			</div>
+                    
+                    <div id="phase">
+                        <form action="listPhases.do?project_id=${project_id}" method="POST" id="phase-add-form">
+                            <h3 id="form-title">Agregar Fase</h3>
+                            <table id="phase-add">
+                                <tr>
+                                    <td>
+                                        <label for ="phaseName" id="phaseNameLabel">Nombre de la Fase:</label>
+                                    </td>
+                                    <td>
+                                        <input type="text" name="phaseName" id="phaseName" class="required" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for ="phaseType" id="phaseTypeLabel">Tipo:</label>
+                                    </td>
+                                    <td>
+                                        <select name="phaseType" id="phaseType" class="required">
+                                            #foreach($type in $phaseTypes)
+                                            <option value="${type}">${type}</option>
+                                            #end
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for ="phaseDescription" id="phaseDescriptionLabel">Descripci&oacute;n:</label>
+                                    </td>
+                                    <td>
+                                        <textarea cols="30" rows="6" name="phaseDescription" id="phaseDescription" class="required"></textarea>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for ="phaseOrder" id="phaseOrderLabel">Después de:</label>
+                                    </td>
+                                    <td>
+                                        <select name="phaseOrder" id="phaseType">
+                                            <option value="0" selected="selected"></option>
+                                            #foreach($p in $phases)
+                                            <option value="${p.projectOrder}">${p.phaseName}</option>
+                                            #end
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><a href="listPhases.do?project_id=${project_id}" id="cancel-link">Cancelar</a></td>
+                                    <td>
+                                        <input type="image" value="Aceptar" src="images/Base/aceptar.png" id="accept-button" />
+                                    </td>
+                                </tr>
+                            </table>
+                        </form>
+                    </div>
+                    <br>
+                    <div>
+			#if ($phases.empty)
+                            <h3 id="form-title">No existen fases registradas para este proyecto.</h3>
+			#else
+                            <h3 id="form-title">Fases Actuales</h3>
+                            <table id="content-table">
+					<tr>
+						<th>Fase</th>
+                                                <th>Tipo</th>
+						<th>Descripción</th>
+						<th>Eliminar</th>
+					</tr>
+					#foreach($p in $phases)
+					<tr>
+                                            <td><a href="viewPhase.do?project_id=${project.projectId}&phase_id=${p.phaseID}">${p.phaseName}</a></td>
+                                            <td>${p.phaseType}</td>
+                                            <td>${p.phaseDesc}</td>
+                                            <td><a href="#" onclick="confirmErase(${p.phaseID})">Borrar</a></td>
+					</tr>
+					#end
+				</table>
+			#end
+			<div id="content-footer">
+				<span class="breadcrumb-title">Estas viendo:</span>
+				<span class="breadcrumb-text">El ciclo de vida del proyecto ${project.projectName}</span>
+			</div>
+                </div>
+		</div>
+    </body>
+</html>

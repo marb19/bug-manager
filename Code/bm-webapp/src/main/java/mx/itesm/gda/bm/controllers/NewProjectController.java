@@ -65,7 +65,7 @@ public class NewProjectController extends BaseController {
         int projectId = projectMgr.createProject(projectName, projectDescription,
                 projectDueDate, projectPlannedDate);
 
-        model.put("projectId", projectId);
-        return "redirect:listProjects.do";
+        //model.put("projectId", projectId);
+        return "redirect:listPhases.do?project_id=" + projectId;
     }
 }
