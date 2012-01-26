@@ -83,6 +83,18 @@
                         </tr>
                         <tr>
                             <td>
+                                <label for ="phase_id" id="phaseLabel">Fase:</label>
+                            </td>
+                            <td>
+                                <select name="phase_id" id="phase_id" class="required">
+                                    #foreach($phase in $phases)
+                                    <option value="${phase.phaseID}">${phase.phaseName}</option>
+                                    #end
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
                                 <label for ="taskDescription" id="taskDescriptionLabel">Descripci&oacute;n:</label>
                             </td>
                             <td>
