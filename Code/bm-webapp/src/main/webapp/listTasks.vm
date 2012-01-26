@@ -85,6 +85,7 @@
 						<th>Estatus</th>
 						<th>Fecha Inicio</th>
 						<th>Fecha Fin</th>
+                                                <th>Fase</th>
 						#if($user.administrator)
 						<th>Acciones</th>
 						#end
@@ -118,6 +119,7 @@
 						#end
 						<td>$date.format(${t.startDate})</td>
 						<td>$date.format(${t.endDate})</td>
+                                                <td>${t.phase.phaseName}</td>
 						#if($user.administrator && $t.investedHours == 0 && $t.commentsNumber == 0)
 						<td><a href="#" onclick="confirmErase(${t.taskID})">Borrar</a></td>
 						#end

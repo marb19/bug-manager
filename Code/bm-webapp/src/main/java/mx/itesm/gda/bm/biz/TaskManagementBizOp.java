@@ -17,7 +17,6 @@ package mx.itesm.gda.bm.biz;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import mx.itesm.gda.bm.model.TaskType;
 
 /**
  *
@@ -27,7 +26,7 @@ import mx.itesm.gda.bm.model.TaskType;
 public interface TaskManagementBizOp extends BizOp {
 
     public int createTask(String taskName, int project, String description,
-            String assignedUser, int estimatedHours, Date startDate, Date endDate, String taskType);
+            String assignedUser, int estimatedHours, Date startDate, Date endDate, String taskType, int phase);
 
     public int modifyTask(int taskID, String taskName, String description, String assignedUser, String status, int estimatedHours, int investedHours, int remainingHours, Date startDate, Date endDate, String taskType);
 

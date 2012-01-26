@@ -24,11 +24,13 @@ import mx.itesm.gda.bm.model.Project;
 import mx.itesm.gda.bm.model.User;
 import mx.itesm.gda.bm.model.dao.TaskDAO;
 import mx.itesm.gda.bm.biz.TaskManagementBizOp;
+import mx.itesm.gda.bm.model.Phase;
 import mx.itesm.gda.bm.model.Task;
 import mx.itesm.gda.bm.model.TaskComment;
 import mx.itesm.gda.bm.model.TaskCompletionReport;
 import mx.itesm.gda.bm.model.TaskState;
 import mx.itesm.gda.bm.model.TaskType;
+import mx.itesm.gda.bm.model.dao.PhaseDAO;
 import mx.itesm.gda.bm.model.dao.ProjectDAO;
 import mx.itesm.gda.bm.model.dao.TaskCommentDAO;
 import mx.itesm.gda.bm.model.dao.TaskCompletionReportDAO;
@@ -59,6 +61,9 @@ public class TaskManagementBizOpImpl extends AbstractBizOp implements
     private UserDAO userDAO;
 
     @Autowired
+    private PhaseDAO phaseDAO;
+
+    @Autowired
     private TaskCommentDAO taskCommentDAO;
 
     @Autowired
@@ -85,6 +90,7 @@ public class TaskManagementBizOpImpl extends AbstractBizOp implements
             t.put("status", task.getTaskState().name());
             t.put("taskType", task.getTaskType().name());
             t.put("commentsNumber", task.getTaskComments().size());
+            t.put("phase", mapPhase(task.getPhase()));
             ret.add(t);
         }
 
@@ -128,6 +134,15 @@ public class TaskManagementBizOpImpl extends AbstractBizOp implements
         return p;
     }
 
+    private Map<String, ?> mapPhase(Phase phase) {
+        Map<String, Object> p = new HashMap<String, Object>();
+        p.put("phaseId", phase.getPhaseId());
+        p.put("phaseName", phase.getPhaseName());
+        p.put("phaseDescription", phase.getPhaseDescription());
+        p.put("order", phase.getProjectOrder());
+        return p;
+    }
+
     @Override
     public Map<String, ?> getTask(Integer taskID) {
 
@@ -152,10 +167,11 @@ public class TaskManagementBizOpImpl extends AbstractBizOp implements
     @Override
     @Transactional(readOnly = true, propagation = Propagation.MANDATORY)
     public int createTask(String taskName, int project, String description,
-            String assignedUser, int estimatedHours, Date startDate, Date endDate, String taskType) {
+            String assignedUser, int estimatedHours, Date startDate, Date endDate, String taskType, int phase) {
 
         User u = userDAO.findByUserName(assignedUser);
         Project p = projectDAO.findById(project);
+        Phase ph = phaseDAO.findById(phase);
         
         Task t = new Task();
         t.setTaskName(taskName);
@@ -168,6 +184,7 @@ public class TaskManagementBizOpImpl extends AbstractBizOp implements
         t.setEndDate(endDate);
         t.setTaskState(TaskState.NOT_STARTED);
         t.setTaskType(TaskType.valueOf(taskType));
+        t.setPhase(ph);
         taskDAO.save(t);
         return t.getTaskId();
     }

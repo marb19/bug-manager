@@ -17,9 +17,11 @@ package mx.itesm.gda.bm.controllers;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import mx.itesm.gda.bm.biz.PhaseManagementBizOp;
 import mx.itesm.gda.bm.biz.ProjectManagementBizOp;
 import mx.itesm.gda.bm.biz.TaskManagementBizOp;
 import mx.itesm.gda.bm.biz.UserManagementBizOp;
+import mx.itesm.gda.bm.model.Phase;
 import mx.itesm.gda.bm.utils.UserLogged;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -49,6 +51,9 @@ public class NewTaskController extends BaseController {
     @Autowired
     private ProjectManagementBizOp projMgr;
 
+    @Autowired
+    private PhaseManagementBizOp phaseMgr;
+
     @RequestMapping(method = RequestMethod.GET)
     @Transactional(readOnly = true)
     @UserLogged(adminRequired = true)
@@ -61,9 +66,11 @@ public class NewTaskController extends BaseController {
 
         List<Map<String, ?>> users = projMgr.getUsers(projectID);
         List<String> taskTypes = taskMgr.getTypes();
+        List<Map<String, ?>> phases = phaseMgr.retrieveAllPhases();
         model.put("users", users);
         model.put("project_id", projectID);
         model.put("taskTypes", taskTypes);
+        model.put("phases", phases);
 
         return null;
     }
@@ -80,6 +87,7 @@ public class NewTaskController extends BaseController {
             @RequestParam("startDate") Date startDate,
             @RequestParam("endDate") Date endDate,
             @RequestParam("taskType") String taskType,
+            @RequestParam("phase_id") int phaseID,
             ModelMap model) {
 
         if(taskName.equals("")){
@@ -88,6 +96,10 @@ public class NewTaskController extends BaseController {
 
         if(projectID <= 0){
             throw new ControllerException("ID de proyecto fuera de rango");
+        }
+
+        if(phaseID <= 0){
+            throw new ControllerException("ID de fase fuera de rango");
         }
 
         if(description.equals("")){
@@ -129,7 +141,7 @@ public class NewTaskController extends BaseController {
         }
         
         int task = taskMgr.createTask(taskName, projectID, description,
-                assignedUser, estimatedHours, startDate, endDate, taskType);
+                assignedUser, estimatedHours, startDate, endDate, taskType, phaseID);
 
         return "redirect:listTasks.do?project_id=" + projectID;
     }
