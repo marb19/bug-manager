@@ -213,4 +213,15 @@ public class TaskDAOImpl extends BaseItemDAOImpl<Task> implements TaskDAO {
                 .getResultList();
         return result;
     }
+
+    @Override
+    @Transactional(readOnly = true, propagation = Propagation.MANDATORY)
+    public List<Task> getOrderedTasks(int projectID) {
+        @SuppressWarnings("unchecked")
+        List<Task> result = getEntityManager().createQuery("SELECT t FROM Task t "
+                + "JOIN t.phase ph JOIN t.project pr WHERE pr.projectId=:projectID ORDER BY ph.projectOrder")
+                .setParameter("projectID", projectID)
+                .getResultList();
+        return result;
+    }
 }
