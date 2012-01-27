@@ -73,9 +73,8 @@ public class TaskManagementBizOpImpl extends AbstractBizOp implements
     @Transactional(readOnly = true, propagation = Propagation.MANDATORY)
     public List<Map<String, ?>> retrieveTasks(int projectID) {
         List<Map<String, ?>> ret = new ArrayList<Map<String, ?>>();
-        Project project = projectDAO.findById(projectID);
 
-        for(Task task : project.getTasks()) {
+        for(Task task : taskDAO.getOrderedTasks(projectID)) {
             Map<String, Object> t = new HashMap<String, Object>();
             t.put("taskID", task.getTaskId());
             t.put("taskName", task.getTaskName());
