@@ -160,6 +160,7 @@ public class TaskManagementBizOpImpl extends AbstractBizOp implements
         t.put("remainingHours", task.getRemainingHours());
         t.put("status", task.getTaskState().name());
         t.put("taskType", task.getTaskType().name());
+        t.put("phase", mapPhase(task.getPhase()));
 
         return t;
     }
@@ -206,9 +207,10 @@ public class TaskManagementBizOpImpl extends AbstractBizOp implements
     }
 
     @Override
-    public int modifyTask(int taskID, String taskName, String description, String assignedUser, String status, int estimatedHours, int investedHours, int remainingHours, Date startDate, Date endDate, String taskType) {
+    public int modifyTask(int taskID, String taskName, String description, String assignedUser, String status, int estimatedHours, int investedHours, int remainingHours, Date startDate, Date endDate, String taskType, int phaseID) {
         Task t = taskDAO.findById(taskID);
         User u = userDAO.findByUserName(assignedUser);
+        Phase ph = phaseDAO.findById(phaseID);
 
         t.setTaskName(taskName);
         t.setTaskDescription(description);
@@ -217,6 +219,7 @@ public class TaskManagementBizOpImpl extends AbstractBizOp implements
         t.setEstimatedHours(estimatedHours);
         t.setRemainingHours(remainingHours);
         t.setTaskType(TaskType.valueOf(taskType));
+        t.setPhase(ph);
         
         if(TaskState.valueOf(status) != TaskState.COMPLETED && TaskState.valueOf(status) != TaskState.CANCELED){
             t.setInvestedHours(t.getInvestedHours() + investedHours);

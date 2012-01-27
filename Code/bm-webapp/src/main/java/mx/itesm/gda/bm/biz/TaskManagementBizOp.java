@@ -28,7 +28,7 @@ public interface TaskManagementBizOp extends BizOp {
     public int createTask(String taskName, int project, String description,
             String assignedUser, int estimatedHours, Date startDate, Date endDate, String taskType, int phase);
 
-    public int modifyTask(int taskID, String taskName, String description, String assignedUser, String status, int estimatedHours, int investedHours, int remainingHours, Date startDate, Date endDate, String taskType);
+    public int modifyTask(int taskID, String taskName, String description, String assignedUser, String status, int estimatedHours, int investedHours, int remainingHours, Date startDate, Date endDate, String taskType, int phaseID);
 
     public Map<String, ?> getTask(Integer taskID);
 
