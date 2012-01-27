@@ -17,6 +17,7 @@ package mx.itesm.gda.bm.controllers;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import mx.itesm.gda.bm.biz.PhaseManagementBizOp;
 import mx.itesm.gda.bm.biz.TaskManagementBizOp;
 import mx.itesm.gda.bm.biz.UserManagementBizOp;
 import mx.itesm.gda.bm.session.UserLoginSession;
@@ -49,6 +50,9 @@ public class ViewTaskController extends BaseController {
     @Autowired
     private UserManagementBizOp userMgr;
 
+    @Autowired
+    private PhaseManagementBizOp phaseMgr;
+
     @RequestMapping(method = RequestMethod.GET)
     @Transactional(readOnly = true)
     @UserLogged()
@@ -68,6 +72,7 @@ public class ViewTaskController extends BaseController {
         List<Map<String, ?>> users = userMgr.retrieveUsers();
         List<Map<String, ?>> comments = taskMgr.retrieveComments(taskID);
         List<String> taskTypes = taskMgr.getTypes();
+        List<Map<String, ?>> phases = phaseMgr.retrieveAllPhases();
 
         model.put("users", users);
         model.put("task", task);
@@ -75,6 +80,7 @@ public class ViewTaskController extends BaseController {
         model.put("project_id", projectID);
         model.put("task_id", taskID);
         model.put("taskTypes", taskTypes);
+        model.put("phases", phases);
 
         return null;
     }
@@ -96,6 +102,7 @@ public class ViewTaskController extends BaseController {
             @RequestParam("endDate") Date endDate,
             @RequestParam("newComment") String newComment,
             @RequestParam("taskType") String taskType,
+            @RequestParam("phase_id") int phaseID,
             ModelMap model) {
 
         if(projectID <= 0){
@@ -127,6 +134,10 @@ public class ViewTaskController extends BaseController {
            status.equals("NOT_STARTED") ||
            status.equals("STARTED"))){
             throw new ControllerException("Estatus inexistente");
+        }
+
+        if(phaseID <= 0){
+            throw new ControllerException("ID de fase fuera de rango");
         }
 
         if(status.equals("COMPLETED") && remainingHours > 0){
@@ -178,7 +189,7 @@ public class ViewTaskController extends BaseController {
 
         int task = taskMgr.modifyTask(taskID, taskName, description,
                 assignedUser, status, estimatedHours, investedHours, remainingHours, startDate,
-                endDate, taskType);
+                endDate, taskType, phaseID);
 
         if(!newComment.equals("")) {
             taskMgr.addComment(taskID, session.getLoggedUserName(), newComment);
