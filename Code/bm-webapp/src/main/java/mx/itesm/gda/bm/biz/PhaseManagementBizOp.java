@@ -29,4 +29,6 @@ public interface PhaseManagementBizOp extends BizOp{
     public List<String> getTypes();
     
     public void modifyOrder(int projectID, int order);
+    
+    public void autoCycle(int projectID, int cycleType);
 }

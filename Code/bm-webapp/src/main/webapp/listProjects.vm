@@ -65,7 +65,11 @@
 					</tr>
 					#foreach($p in $projects)
 					<tr>
+                                                #if($p.projectNumberOfPhases > 0)
 						<td><a href="listTasks.do?project_id=${p.projectId}">${p.projectName}</a></td>
+                                                #else
+                                                <td><a href="listPhases.do?project_id=${p.projectId}">${p.projectName}</a></td>
+                                                #end
 						<td>$display.truncate($p.projectDescription,50)</td>
 						<td>$date.format($p.projectDueDate)</td>
 						<td>$date.format($p.projectPlannedDate)</td>

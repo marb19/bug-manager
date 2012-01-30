@@ -71,48 +71,63 @@ public class ListPhasesController {
     @Transactional
     @UserLogged(adminRequired = true)
     public String newPhase(
-            @RequestParam("phaseName") String phaseName,
-            @RequestParam("project_id") int projectID,
-            @RequestParam("phaseDescription") String description,
-            @RequestParam("phaseOrder") int phaseOrder,
-            @RequestParam("phaseType") String phaseType,
+            @RequestParam(value = "phaseName", defaultValue="") String phaseName,
+            @RequestParam(value = "project_id", defaultValue = "0") int projectID,
+            @RequestParam(value = "phaseDescription", defaultValue = "") String description,
+            @RequestParam(value = "phaseOrder", defaultValue = "-1") int phaseOrder,
+            @RequestParam(value = "phaseType", defaultValue = "") String phaseType,
+            @RequestParam(value = "cycleType", defaultValue = "0") int cycleType,
             ModelMap model) {
-
-        if(phaseName.equals("")){
-            throw new ControllerException("No se admiten campos vacios");
-        }
-
-        if(projectID <= 0){
-            throw new ControllerException("ID de proyecto fuera de rango");
-        }
         
-        if(phaseOrder < 0){
-            throw new ControllerException("Orden en el proyecto fuera de rango");
-        }
-
-        if(description.equals("")){
-            throw new ControllerException("No se admiten campos vacios");
-        }
-
-        if(phaseType.equals("")){
-            throw new ControllerException("No se admiten campos vacios");
-        }
-
-        boolean wrongType = true;
-        for (String type : phaseMgr.getTypes()){
-            if (phaseType.equals(type)){
-                wrongType=false;
+        if(cycleType == 0){
+            if(phaseName.equals("")){
+                throw new ControllerException("No se admiten campos vacios");
             }
-        }
-        if (wrongType){
-            throw new ControllerException("Tipo de fase inexistente");
-        }
-        
-        phaseMgr.modifyOrder(projectID, phaseOrder + 1);
-        
-        int phase = phaseMgr.createPhase(phaseName, description, projectID, phaseOrder + 1, phaseType);
 
-        return "redirect:listPhases.do?project_id=" + projectID;
+            if(projectID <= 0){
+                throw new ControllerException("ID de proyecto fuera de rango");
+            }
+
+            if(phaseOrder < 0){
+                throw new ControllerException("Orden en el proyecto fuera de rango");
+            }
+
+            if(description.equals("")){
+                throw new ControllerException("No se admiten campos vacios");
+            }
+
+            if(phaseType.equals("")){
+                throw new ControllerException("No se admiten campos vacios");
+            }
+
+            boolean wrongType = true;
+            for (String type : phaseMgr.getTypes()){
+                if (phaseType.equals(type)){
+                    wrongType=false;
+                }
+            }
+            if (wrongType){
+                throw new ControllerException("Tipo de fase inexistente");
+            }
+
+            phaseMgr.modifyOrder(projectID, phaseOrder + 1);
+
+            int phase = phaseMgr.createPhase(phaseName, description, projectID, phaseOrder + 1, phaseType);
+
+            return "redirect:listPhases.do?project_id=" + projectID;
+        }
+        else{
+            
+            if(projectID <= 0){
+                throw new ControllerException("ID de proyecto fuera de rango");
+            }
+            
+            if(cycleType != 1 && cycleType != 2){
+                throw new ControllerException("Tipo de ciclo fuera de rango");
+            }
+            
+            phaseMgr.autoCycle(projectID, cycleType);
+            return "redirect:listPhases.do?project_id=" + projectID;
+        }
     }
-
 }

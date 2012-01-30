@@ -11,11 +11,11 @@
                         window.location = url;
                 }
 
-                function confirmErase(phaseId)
+                function confirmErase(phaseId, projectId)
                 {
                     if (confirm("¿Estás seguro que deseas borrar la fase?"))
                     {
-                        window.location = "deletePhase.do?phase_id=" + phaseId;
+                        window.location = "deletePhase.do?phaseID=" + phaseId + "&project_id=" + projectId;
                     }
                     else
                     {
@@ -66,6 +66,11 @@
 			</div>
                     
                     <div id="phase">
+                        #if($project.projectNumberOfPhases == 0)
+                        <table>
+                        <tr>
+                        <td>
+                        #end
                         <form action="listPhases.do?project_id=${project_id}" method="POST" id="phase-add-form">
                             <h3 id="form-title">Agregar Fase</h3>
                             <table id="phase-add">
@@ -118,6 +123,35 @@
                                 </tr>
                             </table>
                         </form>
+                    #if($project.projectNumberOfPhases == 0)
+                    </td>
+                            <td>
+                                <form action="listPhases.do?project_id=${project_id}" method="POST" id="phase-add-form">
+                                    <h3 id="form-title">Ciclo de Vida Default</h3>
+                                    <table id="phase-add">
+                                        <tr>
+                                            <td>
+                                                <label for ="cycleType" id="cycleTypeLabel">Nombre de la Fase:</label>
+                                            </td>
+                                            <td>
+                                                <select name="cycleType" id="cycleType">
+                                                    <option value="1" selected="selected">Cascada</option>
+                                                    <option value="2">Iterativo</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="listPhases.do?project_id=${project_id}" id="cancel-link">Cancelar</a></td>
+                                            <td>
+                                                <input type="image" value="Aceptar" src="images/Base/aceptar.png" id="accept-button" />
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </form>
+                            </td>
+                    </tr>
+                    </table>
+                    #end
                     </div>
                     <br>
                     <div>
@@ -137,7 +171,7 @@
                                             <td><a href="viewPhase.do?project_id=${project.projectId}&phase_id=${p.phaseID}">${p.phaseName}</a></td>
                                             <td>${p.phaseType}</td>
                                             <td>${p.phaseDesc}</td>
-                                            <td><a href="#" onclick="confirmErase(${p.phaseID})">Borrar</a></td>
+                                            <td><a href="#" onclick="confirmErase(${p.phaseID}, ${project_id})">Borrar</a></td>
 					</tr>
 					#end
 				</table>
