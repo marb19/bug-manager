@@ -118,13 +118,23 @@ public class PhaseManagementBizOpImpl extends AbstractBizOp implements PhaseMana
     @Override
     public void deletePhase(int phaseID) {
         Phase p = phaseDAO.findById(phaseID);
-
+        Project project = p.getProject();
+        
         if (p == null){
             throw new BizException("Cannot delete non-existing phase");
         }
 
         if(!p.getTasks().isEmpty()){
             throw new BizException("Cannot delete non-empty phase");
+        }
+        
+        List<Phase> phases = project.getPhases();
+        
+        for(Phase phase:phases){
+            int actualOrder = phase.getProjectOrder();
+            if(actualOrder > p.getProjectOrder()){
+                phase.setProjectOrder(actualOrder - 1);
+            }
         }
 
         phaseDAO.delete(p);
@@ -144,6 +154,7 @@ public class PhaseManagementBizOpImpl extends AbstractBizOp implements PhaseMana
     }
 
     @Override
+    
     @Transactional(readOnly = true, propagation = Propagation.MANDATORY)
     public List<String> getTypes() {
         List<String> phaseTypes = new ArrayList<String>() {};
@@ -166,4 +177,221 @@ public class PhaseManagementBizOpImpl extends AbstractBizOp implements PhaseMana
         }
     }
     
+    @Override
+    public void autoCycle(int projectID, int cycleType){
+        
+        Project p = projectDAO.findById(projectID);
+        
+        if(p == null){
+            throw new BizException("Proyecto inexistente");
+        }
+        
+        if(p.getPhases().size() > 0){
+            throw new BizException("Solo sirve para proyectos sin fases");
+        }
+        
+        if(cycleType != 1 && cycleType != 2){
+            throw new BizException("Ciclo de vida inexistente");
+        }
+        
+        if(cycleType == 1){
+            waterFallCycle(projectID);
+        }
+        
+        if(cycleType == 2){
+            iterativeCycle(projectID);
+        }
+    }
+    
+    public void waterFallCycle(int projectID){
+        
+        Project p = projectDAO.findById(projectID);
+        
+        //Requerimientos y revisión
+        Phase req = new Phase();
+        req.setPhaseName("Requerimientos");
+        req.setPhaseDescription("Licitación y análisis de requerimientos");
+        req.setProject(p);
+        req.setProjectOrder(1);
+        req.setType(PhaseType.REQUIREMENTS);
+        phaseDAO.save(req);
+        
+        Phase reqr = new Phase();
+        reqr.setPhaseName("Revisión de Requerimientos");
+        reqr.setPhaseDescription("Revisión del documento de requerimientos");
+        reqr.setProject(p);
+        reqr.setProjectOrder(2);
+        reqr.setType(PhaseType.REVIEW);
+        phaseDAO.save(reqr);
+        
+        //Diseño y revisión
+        Phase des = new Phase();
+        des.setPhaseName("Diseño");
+        des.setPhaseDescription("Diseño y arquitectura del sistema");
+        des.setProject(p);
+        des.setProjectOrder(3);
+        des.setType(PhaseType.DESIGN);
+        phaseDAO.save(des);
+        
+        Phase desr = new Phase();
+        desr.setPhaseName("Revisión de Diseño");
+        desr.setPhaseDescription("Revisión del documento de diseño");
+        desr.setProject(p);
+        desr.setProjectOrder(4);
+        desr.setType(PhaseType.REVIEW);
+        phaseDAO.save(desr);
+        
+        //Codificación y revisión
+        Phase cod = new Phase();
+        cod.setPhaseName("Codificación");
+        cod.setPhaseDescription("Construcción del sistema");
+        cod.setProject(p);
+        cod.setProjectOrder(5);
+        cod.setType(PhaseType.CODING);
+        phaseDAO.save(cod);
+        
+        Phase codr = new Phase();
+        codr.setPhaseName("Revisión de la Codificación");
+        codr.setPhaseDescription("Revisión de la construcción del sistema");
+        codr.setProject(p);
+        codr.setProjectOrder(6);
+        codr.setType(PhaseType.REVIEW);
+        phaseDAO.save(codr);
+        
+        //Pruebas
+        Phase test = new Phase();
+        test.setPhaseName("Pruebas");
+        test.setPhaseDescription("Pruebas del sistema");
+        test.setProject(p);
+        test.setProjectOrder(7);
+        test.setType(PhaseType.TESTING);
+        phaseDAO.save(test);
+        
+        //Mantenimiento
+        Phase mant = new Phase();
+        mant.setPhaseName("Mantenimiento");
+        mant.setPhaseDescription("Mantenimiento del sistema");
+        mant.setProject(p);
+        mant.setProjectOrder(8);
+        mant.setType(PhaseType.MAINTENANCE);
+        phaseDAO.save(mant);
+    }
+            
+    public void iterativeCycle(int projectID){
+        
+        Project p = projectDAO.findById(projectID);
+        
+        Phase req = new Phase();
+        req.setPhaseName("Requerimientos");
+        req.setPhaseDescription("Licitación y análisis de requerimientos");
+        req.setProject(p);
+        req.setProjectOrder(1);
+        req.setType(PhaseType.REQUIREMENTS);
+        phaseDAO.save(req);
+        
+        Phase reqr = new Phase();
+        reqr.setPhaseName("Revisión de Requerimientos");
+        reqr.setPhaseDescription("Revisión del documento de requerimientos");
+        reqr.setProject(p);
+        reqr.setProjectOrder(2);
+        reqr.setType(PhaseType.REVIEW);
+        phaseDAO.save(reqr);
+        
+        //Iteración I
+        //Diseño y revisión
+        Phase desI = new Phase();
+        desI.setPhaseName("Diseño I");
+        desI.setPhaseDescription("Diseño y arquitectura del sistema");
+        desI.setProject(p);
+        desI.setProjectOrder(3);
+        desI.setType(PhaseType.DESIGN);
+        phaseDAO.save(desI);
+        
+        Phase desrI = new Phase();
+        desrI.setPhaseName("Revisión del Diseño I");
+        desrI.setPhaseDescription("Revisión del documento de diseño");
+        desrI.setProject(p);
+        desrI.setProjectOrder(4);
+        desrI.setType(PhaseType.REVIEW);
+        phaseDAO.save(desrI);
+        
+        //Codificación y revisión
+        Phase codI = new Phase();
+        codI.setPhaseName("Codificación I");
+        codI.setPhaseDescription("Construcción del sistema");
+        codI.setProject(p);
+        codI.setProjectOrder(5);
+        codI.setType(PhaseType.CODING);
+        phaseDAO.save(codI);
+        
+        Phase codrI = new Phase();
+        codrI.setPhaseName("Revisión de la Codificación I");
+        codrI.setPhaseDescription("Revisión de la construcción del sistema");
+        codrI.setProject(p);
+        codrI.setProjectOrder(6);
+        codrI.setType(PhaseType.REVIEW);
+        phaseDAO.save(codrI);
+        
+        //Pruebas
+        Phase testI = new Phase();
+        testI.setPhaseName("Pruebas I");
+        testI.setPhaseDescription("Pruebas del sistema");
+        testI.setProject(p);
+        testI.setProjectOrder(7);
+        testI.setType(PhaseType.TESTING);
+        phaseDAO.save(testI);
+        
+        //Iteración II
+        //Diseño y revisión
+        Phase desII = new Phase();
+        desII.setPhaseName("Diseño II");
+        desII.setPhaseDescription("Diseño y arquitectura del sistema");
+        desII.setProject(p);
+        desII.setProjectOrder(8);
+        desII.setType(PhaseType.DESIGN);
+        phaseDAO.save(desII);
+        
+        Phase desrII = new Phase();
+        desrII.setPhaseName("Revisión del Diseño II");
+        desrII.setPhaseDescription("Revisión del documento de diseño");
+        desrII.setProject(p);
+        desrII.setProjectOrder(9);
+        desrII.setType(PhaseType.REVIEW);
+        phaseDAO.save(desrII);
+        
+        //Codificación y revisión
+        Phase codII = new Phase();
+        codII.setPhaseName("Codificación II");
+        codII.setPhaseDescription("Construcción del sistema");
+        codII.setProject(p);
+        codII.setProjectOrder(10);
+        codII.setType(PhaseType.CODING);
+        phaseDAO.save(codII);
+        
+        Phase codrII = new Phase();
+        codrII.setPhaseName("Revisión de la Codificación II");
+        codrII.setPhaseDescription("Revisión de la construcción del sistema");
+        codrII.setProject(p);
+        codrII.setProjectOrder(11);
+        codrII.setType(PhaseType.REVIEW);
+        phaseDAO.save(codrII);
+        
+        //Pruebas
+        Phase testII = new Phase();
+        testII.setPhaseName("Pruebas II");
+        testII.setPhaseDescription("Pruebas del sistema");
+        testII.setProject(p);
+        testII.setProjectOrder(12);
+        testII.setType(PhaseType.TESTING);
+        phaseDAO.save(testII);
+        
+        //Mantenimiento
+        Phase mant = new Phase();
+        mant.setPhaseName("Mantenimiento");
+        mant.setPhaseDescription("Mantenimiento del sistema");
+        mant.setProject(p);
+        mant.setProjectOrder(13);
+        mant.setType(PhaseType.MAINTENANCE);
+        phaseDAO.save(mant);
+    }
 }
