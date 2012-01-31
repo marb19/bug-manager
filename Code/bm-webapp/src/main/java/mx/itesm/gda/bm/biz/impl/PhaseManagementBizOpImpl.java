@@ -12,8 +12,10 @@ import mx.itesm.gda.bm.biz.PhaseManagementBizOp;
 import mx.itesm.gda.bm.model.Phase;
 import mx.itesm.gda.bm.model.PhaseType;
 import mx.itesm.gda.bm.model.Project;
+import mx.itesm.gda.bm.model.Task;
 import mx.itesm.gda.bm.model.dao.PhaseDAO;
 import mx.itesm.gda.bm.model.dao.ProjectDAO;
+import mx.itesm.gda.bm.model.dao.TaskDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -34,6 +36,9 @@ public class PhaseManagementBizOpImpl extends AbstractBizOp implements PhaseMana
     @Autowired
     private PhaseDAO phaseDAO;
     
+    @Autowired
+    private TaskDAO taskDAO;
+    
     @Override
     public List<Map<String, ?>> retrieveAllPhases() {
         List<Map<String, ?>> ret = new ArrayList<Map<String, ?>>();
@@ -48,6 +53,7 @@ public class PhaseManagementBizOpImpl extends AbstractBizOp implements PhaseMana
             p.put("phaseDesc", phase.getPhaseDescription());
             p.put("phaseType", phase.getType().name());
             p.put("projectOrder", phase.getProjectOrder());
+            p.put("phaseTasks", mapTasks(phase.getProject().getProjectId()));
             ret.add(p);
         }
 
@@ -73,9 +79,32 @@ public class PhaseManagementBizOpImpl extends AbstractBizOp implements PhaseMana
             p.put("phaseDesc", phasesArray[i].getPhaseDescription());
             p.put("phaseType", phasesArray[i].getType().name());
             p.put("projectOrder", phasesArray[i].getProjectOrder());
+            p.put("phaseTasks", mapTasks(phasesArray[i].getProject().getProjectId()));
             ret.add(p);
         }
         
+        return ret;
+    }
+    
+    private List<Map<String, ?>> mapTasks(int projectID){
+        List<Map<String, ?>> ret = new ArrayList<Map<String, ?>>();
+
+        for(Task task : taskDAO.getOrderedTasks(projectID)) {
+            Map<String, Object> t = new HashMap<String, Object>();
+            t.put("taskID", task.getTaskId());
+            t.put("taskName", task.getTaskName());
+            t.put("startDate", task.getStartDate());
+            t.put("endDate", task.getEndDate());
+            t.put("investedHours", task.getInvestedHours());
+            t.put("estimatedHours", task.getEstimatedHours());
+            t.put("remainingHours", task.getRemainingHours());
+            t.put("completionDate", task.getCompletionDate());
+            t.put("status", task.getTaskState().name());
+            t.put("taskType", task.getTaskType().name());
+            t.put("commentsNumber", task.getTaskComments().size());
+            ret.add(t);
+        }
+
         return ret;
     }
 
@@ -110,7 +139,27 @@ public class PhaseManagementBizOpImpl extends AbstractBizOp implements PhaseMana
             phase.setType(PhaseType.valueOf(phaseType));
         }
         
-        if(projectOrder > 0){
+        if(projectOrder >= 0 && phase.getProjectOrder() != projectOrder){
+            
+            int actualOrder = phase.getProjectOrder();
+            Project project = projectDAO.findById(phase.getProject().getProjectId());
+            List<Phase> phases = project.getPhases();
+            
+            if(projectOrder > actualOrder){
+                for(Phase p:phases){
+                    if(p.getProjectOrder() > actualOrder && p.getProjectOrder() <= projectOrder){
+                        p.setProjectOrder(p.getProjectOrder() - 1);
+                    }
+                }
+            }
+            else if(projectOrder < actualOrder){
+                for(Phase p:phases){
+                    if(p.getProjectOrder() < actualOrder && p.getProjectOrder() >= projectOrder){
+                        p.setProjectOrder(p.getProjectOrder() + 1);
+                    }
+                }
+            }
+            
             phase.setProjectOrder(projectOrder);
         }
     }
@@ -149,6 +198,7 @@ public class PhaseManagementBizOpImpl extends AbstractBizOp implements PhaseMana
         p.put("phaseDesc", phase.getPhaseDescription());
         p.put("phaseType", phase.getType().name());
         p.put("projectOrder", phase.getProjectOrder());
+        p.put("phaseTasks", mapTasks(phase.getProject().getProjectId()));
         
         return p;
     }
