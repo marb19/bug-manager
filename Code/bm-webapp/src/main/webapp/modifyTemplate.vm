@@ -8,6 +8,7 @@
 		<script type="text/javascript" src="./js/jquery-1.4.2.min.js"></script>
 		<script type="text/javascript" src="./js/jquery.validate.min.js"></script>
 		<script type="text/javascript" src="./js/localization/messages_es.js"></script>
+                <script type="text/javascript" src="./js/jquery.printElement.js"></script>
 		<script>
 			function goToUrl(url)
 			{
