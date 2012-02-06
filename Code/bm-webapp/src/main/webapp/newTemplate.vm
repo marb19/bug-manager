@@ -71,13 +71,17 @@
 							</td>
 						</tr>
                                                 <tr>
-							<td>
-								<label for ="text" id="templateReviewType">Tipo de revision:</label>
-							</td>
-							<td>
-								<input type="text" name="templateReviewType" id="templateReviewType" class="required" />
-							</td>
-						</tr>
+                                                    <td>
+                                                        <label for ="templateReviewType" id="templateReviewTypeLabel">Tipo:</label>
+                                                    </td>
+                                                    <td>
+                                                        <select name="templateReviewType" id="templateReviewType" class="required">
+                                                            #foreach($type in $templateReviewTypes)
+                                                            <option value="${type}">${type}</option>
+                                                            #end
+                                                        </select>
+                                                    </td>
+                                                </tr>
                                                 <tr>
 							<td>
 								<label for ="templatePublic" id="templatePublic">Plantilla publica:</label>

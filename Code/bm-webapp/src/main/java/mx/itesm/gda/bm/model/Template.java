@@ -17,6 +17,8 @@ package mx.itesm.gda.bm.model;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -45,8 +47,9 @@ public class Template extends AbstractItem {
     @Column(length = 4095, nullable = false)
     private String templateDescription;
 
-    @Column(nullable=false)
-    private int templateReviewType;
+    @Enumerated(EnumType.ORDINAL)
+    @Column(nullable = false)
+    private TemplateReviewType templateReviewType;
 
     @Column(nullable = false)
     private boolean templatePublic;
@@ -102,14 +105,14 @@ public class Template extends AbstractItem {
     /**
      * @return the templateReviewType
      */
-    public int getTemplateReviewType() {
+    public TemplateReviewType getTemplateReviewType() {
         return templateReviewType;
     }
 
     /**
      * @param templateReviewType the templateReviewType to set
      */
-    public void setTemplateReviewType(int templateReviewType) {
+    public void setTemplateReviewType(TemplateReviewType templateReviewType) {
         this.templateReviewType = templateReviewType;
     }
 

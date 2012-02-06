@@ -51,8 +51,10 @@ public class ModifyTemplateController extends BaseController {
             ModelMap model) {
         Map<String, ?> t = templateMgr.getTemplate(templateId);
         List<Map<String, ?>> elements = templateMgr.getTemplateElements(templateId);
+        List<String> templateReviewTypes = templateMgr.getTypes();
         model.put("t", t);
         model.put("elements", elements);
+        model.put("templateReviewTypes", templateReviewTypes);
         return null;
     }
 
@@ -63,7 +65,7 @@ public class ModifyTemplateController extends BaseController {
             @RequestParam("templateId") int templateId,
             @RequestParam("templateName") String templateName,
             @RequestParam("templateDescription") String templateDescription,
-            @RequestParam("templateReviewType") int templateReviewType,
+            @RequestParam("templateReviewType") String templateReviewType,
             @RequestParam(value = "templatePublic", defaultValue = "false") boolean templatePublic,
             @RequestParam("assignedUser") String assignedUser,
             ModelMap model) {
@@ -83,6 +85,19 @@ public class ModifyTemplateController extends BaseController {
 
         if(userMgr.getUser(assignedUser) == null) {
             throw new ControllerException("Usuario inexistente");
+        }
+        if(templateReviewType.equals("")){
+            throw new ControllerException("No se admiten campos vacios");
+        }
+
+        boolean wrongType = true;
+        for (String type : templateMgr.getTypes()){
+            if (templateReviewType.equals(type)){
+                wrongType=false;
+            }
+        }
+        if (wrongType){
+            throw new ControllerException("Tipo de template inexistente");
         }
 
         int template = templateMgr.modifyTemplate(templateId, templateName, templateDescription,

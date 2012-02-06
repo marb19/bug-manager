@@ -25,11 +25,11 @@ import java.util.Map;
 public interface TemplateManagementBizOp extends BizOp {
 
     public int createTemplate(String templateName, String templateDescription,
-            int templateReviewType, boolean templatePublic,
+            String templateReviewType, boolean templatePublic,
             String assignedUser);
 
     public int modifyTemplate(int templateId, String templateName, String templateDescription,
-            int templateReviewType, boolean templatePublic,
+            String templateReviewType, boolean templatePublic,
             String assignedUser);
 
     public int modifyTemplateElement(int templateElementId, int defectTypeId, String elementDescription);
@@ -49,4 +49,6 @@ public interface TemplateManagementBizOp extends BizOp {
     public int addElement(int templateId, int defectTypeId, String elementDescription);
 
     public void deleteTemplateElement(Integer templateElementId);
+
+    public List<String> getTypes();
 }

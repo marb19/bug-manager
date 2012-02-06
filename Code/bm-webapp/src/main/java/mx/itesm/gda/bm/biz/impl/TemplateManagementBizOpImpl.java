@@ -25,6 +25,7 @@ import mx.itesm.gda.bm.biz.TemplateManagementBizOp;
 import mx.itesm.gda.bm.model.DefectType;
 import mx.itesm.gda.bm.model.Template;
 import mx.itesm.gda.bm.model.TemplateElement;
+import mx.itesm.gda.bm.model.TemplateReviewType;
 import mx.itesm.gda.bm.model.dao.DefectTypeDAO;
 import mx.itesm.gda.bm.model.dao.TemplateElementDAO;
 import mx.itesm.gda.bm.model.dao.UserDAO;
@@ -65,7 +66,7 @@ public class TemplateManagementBizOpImpl extends AbstractBizOp implements
         t.put("templateId", template.getTemplateId());
         t.put("templateName", template.getTemplateName());
         t.put("templateDescription", template.getTemplateDescription());
-        t.put("templateReviewType", template.getTemplateReviewType());
+        t.put("templateReviewType", template.getTemplateReviewType().name());
         t.put("assignedUser", mapUser(template.getAssignedUser()));
         t.put("templatePublic", template.getTemplatePublic());
 
@@ -83,7 +84,7 @@ public class TemplateManagementBizOpImpl extends AbstractBizOp implements
     @Override
     @Transactional(readOnly = true, propagation = Propagation.MANDATORY)
     public int createTemplate(String templateName, String templateDescription,
-            int templateReviewType, boolean templatePublic,
+            String templateReviewType, boolean templatePublic,
             String assignedUser) {
 
         User u = userDAO.findByUserName(assignedUser);
@@ -91,7 +92,7 @@ public class TemplateManagementBizOpImpl extends AbstractBizOp implements
         Template t = new Template();
         t.setTemplateName(templateName);
         t.setTemplateDescription(templateDescription);
-        t.setTemplateReviewType(templateReviewType);
+        t.setTemplateReviewType(TemplateReviewType.valueOf(templateReviewType));
         t.setTemplatePublic(templatePublic);
         t.setAssignedUser(u);
         templateDAO.save(t);
@@ -117,7 +118,7 @@ public class TemplateManagementBizOpImpl extends AbstractBizOp implements
 
     @Override
     public int modifyTemplate(int templateId, String templateName, String templateDescription,
-            int templateReviewType, boolean templatePublic,
+            String templateReviewType, boolean templatePublic,
             String assignedUser) {
         Template t = templateDAO.findById(templateId);
         User u = userDAO.findByUserName(assignedUser);
@@ -125,7 +126,7 @@ public class TemplateManagementBizOpImpl extends AbstractBizOp implements
         t.setTemplateName(templateName);
         t.setTemplateDescription(templateDescription);
         t.setAssignedUser(u);
-        t.setTemplateReviewType(templateReviewType);
+        t.setTemplateReviewType(TemplateReviewType.valueOf(templateReviewType));
         t.setTemplatePublic(templatePublic);
 
         templateDAO.update(t);
@@ -143,7 +144,7 @@ public class TemplateManagementBizOpImpl extends AbstractBizOp implements
                 t.put("templateId", template.getTemplateId());
                 t.put("templateName", template.getTemplateName());
                 t.put("templateDescription", template.getTemplateDescription());
-                t.put("templateReviewType", template.getTemplateReviewType());
+                t.put("templateReviewType", template.getTemplateReviewType().name());
                 t.put("templatePublic", template.getTemplatePublic());
                 t.put("assignedUser", userName);
                 ret.add(t);
@@ -230,5 +231,15 @@ public class TemplateManagementBizOpImpl extends AbstractBizOp implements
         }
 
         templateElementDAO.delete(te);
+    }
+
+    @Override
+    @Transactional(readOnly = true, propagation = Propagation.MANDATORY)
+    public List<String> getTypes() {
+        List<String> templateReviewTypes = new ArrayList<String>() {};
+        for (TemplateReviewType taskType : TemplateReviewType.values()){
+            templateReviewTypes.add(taskType.name());
+        }
+        return templateReviewTypes;
     }
 }
