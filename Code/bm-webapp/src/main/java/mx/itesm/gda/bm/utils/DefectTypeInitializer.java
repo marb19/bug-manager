@@ -46,7 +46,7 @@ public class DefectTypeInitializer {
     @PostConstruct
     @Transactional
     public void init() {
-        LOGGER.debug("Checking for admin users");
+        LOGGER.debug("Checking for defect types");
         List<DefectType> defectTypes = defectTypeDAO.getAll();
 
         if(defectTypes.isEmpty()) {

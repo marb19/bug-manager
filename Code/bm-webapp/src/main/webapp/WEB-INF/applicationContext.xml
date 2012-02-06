@@ -130,4 +130,6 @@
     </bean>
 
     <bean class="mx.itesm.gda.bm.utils.DefectTypeInitializer"/>
+
+    <bean class="mx.itesm.gda.bm.utils.TemplateInitializer"/>
 </beans>

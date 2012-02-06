@@ -27,15 +27,19 @@
                         }
                         
                         $(document).ready(function(){
+
+                            $('#toPrint').hide();
                             
                             $("#printTemplate").click(function() {
                                 printElem({});
                             });
+
                             
                         });
                         
                         function printElem(options){
-                            $('#toPrint').printElement(options);
+                            $('#toPrint').show().printElement(options);
+                            $('#toPrint').hide();
                         }
 		</script>
     </head>
@@ -143,7 +147,7 @@
                                             <h3 id="form-title">Plantilla vacia.</h3>
                                         #else
                                         <input type="button" value="Imprimir Plantilla" id="printTemplate" name="printTemplate"/>
-                                        <div id="toPrint" name="toPrint">
+                                        <div id="table" name="table">
                                             <table id="content-table">
                                                 <tr>
                                                     <th>Categoria</th>
@@ -161,6 +165,24 @@
                                                 #end
                                             </table>
                                         </div>
+
+                                        <div id="toPrint" name="toPrint">
+                                            <table id="content-table" border="1">
+                                                <tr>
+                                                    <th>Categoria</th>
+                                                    <th>Descripcion</th>
+                                                    <th></th>
+                                                </tr>
+                                                #foreach($e in $elements)
+                                                <tr>
+                                                    <td>${e.defectTypeName}</td>
+                                                    <td>${e.elementDescription}</td>
+                                                    <td>&nbsp&nbsp&nbsp&nbsp&nbsp</td>
+                                                </tr>
+                                                #end
+                                            </table>
+                                        </div>
+
                                         #end
 				</form>
 			</div>
