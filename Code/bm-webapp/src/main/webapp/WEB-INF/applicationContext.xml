@@ -128,4 +128,6 @@
         <property name="fullName" value="Administrador del Sistema"/>
         <property name="email" value="admin@bm.com.mx"/>
     </bean>
+
+    <bean class="mx.itesm.gda.bm.utils.DefectTypeInitializer"/>
 </beans>
