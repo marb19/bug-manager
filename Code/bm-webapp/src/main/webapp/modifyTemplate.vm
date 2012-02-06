@@ -25,6 +25,18 @@
                                 return false;
                             }
                         }
+                        
+                        $(document).ready(function(){
+                            
+                            $("#printTemplate").click(function() {
+                                printElem({});
+                            });
+                            
+                        });
+                        
+                        function printElem(options){
+                            $('#toPrint').printElement(options);
+                        }
 		</script>
     </head>
 	<body>
@@ -122,6 +134,8 @@
                                         #if ($elements.empty)
                                             <h3 id="form-title">Plantilla vacia.</h3>
                                         #else
+                                        <input type="button" value="Imprimir Plantilla" id="printTemplate" name="printTemplate"/>
+                                        <div id="toPrint" name="toPrint">
                                             <table id="content-table">
                                                 <tr>
                                                     <th>Categoria</th>
@@ -138,6 +152,7 @@
                                                 </tr>
                                                 #end
                                             </table>
+                                        </div>
                                         #end
 				</form>
 			</div>
