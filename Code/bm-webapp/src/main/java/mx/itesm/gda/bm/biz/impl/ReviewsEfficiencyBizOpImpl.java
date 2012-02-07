@@ -74,8 +74,8 @@ public class ReviewsEfficiencyBizOpImpl extends AbstractBizOp implements Reviews
             String projectName = project.getProjectName();
             allDefects = project.getDefects();
             allTasks = project.getTasks();
-            chartTitle = "<chart caption='Yield por técnica para el proyecto " +  projectName + "'"
-                    + "xAxisName='Número de defectos detectados por hora' yAxisName='Porcentaje de defectos' bgAlpha='0,0'>";
+            chartTitle = "<chart caption='Eficiencia por técnica para el proyecto " +  projectName + "'"
+                    + "xAxisName='Número de defectos detectados por hora' yAxisName='Número de defectos detectados por hora' bgAlpha='0,0'>";
         }
 
         for (Defect singleDefect : allDefects){
