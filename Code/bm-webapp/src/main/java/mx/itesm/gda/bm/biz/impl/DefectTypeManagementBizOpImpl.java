@@ -23,7 +23,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import mx.itesm.gda.bm.biz.BizException;
-import mx.itesm.gda.bm.biz.DefectTypeManagementBizOp;;
+import mx.itesm.gda.bm.biz.DefectTypeManagementBizOp;
+import mx.itesm.gda.bm.model.dao.DefectDAO;
 import org.springframework.stereotype.Component;
 import org.springframework.context.annotation.Scope;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,6 +45,9 @@ public class DefectTypeManagementBizOpImpl extends AbstractBizOp implements
     @Autowired
     private DefectTypeDAO defectTypeDAO;
 
+    @Autowired
+    private DefectDAO defectDAO;
+
     @Override
     @Transactional(readOnly = true, propagation = Propagation.MANDATORY)
     public List<Map<String, ?>> retrieveDefectTypes(){
@@ -58,8 +62,7 @@ public class DefectTypeManagementBizOpImpl extends AbstractBizOp implements
             dt.put("ID", defectType.getDefectTypeId());
             dt.put("Name", defectType.getDefectTypeName());
             dt.put("Description", defectType.getDefectTypeDescription());
-            boolean isEmpty= true/*(Definir condiciones)*/;
-            dt.put("isEmpty", isEmpty);
+            dt.put("isEmpty", defectDAO.searchAllByType(defectType.getDefectTypeId()).isEmpty());
             ret.add(dt);
         }
 

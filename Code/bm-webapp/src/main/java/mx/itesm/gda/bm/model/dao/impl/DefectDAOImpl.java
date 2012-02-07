@@ -117,6 +117,17 @@ public class DefectDAOImpl extends BaseItemDAOImpl<Defect> implements DefectDAO 
 
     @Override
     @Transactional(readOnly = true, propagation = Propagation.MANDATORY)
+    public List<Defect> searchAllByType(int defectType_id){
+        @SuppressWarnings("unchecked")
+        List<Defect> result = getEntityManager().createQuery("SELECT d FROM Defect d "
+                + "JOIN d.defectType dt WHERE dt.defectTypeId = :defectType_id ")
+                .setParameter("defectType_id", defectType_id)
+                .getResultList();
+        return result;
+    }
+
+    @Override
+    @Transactional(readOnly = true, propagation = Propagation.MANDATORY)
     public List<Defect> searchByUserAndInyPhase(int phase_id, String username){
         @SuppressWarnings("unchecked")
         List<Defect> result = getEntityManager().createQuery("SELECT d FROM Defect d "
