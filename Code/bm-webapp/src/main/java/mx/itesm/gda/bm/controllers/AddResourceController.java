@@ -58,6 +58,7 @@ public class AddResourceController extends BaseController{
         }
 
         projMgr.addUser(projectID, userName);
+        userMgr.addProject(projectID, userName);
 
         return "redirect:listResources.do?project_id=" + projectID;
     }

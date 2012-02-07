@@ -248,7 +248,7 @@ public class User extends AbstractItem {
     /**
      * @param projects the projects to set
      */
-    public void setProjects(List<Project> assignedProjects) {
+    public void setProjects(List<Project> projects) {
         this.projects = projects;
     }
 }

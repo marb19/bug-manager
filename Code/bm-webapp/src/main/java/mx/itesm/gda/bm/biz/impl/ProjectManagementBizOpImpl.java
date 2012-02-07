@@ -181,8 +181,7 @@ public class ProjectManagementBizOpImpl extends AbstractBizOp implements
     @Override
     @Transactional(propagation = Propagation.MANDATORY)
     public void addUser(int projectId, String userName){
-        Project project = new Project();
-        project = projectDAO.findById(projectId);
+        Project project = projectDAO.findById(projectId);
         User user = userDAO.findByUserName(userName);
 
         List<User> users = project.getUsers();
@@ -194,8 +193,7 @@ public class ProjectManagementBizOpImpl extends AbstractBizOp implements
     @Override
     @Transactional(propagation = Propagation.MANDATORY)
     public void removeUser(int projectId, String userName){
-        Project project = new Project();
-        project = projectDAO.findById(projectId);
+        Project project = projectDAO.findById(projectId);
         User user = userDAO.findByUserName(userName);
 
         List<User> users = project.getUsers();
