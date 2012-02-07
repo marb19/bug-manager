@@ -66,7 +66,7 @@ public class NewTaskController extends BaseController {
 
         List<Map<String, ?>> users = projMgr.getUsers(projectID);
         List<String> taskTypes = taskMgr.getTypes();
-        List<Map<String, ?>> phases = phaseMgr.retrieveAllPhases();
+        List<Map<String, ?>> phases = phaseMgr.retrieveProjectPhases(projectID);
         model.put("users", users);
         model.put("project_id", projectID);
         model.put("taskTypes", taskTypes);
