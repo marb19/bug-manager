@@ -42,4 +42,7 @@ public interface UserManagementBizOp extends BizOp {
     
     public List<Map<String, ?>> getProjects(String userName);
 
+    public void addProject(int projectId, String userName);
+
+    public void removeProject(int projectId, String userName);
 }

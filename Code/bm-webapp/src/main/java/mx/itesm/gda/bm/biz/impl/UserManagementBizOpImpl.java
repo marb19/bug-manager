@@ -19,6 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import mx.itesm.gda.bm.biz.BizException;
+import mx.itesm.gda.bm.biz.ProjectManagementBizOp;
 import mx.itesm.gda.bm.biz.UserManagementBizOp;
 import mx.itesm.gda.bm.model.Project;
 import mx.itesm.gda.bm.model.User;
@@ -46,6 +47,9 @@ public class UserManagementBizOpImpl extends AbstractBizOp implements
     @Autowired
     ProjectDAO projectDAO;
 
+    @Autowired
+    ProjectManagementBizOp projectMgr;
+
     @Override
     @Transactional(readOnly = true, propagation = Propagation.MANDATORY)
     public List<Map<String, ?>> retrieveUsers() {
@@ -59,7 +63,8 @@ public class UserManagementBizOpImpl extends AbstractBizOp implements
             u.put("email", user.getEmail());
             boolean isEmpty=(user.getAssignedTasks().isEmpty() && 
                     user.getAuthoredComments().isEmpty() &&
-                    user.getAuthoredCompletionReports().isEmpty());
+                    user.getAuthoredCompletionReports().isEmpty() &&
+                    user.getProjects().isEmpty());
             u.put("isEmpty", isEmpty);
             ret.add(u);
         }
@@ -87,7 +92,7 @@ public class UserManagementBizOpImpl extends AbstractBizOp implements
         if (u==null){
             throw new BizException("Cannot delete non-existing user");
         }
-        if(!(u.getAssignedTasks().isEmpty() && u.getAuthoredComments().isEmpty() && u.getAuthoredCompletionReports().isEmpty())) {
+        if(!(u.getAssignedTasks().isEmpty() && u.getAuthoredComments().isEmpty() && u.getAuthoredCompletionReports().isEmpty() && u.getProjects().isEmpty())) {
             throw new BizException("Cannot delete non-empty user");
         }
         userDAO.delete(u);
@@ -173,6 +178,30 @@ public class UserManagementBizOpImpl extends AbstractBizOp implements
         }
 
         return ret;
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.MANDATORY)
+    public void addProject(int projectId, String userName){
+        Project project = projectDAO.findById(projectId);
+        User user = userDAO.findByUserName(userName);
+
+        List<Project> projects = user.getProjects();
+        projects.add(project);
+        user.setProjects(projects);
+        userDAO.update(user);
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.MANDATORY)
+    public void removeProject(int projectId, String userName){
+        Project project = projectDAO.findById(projectId);
+        User user = userDAO.findByUserName(userName);
+
+        List<Project> projects = user.getProjects();
+        projects.remove(project);
+        user.setProjects(projects);
+        userDAO.update(user);
     }
 
 }

@@ -58,6 +58,7 @@ public class RemoveResourceController extends BaseController{
         }
 
         projMgr.removeUser(projectID, userName);
+        userMgr.removeProject(projectID, userName);
 
         return "redirect:listResources.do?project_id=" + projectID;
     }
