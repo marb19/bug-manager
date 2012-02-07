@@ -72,7 +72,7 @@ public class ViewTaskController extends BaseController {
         List<Map<String, ?>> users = userMgr.retrieveUsers();
         List<Map<String, ?>> comments = taskMgr.retrieveComments(taskID);
         List<String> taskTypes = taskMgr.getTypes();
-        List<Map<String, ?>> phases = phaseMgr.retrieveAllPhases();
+        List<Map<String, ?>> phases = phaseMgr.retrieveProjectPhases(projectID);
 
         model.put("users", users);
         model.put("task", task);
