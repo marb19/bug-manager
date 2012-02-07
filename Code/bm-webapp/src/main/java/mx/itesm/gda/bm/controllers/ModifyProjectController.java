@@ -14,7 +14,9 @@
 package mx.itesm.gda.bm.controllers;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
+import mx.itesm.gda.bm.biz.PhaseManagementBizOp;
 import mx.itesm.gda.bm.biz.ProjectManagementBizOp;
 import mx.itesm.gda.bm.utils.UserLogged;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +40,9 @@ public class ModifyProjectController extends BaseController {
 
     @Autowired
     private ProjectManagementBizOp projectMgr;
+    
+    @Autowired
+    private PhaseManagementBizOp phaseMgr;
 
     @RequestMapping(method = RequestMethod.GET)
     @Transactional
@@ -49,7 +54,20 @@ public class ModifyProjectController extends BaseController {
         }
 
         Map<String, ?> p = projectMgr.getProject(project_id);
+        List<Map<String, ?>> phases = phaseMgr.retrieveProjectPhases(project_id);
+        
+        int actualPhase = (Integer)(p.get("projectActualPhase"));
+        if(actualPhase > 0){
+            Map<String, ?> phase = phaseMgr.getPhase(actualPhase);
+            model.put("actualOrder", (Integer)phase.get("projectOrder"));
+        }
+        else{
+            model.put("actualOrder", 0);
+        }
+        
         model.put("p", p);
+        model.put("phases", phases);
+        
         return null;
     }
 
@@ -62,6 +80,7 @@ public class ModifyProjectController extends BaseController {
             @RequestParam("projectDueDate") Date projectDueDate,
             @RequestParam("projectPlannedDate") Date projectPlannedDate,
             @RequestParam("projectId") int projectId,
+            @RequestParam("actualPhase") int actualPhase,
             ModelMap model) {
 
         if (projectName.equals("")) {
@@ -75,7 +94,7 @@ public class ModifyProjectController extends BaseController {
         }
 
         projectMgr.updateProject(projectId, projectName, projectDescription,
-                projectDueDate, projectPlannedDate);
+                projectDueDate, projectPlannedDate, actualPhase);
 
         return "redirect:listProjects.do";
     }

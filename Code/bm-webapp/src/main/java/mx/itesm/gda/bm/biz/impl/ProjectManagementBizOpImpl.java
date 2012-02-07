@@ -111,14 +111,16 @@ public class ProjectManagementBizOpImpl extends AbstractBizOp implements
     @Transactional(propagation = Propagation.MANDATORY)
     public void updateProject(int projectId, String projectName,
             String projectDescription, Date projectDueDate,
-            Date projectPlannedDate) {
+            Date projectPlannedDate, int actualPhase) {
 
-        Project p = new Project();
+        Project p = projectDAO.findById(projectId);
         p.setProjectId(projectId);
         p.setProjectName(projectName);
         p.setProjectDescription(projectDescription);
         p.setProjectDueDate(projectDueDate);
         p.setProjectPlannedDate(projectPlannedDate);
+        p.setActualPhase(actualPhase);
+        
         projectDAO.update(p);
 
     }

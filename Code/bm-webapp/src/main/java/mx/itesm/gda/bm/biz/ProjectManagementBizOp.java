@@ -32,7 +32,7 @@ public interface ProjectManagementBizOp extends BizOp {
 
     public void updateProject(int projectId, String projectName,
             String projectDescription, Date projectDueDate,
-            Date projectPlannedDate);
+            Date projectPlannedDate, int actualPhase);
 
     public void addUser(int projectId, String userName);
 

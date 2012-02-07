@@ -95,7 +95,26 @@
 								<input type="text" name="projectPlannedDate" value="${dateShort.format($p.projectPlannedDate)}" id="PlannedDate" class="required hasDatePicker" />
 							</td>
 						</tr>
-
+                                                <tr>
+                                                    <td>
+                                                        <label for ="actualPhase" id="actualPhaseLabel">Fase Actual:</label>
+                                                    </td>
+                                                    <td>
+                                                        <select name="actualPhase" id="actualPhase" class="required">
+                                                            #if($actualOrder == 0)
+                                                                <option value="0" selected="selected"></option>
+                                                            #end
+                                                            #foreach($phase in $phases)
+                                                                #if($phase.phaseID == $p.projectActualPhase)
+                                                                <option value="${phase.phaseID}" selected="selected">${phase.phaseName}</option>
+                                                                #end
+                                                                #if($phase.projectOrder >= $actualOrder)
+                                                                <option value="${phase.phaseID}">${phase.phaseName}</option>
+                                                                #end
+                                                            #end
+                                                        </select>
+                                                    </td>
+                                                </tr>
 						<tr>
 							<td><a href="listProjects.do" id="cancel-link">Cancelar</a></td>
 							<td>

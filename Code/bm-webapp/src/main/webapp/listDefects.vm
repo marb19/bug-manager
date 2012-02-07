@@ -55,10 +55,12 @@
 			<div id="content-header">
 				<span class="breadcrumb-title">Estas viendo:</span>
 				<span class="breadcrumb-text">${project.projectName} > Todas los defectos</span>
-				<a href="newDefect.do?project_id=${project.projectId}" id="add-icon-link">
+				#if($project.projectActualPhase > 0)
+                                <a href="newDefect.do?project_id=${project.projectId}" id="add-icon-link">
 					<img src="images/Base/agregar.png" id="add-icon-img" />
 				</a>
                                 <br/>
+                                #end
                                 <a href="newDefectType.do" id="add-icon-link">
 				Agregar Tipo de Defecto
 				</a>
@@ -103,10 +105,12 @@
 				<span class="breadcrumb-title">Estas viendo:</span>
 				<span class="breadcrumb-text">${project.projectName} > Todas los defectos</span>
 				#if($user.administrator)
+                                #if($project.projectActualPhase > 0)
 				<a href="newDefect.do?project_id=${project.projectId}" id="add-icon-link">
 					<img src="images/Base/agregar.png" id="add-icon-img" />
 				</a>
                                 <br/>
+                                #end
                                 <a href="newDefectType.do" id="add-icon-link">
 				Agregar Tipo de Defecto
 				</a>
