@@ -38,6 +38,8 @@ public interface DefectDAO extends BaseItemDAO<Defect> {
 
     public List<Defect> searchByType(int defectType_id);
 
+    public List<Defect> searchAllByType(int defectType_id);
+
     public List<Defect> searchByUserAndInyPhase(int phase_id, String username);
 
     public List<Defect> searchByUserAndRemPhase(int phase_id, String username);
