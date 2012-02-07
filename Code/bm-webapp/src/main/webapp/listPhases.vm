@@ -76,7 +76,7 @@
                             <table id="phase-add">
                                 <tr>
                                     <td>
-                                        <label for ="phaseName" id="phaseNameLabel">Nombre de la Fase:</label>
+                                        <label for ="phaseName" id="phaseNameLabel">Tipo de Ciclo de Vida:</label>
                                     </td>
                                     <td>
                                         <input type="text" name="phaseName" id="phaseName" class="required" />
