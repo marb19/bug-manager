@@ -11,7 +11,7 @@
         <script type="text/javascript" src="./js/localization/messages_es.js"></script>
         <script type="text/javascript" src="./js/jquery-ui-1.8.5.custom.min.js"></script>
         <script type="text/javascript" src="./js/localization/jquery.ui.datepicker-es.js"></script>
-        <script>
+        <script type="text/javascript">
                 function goToUrl(url)
                 {
                         window.location = url;
@@ -95,10 +95,10 @@
                         </tr>
                         <tr>
                             <td>
-                                <label for ="taskDescription" id="taskDescriptionLabel">Descripci&oacute;n:</label>
+                                <label for ="taskDescription" id="taskDescriptionLabel" >Descripci&oacute;n:</label>
                             </td>
                             <td>
-                                <textarea cols="30" rows="6" name="taskDescription" id="taskDescription"></textarea>
+                                <textarea cols="30" rows="6" name="taskDescription" id="taskDescription" class="required"></textarea>
                             </td>
                         </tr>
                         <tr>
