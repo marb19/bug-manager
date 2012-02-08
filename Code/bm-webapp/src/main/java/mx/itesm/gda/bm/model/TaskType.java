@@ -22,12 +22,18 @@ package mx.itesm.gda.bm.model;
 
 public enum TaskType {
 
-    DEVELOPMENT(true, false, false, false, false, false),
-    PERSONAL_REVIEW(false, true, false, false, false, false),
-    PEER_REVIEW(false, false, true, false, false, false),
-    WALKTHROUGH(false, false, false, true, false, false),
-    INSPECTION(false, false, false, false, true, false),
-    TESTING(false, false, false, false, false, true);
+    REQUIREMENTS(true, false, false, false, false, false, false, false),
+    DESIGN(false, true, false, false, false, false, false, false),
+    DEVELOPMENT(false, false, true, false, false, false, false, false),
+    PERSONAL_REVIEW(false, false, false, true, false, false, false, false),
+    PEER_REVIEW(false, false, false, false, true, false, false, false),
+    WALKTHROUGH(false, false, false, false, false, true, false, false),
+    INSPECTION(false, false, false, false, false, false, true, false),
+    TESTING(false, false, false, false, false, false, false, true);
+
+    private final boolean requirements;
+    
+    private final boolean design;
 
     private final boolean development;
 
@@ -41,8 +47,10 @@ public enum TaskType {
 
     private final boolean testing;
 
-    TaskType(boolean my_development, boolean my_personalReview, boolean my_peerReview,
-            boolean my_walk, boolean my_inspection, boolean my_testing){
+    TaskType(boolean my_requirements, boolean my_design, boolean my_development, boolean my_personalReview,
+            boolean my_peerReview, boolean my_walk, boolean my_inspection, boolean my_testing){
+        requirements = my_requirements;
+        design = my_design;
         development = my_development;
         personalReview = my_personalReview;
         peerReview = my_peerReview;
@@ -50,6 +58,22 @@ public enum TaskType {
         inspection = my_inspection;
         testing = my_testing;
     }
+
+
+    /**
+     * @return the development task
+     */
+     public boolean isRequirements(){
+         return requirements;
+     }
+
+
+    /**
+     * @return the development task
+     */
+     public boolean isDesign(){
+         return design;
+     }
 
     /**
      * @return the development task

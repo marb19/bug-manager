@@ -30,6 +30,7 @@ import mx.itesm.gda.bm.model.Project;
 import mx.itesm.gda.bm.model.dao.ProjectDAO;
 import mx.itesm.gda.bm.model.Phase;
 import mx.itesm.gda.bm.model.dao.PhaseDAO;
+import mx.itesm.gda.bm.model.Task;
 /**
  *
  * @author $Author: lalo.campos@gmail.com $
@@ -97,9 +98,19 @@ public class DefectsInyRemBizOpImpl extends AbstractBizOp implements DefectsInyR
         for(Phase phase : listOfPhases){
             phaseNames.add(phase.getPhaseName());
             int phase_id = phase.getPhaseId();
-            List<Defect> phaseInyectionDefects = defectDAO.searchByUserAndInyPhase(phase_id, username);
+            List<Defect> phaseInyectionDefects = defectDAO.searchByInyectionPhase(phase_id);
+            int numberOfDefects = 0;
+            for (Defect singleDefect : phaseInyectionDefects){
+                Task inyectionTask = singleDefect.getInyectionTask();
+                if (inyectionTask != null){
+                    User assignedUser = inyectionTask.getAssignedUser();
+                    if (username.equals(assignedUser.getUserName())){
+                        numberOfDefects++;
+                    }
+                }
+            }
             List<Defect> phaseRemotionDefects = defectDAO.searchByUserAndRemPhase(phase_id, username);
-            inyectionDefects.add(phaseInyectionDefects.size());
+            inyectionDefects.add(numberOfDefects);
             remotionDefects.add(phaseRemotionDefects.size());
         }
 
