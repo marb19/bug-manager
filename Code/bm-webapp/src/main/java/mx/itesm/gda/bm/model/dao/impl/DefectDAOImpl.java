@@ -79,9 +79,10 @@ public class DefectDAOImpl extends BaseItemDAOImpl<Defect> implements DefectDAO 
         List<Defect> result = getEntityManager().createQuery("SELECT d FROM Defect d "
                 + "JOIN d.defectType dt JOIN d.assignedUser u WHERE "
                 + "dt.defectTypeId = :defectType_id AND u.userName = :username "
-                + "AND d.defectState = :fixed")
+                + "AND (d.defectState = :fixed OR d.defectState = :accepted)")
                 .setParameter("defectType_id", defectType_id)
                 .setParameter("username", username)
+                .setParameter("accepted", DefectState.ACCEPTED)
                 .setParameter("fixed", DefectState.FIXED)
                 .getResultList();
         return result;
@@ -94,9 +95,10 @@ public class DefectDAOImpl extends BaseItemDAOImpl<Defect> implements DefectDAO 
         List<Defect> result = getEntityManager().createQuery("SELECT d FROM Defect d "
                 + "JOIN d.defectType dt JOIN d.project p WHERE "
                 + "dt.defectTypeId = :defectType_id AND p.projectId = :project_id "
-                + "AND d.defectState = :fixed")
+                + "AND (d.defectState = :fixed OR d.defectState = :accepted)")
                 .setParameter("defectType_id", defectType_id)
                 .setParameter("project_id", project_id)
+                .setParameter("accepted", DefectState.ACCEPTED)
                 .setParameter("fixed", DefectState.FIXED)
                 .getResultList();
         return result;
@@ -108,8 +110,9 @@ public class DefectDAOImpl extends BaseItemDAOImpl<Defect> implements DefectDAO 
         @SuppressWarnings("unchecked")
         List<Defect> result = getEntityManager().createQuery("SELECT d FROM Defect d "
                 + "JOIN d.defectType dt WHERE dt.defectTypeId = :defectType_id "
-                + "AND d.defectState = :fixed")
+                + "AND (d.defectState = :fixed OR d.defectState = :accepted)")
                 .setParameter("defectType_id", defectType_id)
+                .setParameter("accepted", DefectState.ACCEPTED)
                 .setParameter("fixed", DefectState.FIXED)
                 .getResultList();
         return result;

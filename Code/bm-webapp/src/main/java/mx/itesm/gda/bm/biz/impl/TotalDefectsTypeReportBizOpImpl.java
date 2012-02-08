@@ -30,6 +30,7 @@ import mx.itesm.gda.bm.model.User;
 import mx.itesm.gda.bm.model.dao.UserDAO;
 import mx.itesm.gda.bm.model.Project;
 import mx.itesm.gda.bm.model.dao.ProjectDAO;
+import mx.itesm.gda.bm.model.Task;
 /**
  *
  * @author $Author: lalo.campos@gmail.com $
@@ -87,12 +88,20 @@ public class TotalDefectsTypeReportBizOpImpl extends AbstractBizOp implements To
         for(DefectType dType : listOfTypes){
             defectTypes.add(dType.getDefectTypeName());
             int defectType = dType.getDefectTypeId();
-            List<Defect> defectsByTypeAndUser = defectByUserDAO.searchByTypeAndUser(defectType, username);
-            totalDefectsByType.add(defectsByTypeAndUser.size());
+            List<Defect> defectsByType = defectByUserDAO.searchByType(defectType);
             long effortByType = 0;
-            for (Defect singleDefect : defectsByTypeAndUser){
-                effortByType = effortByType + singleDefect.getInvestedHours();
+            int numberOfDefects = 0;
+            for (Defect singleDefect : defectsByType){
+                Task inyectionTask = singleDefect.getInyectionTask();
+                if (inyectionTask != null){
+                    User assignedUser = inyectionTask.getAssignedUser();
+                    if (username.equals(assignedUser.getUserName())){
+                        numberOfDefects++;
+                        effortByType = effortByType + singleDefect.getInvestedHours();
+                    }
+                }
             }
+            totalDefectsByType.add(numberOfDefects);
             totalEffortByType.add(effortByType);
         }
 

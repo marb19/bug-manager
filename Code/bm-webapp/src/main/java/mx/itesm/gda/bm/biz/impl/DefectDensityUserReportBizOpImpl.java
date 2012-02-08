@@ -18,6 +18,7 @@ import java.text.DecimalFormat;
 import mx.itesm.gda.bm.model.User;
 import mx.itesm.gda.bm.model.dao.UserDAO;
 import mx.itesm.gda.bm.model.Defect;
+import mx.itesm.gda.bm.model.dao.DefectDAO;
 import mx.itesm.gda.bm.model.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Propagation;
@@ -43,6 +44,9 @@ public class DefectDensityUserReportBizOpImpl extends AbstractBizOp implements D
     @Autowired
     private UserDAO userDAO;
 
+    @Autowired
+    private DefectDAO defectDAO;
+
     @Override
     @Transactional(readOnly = true, propagation = Propagation.MANDATORY)
     public String getDefectDensityReport(){
@@ -53,12 +57,17 @@ public class DefectDensityUserReportBizOpImpl extends AbstractBizOp implements D
         List<User> allDevelopers = userDAO.getAllDevelopers();
         for(User user : allDevelopers){
             usersNames.add(user.getFullName());
-            List<Defect> defectsByUser = user.getAssignedDefects();
+            List<Defect> inyectedDefects = defectDAO.searchByState(DefectState.ACCEPTED);
+            List<Defect> fixedDefects = defectDAO.searchByState(DefectState.FIXED);
+            inyectedDefects.addAll(fixedDefects);
             int totalDefects = 0;
-            for (Defect singleDefect : defectsByUser){
-                if (singleDefect.getDefectState() == DefectState.ACCEPTED
-                        || singleDefect.getDefectState() == DefectState.FIXED){
-                    totalDefects++;
+            for (Defect singleDefect : inyectedDefects){
+                Task inyectionTask = singleDefect.getInyectionTask();
+                if (inyectionTask != null){
+                    User assignedUser = inyectionTask.getAssignedUser();
+                    if (user.equals(assignedUser)){
+                        totalDefects++;
+                    }
                 }
             }
             List<Task> tasksByUser = user.getAssignedTasks();
