@@ -55,10 +55,10 @@
                             <th></th>
                             <th>Velocidad</th>
                             <th>Tiempo</th>
-                            <th>Defectos remv</th>
-                            <th>Defectos remv</th>
-                            <th>Appraisal</th>
-                            <th>Fallas</th>
+                            <th>Eficiencia</th>
+                            <th>Efectividad Relativa</th>
+                            <th>Costo</th>
+                            <th>Costo</th>
                             <th></th>
                         </tr>
                         <tr>
@@ -68,21 +68,21 @@
                             <th>Yield</th>
                             <th>Revisión</th>
                             <th>Fase</th>
-                            <th>Eficiencia</th>
-                            <th>Leverage</th>
-                            <th>Costo</th>
-                            <th>Costo</th>
-                            <th>a/fr</th>
+                            <th>Defectos removidos</th>
+                            <th>Defectos removidos</th>
+                            <th>Evaluación</th>
+                            <th>Fallas</th>
+                            <th>A/FR</th>
                         </tr>
                         <tr>
                             <th>FASE</th>
                             <th></th>
                             <th></th>
-                            <th>% Efect</th>
+                            <th>% Efectividad</th>
                             <th>LOC/hr</th>
                             <th></th>
                             <th>Remv/hr</th>
-                            <th>DRE F1/DRE UT</th>
+                            <th>EDR Fase/EDR Pruebas</th>
                             <th></th>
                             <th></th>
                             <th>Approx:2</th>

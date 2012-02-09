@@ -68,7 +68,9 @@ public class GeneralSummaryBizOpImpl extends AbstractBizOp implements GeneralSum
                 remDefects = remDefects + removedDefects.size();
                 List<Task> tasksByPhase = singlePhase.getTasks();
                 for (Task singleTask : tasksByPhase){
-                    timePhase = timePhase + singleTask.getInvestedHours();
+                    if (singleTask.getTaskState() == TaskState.STARTED || singleTask.getTaskState() == TaskState.COMPLETED){
+                        timePhase = timePhase + singleTask.getInvestedHours();
+                    }
                 }
             }
         }
@@ -77,12 +79,12 @@ public class GeneralSummaryBizOpImpl extends AbstractBizOp implements GeneralSum
             testingEfficiency = 0;
         }
         else {
-            testingEfficiency = remDefects / timePhase;
+            testingEfficiency = roundNumber((double)remDefects / (double)timePhase);
         }        
 
         // Getting the rest of the metrics
         for (Phase singlePhase : allPhases){
-            double efficiency = 0, leverage = 0;
+            double efficiency = 0.0, leverage = 0.0;
             // Getting the inyected and removed defects by phase, and their totals
             Map<String, Object> row = new HashMap<String, Object>();
             List<Defect> inyectedDefects = defectDAO.searchByInyPhaseProject(singlePhase.getPhaseId(), project_id);
@@ -94,7 +96,9 @@ public class GeneralSummaryBizOpImpl extends AbstractBizOp implements GeneralSum
             List<Task> tasksByPhase = singlePhase.getTasks();
             long timeByPhase = 0;
             for (Task singleTask : tasksByPhase){
-                timeByPhase = timeByPhase + singleTask.getInvestedHours();
+                if (singleTask.getTaskState() == TaskState.STARTED || singleTask.getTaskState() == TaskState.COMPLETED){
+                    timeByPhase = timeByPhase + singleTask.getInvestedHours();
+                }
             }
             totalTime = totalTime + timeByPhase;
 
@@ -108,26 +112,26 @@ public class GeneralSummaryBizOpImpl extends AbstractBizOp implements GeneralSum
                     efficiency = 0;
                 }
                 else {
-                    efficiency = removedDefects.size() / timeByPhase;
+                    efficiency = roundNumber((double)removedDefects.size() / (double)timeByPhase);
                 }
                 if (testingEfficiency == 0){
                     leverage = 0;
                 }
                 else {
-                    leverage = efficiency / testingEfficiency;
+                    leverage = roundNumber((double)efficiency / (double)testingEfficiency);
                 }
             }
             totalAppraisalCost = totalAppraisalCost + appraisalCostByPhase;
 
             // Getting failure cost by phase
             int failureCostByPhase = 0;
-            if (singlePhase.getType() == PhaseType.TESTING){
+            if (singlePhase.getType() == PhaseType.TESTING || singlePhase.getType() == PhaseType.MAINTENANCE){
                 failureCostByPhase = getCost(singlePhase);
                 if (timeByPhase == 0){
                     efficiency = 0;
                 }
                 else {
-                    efficiency = removedDefects.size() / timeByPhase;
+                    efficiency = roundNumber((double)removedDefects.size() / (double)timeByPhase);
                 }
             }
             totalFailureCost = totalFailureCost + failureCostByPhase;
@@ -177,7 +181,7 @@ public class GeneralSummaryBizOpImpl extends AbstractBizOp implements GeneralSum
             afr = 0;
         }
         else {
-            afr = totalAppraisalCost / totalFailureCost;
+            afr = roundNumber((double)totalAppraisalCost / (double)totalFailureCost);
         }
         // Putting all the total values in the map and adding the map to the final array
         totalRow.put("phase", "Total:");
@@ -221,7 +225,7 @@ public class GeneralSummaryBizOpImpl extends AbstractBizOp implements GeneralSum
             row.put("density", 0);
         }
         else {
-            row.put("density", roundNumber(1000 * (totalInyDefects/totalSize)));
+            row.put("density", roundNumber((1000 * (double)totalInyDefects)/(double)totalSize));
         }
         row.put("defects", totalInyDefects);
         row.put("LOC", totalSize);
@@ -232,7 +236,8 @@ public class GeneralSummaryBizOpImpl extends AbstractBizOp implements GeneralSum
     private String getSpeedByPhase(Phase singlePhase){
         String speed = null;
         List<Task> allTasks = singlePhase.getTasks();
-        long size = 0, time = 0, speedByPhase;
+        long size = 0, time = 0; 
+        double speedByPhase = 0.0;
 
         for (Task singleTask : allTasks){
             size = size + singleTask.getSize();
@@ -242,7 +247,7 @@ public class GeneralSummaryBizOpImpl extends AbstractBizOp implements GeneralSum
             speedByPhase = 0;
         }
         else {
-            speedByPhase = size / time;
+            speedByPhase = roundNumber((double)size / (double)time);
         }
         speed = String.valueOf(speedByPhase);
         return speed;
@@ -253,13 +258,15 @@ public class GeneralSummaryBizOpImpl extends AbstractBizOp implements GeneralSum
 
         List<Task> allTasks = singlePhase.getTasks();
         for (Task singleTask : allTasks){
-            cost = cost + singleTask.getInvestedHours();
+            if (singleTask.getTaskState() == TaskState.STARTED || singleTask.getTaskState() == TaskState.COMPLETED){
+                cost = cost + singleTask.getInvestedHours();
+            }
         }
         return cost;
     }
 
     private double roundNumber(double d){
-        DecimalFormat twoDecimals = new DecimalFormat("#.##");
-        return Double.valueOf(twoDecimals.format(d));
+        DecimalFormat threeDecimals = new DecimalFormat("#.###");
+        return Double.valueOf(threeDecimals.format(d));
     }
 }
