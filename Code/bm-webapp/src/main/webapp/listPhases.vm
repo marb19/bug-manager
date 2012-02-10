@@ -24,11 +24,8 @@
                 }
                 
                 $(document).ready(function(){
-                        $("#phase-add-form").validate({
-							rules: {
-
-							}
-						});
+                        $("#phase-add-form").validate();
+                        $("#cycle-add-form").validate();
                 })
         </script>
     </head>
@@ -126,9 +123,9 @@
                     #if($project.projectNumberOfPhases == 0)
                     </td>
                             <td>
-                                <form action="listPhases.do?project_id=${project_id}" method="POST" id="phase-add-form">
+                                <form action="listPhases.do?project_id=${project_id}" method="POST" id="cycle-add-form">
                                     <h3 id="form-title">Ciclo de Vida Default</h3>
-                                    <table id="phase-add">
+                                    <table id="cycle-add">
                                         <tr>
                                             <td>
                                                 <label for ="cycleType" id="cycleTypeLabel">Nombre de la Fase:</label>
@@ -171,7 +168,9 @@
                                             <td><a href="viewPhase.do?project_id=${project.projectId}&phase_id=${p.phaseID}">${p.phaseName}</a></td>
                                             <td>${p.phaseType}</td>
                                             <td>${p.phaseDesc}</td>
+                                            #if($p.empty && $project.projectActualPhase != $p.phaseID)
                                             <td><a href="#" onclick="confirmErase(${p.phaseID}, ${project_id})">Borrar</a></td>
+                                            #end
 					</tr>
 					#end
 				</table>

@@ -172,7 +172,7 @@
                                 <select name="detectionTask" id="detectionTask" class="required">
                                     <option value="${defect.detectionTask.taskID}" selected="selected">${defect.detectionTask.taskName}</option>
                                     #foreach($t in $tasks)
-                                        #if($t.taskID != $defect.detectionTask.taskID)
+                                        #if($t.taskID != $defect.detectionTask.taskID && $t.status != "CANCELED")
                                         <option value="${t.taskID}">${t.taskName}</option>
                                         #end
                                     #end
@@ -193,14 +193,16 @@
                                     #if($defect.inyectionPhase != "")
                                         <option value="${defect.inyectionPhase.phaseID}" selected="selected">${defect.inyectionPhase.phaseName}</option>
                                         #foreach($p in $phases)
-                                            #if($p.phaseID != $defect.inyectionPhase.phaseID)
+                                            #if($p.phaseID != $defect.inyectionPhase.phaseID && $p.projectOrder <= $defect.detectionPhase.projectOrder)
                                             <option value="${p.phaseID}">${p.phaseName}</option>
                                             #end
                                         #end
                                     #else
                                         <option value="0" selected="selected"></option>
                                         #foreach($p in $phases)
+                                            #if($p.projectOrder <= $defect.detectionPhase.projectOrder)
                                             <option value="${p.phaseID}">${p.phaseName}</option>
+                                            #end
                                         #end
                                     #end
                                 </select>
@@ -224,14 +226,16 @@
                                     #if($defect.inyectionTask != "")
                                         <option value="${defect.inyectionTask.taskID}" selected="selected">${defect.inyectionTask.taskName}</option>
                                         #foreach($t in $tasks)
-                                            #if($t.taskID != $defect.inyectionTask.taskID)
+                                            #if($t.taskID != $defect.inyectionTask.taskID && $t.status != "CANCELED")
                                             <option value="${t.taskID}">${t.taskName}</option>
                                             #end
                                         #end
                                     #else
                                         <option value="0" selected="selected"></option>
                                         #foreach($t in $tasks)
+                                            #if($t.status != "CANCELED")
                                             <option value="${t.taskID}">${t.taskName}</option>
+                                            #end
                                         #end
                                     #end
                                 </select>
@@ -255,14 +259,16 @@
                                     #if($defect.remotionPhase != "")
                                         <option value="${defect.remotionPhase.phaseID}" selected="selected">${defect.remotionPhase.phaseName}</option>
                                         #foreach($p in $phases)
-                                            #if($p.phaseID != $defect.remotionPhase.phaseID)
+                                            #if($p.phaseID != $defect.remotionPhase.phaseID && $p.projectOrder >= $defect.detectionPhase.projectOrder)
                                             <option value="${p.phaseID}">${p.phaseName}</option>
                                             #end
                                         #end
                                     #else
                                         <option value="0" selected="selected"></option>
                                         #foreach($p in $phases)
+                                            #if($p.projectOrder >= $defect.detectionPhase.projectOrder)
                                             <option value="${p.phaseID}">${p.phaseName}</option>
+                                            #end
                                         #end
                                     #end
                                 </select>
@@ -286,14 +292,16 @@
                                     #if($defect.remotionTask != "")
                                         <option value="${defect.remotionTask.taskID}" selected="selected">${defect.remotionTask.taskName}</option>
                                         #foreach($t in $tasks)
-                                            #if($t.taskID != $defect.remotionTask.taskID)
+                                            #if($t.taskID != $defect.remotionTask.taskID && $t.status != "CANCELED")
                                             <option value="${t.taskID}">${t.taskName}</option>
                                             #end
                                         #end
                                     #else
                                         <option value="0" selected="selected"></option>
                                         #foreach($t in $tasks)
+                                            #if($t.status != "CANCELED")
                                             <option value="${t.taskID}">${t.taskName}</option>
+                                            #end
                                         #end
                                     #end
                                 </select>

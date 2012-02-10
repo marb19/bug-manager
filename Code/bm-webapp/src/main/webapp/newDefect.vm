@@ -89,7 +89,9 @@
                                 <select name="defectTask" id="defectTask" class="required">
                                     <option value="" selected>-- Seleccionar --</option>
                                     #foreach($t in $tasks)
+                                        #if($t.status != "CANCELED")
                                     <option value="${t.taskID}">${t.taskName}</option>
+                                        #end
                                     #end
                                 </select>
                             </td>
