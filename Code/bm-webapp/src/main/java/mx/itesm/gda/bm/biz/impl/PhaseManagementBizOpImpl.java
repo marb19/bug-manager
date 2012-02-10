@@ -54,6 +54,7 @@ public class PhaseManagementBizOpImpl extends AbstractBizOp implements PhaseMana
             p.put("phaseType", phase.getType().name());
             p.put("projectOrder", phase.getProjectOrder());
             p.put("phaseTasks", mapTasks(phase.getProject().getProjectId()));
+            p.put("empty", phase.getTasks().isEmpty());
             ret.add(p);
         }
 
@@ -80,6 +81,7 @@ public class PhaseManagementBizOpImpl extends AbstractBizOp implements PhaseMana
             p.put("phaseType", phasesArray[i].getType().name());
             p.put("projectOrder", phasesArray[i].getProjectOrder());
             p.put("phaseTasks", mapTasks(phasesArray[i].getProject().getProjectId()));
+            p.put("empty", phasesArray[i].getTasks().isEmpty());
             ret.add(p);
         }
         
@@ -177,6 +179,10 @@ public class PhaseManagementBizOpImpl extends AbstractBizOp implements PhaseMana
             throw new BizException("Cannot delete non-empty phase");
         }
         
+        if(project.getActualPhase() == p.getPhaseId()){
+            throw new BizException("Cannot delete project actual phase");
+        }
+        
         List<Phase> phases = project.getPhases();
         
         for(Phase phase:phases){
@@ -199,6 +205,7 @@ public class PhaseManagementBizOpImpl extends AbstractBizOp implements PhaseMana
         p.put("phaseType", phase.getType().name());
         p.put("projectOrder", phase.getProjectOrder());
         p.put("phaseTasks", mapTasks(phase.getProject().getProjectId()));
+        p.put("empty", phase.getTasks().isEmpty());
         
         return p;
     }
