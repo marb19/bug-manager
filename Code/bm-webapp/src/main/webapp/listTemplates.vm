@@ -70,7 +70,11 @@
 					</tr>
 					#foreach($t in $templates)
 					<tr>
+                                                #if($user.userName==$t.assignedUser)
 						<td><a href="modifyTemplate.do?templateId=${t.templateId}">${t.templateName}</a></td>
+                                                #else
+                                                <td>${t.templateName}</td>
+                                                #end
 						<td>${t.templateDescription}</td>
 						<td>${t.templateReviewType}</td>
 						#if(!$t.templatePublic && $t.assignedUser == $user.userName)

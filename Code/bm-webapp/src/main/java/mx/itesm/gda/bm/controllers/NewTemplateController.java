@@ -45,7 +45,7 @@ public class NewTemplateController extends BaseController {
 
     @RequestMapping(method = RequestMethod.GET)
     @Transactional(readOnly = true)
-    @UserLogged(adminRequired = true)
+    @UserLogged
     public String displayForm(ModelMap model) {
         List<String> templateReviewTypes = templateMgr.getTypes();
 
@@ -56,7 +56,7 @@ public class NewTemplateController extends BaseController {
 
     @RequestMapping(method = RequestMethod.POST)
     @Transactional
-    @UserLogged(adminRequired = true)
+    @UserLogged
     public String newTemplate(
             @RequestParam("templateName") String templateName,
             @RequestParam("templateDescription") String templateDescription,

@@ -146,7 +146,7 @@ public class TemplateManagementBizOpImpl extends AbstractBizOp implements
                 t.put("templateDescription", template.getTemplateDescription());
                 t.put("templateReviewType", template.getTemplateReviewType().name());
                 t.put("templatePublic", template.getTemplatePublic());
-                t.put("assignedUser", userName);
+                t.put("assignedUser", template.getAssignedUser().getUserName());
                 ret.add(t);
             }
         }
