@@ -103,6 +103,7 @@ public class ViewTaskController extends BaseController {
             @RequestParam("newComment") String newComment,
             @RequestParam("taskType") String taskType,
             @RequestParam("phase_id") int phaseID,
+            @RequestParam("size") int size,
             ModelMap model) {
 
         if(projectID <= 0){
@@ -189,7 +190,7 @@ public class ViewTaskController extends BaseController {
 
         int task = taskMgr.modifyTask(taskID, taskName, description,
                 assignedUser, status, estimatedHours, investedHours, remainingHours, startDate,
-                endDate, taskType, phaseID);
+                endDate, taskType, phaseID, size);
 
         if(!newComment.equals("")) {
             taskMgr.addComment(taskID, session.getLoggedUserName(), newComment);

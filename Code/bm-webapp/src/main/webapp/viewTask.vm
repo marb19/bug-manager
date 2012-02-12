@@ -214,6 +214,19 @@
                         </tr>
                         <tr>
                             <td>
+                                <label for ="size" id="sizeLabel">Tamaño de la Tarea:</label>
+                            </td>
+                            <td>
+                                #if($user.administrator && $task.status != "CANCELED")
+                                <input type="text" name="size" id="size" class="required digits" value="${task.size}"/>
+                                #else
+				<span>${task.size}</span>
+				<input type="hidden" value="${task.size}" name="size" id="size"  />
+                                #end
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
                                 <label for ="status" id="statusLabel">Estatus:</label>
                             </td>
                             <td>
