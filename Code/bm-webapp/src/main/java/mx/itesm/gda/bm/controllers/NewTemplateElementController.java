@@ -44,7 +44,7 @@ public class NewTemplateElementController extends BaseController {
 
     @RequestMapping(method = RequestMethod.GET)
     @Transactional(readOnly = true)
-    @UserLogged(adminRequired = true)
+    @UserLogged
     public String displayForm(
             @RequestParam("templateId") int templateId,
             ModelMap model) {
@@ -57,7 +57,7 @@ public class NewTemplateElementController extends BaseController {
 
     @RequestMapping(method = RequestMethod.POST)
     @Transactional
-    @UserLogged(adminRequired = true)
+    @UserLogged
     public String newTemplateElement(
             @RequestParam("templateId") int templateId,
             @RequestParam("defectTypeId") int defectTypeId,
