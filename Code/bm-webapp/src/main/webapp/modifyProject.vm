@@ -49,6 +49,12 @@
 							#end
                                                         <li onclick="goToUrl('listTemplates.do')">Plantillas</li>
                                                         <li onclick="goToUrl('listDefectTypes.do')">Tipos de defecto</li>
+                                                        #if($user.administrator)
+                                                        <li onclick="goToUrl('listResources.do?project_id='+$project_id)">Recursos</li>
+                                                        #end
+                                                        #if($user.permissions>=20)
+                                                        <li onclick="goToUrl('listPhases.do?project_id='+$project_id)">Fases</li>
+                                                        #end
 						</ul>
 					</div>
 					<img src="images/Base/Menu3.png" id="base-menu-right" />

@@ -63,6 +63,7 @@ public class ListTasksController {
         Map<String, ?> project = projMgr.getProject(projectID);
         model.put("tasks", tasks);
         model.put("project", project);
+        model.put("project_id", projectID);
         model.put("filter", filter);
 
         return null;
