@@ -139,7 +139,7 @@ public class TemplateManagementBizOpImpl extends AbstractBizOp implements
         List<Map<String, ?>> ret = new ArrayList<Map<String, ?>>();
 
         for(Template template : templateDAO.getAll()) {
-            if(template.getAssignedUser().getUserName().equals(userName)){
+            if(template.getAssignedUser().getUserName().equals(userName) || template.getTemplatePublic()){
                 Map<String, Object> t = new HashMap<String, Object>();
                 t.put("templateId", template.getTemplateId());
                 t.put("templateName", template.getTemplateName());
