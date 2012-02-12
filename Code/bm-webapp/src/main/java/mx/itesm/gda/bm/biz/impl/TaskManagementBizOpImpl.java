@@ -90,6 +90,7 @@ public class TaskManagementBizOpImpl extends AbstractBizOp implements
             t.put("taskType", task.getTaskType().name());
             t.put("commentsNumber", task.getTaskComments().size());
             t.put("phase", mapPhase(task.getPhase()));
+            t.put("size", task.getSize());
             ret.add(t);
         }
 
@@ -160,6 +161,7 @@ public class TaskManagementBizOpImpl extends AbstractBizOp implements
         t.put("status", task.getTaskState().name());
         t.put("taskType", task.getTaskType().name());
         t.put("phase", mapPhase(task.getPhase()));
+        t.put("size", task.getSize());
 
         return t;
     }
@@ -185,6 +187,7 @@ public class TaskManagementBizOpImpl extends AbstractBizOp implements
         t.setTaskState(TaskState.NOT_STARTED);
         t.setTaskType(TaskType.valueOf(taskType));
         t.setPhase(ph);
+        t.setSize(0);
         taskDAO.save(t);
         return t.getTaskId();
     }
@@ -206,7 +209,7 @@ public class TaskManagementBizOpImpl extends AbstractBizOp implements
     }
 
     @Override
-    public int modifyTask(int taskID, String taskName, String description, String assignedUser, String status, int estimatedHours, int investedHours, int remainingHours, Date startDate, Date endDate, String taskType, int phaseID) {
+    public int modifyTask(int taskID, String taskName, String description, String assignedUser, String status, int estimatedHours, int investedHours, int remainingHours, Date startDate, Date endDate, String taskType, int phaseID, int size) {
         Task t = taskDAO.findById(taskID);
         User u = userDAO.findByUserName(assignedUser);
         Phase ph = phaseDAO.findById(phaseID);
@@ -219,6 +222,7 @@ public class TaskManagementBizOpImpl extends AbstractBizOp implements
         t.setRemainingHours(remainingHours);
         t.setTaskType(TaskType.valueOf(taskType));
         t.setPhase(ph);
+        t.setSize(size);
         
         if(TaskState.valueOf(status) != TaskState.COMPLETED && TaskState.valueOf(status) != TaskState.CANCELED){
             t.setInvestedHours(t.getInvestedHours() + investedHours);
