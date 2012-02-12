@@ -87,7 +87,11 @@
 								<label for ="templateName" id="fullNameLabel">Nombre:</label>
 							</td>
 							<td>
+                                                                #if($user.userName==$t.assignedUser.userName)
 								<input type="text" name="templateName" id="templateName" value="${t.templateName}" class="required" />
+                                                                #else
+                                                                <input type="text" name="templateName" id="templateName" value="${t.templateName}" class="required" disabled="disabled" />
+                                                                #end
 							</td>
 						</tr>
 						<tr>
@@ -95,7 +99,11 @@
 								<label for ="text" id="templateDescription">Descripcion:</label>
 							</td>
 							<td>
+                                                                #if($user.userName==$t.assignedUser.userName)
 								<input type="text" name="templateDescription" id="templateDescription" value="${t.templateDescription}" class="required" />
+                                                                #else
+                                                                <input type="text" name="templateDescription" id="templateDescription" value="${t.templateDescription}" class="required" disabled="disabled" />
+                                                                #end
 							</td>
 						</tr>
                                                 <tr>
@@ -103,6 +111,7 @@
                                                         <label for ="templateReviewType" id="templateReviewTypeLabel">Tipo:</label>
                                                     </td>
                                                     <td>
+                                                        #if($user.userName==$t.assignedUser.userName)
                                                         <select name="templateReviewType" id="templateReviewType" class="required">
                                                             #foreach($type in $templateReviewTypes)
                                                             #if($t.templateReviewType == $type)
@@ -112,6 +121,17 @@
                                                             #end
                                                             #end
                                                         </select>
+                                                        #else
+                                                        <select name="templateReviewType" id="templateReviewType" class="required" disabled="disabled">
+                                                            #foreach($type in $templateReviewTypes)
+                                                            #if($t.templateReviewType == $type)
+                                                            <option value="${type}" selected="selected">${type}</option>
+                                                            #else
+                                                            <option value="${type}">${type}</option>
+                                                            #end
+                                                            #end
+                                                        </select>
+                                                        #end
                                                     </td>
                                                 </tr>
                                                 #if($user.permissions>=20)
@@ -120,11 +140,19 @@
 								<label for ="templatePublic" id="templatePublic">Plantilla publica:</label>
 							</td>
 							<td>
+                                                            #if($user.userName==$t.assignedUser.userName)
                                                                 #if($t.templatePublic)
 								<input type="checkbox" name="templatePublic" id="templatePublic" checked="true" value="true"/>
                                                                 #else
                                                                 <input type="checkbox" name="templatePublic" id="templatePublic" value="true"/>
                                                                 #end
+                                                            #else
+                                                                #if($t.templatePublic)
+								<input type="checkbox" name="templatePublic" id="templatePublic" checked="true" value="true" disabled="disabled"/>
+                                                                #else
+                                                                <input type="checkbox" name="templatePublic" id="templatePublic" value="true" disabled="disabled"/>
+                                                                #end
+                                                            #end
 							</td>
 						</tr>
                                                 #else
@@ -132,7 +160,9 @@
                                                 #end
                                                 <tr>
                                                         <td>
+                                                            #if($user.userName==$t.assignedUser.userName)
                                                                 <a href="newTemplateElement.do?templateId=${t.templateId}" id="add-element">Añadir elemento</a>
+                                                            #end
                                                         </td>
                                                         <td>
                                                             
@@ -143,7 +173,9 @@
 							<td>
                                                                 <input type="hidden" name="templateId" value="${t.templateId}"></input>
                                                                 <input type="hidden" name="assignedUser" value="${user.userName}"></input>
+                                                                #if($user.userName==$t.assignedUser.userName)
 								<input type="image" value="Aceptar" src="images/Base/aceptar.png" id="accept-button" />
+                                                                #end
 							</td>
 						</tr>
 					</table>
@@ -163,8 +195,10 @@
                                                 <tr>
                                                     <td>${e.defectTypeName}</td>
                                                     <td>${e.elementDescription}</td>
+                                                    #if($user.userName==$t.assignedUser.userName)
                                                     <td><a href="modifyTemplateElement.do?templateId=${e.templateId}&templateElementId=${e.elementId}">Modificar</a></td>
                                                     <td><a href="#" onclick="confirmErase('${e.elementId}', '${e.templateId}');">Borrar</a></td>
+                                                    #end
                                                 </tr>
                                                 #end
                                             </table>
