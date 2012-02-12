@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>Agregar tarea - All In Time System</title>
+        <title>Agregar tarea - BUG MANAGER</title>
         <link rel="stylesheet" href="CSS/Style.css" type="text/css" media="screen" />
         <link rel="stylesheet" href="CSS/redmond/jquery-ui-1.8.5.custom.css" type="text/css" media="screen" />
         <script type="text/javascript" src="./js/jquery-1.4.2.min.js"></script>
