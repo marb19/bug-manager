@@ -47,7 +47,7 @@ public class ListResourcesController {
 
     @RequestMapping(method = RequestMethod.GET)
     @Transactional
-    @UserLogged
+    @UserLogged(adminRequired = true)
     public String listUsers(@RequestParam("project_id") int projectID,
             ModelMap model) {
         List<Map<String, ?>> projectUsers = projectMgr.getUsers(projectID);
