@@ -82,6 +82,7 @@
                                                         </select>
                                                     </td>
                                                 </tr>
+                                                #if($user.permissions>=20)
                                                 <tr>
 							<td>
 								<label for ="templatePublic" id="templatePublic">Plantilla publica:</label>
@@ -90,7 +91,9 @@
 								<input type="checkbox" name="templatePublic" id="templatePublic" value="true"/>
 							</td>
 						</tr>
-                                                
+                                                #else
+                                                <input type="hidden" name="templatePublic" value="false"></input>
+                                                #end
 						<tr>
 							<td><a href="listTemplates.do" id="cancel-link">Cancelar</a></td>
 							<td>

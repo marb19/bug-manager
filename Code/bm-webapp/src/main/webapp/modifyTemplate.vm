@@ -114,6 +114,7 @@
                                                         </select>
                                                     </td>
                                                 </tr>
+                                                #if($user.permissions>=20)
                                                 <tr>
 							<td>
 								<label for ="templatePublic" id="templatePublic">Plantilla publica:</label>
@@ -126,6 +127,9 @@
                                                                 #end
 							</td>
 						</tr>
+                                                #else
+                                                <input type="hidden" name="templatePublic" value="false"></input>
+                                                #end
                                                 <tr>
                                                         <td>
                                                                 <a href="newTemplateElement.do?templateId=${t.templateId}" id="add-element">Añadir elemento</a>
