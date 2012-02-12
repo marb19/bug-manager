@@ -47,6 +47,8 @@
 							<li class='Usuarios' onclick="goToUrl('listUsers.do')" >
 							</li>
 							#end
+                                                        <li onclick="goToUrl('listTemplates.do')">Plantillas</li>
+                                                        <li onclick="goToUrl('listDefectTypes.do')">Tipos de defecto</li>
 						</ul>
 					</div>
 					<img src="images/Base/Menu3.png" id="base-menu-right" />
