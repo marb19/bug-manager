@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>Tipos de Defectos - All In Time System</title>
+		<title>Tipos de Defectos - BUG MANAGER</title>
 		<link rel="stylesheet" href="CSS/Style.css" type="text/css" media="screen" />
 		<script>
 			function goToUrl(url)

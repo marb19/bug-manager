@@ -3,9 +3,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>Ciclo de Vida - Bug Manager</title>
+        <title>Ciclo de Vida - BUG MANAGER</title>
         <link rel="stylesheet" href="CSS/Style.css" type="text/css" media="screen" />
-        <script>
+        <link rel="stylesheet" href="CSS/redmond/jquery-ui-1.8.5.custom.css" type="text/css" media="screen" />
+        <script type="text/javascript" src="./js/jquery-1.4.2.min.js"></script>
+	<script type="text/javascript" src="./js/jquery.validate.min.js"></script>
+	<script type="text/javascript" src="./js/localization/messages_es.js"></script>
+	<script type="text/javascript" src="./js/jquery-ui-1.8.5.custom.min.js"></script>
+	<script type="text/javascript" src="./js/localization/jquery.ui.datepicker-es.js"></script>
+	<script type="text/javascript">
                 function goToUrl(url)
                 {
                         window.location = url;
@@ -22,14 +28,15 @@
                         return false;
                     }
                 }
-                
+
                 $(document).ready(function(){
+			$("#cycle-add-form").validate();
                         $("#phase-add-form").validate();
-                        $("#cycle-add-form").validate();
-                })
+		});
+                
         </script>
-    </head>
-    <body>
+   </head>
+   <body>
         <div id="header">
             <img src="images/Login/bm-logo.png"  alt="BM logo" id="base-bmlogo"/>
             <div id="base-header-text">
@@ -73,7 +80,7 @@
                             <table id="phase-add">
                                 <tr>
                                     <td>
-                                        <label for ="phaseName" id="phaseNameLabel">Tipo de Ciclo de Vida:</label>
+                                        <label for ="phaseName" id="phaseNameLabel">Nombre de la fase:</label>
                                     </td>
                                     <td>
                                         <input type="text" name="phaseName" id="phaseName" class="required" />
@@ -128,7 +135,7 @@
                                     <table id="cycle-add">
                                         <tr>
                                             <td>
-                                                <label for ="cycleType" id="cycleTypeLabel">Nombre de la Fase:</label>
+                                                <label for ="cycleType" id="cycleTypeLabel">Tipo de ciclo de vida:</label>
                                             </td>
                                             <td>
                                                 <select name="cycleType" id="cycleType">

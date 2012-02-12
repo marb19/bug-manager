@@ -44,10 +44,9 @@
             </div>
         </div>        
         <div id="content">
-            <div id="content-header">
-                <form action="#" method="POST" id="config-report-form">
+            <div id="content-header">                
                     <h3 id="form-title">Resumen General del Proyecto ${projectName}</h3>
-                    <table id="user-modify" border="1">
+                    <table id="content-table">
                         <tr>
                             <th></th>
                             <th>Defectos</th>
@@ -103,7 +102,7 @@
                         </tr>
                         #end
                     </table>
-                    <table id="user-modify" border="1">
+                    <table id="content-table">
                         <tr>
                             <th>Densidad de Defectos:</th>
                             <td>${defectSummary.density}</td>
@@ -116,8 +115,7 @@
                             <th>LOC:</th>
                             <td>${defectSummary.LOC}</td>
                         </tr>
-                    </table>
-                </form>
+                    </table>                
             </div>
         </div>
         <div id="text-content">
