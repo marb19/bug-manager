@@ -44,7 +44,7 @@ public class DeleteTemplateElementController extends BaseController {
 
     @RequestMapping(method = RequestMethod.GET)
     @Transactional
-    @UserLogged(adminRequired = true)
+    @UserLogged
     public String deleteUser(
             @RequestParam("templateElementId") int templateElementId,
             @RequestParam("templateId") int templateId,

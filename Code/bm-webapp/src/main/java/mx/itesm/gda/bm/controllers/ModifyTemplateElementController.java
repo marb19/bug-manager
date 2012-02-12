@@ -45,7 +45,7 @@ public class ModifyTemplateElementController extends BaseController {
 
     @RequestMapping(method = RequestMethod.GET)
     @Transactional(readOnly = true)
-    @UserLogged(adminRequired = true)
+    @UserLogged
     public String getTemplateData(
             @RequestParam("templateElementId") int templateElementId,
             @RequestParam("templateId") int templateId,
@@ -59,7 +59,7 @@ public class ModifyTemplateElementController extends BaseController {
 
     @RequestMapping(method = RequestMethod.POST)
     @Transactional
-    @UserLogged(adminRequired = true)
+    @UserLogged
     public String modifyTemplate(
             @RequestParam("templateElementId") int templateElementId,
             @RequestParam("templateId") int templateId,
