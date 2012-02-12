@@ -67,6 +67,7 @@ public class ModifyProjectController extends BaseController {
         
         model.put("p", p);
         model.put("phases", phases);
+        model.put("project_id", project_id);
         
         return null;
     }

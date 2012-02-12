@@ -59,6 +59,7 @@ public class ListDefectController {
         Map<String, ?> project = projMgr.getProject(projectID);
         model.put("defects", defects);
         model.put("project", project);
+        model.put("project_id", projectID);
 
         return null;
     }
