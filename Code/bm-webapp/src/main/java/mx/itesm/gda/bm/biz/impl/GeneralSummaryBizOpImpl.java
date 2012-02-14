@@ -55,11 +55,20 @@ public class GeneralSummaryBizOpImpl extends AbstractBizOp implements GeneralSum
         Map<String, Object> totalRow = new HashMap<String, Object>();
         long totalInyDefects = 0, totalRemDefects = 0, totalTime = 0,
                 totalAppraisalCost = 0, totalFailureCost = 0;
-        int acumInyected = 0, acumRemoved = 0, escaped = 0, goal = 0, remDefects = 0, timePhase = 0;
+        //int acumInyected = 0, acumRemoved = 0, escaped = 0, goal = 0;
+        int remDefects = 0, timePhase = 0, totalNumberOfDefects = 0;
         double yield = 0, afr = 0, testingEfficiency = 0;
 
         Project project = projectDAO.findById(project_id);
-        List<Phase> allPhases = project.getPhases();        
+        List<Phase> allPhases = project.getPhases();
+        List<Defect> allDefects = project.getDefects();
+
+        // Getting total number of defects to calculate yield
+        for(Defect singleDefect : allDefects){
+            if (singleDefect.getDefectState() == DefectState.ACCEPTED || singleDefect.getDefectState() == DefectState.FIXED){
+                totalNumberOfDefects++;
+            }
+        }
 
         // Getting testing efficiency
         for (Phase singlePhase : allPhases){
@@ -88,9 +97,9 @@ public class GeneralSummaryBizOpImpl extends AbstractBizOp implements GeneralSum
             // Getting the inyected and removed defects by phase, and their totals
             Map<String, Object> row = new HashMap<String, Object>();
             List<Defect> inyectedDefects = defectDAO.searchByInyPhaseProject(singlePhase.getPhaseId(), project_id);
-            List<Defect> removedDefects = defectDAO.searchByRemPhaseProject(singlePhase.getPhaseId(), project_id);
+            List<Defect> detectedDefects = defectDAO.searchByDetPhaseProject(singlePhase.getPhaseId(), project_id);
             totalInyDefects = totalInyDefects + inyectedDefects.size();
-            totalRemDefects = totalRemDefects + removedDefects.size();
+            totalRemDefects = totalRemDefects + detectedDefects.size();
 
             // Getting time by phase and total time
             List<Task> tasksByPhase = singlePhase.getTasks();
@@ -112,7 +121,7 @@ public class GeneralSummaryBizOpImpl extends AbstractBizOp implements GeneralSum
                     efficiency = 0;
                 }
                 else {
-                    efficiency = roundNumber((double)removedDefects.size() / (double)timeByPhase);
+                    efficiency = roundNumber((double)detectedDefects.size() / (double)timeByPhase);
                 }
                 if (testingEfficiency == 0){
                     leverage = 0;
@@ -131,29 +140,24 @@ public class GeneralSummaryBizOpImpl extends AbstractBizOp implements GeneralSum
                     efficiency = 0;
                 }
                 else {
-                    efficiency = roundNumber((double)removedDefects.size() / (double)timeByPhase);
+                    efficiency = roundNumber((double)detectedDefects.size() / (double)timeByPhase);
                 }
             }
             totalFailureCost = totalFailureCost + failureCostByPhase;
 
             // Getting yield by phase
-            List<Defect> detectionDefects = defectDAO.searchByInyPhaseProject(singlePhase.getPhaseId(), project_id);
-            List<Defect> remotionDefects = defectDAO.searchByRemPhaseProject(singlePhase.getPhaseId(), project_id);
-            acumInyected = acumInyected + detectionDefects.size();
-            acumRemoved = acumRemoved + remotionDefects.size();
-            escaped = acumInyected - acumRemoved;
-            goal = remotionDefects.size() + escaped;
-            if (goal == 0){
+            
+            if (totalNumberOfDefects == 0){
                 yield = 0;
             }
             else {
-                yield = roundNumber(100*((double)remotionDefects.size()/(double)goal));
+                yield = roundNumber(100*((double)detectedDefects.size()/(double)totalNumberOfDefects));
             }
 
             // Putting all values in the map and adding the map to final array
             row.put("phase", singlePhase.getPhaseName());
             row.put("inyectedDefects", inyectedDefects.size());
-            row.put("removedDefects", removedDefects.size());
+            row.put("removedDefects", detectedDefects.size());
             row.put("yield", yield);
             row.put("speed", speedByPhase);
             row.put("time", timeByPhase);

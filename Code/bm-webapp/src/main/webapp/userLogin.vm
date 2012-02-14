@@ -208,7 +208,7 @@ function showCredits() {
                         </table>
                         <input type="image" value="Entrar" src="images/Login/ingresar.png" id="login-button" />
                     </form>
-                    <input type="button" value="Creditos" onClick="showCredits();"></input>
+                    <!--<input type="button" value="Creditos" onClick="showCredits();"></input>-->
                 </div>
             </div>
         </div>

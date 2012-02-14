@@ -50,25 +50,32 @@ public class PhaseYieldReportBizOpImpl extends AbstractBizOp implements PhaseYie
         String xmlData = null;
         ArrayList<String> phaseNames = new ArrayList<String>();        
         ArrayList<Double> phaseYield = new ArrayList<Double>();
-        int acumInyected = 0, acumRemoved = 0, escaped = 0, goal = 0;
+        //int acumInyected = 0, acumDetected = 0, escaped = 0, goal = 0;
+        int totalNumberOfDefects = 0;
 
         Project project = projectDAO.findById(project_id);        
         List<Phase> allPhases = project.getPhases();
-        
+        List<Defect> allDefects = project.getDefects();
+
+        for(Defect singleDefect : allDefects){
+            if (singleDefect.getDefectState() == DefectState.ACCEPTED || singleDefect.getDefectState() == DefectState.FIXED){
+                totalNumberOfDefects++;
+            }
+        }
         for(Phase phase : allPhases){
             phaseNames.add(phase.getPhaseName());
             Integer phase_id = phase.getPhaseId();
-            List<Defect> inyectedDefects = defectDAO.searchByInyPhaseProject(phase_id, project_id);
-            List<Defect> removedDefects = defectDAO.searchByRemPhaseProject(phase_id, project_id);
-            acumInyected = acumInyected + inyectedDefects.size();
-            acumRemoved = acumRemoved + removedDefects.size();
-            escaped = acumInyected - acumRemoved;
-            goal = removedDefects.size() + escaped;
-            if (goal == 0){
+            //List<Defect> inyectedDefects = defectDAO.searchByInyPhaseProject(phase_id, project_id);
+            List<Defect> detectedDefects = defectDAO.searchByDetPhaseProject(phase_id, project_id);
+            //acumInyected = acumInyected + inyectedDefects.size();
+            //acumDetected = acumDetected + detectedDefects.size();
+            //escaped = acumInyected - acumDetected;
+            //goal = detectedDefects.size() + escaped;
+            if (totalNumberOfDefects == 0){
                 phaseYield.add(0.0);
             }
             else {
-                phaseYield.add(roundNumber(100*((double)removedDefects.size()/(double)goal)));
+                phaseYield.add(roundNumber(100*((double)detectedDefects.size()/(double)totalNumberOfDefects)));
             }
         }        
         
