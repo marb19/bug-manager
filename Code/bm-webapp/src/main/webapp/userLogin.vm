@@ -169,7 +169,7 @@ function showCredits() {
 
     </head>
     <body>
-        <div id="header">
+        <div id="login-header">
             <img src="images/Login/bm-logo.png"  alt="BM logo" id="login-bmlogo"/>
         </div>
         <div id="page">
