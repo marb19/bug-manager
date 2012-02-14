@@ -52,11 +52,10 @@
 				<table id="content-table">
 					<tr>
 						<th>Usuario</th>
-											<th>Nombre completo</th>
+						<th>Nombre completo</th>
 						<th>Permisos</th>
 						<th>E-mail</th>
-											<th></th>
-						<th></th>
+						<th>Acción</th>
 					</tr>
 					#foreach($u in $projectUsers)
 					<tr>
@@ -91,11 +90,10 @@
 				<table id="content-table">
 					<tr>
 						<th>Usuario</th>
-											<th>Nombre completo</th>
+						<th>Nombre completo</th>
 						<th>Permisos</th>
 						<th>E-mail</th>
-											<th></th>
-						<th></th>
+						<th>Acción</th>
 					</tr>
 					#foreach($u in $availableUsers)
 					<tr>

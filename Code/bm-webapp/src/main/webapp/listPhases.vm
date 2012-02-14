@@ -167,7 +167,7 @@
 						<th>Fase</th>
                                                 <th>Tipo</th>
 						<th>Descripción</th>
-						<th>Eliminar</th>
+						<th>Acción</th>
 					</tr>
 					#foreach($p in $phases)
 					<tr>

@@ -89,7 +89,7 @@
 						<th>Fecha Fin</th>
                                                 <th>Fase</th>
 						#if($user.administrator)
-						<th>Acciones</th>
+						<th>Acción</th>
 						#end
 					</tr>
 					#foreach($t in $tasks)

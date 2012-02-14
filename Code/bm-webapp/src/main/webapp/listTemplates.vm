@@ -60,6 +60,9 @@
 						<th>Plantilla</th>
 						<th>Descripcion</th>
 						<th>Tipo de Revision</th>
+                                                #if(!$t.templatePublic && $t.assignedUser == $user.userName)
+                                                <th>Acción</th>
+                                                #end
 					</tr>
 					#foreach($t in $templates)
 					<tr>
