@@ -14,13 +14,13 @@ body
 #header
 {
 	height:125px;
-	overflow:hidden;
+	overflow:hidden;        
 }
 #base-header-text
 {
 	float:right;
-	font-family:'Lucida Sans', 'Lucida Grande', 'Arial', Sans-serif;
-	font-size:10pt;
+	font: bold 12px "Trebuchet MS", Verdana, Arial, Helvetica,
+	sans-serif;
 	margin-right:40px;
 	margin-top:20px;
 	text-align:right;
@@ -245,25 +245,40 @@ body
 {
         font: bold 11px "Trebuchet MS", Verdana, Arial, Helvetica,
 	sans-serif;
-	color: #6D929B;
-	border-right: 1px solid #C1DAD7;
+	/*border-right: 1px solid #C1DAD7;
+        border-left: 1px solid #C1DAD7;
 	border-bottom: 1px solid #C1DAD7;
-	border-top: 1px solid #C1DAD7;
-	letter-spacing: 2px;
+	border-top: 1px solid #C1DAD7;*/
+	width:100%;
+}
+#content-table th
+{        
+	color: #ffffff;
+	/*border-right: 1px solid #C1DAD7;
+        border-left: 1px solid #C1DAD7;
+	border-bottom: 1px solid #C1DAD7;
+	border-top: 1px solid #C1DAD7;*/
+	letter-spacing: 1px;
 	text-transform: uppercase;
 	text-align: center;
-	padding: 6px 6px 6px 12px;
-	background: none;
-	width:100%;
+	padding: 6px 6px 6px 6px;
+	background: #1d5987;
+	
 }
 #content-table td
 {
-        border-right: 1px solid #C1DAD7;
-	border-bottom: 1px solid #C1DAD7;
-	background: #fff;
-	padding: 6px 6px 6px 12px;
-	color: #6D929B;
-	text-align:center;		
+        border-right: 1px solid #ffffff;
+	border-bottom: 1px solid #ffffff;
+	background: none;
+	padding: 6px 6px 6px 6px;
+	color: #1155ff;
+	text-align:center;        
+}
+#content-table tr:nth-of-type(odd)
+{
+        background: #FFFFFF;
+        border-right: 1px solid #eaeaea;
+        border-bottom: 1px solid #eaeaea;
 }
 form label
 {
