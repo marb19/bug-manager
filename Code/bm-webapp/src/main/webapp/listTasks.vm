@@ -34,32 +34,23 @@
 				Hoy es $dateLong.format($date.systemDate)<br/>
 				Bienvenido, ${user.fullName}<br/>
                 <a href='userLogin.do?op=logout'>Salir</a>
-            </div>
-            <div id="base-menu">
-                <div id="base-menu-bar">
-                    <img src="images/Base/Menu1.png" id="base-menu-left" />
-                    <div id="base-menu-center">
-                        <ul>
-                            <li class='ProyectosVisitando' onclick="goToUrl('listProjects.do')" >
-                            </li>
-                            <li class='Reportes' onclick="goToUrl('listReports.do')" >
-                            </li>
-                            #if($user.administrator)
-                            <li class='Usuarios' onclick="goToUrl('listUsers.do')" >
-                            </li>
-                            #end
-                            <li onclick="goToUrl('listTemplates.do')">Plantillas</li>
-                            <li onclick="goToUrl('listDefectTypes.do')">Tipos de defecto</li>
-                            #if($user.administrator)
-                            <li onclick="goToUrl('listResources.do?project_id='+$project_id)">Recursos</li>
-                            #end
-                            #if($user.permissions>=20)
-                            <li onclick="goToUrl('listPhases.do?project_id='+$project_id)">Fases</li>
-                            #end
-                        </ul>
-                    </div>
-                    <img src="images/Base/Menu3.png" id="base-menu-right" />
-                </div>
+            </div>            
+            <div id="base-menu-bar">
+                <ul id="nav-bar">
+                    <li><a href="listProjects.do">Proyectos</a></li>
+                    <li><a href="listReports.do">Reportes</a></li>
+                    #if($user.administrator)
+                    <li><a href="listUsers.do">Usuarios</a></li>
+                    #end
+                    <li><a href="listTemplates.do">Plantillas</a></li>
+                    <li><a href="listDefectTypes.do">Tipos de defectos</a></li>
+                    #if($user.administrator)
+                    <li><a href="listResources.do?project_id=$project_id">Recursos</a></li>
+                    #end
+                    #if($user.permissions>=20)
+                    <li><a href="listPhases.do?project_id=$project_id">Fases</a></li>
+                    #end
+                </ul>
             </div>
         </div>
 		<div id="content"> <!--AQUI METER TODOS LOS INPUT, LABELS etc-->

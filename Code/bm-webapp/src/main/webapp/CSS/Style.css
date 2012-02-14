@@ -27,7 +27,7 @@ body
 	font: bold 12px "Trebuchet MS", Verdana, Arial, Helvetica,
 	sans-serif;
 	margin-right:40px;
-	margin-top:20px;
+	margin-top:10px;
 	text-align:right;
 }
 #nav-bar
@@ -41,7 +41,7 @@ body
 #nav-bar li a
 {
         font-family: Arial;
-        font-size: 14px;
+        font-size: 12px;
         text-decoration: none;
         letter-spacing: 1px;	
         float:left;
@@ -57,11 +57,11 @@ body
 }
 #base-bmlogo
 {
-	margin-left:10px;
+	margin-left:30px;
 }
 #base-menu-bar
 {
-	margin-left:10px;
+	margin-left:30px;
 	/*margin-right:21px;*/
         width:100%;
 }
