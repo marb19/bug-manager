@@ -56,7 +56,7 @@
 					<tr>
                                             <th>Nombre</th>
                                             <th>Descripción</th>
-                                            <th></th>
+                                            <th>Acción</th>
 					</tr>
 					#foreach($dt in $defectTypes)
 					<tr>

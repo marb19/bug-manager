@@ -55,11 +55,10 @@
 				<table id="content-table">
 					<tr>
 						<th>Usuario</th>
-											<th>Nombre completo</th>
+						<th>Nombre completo</th>
 						<th>Permisos</th>
 						<th>E-mail</th>
-											<th></th>
-						<th></th>
+						<th colspan="2">Acciones</th>
 					</tr>
 					#foreach($u in $users)
 					<tr>
@@ -77,14 +76,14 @@
                                                     #end
                                                 </td>
 						<td>${u.email}</td>
-											<td>
-												<a href="modifyUserPassword.do?userName=${u.userName}">Cambiar Password</a>
-											</td>
 						<td>
-												#if($u.userName != $user.userName && $u.isEmpty)
-												<a href="#" onclick="confirmDeleteUser('${u.userName}');">Borrar</a>
-												#end
-											</td>
+							<a href="modifyUserPassword.do?userName=${u.userName}">Cambiar Password</a>
+						</td>
+						<td>
+                                                    #if($u.userName != $user.userName && $u.isEmpty)
+                                                    <a href="#" onclick="confirmDeleteUser('${u.userName}');">Borrar</a>
+                                                    #end
+						</td>
 					</tr>
 					#end
 				</table>
