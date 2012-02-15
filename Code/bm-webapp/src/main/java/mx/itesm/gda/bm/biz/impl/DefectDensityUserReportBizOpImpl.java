@@ -20,6 +20,7 @@ import mx.itesm.gda.bm.model.dao.UserDAO;
 import mx.itesm.gda.bm.model.Defect;
 import mx.itesm.gda.bm.model.dao.DefectDAO;
 import mx.itesm.gda.bm.model.Task;
+import mx.itesm.gda.bm.session.UserLoginSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -47,15 +48,27 @@ public class DefectDensityUserReportBizOpImpl extends AbstractBizOp implements D
     @Autowired
     private DefectDAO defectDAO;
 
+    @Autowired
+    private UserLoginSession loginSession;
+
     @Override
     @Transactional(readOnly = true, propagation = Propagation.MANDATORY)
     public String getDefectDensityReport(){
         String xmlData = null;
         ArrayList<String> usersNames = new ArrayList<String>();
         ArrayList<Double> defectDensityByUsername = new ArrayList<Double>();
+        List<User> allUsers = new ArrayList<User>();
 
-        List<User> allDevelopers = userDAO.getAllDevelopers();
-        for(User user : allDevelopers){
+        String userlogged = loginSession.getLoggedUserName();
+        User loggedUser = userDAO.findByUserName(userlogged);
+        if (loggedUser.getPermissions() >= 20){
+            allUsers = userDAO.getAllDevelopers();
+        }
+        else{
+            allUsers.add(loggedUser);
+        }
+
+        for(User user : allUsers){
             usersNames.add(user.getFullName());
             List<Defect> inyectedDefects = defectDAO.searchByState(DefectState.ACCEPTED);
             List<Defect> fixedDefects = defectDAO.searchByState(DefectState.FIXED);

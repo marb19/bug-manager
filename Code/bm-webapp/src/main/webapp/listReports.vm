@@ -25,8 +25,14 @@
                    "13":"Número de defectos por técnica de detección"};
                    defectReports = {"14":"Densidad de defectos por usuario","15":"Número de defectos por tipo",
                    "16":"Defectos inyectados y removidos por fase"};
-                   level = {"1":"Usuario","2":"Proyecto","3":"Empresa"};
-                   level2 = {"2":"Proyecto","3":"Empresa"};
+                   if ($("#user.permissions") >= 20){
+                        level = {"1":"Usuario","2":"Proyecto","3":"Empresa"};
+                        level2 = {"2":"Proyecto","3":"Empresa"};
+                   }
+                   else {
+                       level = {"1":"Usuario","2":"Proyecto"};
+                       level2 = {"2":"Proyecto"};
+                   }                   
 
                    $("#report").empty();
                    for (key in genReports){
@@ -211,6 +217,10 @@
                             $("#level").hide("fast");
                             $("#level").val("");
                             $("#level").attr("disabled", "true");
+                            $("#levelLabel2").hide("fast");
+                            $("#level2").hide("fast");
+                            $("#level2").val("");
+                            $("#level2").attr("disabled", "true");
                         }
                         else if ( $("#report").val() == "15" || $("#report").val() == "16") {
                             $("#level").empty();
@@ -525,7 +535,10 @@
             </div>
         </div>
         <div id="content">
-            <div id="content-header">                
+            <div id="content-header">
+                <span class="breadcrumb-title">Estas viendo:</span>
+                <span class="breadcrumb-text">Todos los reportes</span>
+
                 <form action="#" method="POST" id="config-report-form">
                     <h3 id="form-title">Reportes y Estadísticas</h3>
                     <table id="user-modify">
@@ -570,7 +583,9 @@
                                 <select name="level2" id="level2">
                                     <option value="1">Usuario</option>
                                     <option value="2">Proyecto</option>
+                                    #if($user.permissions>=20)
                                     <option value="3">Empresa</option>
+                                    #end
                                 </select>
                             </td>
                         </tr>
@@ -594,8 +609,12 @@
                             <td>
                                 <select name="username" id="username">
                                     <option value=""> --- </option>
-                                    #foreach($u in $users)
-                                        <option value="${u.userName}">${u.fullName}</option>
+                                    #if($user.permissions>=20)
+                                        #foreach($u in $users)
+                                            <option value="${u.userName}">${u.fullName}</option>
+                                        #end
+                                    #else
+                                        <option value="${user.userName}">${user.fullName}</option>
                                     #end
                                 </select>
                             </td>
@@ -607,6 +626,10 @@
                         </tr>
                     </table>
                 </form>
+            </div>
+            <div id="content-footer">
+                <span class="breadcrumb-title">Estas viendo:</span>
+                <span class="breadcrumb-text">Todos los proyectos</span>
             </div>
         </div>
     </body>

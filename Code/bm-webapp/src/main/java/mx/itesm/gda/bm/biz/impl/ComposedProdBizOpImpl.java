@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
+import mx.itesm.gda.bm.session.UserLoginSession;
 import mx.itesm.gda.bm.biz.ComposedProdBizOp;
 import mx.itesm.gda.bm.model.dao.TaskDAO;
 import mx.itesm.gda.bm.model.Task;
@@ -45,6 +46,9 @@ public class ComposedProdBizOpImpl extends AbstractBizOp implements ComposedProd
     @Autowired
     private UserDAO userDAO;
 
+    @Autowired
+    private UserLoginSession loginSession;
+
     @Override
     @Transactional(readOnly = true, propagation = Propagation.MANDATORY)
     public String getComposedProdReport(int level){
@@ -74,10 +78,18 @@ public class ComposedProdBizOpImpl extends AbstractBizOp implements ComposedProd
         ArrayList<String> usersNames = new ArrayList<String>();
         ArrayList<Double> prods = new ArrayList<Double>();
         ArrayList<Double> composedProds = new ArrayList<Double>();
+        List<User> allUsers = new ArrayList<User>();
+        
+        String userlogged = loginSession.getLoggedUserName();
+        User loggedUser = userDAO.findByUserName(userlogged);
+        if (loggedUser.getPermissions() >= 20){
+            allUsers = userDAO.getAllDevelopers();
+        }
+        else{
+            allUsers.add(loggedUser);
+        }
 
-        List<User> allDevelopers = userDAO.getAllDevelopers();
-
-        for(User singleUser : allDevelopers){
+        for(User singleUser : allUsers){
             long LOC = 0, effort = 0, correctionEffort = 0;            
 
             String username = singleUser.getUserName();
@@ -136,8 +148,16 @@ public class ComposedProdBizOpImpl extends AbstractBizOp implements ComposedProd
         ArrayList<String> projectsNames = new ArrayList<String>();
         ArrayList<Double> prods = new ArrayList<Double>();
         ArrayList<Double> composedProds = new ArrayList<Double>();
+        List<Project> allProjects = new ArrayList<Project>();
 
-        List<Project> allProjects = projectDAO.getAll();
+        String userlogged = loginSession.getLoggedUserName();
+        User loggedUser = userDAO.findByUserName(userlogged);
+        if (loggedUser.getPermissions() >= 20){
+            allProjects = projectDAO.getAll();
+        }
+        else{
+            allProjects = projectDAO.searchByUserNameEnrolled(userlogged);
+        }                
 
         for(Project singleProject : allProjects){
             long LOC = 0, effort = 0, correctionEffort = 0;            
