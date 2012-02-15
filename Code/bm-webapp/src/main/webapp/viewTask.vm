@@ -37,7 +37,7 @@
                       alert("La tarea no puede modificarse, el esfuerzo agregado y el restante no pueden ser igual a 0.");
                       return false;
                    }
-                   if ($("#remainingHours").val() <= 0) {
+                   if (($("#remainingHours").val() <= 0) && ($("#size").val() > 0)) {
                     if (confirm("Esta tarea será marcada como completada, porque el esfuerzo restante es 0")) {
                       return true;
                     }
@@ -47,6 +47,10 @@
                    }
                    if (($("#remainingHours").val() > 0) && ($("#status").val() == "COMPLETED")) {
                        alert("La tarea no puede modificarse a estatus COMPLETADA, ya que el esfuerzo restante es mayor a CERO.")
+                       return false;
+                   }
+                   if (($("#size").val() <= 0) && ($("#status").val() == "COMPLETED")) {
+                       alert("La tarea no puede modificarse a estatus COMPLETADA, ya que el tamaño de la tarea no puede ser 0.")
                        return false;
                    }
                  });
