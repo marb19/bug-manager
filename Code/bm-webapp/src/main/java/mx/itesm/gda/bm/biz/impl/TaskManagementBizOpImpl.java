@@ -232,7 +232,7 @@ public class TaskManagementBizOpImpl extends AbstractBizOp implements
             t.setTaskState(TaskState.STARTED);
         }
 
-        if(remainingHours == 0 && TaskState.valueOf(status) != TaskState.CANCELED){
+        if(remainingHours == 0 && size > 0 && TaskState.valueOf(status) != TaskState.CANCELED){
             t.setTaskState(TaskState.COMPLETED);
         }
 
