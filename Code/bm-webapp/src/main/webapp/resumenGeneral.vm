@@ -94,6 +94,8 @@
                         </tr>
                         #end
                     </table>
+            </div>
+            <div id="content-header-2">
                     <table id="content-table">
                         <tr>
                             <th>Densidad de Defectos:</th>
