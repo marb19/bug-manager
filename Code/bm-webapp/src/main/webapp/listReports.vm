@@ -25,15 +25,17 @@
                    "13":"Número de defectos por técnica de detección"};
                    defectReports = {"14":"Densidad de defectos por usuario","15":"Número de defectos por tipo",
                    "16":"Defectos inyectados y removidos por fase"};
-                   if ($("#user.permissions") >= 20){
+
+                   var permissions = "${user.permissions}";
+                   if (permissions >= 20){
                         level = {"1":"Usuario","2":"Proyecto","3":"Empresa"};
                         level2 = {"2":"Proyecto","3":"Empresa"};
                    }
                    else {
-                       level = {"1":"Usuario","2":"Proyecto"};
-                       level2 = {"2":"Proyecto"};
-                   }                   
-
+                        level = {"1":"Usuario","2":"Proyecto"};
+                        level2 = {"2":"Proyecto"};
+                   }
+                                      
                    $("#report").empty();
                    for (key in genReports){
                         $("#report").append('<option value="' + key + '">' + genReports[key] + '</option>');
@@ -571,7 +573,10 @@
                             </td>
                             <td>
                                 <select name="level" id="level">
-                                    <option value=""> --- </option>                                    
+                                    <option value=""> --- </option>
+                                    #if($user.permissions>=20)
+                                    <option value="3">Empresa</option>
+                                    #end
                                 </select>
                             </td>
                         </tr>
