@@ -73,7 +73,7 @@ public class PhaseProdReportBizOpImpl extends AbstractBizOp implements PhaseProd
             }
         }
 
-        xmlData += "<chart caption='Productividad de fase' xAxisName='Fase' yAxisName='Paginas/LOC por hora' bgAlpha='0,0'>";
+        xmlData += "<chart caption='Productividad de fase' xAxisName='Fase' yAxisName='Tamaño por hora' bgAlpha='0,0'>";
 
         for(int i = 0; i < phaseNames.size(); i++){
             xmlData += "<set label='" + phaseNames.get(i) + "' value='" + phaseProd.get(i) + "' />";
