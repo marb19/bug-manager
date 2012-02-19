@@ -1,0 +1,112 @@
+%Empieza configuracion de capitulo
+\setstretch{1.0}
+\titleformat{\chapter}[block]{\Large\bfseries}{CAP'ITULO \Huge\thechapter\vspace{25 pt}}{0 pt}{\\\fontsize{26}{36}\selectfont}
+\titlespacing{\chapter}{0 pt}{30 pt}{50 pt}[0 pt]
+\titleformat{\section}{\Large\bfseries}{\thesection}{0 pt}{\hspace{30 pt}}
+\titleformat{\subsection}{\large\bfseries}{\thesubsection}{0 pt}{\hspace{30 pt}}
+\pagestyle{fancy}
+\fancyhead[LO,LE]{\footnotesize\textit{\leftmark}}
+\fancyhead[RO,RE]{\thepage}
+\fancyfoot[CO,CE]{}
+%Termina configuracion de capitulo
+
+\chapter{Introducci'on} %Cambia Introducci'on al nombre de tu capitulo
+\setstretch{1.5} %Regresa el interlineado a 1.5
+
+\normalsize
+
+\section{Antecedentes}
+\vspace{30 pt}
+\noindent
+Para buen n'umero de consultores (CITAR) de las empresas mexicanas de desarrollo de software, el com'un denominador de las empresas medianas y peque'nas, es no tener una administraci'on de la calidad en el proceso de desarrollo.
+
+En este tipo de situaci'on, las empresas suelen asumir que las pr'acticas de calidad agregan trabajo extra, haciendo m'as lento y complicado el proceso de desarrollo. Esto provoca el atraso en los calendarios y la entrega tardía de los productos respectivos..
+
+Estas decisiones provocan exactamente el efecto contrario. Al no tener un apropiado control de la calidad de sus productos, se ven envueltos en las siguientes situaciones:
+
+\begin{itemize}
+	\item Cuando se llega a la fase de pruebas, el producto est'a plagado de defectos; lo que ocasiona que la fase tome la mitad del tiempo total de desarrollo, haciendo para muchos tortuosa esta etapa;
+	\item Una vez que el sistema sale a producci'on, no est'a garantizado que el producto no tiene defectos. Muchos de estos fueron generados al momento de hacer las correcciones, o simplemente no se encontraron;
+	\item Cuando los usuarios encuentran defectos en el producto final, lo usual es hacer la correci'on de estos defectos. Corregir un evento en etapa de pruebas cuesta normalmente diez veces m'as de lo que costar'ia en la fase de codificaci'on; tanto como corregir un defecto en la fase mantenimiento cuesta cien veces m'as que hacerlo en la fase de codificaci'on (ESCRIBIR LA CITA). Ambas generan altos costos de mantenimiento los cuales suelen ser absorbidos por la empresa que desarroll'o el sistema.
+	\item Peor a'un que el incremento de los costos de mantenimiento, el cliente tiene un producto defectuoso, el cual no le permite realizar las actividades requeridas, generando desconfianza en la empresa de desarrollo, adem'as una mala imagen y p'erdidas de clientes en el futuro.
+\end{itemize}
+
+Todas estas situaciones pueden ser evitadas con una correcta administraci'on de la calidad en el proceso de desarrollo de software.
+
+Lo que muchas empresas no tienen en cuenta es que la calidad en el desarrollo deber'ia ser la prioridad en el proceso de elaboraci'on de productos de software. La calidad ayuda a que los productos en desarrollo sean predecibles en tama'no y calendario, f'aciles de dar seguimiento y bajo costo de mantenimiento (CITA).
+
+En vez de hacer m'as largo, complicado y costoso el proceso de desarrollo, la administraci'on de la calidad recorta los tiempos de desarrollo, reduciendo considerablemente la fase de pruebas, disminuyendo el ciclo de vida del proyecto. La reducci'on del tiempo total de desarrollo se traduce en ahorro de costo en el proyecto. Si a lo anterior agregamos un menor n'umero de defectos en las etapas de pruebas y producci'on, el cliente tendr'a un producto de calidad, y la empresa de desarrollo mejorar'a imagen y su perspectiva de mercados a futuro.
+
+\section{Planteamiento del Problema}
+\noindent
+Normalmente las empresas medianas y peque'nas piensan que la administraci'on de la calidad (y muchas veces hasta la m'as b'asica administraci'on de software) es exclusiva de las empresas trasnacionales con grandes recursos y procesos bien definidos, normalmente con modelos de calidad mundialmente reconocidos. Tienen la idea de que la implementaci'on de un plan de calidad, as'i como sus actividades pertinentes y propio seguimiento, es una tarea que agrega m'as trabajo y complejidad al proyecto, lo que los har'ia salirse de calendarios y no cumplir con las fechas acordadas con el cliente. 
+
+Entonces la problem'atica de las empresas medianas y peque'nas de desarrollo de software es la falta de calidad en los productos que elaboran. Esta problem'atica se origina al no tener procesos definidos de desarrollo, COMPLETAR PROBLEMÁTICA
+
+\section{Propuesta de Soluci'on}
+\noindent
+A partir de los antecedentes y la problem'atica descrita en el punto anterior, se pretende crear una herramienta llamada BM (por sus siglas en ingl'es Bug Manager), que ayude a las peque'nas y medianas empresas a la implementaci'on y seguimiento de un plan de calidad, as'i como las actividades que se requieran realizar. Esta herramienta ataca el nicho de estas peque'nas y medianas empresas las cuales no cuentan con procesos de calidad.
+
+El BM pretende ayudar a las empresas a:
+
+\begin{itemize}
+	\item Establecer un ciclo de desarrollo.
+	\item Elaborar un plan de calidad estableciendo objetivos y t'ecnicas de detecci'on de defectos para cada fase del desarrollo.
+	\item Ayudar con plantillas que sirvan como gu'ias de las t'ecnicas de detecci'on de defectos.
+	\item Dar un seguimiento apropiado a los defectos encontrados durante el desarrollo del sistema.
+	\item Generaci'on de estad'isticas y reportes los cuales mostrar'an informaci'on valiosa acerca del desarrollo como: Productividad, Densidad de Defectos, Retorno de Inversi'on de las Actividades de Calidad, entre otras. Estas proporcionar'an a las empresas informaci'on importante acerca de su proceso de desarrollo, mostrando cu'ales son sus 'areas fuertes y en cu'ales hay oportunidad de mejora.
+\end{itemize}
+
+
+Tambi'en se pretende que el BM genere una actitud de calidad total y mejora continua en las empresas que lo utilicen, y lograr un cambio cultural evolutivo:
+
+\begin{itemize}
+	\item Promoviendo una cultura de calidad personal en el programador contra una cultura de calidad asignada a grupos organizacionales ajenos al desarrollo (pruebas, adherencia a procesos).
+	\item Estableciendo una meta en el programador/grupo de desarrollo de cero defectos en pruebas de unidad contra n'umero de componentes programados por hora.
+	\item Promoviendo la prevenci'on de defectos en lugar de la b'usqueda de defectos durante las pruebas.
+	\item Enfocando el esfuerzo de t'ecnicas de detecci'on de defectos al inicio del ciclo de vida en lugar de crecer los grupos dedicados a las pruebas al final del ciclo de vida.
+	\item En resumen, promover un compromiso personal a la calidad del desarrollo de software y a las actividades asociadas para su mejora continua.
+\end{itemize}
+
+En la actualidad existen herramientas y programas de software que realizan tareas similares a las que realizar'a el sistema propuesto. Principalmente estos sistemas se dedican al registro y rastreo de defectos, as'i como al registro de las actividades realizadas dentro del ciclo de desarrollo, como una especie de bit'acora. En general, consideramos que estos sistemas atacan una parte del problema y com'unmente carecen de la funcionalidad necesaria para agregar verdadero valor al proceso y m'etodo de desarrollo, debido a que se centran ya sea en el seguimiento de actividades o en el registro de defectos, pero no conjuntan ambas vistas de la problem'atica, aparte de que no generan estad'isticas acerca de la informaci'on recabada.
+
+El sistema propuesto pretende, al igual que las otras herramientas dar un seguimiento apropiado a los defectos, as'i como el establecimiento y la gu'ia de un plan de calidad, finalmente generando estad'isticas y reportes de todos los datos recabados.
+
+\section{Objetivos}
+\noindent
+Los objetivos del Trabajo de Tesis son:
+
+\begin{itemize}
+	\item Realizar una investigaci'on y an'alisis de los factores que determinan la calidad en el proceso de desarrollo de software, y demostrar el papel clave de la calidad en el desarrollo de software. 
+	\item Realizar una investigaci'on y an'alisis del Costo de la Calidad en el proceso de desarrollo de software. Comparaci'on del costo de la calidad contra el costo de la no calidad. An'alisis del retorno de inversi'on de las distintas t'ecnicas y pr'acticas de calidad.
+	\item Realizar la propuesta de la herramienta BM, en las partes que conciernen al Costo de la Calidad.
+	\item Construcci'on de la herramienta BM, en las partes que conciernen al Costo de la Calidad.
+	\item An'alisis de los resultados obtenidos en el proceso de construcci'on de la herramienta BM, que incluye el an'alisis de Costo de la Calidad contra Costo de la No Calidad, y an'alisis del Retorno de Inversi'on de las actividades y pr'acticas implementadas.
+	\item Que la herramienta BM tenga las siguientes caracter'isticas m'inimas:
+	\begin{itemize}
+		\item Generar estad'isticas y m'etricas de valor para la empresa y el personal en base a la informaci'on proporcionada por los usuarios del sistema.
+		\item Dar una gu'ia en los procedimientos principales de aseguramiento de la calidad.
+		\item Optimizar y hacer m'as eficiente el proceso de desarrollo de software promoviendo actividades de prevenci'on de defectos y an'alisis de datos.
+	\end{itemize}
+\end{itemize}
+
+\section{Alcances}
+\noindent
+Los alcances del Trabajo de Tesis son:
+
+\begin{itemize}
+	\item Investigaci'on del Costo de la Calidad en el proceso de desarrollo de software.
+	\item Propuesta y construcci'on de la herramienta BM, en las partes que conciernen el Costo de la Calidad.
+\end{itemize}
+
+\section{Contribuciones}
+\noindent
+Las contribuciones del trabajo de tesis son:
+
+\begin{itemize}
+	\item Proporcionar una herramienta flexible y efectiva para realizar las diferentes actividades de calidad, que permita eventualmente cambiar la manera en la que se elaboran este tipo de herramientas hasta el d'ia de hoy.
+	\item Que la herramienta elaborada colabore en la mejora continua de los productos de software desarrollados, por las diferentes empresas que adopten la herramienta como parte de su ciclo de desarrollo.
+	\item Colaborar con la industria mexicana y latinoamericana de desarrollo de software, especialmente en las peque'nas y medianas empresas, a generar una cultura de calidad que ayudar'a a atraer m'as proyectos a la industria, generando as'i una mejora econ'omica en la regi'on.
+\end{itemize}
+
+\clearpage
