@@ -47,6 +47,8 @@
                     #if($user.permissions>=20)
                     <li><a href="listPhases.do?project_id=$project_id">Fases</a></li>
                     #end
+                    <li><a href="listTasks.do?project_id=$project_id">Tareas</a></li>
+                    <li><a href="listDefects.do?project_id=$project_id">Defectos</a></li>
                 </ul>
             </div>
         </div>
