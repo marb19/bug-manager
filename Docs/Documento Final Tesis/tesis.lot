@@ -1,9 +1,14 @@
 \select@language {spanish}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {2.1}{\ignorespaces N'umero de Defectos por Nivel de CMM\relax }}{20}
-\contentsline {table}{\numberline {2.2}{\ignorespaces Tipos de Defectos por Mil L'ineas de C'odigo\relax }}{22}
-\contentsline {table}{\numberline {2.3}{\ignorespaces M'etricas del COQ\relax }}{23}
-\contentsline {table}{\numberline {2.4}{\ignorespaces Sub-M'etricas del PQI\relax }}{24}
-\contentsline {table}{\numberline {2.5}{\ignorespaces Clasificiaci'on de Defectos del PSP\relax }}{28}
-\contentsline {table}{\numberline {2.6}{\ignorespaces Lista de Chequeo para la Revisi'on de C'odigo de PSP\relax }}{29}
+\contentsline {table}{\numberline {2.1}{\ignorespaces N'umero de Defectos por Nivel de CMM\relax }}{17}
+\contentsline {table}{\numberline {2.2}{\ignorespaces Costo de Encontrar y Corregir Defectos\relax }}{18}
+\contentsline {table}{\numberline {2.3}{\ignorespaces Tipos de Defectos por Mil L'ineas de C'odigo\relax }}{19}
+\contentsline {table}{\numberline {2.4}{\ignorespaces M'etricas del COQ\relax }}{20}
+\contentsline {table}{\numberline {2.5}{\ignorespaces M'etricas del PQI\relax }}{21}
+\contentsline {table}{\numberline {2.6}{\ignorespaces Clasificiaci'on de Defectos del PSP\relax }}{26}
+\contentsline {table}{\numberline {2.7}{\ignorespaces Lista de Chequeo para la Revisi'on de C'odigo de PSP\relax }}{26}
+\contentsline {table}{\numberline {2.8}{\ignorespaces Potencial de Inyecci'on Defectos Promedio\relax }}{37}
+\contentsline {table}{\numberline {2.9}{\ignorespaces Efectividad en la Remoci'on de Defectos\relax }}{37}
+\contentsline {table}{\numberline {2.10}{\ignorespaces An'alisis del ROI\relax }}{44}
+\addvspace {10\p@ }
