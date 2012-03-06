@@ -18,7 +18,7 @@
 \section{Antecedentes}
 \vspace{30 pt}
 \noindent
-Para buen n'umero de consultores (CITAR) de las empresas mexicanas de desarrollo de software, el com'un denominador de las empresas medianas y peque'nas, es no tener una administraci'on de la calidad en el proceso de desarrollo.
+Consultores de modelos de calidad [CITAR] de las empresas mexicanas de desarrollo de software han identificado un com'un denominador en las empresas peque'nas y medianas: Una pobre o nula administraci'on de la calidad en el proceso de desarrollo.
 
 En este tipo de situaci'on, las empresas suelen asumir que las pr'acticas de calidad agregan trabajo extra, haciendo m'as lento y complicado el proceso de desarrollo. Esto provoca el atraso en los calendarios y la entrega tardía de los productos respectivos..
 
@@ -27,41 +27,47 @@ Estas decisiones provocan exactamente el efecto contrario. Al no tener un apropi
 \begin{itemize}
 	\item Cuando se llega a la fase de pruebas, el producto est'a plagado de defectos; lo que ocasiona que la fase tome la mitad del tiempo total de desarrollo, haciendo para muchos tortuosa esta etapa;
 	\item Una vez que el sistema sale a producci'on, no est'a garantizado que el producto no tiene defectos. Muchos de estos fueron generados al momento de hacer las correcciones, o simplemente no se encontraron;
-	\item Cuando los usuarios encuentran defectos en el producto final, lo usual es hacer la correci'on de estos defectos. Corregir un evento en etapa de pruebas cuesta normalmente diez veces m'as de lo que costar'ia en la fase de codificaci'on; tanto como corregir un defecto en la fase mantenimiento cuesta cien veces m'as que hacerlo en la fase de codificaci'on (ESCRIBIR LA CITA). Ambas generan altos costos de mantenimiento los cuales suelen ser absorbidos por la empresa que desarroll'o el sistema.
+	\item Cuando los usuarios encuentran defectos en el producto final, lo usual es hacer la correci'on de estos defectos. Corregir un evento en etapa de pruebas cuesta normalmente diez veces m'as de lo que costar'ia en la fase de codificaci'on; tanto como corregir un defecto en la fase mantenimiento cuesta cien veces m'as que hacerlo en la fase de codificaci'on \cite{Humphrey}. Ambas generan altos costos de mantenimiento los cuales suelen ser absorbidos por la empresa que desarroll'o el sistema.
 	\item Peor a'un que el incremento de los costos de mantenimiento, el cliente tiene un producto defectuoso, el cual no le permite realizar las actividades requeridas, generando desconfianza en la empresa de desarrollo, adem'as una mala imagen y p'erdidas de clientes en el futuro.
 \end{itemize}
 
 Todas estas situaciones pueden ser evitadas con una correcta administraci'on de la calidad en el proceso de desarrollo de software.
 
-Lo que muchas empresas no tienen en cuenta es que la calidad en el desarrollo deber'ia ser la prioridad en el proceso de elaboraci'on de productos de software. La calidad ayuda a que los productos en desarrollo sean predecibles en tama'no y calendario, f'aciles de dar seguimiento y bajo costo de mantenimiento (CITA).
+Lo que muchas empresas no tienen en cuenta es que la calidad en el desarrollo deber'ia ser la prioridad en el proceso de elaboraci'on de productos de software. La calidad ayuda a que los productos en desarrollo sean predecibles en tama'no y calendario, f'aciles de dar seguimiento y bajo costo de mantenimiento\cite{Humphrey2002}.
 
 En vez de hacer m'as largo, complicado y costoso el proceso de desarrollo, la administraci'on de la calidad recorta los tiempos de desarrollo, reduciendo considerablemente la fase de pruebas, disminuyendo el ciclo de vida del proyecto. La reducci'on del tiempo total de desarrollo se traduce en ahorro de costo en el proyecto. Si a lo anterior agregamos un menor n'umero de defectos en las etapas de pruebas y producci'on, el cliente tendr'a un producto de calidad, y la empresa de desarrollo mejorar'a imagen y su perspectiva de mercados a futuro.
 
 \section{Planteamiento del Problema}
+\label{sec:planteamientodelproblema}
 \noindent
-Normalmente las empresas medianas y peque'nas piensan que la administraci'on de la calidad (y muchas veces hasta la m'as b'asica administraci'on de software) es exclusiva de las empresas trasnacionales con grandes recursos y procesos bien definidos, normalmente con modelos de calidad mundialmente reconocidos. Tienen la idea de que la implementaci'on de un plan de calidad, as'i como sus actividades pertinentes y propio seguimiento, es una tarea que agrega m'as trabajo y complejidad al proyecto, lo que los har'ia salirse de calendarios y no cumplir con las fechas acordadas con el cliente. 
+La problem'atica consiste en que las empresas peque'nas y medianas de desarrollo de software no elaboran productos de calidad. Esto ocasiona que al construir los productos de software la fase de pruebas tome hasta la mitad del tiempo total del proyecto; que el proyecto se salga de calendario; y que al entregar el producto al cliente este a'un tenga defectos y este no quede satisfecho con el trabajo realizado. Esta problem'atica se origina por las siguientes situaciones:
 
-Entonces la problem'atica de las empresas medianas y peque'nas de desarrollo de software es la falta de calidad en los productos que elaboran. Esta problem'atica se origina al no tener procesos definidos de desarrollo, COMPLETAR PROBLEMÁTICA
+\begin{itemize}
+	\item Compromisos poco realistas con el cliente;
+	\item Una pobre administraci'on del proyecto;
+	\item No tener procesos definidos de desarrollo;
+	\item No tener un plan de administraci'on de la calidad;
+	\item Seguimiento inadecuado de los defectos encontrados.
+\end{itemize}
 
 \section{Propuesta de Soluci'on}
 \noindent
-A partir de los antecedentes y la problem'atica descrita en el punto anterior, se pretende crear una herramienta llamada BM (por sus siglas en ingl'es Bug Manager), que ayude a las peque'nas y medianas empresas a la implementaci'on y seguimiento de un plan de calidad, as'i como las actividades que se requieran realizar. Esta herramienta ataca el nicho de estas peque'nas y medianas empresas las cuales no cuentan con procesos de calidad.
+A partir de los antecedentes y la problem'atica descrita en el punto anterior, se propone la creaci'on de una herramienta de administraci'on de la calidad en el software bautizada Bug Manager (por sus siglas en ingl'es BM), que ayude a las peque'nas y medianas empresas a la implementaci'on y seguimiento de un plan de calidad, as'i como las actividades que se requieran realizar. Esta herramienta ataca el nicho de estas peque'nas y medianas empresas las cuales no cuentan con procesos de calidad ni con presupuestos para la compra de herramientas.
 
-El BM pretende ayudar a las empresas a:
+El BM ayudar'a a las empresas a:
 
 \begin{itemize}
 	\item Establecer un ciclo de desarrollo.
 	\item Elaborar un plan de calidad estableciendo objetivos y t'ecnicas de detecci'on de defectos para cada fase del desarrollo.
 	\item Ayudar con plantillas que sirvan como gu'ias de las t'ecnicas de detecci'on de defectos.
 	\item Dar un seguimiento apropiado a los defectos encontrados durante el desarrollo del sistema.
-	\item Generaci'on de estad'isticas y reportes los cuales mostrar'an informaci'on valiosa acerca del desarrollo como: Productividad, Densidad de Defectos, Retorno de Inversi'on de las Actividades de Calidad, entre otras. Estas proporcionar'an a las empresas informaci'on importante acerca de su proceso de desarrollo, mostrando cu'ales son sus 'areas fuertes y en cu'ales hay oportunidad de mejora.
+	\item Generaci'on de estad'isticas y reportes los cuales mostrar'an informaci'on valiosa acerca del desarrollo como: Productividad, Densidad de Defectos, Retorno de Inversi'on de las Actividades de Calidad, entre otras. Estas proporcionar'an a las empresas informaci'on importante acerca de su proceso de desarrollo, mostrando cu'ales son sus 'areas fuertes y en cu'ales hay una oportunidad de mejora.
 \end{itemize}
-
 
 Tambi'en se pretende que el BM genere una actitud de calidad total y mejora continua en las empresas que lo utilicen, y lograr un cambio cultural evolutivo:
 
 \begin{itemize}
-	\item Promoviendo una cultura de calidad personal en el programador contra una cultura de calidad asignada a grupos organizacionales ajenos al desarrollo (pruebas, adherencia a procesos).
+	\item Promoviendo una cultura de calidad personal en el programador en lugar de una cultura de calidad asignada a grupos organizacionales ajenos al desarrollo (pruebas, adherencia a procesos).
 	\item Estableciendo una meta en el programador/grupo de desarrollo de cero defectos en pruebas de unidad contra n'umero de componentes programados por hora.
 	\item Promoviendo la prevenci'on de defectos en lugar de la b'usqueda de defectos durante las pruebas.
 	\item Enfocando el esfuerzo de t'ecnicas de detecci'on de defectos al inicio del ciclo de vida en lugar de crecer los grupos dedicados a las pruebas al final del ciclo de vida.

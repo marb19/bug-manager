@@ -21,7 +21,7 @@ En esta secci'on se dar'an las nociones b'asicas que se deben de conocer en el t
 
 \subsection{Definici'on de Calidad de Software}
 \noindent
-El concepto de Calidad de Software ha sido definido de varias formas por distintos autores. A continuaci'on presento algunas de las definiciones m'as destacables:
+El concepto de Calidad de Software ha sido definido de varias formas por distintos autores. A continuaci'on se proveen algunas de las definiciones m'as destacables:
 
 \begin{itemize}
 	\item ``Calidad significa cumplir con los requerimientos'' - \cite{Crosby1979};
@@ -34,21 +34,6 @@ El concepto de Calidad de Software ha sido definido de varias formas por distint
 
 Tomando en cuenta estas definiciones, hay autores que se inclinan por definir Calidad de Software en relaci'on al cumplimiento de requerimientos, y otros que prefieren relacionar la calidad con la satisfacci'on final del cliente. Finalmente las empresas deben de buscar un balance apropiado entre ambos enfoques para lograr el 'exito en su labor.
 
-\subsection{Atributos de Calidad}
-\noindent
-Los atributos de calidad son caracter'isticas no funcionales de un sistema. Tambi'en se conocen como requerimientos no funcionales y son factores que determinan la calidad interna y externa de un producto.
-
-Los principales atributos de calidad son\cite{RohitDhiman2005}:
-
-\begin{itemize}
-	\item \emph{Funcionalidad}. Este atributo se refiere a que el sistema cubra adecuadamente las necesidades funcionales del cliente. Sus caracter'isticas espec'ificas son: Precisi'on, interoperabilidad, y seguridad;
-	\item \emph{Confiabilidad}. Este atributo se refiere a que tan confiable es el sistema, a si el sistema va a responder efectivamente cuando es necesario. Sus caracter'isticas espec'ificas son: Madurez, tolerancia a fallas y la habilidad de recuperarse a 'estas;
-	\item \emph{Usabilidad}. Este atributo se refiere a que tan f'acil, intuitivo y usable es el sistema para el usuario. Sus caracter'isticas espec'ificas son: La facilidad con la que el sistema es entendido, que tan f'acil se aprende a usarlo, operatividad y atractividad;
-	\item \emph{Eficiencia}. Este atributo se refiere al desempe'no del sistema. Sus caracter'isticas espec'ificas son: Desempe'no en el tiempo y utilizaci'on de recursos;
-	\item \emph{Mantenibilidad}. Este atributo se refiere a como el sistema puede ser mantenido y mejorado en el tiempo. Sus caracter'isticas espec'ificas son: Analizabilidad, modificabilidad, estabilidad y facilidad para ser probado;
-	\item \emph{Portabilidad}. Este atributo se refiere a como el sistema puede ser instalado en distintos ambientes. Sus caracter'isticas espec'ificas son: Adaptabilidad, facilidad para ser instalado, coexistencia y reemplazabilidad.
-\end{itemize}
-
 \section{Enfoques de la Calidad de Software}
 \noindent
 Existen tres principales enfoques bajo los cuales la industria busca mejorar la calidad en el desarrollo de software. Estos son: Adherencia a procesos, elaboraci'on de pruebas y revisiones de producto.
@@ -57,7 +42,7 @@ Existen tres principales enfoques bajo los cuales la industria busca mejorar la 
 \noindent
 Un enfoque que se tiene para dar calidad a los sistemas de software se hace mediante la definici'on y adherencia a procesos. La idea de este enfoque es que las organizaciones tengan procesos bien definidos, y los sigan religiosamente. Esto con el objetivo de siempre poder obtener resultados similares en sus diferentes procesos.
 
-Dos grandes ejemplos de este enfoque son el ISO9000 y CMMI.
+Dos grandes ejemplos de este enfoque son el ISO9000 el modelo de capacidad y madurez integrado (Por sus siglas en Ingl'es, CMMI).
 
 ISO9000 es una familia de est'andares relacionados a la administraci'on de la calidad de los sistemas, y est'an dise'nados para ayudar a las organizaciones a asegurarse que cumplen con las necesidades de los clientes y las dem'as partes interesadas. Los est'andares que componen al ISO900 son \cite{Herzwurm1996}:
 
@@ -69,55 +54,44 @@ ISO9000 es una familia de est'andares relacionados a la administraci'on de la ca
 	\item \emph{ISO9004}. Modelo para asegurar la calidad a trav'es de situaciones preventivas.
 \end{itemize}
 
-CMMI (siglas en ingl'es de Capability Maturity Model Integration) es un enfoque de mejora de procesos que tiene como meta ayudar a las empresas a mejorar su desempe'no. Este modelo contiene los elementos esenciales de los procesos efectivos, y describe un proceso evolutivo  de mejora tanto para mejorar procesos inmaduros como para mejorar procesos maduros. Cuenta con 5 niveles de madurez que son los siguientes\cite{Yoo2005}:
+CMMI es un modelo de referencia que gu'ia iniciativas de mejora de procesos que tiene como meta ayudar a las empresas a mejorar su desempe'no. Este modelo contiene los elementos esenciales de los procesos efectivos, y describe un proceso evolutivo  de mejora tanto para mejorar procesos inmaduros como para mejorar procesos maduros. Cuenta con 5 niveles de madurez que son los siguientes\cite{Yoo2005}:
 
 \begin{itemize}
 	\item \emph{Nivel 1 (Inicial)}. Procesos impredecibles, poco controlados y que reaccionan a las situaciones;
-  \item \emph{Nivel 2 (Administrado)}. Proceso caracterizado por estar organizado en proyectos, normalmente es reactivo a las situaciones;
+  \item \emph{Nivel 2 (Administrado)}. Proceso caracterizado por estar orientado a nivel proyecto, normalmente es reactivo a las situaciones;
 	\item \emph{Nivel 3 (Definido)}. La organizaci'on tiene procesos definidos y es proactiva. Los proyectos se rigen mediante los procesos de la organizaci'on;
-	\item \emph{Nivel 4 (Administrado Cuantitativamente)}. Los procesos de la organizaci'on son controlados y medidos;
-	\item \emph{Nivel 5 (Optimizaci'on)}. Se enfoca en la mejora de procesos.
+	\item \emph{Nivel 4 (Administrado Cuantitativamente)}. Los procesos de la organizaci'on son controlados y medidos cuantitativamente;
+	\item \emph{Nivel 5 (Optimizaci'on)}. Se enfoca en la mejora continua de procesos.
 \end{itemize}
 
 \subsection{Pruebas de Software}
+\label{sec:pruebasdesoftware}
 \noindent
-Un segundo enfoque es aquel que est'a basado en la realizaci'on de pruebas para asegurar la calidad del sistema.
+Un segundo enfoque es aquel que est'a basado en la realizaci'on de pruebas para asegurar la calidad del sistema. Las pruebas de software incluyen un proceso de verificaci'on y validaci'on de un sistema de software. Estas actividades se realizan con el objetivo de encontrar defectos en un sistema de software. Un defecto es una diferencia entre el resultado esperado y el resultado obtenido. 
 
-Las pruebas de software son un proceso de verificaci'on y validaci'on de un sistema de software. Estas actividades se realizan con el objetivo de encontrar defectos en un sistema de software. Con esta definici'on surgen tres conceptos \cite{JohnE.Bentley}:
-
-\begin{itemize}
-	\item \emph{Verificaci'on}. Es asegurarse que el sistema hace lo que el usuario final necesita que haga.
-	\item \emph{Validaci'on}. Es asegurarse que las operaciones que realice el sistema sean correctas.
-	\item \emph{Defecto}. Es una diferencia entre el resultado esperado y el resultado obtenido.
-\end{itemize}
-
-Las pruebas de software son realizadas para encontrar los defectos en el sistema de software antes de que estos lleguen al usuario final.
-
-Existen distintos tipos de pruebas de software, los m'as comunes son \cite{JohnE.Bentley}:
+Las pruebas de software son realizadas para encontrar los defectos en el sistema de software antes de que estos lleguen al usuario final. Existen distintos tipos de pruebas de software, los m'as comunes son \cite{JohnE.Bentley}:
 
 \begin{itemize}
-	\item \emph{Pruebas Unitarias}. Son pruebas ejecutadas a una unidad de sistema. Dependiendo del tipo de proyecto, una unidad puede ser considerada, un m'etodo dentro de alguna clase, un archivo de c'odigo fuente completo entre otras. En estas pruebas solo se asegura la funcionalidad independiente de la unidad.
+	\item \emph{Pruebas Unitarias}. Son pruebas ejecutadas a una unidad de sistema. Dependiendo del tipo de proyecto, una unidad puede ser considerada, un m'etodo dentro de alguna clase, un archivo de c'odigo fuente completo entre otras. En estas pruebas solo se asegura la funcionalidad asociada a la unidad.
 	\item \emph{Pruebas de Sistema}. Es ejecutar todas las pruebas unitarias en un escenario real. Se refieren a utilizar el sistema bajo condiciones normales donde las unidades interact'uen entre s'i.
 	\item \emph{Pruebas de Estr'es}. Es ejecutar pruebas de sistema pero bajo condiciones de estr'es, con una carga de trabajo muy alta y fuera de lo normal.
 	\item \emph{Pruebas de Aceptaci'on de Usuari}o. Tambi'en conocidas como pruebas Beta, tratan de darle una versi'on funcional, aunque no propiamente final,  del sistema al usuario final, para que estos se aseguren de que el sistema hace lo que ellos necesitan y lo haga de forma correcta.
 	\item \emph{Pruebas de Regresi'on}. Estas pruebas se ejecutan cuando se realiza la correcci'on de alg'un defecto. Todos los componentes o unidades que son afectados por este cambio tienen que ser probados de nuevo para asegurarse de que la correcci'on del defecto original no introdujo nuevos defectos.
 \end{itemize}
 
-Sin embargo el enfoque de este Trabajo de Tesis es justamente evitar hacer pruebas extensivas. Como se mencion'o en la secci'on 1.1 del presente Trabajo de Tesis, gran parte de la problem'atica actual se debe a que los productos del proceso de desarrollo de software llegan con una calidad tan baja a la etapa de pruebas, que a las organizaciones de desarrollo normalmente les toma la mitad del tiempo total del proyecto terminar esta etapa. El Trabajo de Tesis se enfoca en la revisi'on y prevenci'on, con el 'ultimo objetivo de que los productos del proceso de desarrollo de software lleguen libres de defectos a la etapa de pruebas.
+Considerar los tipos de prueba c'omo la 'unica alternativa para remover defectos es inadecuado, costoso, poco efectivo y conlleva a perder el control del proyecto en la fase de pruebas. El enfoque de este Trabajo de Tesis es justamente evitar hacer pruebas extensivas. Como se mencion'o en la secci'on \ref{sec:planteamientodelproblema} del presente Trabajo de Tesis, gran parte de la problem'atica actual se debe a que los productos del proceso de desarrollo de software tienen una alta densidad de defectos por lo que llegan con una calidad muy baja a la etapa de pruebas, que a las organizaciones de desarrollo normalmente les toma la mitad del tiempo total del proyecto terminar esta etapa \cite{Humphrey2002}. El Trabajo de Tesis se enfoca en la revisi'on y prevenci'on de defectos durante el ciclo de vida, con el 'ultimo objetivo de que los productos del proceso de desarrollo de software lleguen libres de defectos a la etapa de pruebas.
 
 \subsection{Revisiones de Productos de Trabajo}
 \noindent
-Este es el enfoque del Trabajo de Tesis. Las revisiones de los productos de trabajo son evaluaciones y revisiones de estos productos por parte de uno o m'as compa'neros del equipo de desarrollo calificados para hacerlo.
+Las revisiones de los productos de trabajo son evaluaciones y revisiones de los productos creados durante el ciclo de vida de desarrollo de software ya sea de forma personal, o por parte de uno o m'as compa'neros del equipo de desarrollo calificados para hacerlo. Este es el enfoque del Trabajo de Tesis.
 
-La idea principal detr'as de las revisiones es detectar los defectos lo antes posible en el proceso de desarrollo de software. Esto evita que los errores permanezcan durante el proceso de desarrollo, donde se va haciendo m'as dif'icil encontrarlos y corregirlos mientras avanza el proyecto.
+La idea principal detr'as de las revisiones es detectar los defectos lo antes posible en el proceso de desarrollo de software. Esto evita que los errores permanezcan durante el proceso de desarrollo, donde se multiplican y se va haciendo m'as dif'icil encontrarlos y corregirlos mientras avanza el proyecto\cite{McConnell2004}.
 
-Los tipos de revisiones de productos m'as comunes son: Revisiones personales, revisiones entre colegas, caminatas e inspecciones.
-
-En la subsecci'on 3.4 del presente Trabajo de Tesis se esbozar'an distintas estrategias para promover la cultura de la revisi'on y la prevenci'on, y en la subsecci'on 3.4.2 se ahondar'a en el tema de las t'ecnicas de detecci'on de defectos.
+Los tipos de revisiones de productos m'as comunes son: Revisiones personales y entre colegas; caminatas e inspecciones. En la subsecci'on \ref{sec:tecnicasdedetecciondedefectos} del presente Trabajo de Tesis se esbozar'an distintas estrategias para promover la cultura de la revisi'on y la prevenci'on.
 
 \section{Importancia de la Calidad en el Desarrollo de Software}
 \noindent
-El software es una tecnolog'ia sorprendente. Es un producto totalmente intelectual por lo que no tiene costos de producci'on, aparte puede ser distribuido mundialmente en segundos, no se deteriora con el tiempo y es la forma m'as econ'omica y sencilla de implementar casi cualquier funci'on compleja.
+El software es una tecnolog'ia sorprendente. Es un producto totalmente intelectual, aparte puede ser distribuido mundialmente en segundos, no se deteriora con el tiempo y es la forma m'as econ'omica y sencilla de implementar casi cualquier funci'on compleja.
 
 En todos los campos de la ingenier'ia y la ciencia, m'as de la mitad del tiempo de cualquier profesional lo utiliza desarrollando, mejorando, manteniendo o usando un sistema de software. Es sin duda uno de los negocios m'as grandes e importantes de la actualidad\cite{Humphrey2002}.
 
@@ -125,7 +99,7 @@ Tomando en cuenta lo anterior, muchos ejecutivos de varias organizaciones vieron
 
 \subsection{El software en las organizaciones}
 \noindent
-Para administrar una organizaci'on o un departamento dentro de una organizaci'on dedicado al software se necesita tener en cuenta los siguientes principios de administraci'on:
+Para administrar una organizaci'on o un departamento dentro de una organizaci'on dedicado al software se necesita tener en cuenta los siguientes principios de administraci'on\cite{Humphrey2002}:
 
 \begin{enumerate}
 	\item Reconocer la importancia del software en el negocio;
@@ -135,16 +109,14 @@ Para administrar una organizaci'on o un departamento dentro de una organizaci'on
 
 \subsection{?`Por qu'e los proyectos de software fallan?}
 \noindent
-La raz'on principal por la que los proyectos fallan es administraci'on inadecuada. Una buena administraci'on requiere dos cosas: Estar enfocados en la calidad, e ingenieros motivados que realicen un trabajo disciplinado.
-
-Las causas m'as comunes por las cuales los proyectos fallan son\cite{Humphrey2002}:
+La raz'on principal por la que los proyectos fallan es administraci'on inadecuada. Una buena administraci'on requiere dos cosas: Estar enfocados en la calidad, e ingenieros motivados que realicen un trabajo disciplinado. Las causas m'as comunes por las cuales los proyectos fallan son\cite{Humphrey2002}:
 
 \begin{itemize}
-	\item \emph{Calendarios poco realistas}. Cuando un proyecto de software inicia con calendarios poco realistas, el proyecto ser'a entrado despu'es de lo que se hubiera hecho con un calendario realista. Esto es porque los ingenieros comienzan a hacer trabajo r'apido y de poca calidad para alcanzar el calendario. El resultado de esto son productos de baja calidad, los cuales est'an llenos de defectos, lo que se traduce a una extensa etapa de pruebas;
+	\item \emph{Calendarios poco realistas}. Cuando un proyecto de software inicia con calendarios poco realistas, el proyecto ser'a entregado despu'es de lo que se hubiera hecho con un calendario realista. Esto es porque los ingenieros comienzan a hacer trabajo r'apido y de poca calidad para alcanzar el calendario. El resultado de esto son productos de baja calidad, los cuales est'an llenos de defectos, lo que se traduce a una extensa etapa de pruebas;
 	\item \emph{Equipo inadecuado}. La 'unica forma de terminar un proyecto de software de manera r'apida y efectiva es asignar el n'umero adecuado de personas y protegerlas de interrupciones y distracciones;
 	\item \emph{Cambio de requerimientos}. Es normal que los requerimientos cambien en las fases iniciales del proyecto, sin embargo llega un punto que esta situaci'on es muy perjudicial. Se tiene que identificar este punto para evitar p'erdidas de dinero y cambios que afecten en sobremanera el trabajo que se est'a haciendo;
 	\item \emph{Baja calidad en el trabajo realizado}. Si el trabajo que se realiza es de baja calidad, va a ocasionar que la fase de pruebas sea muy larga y se gaste mucho tiempo arreglando defectos durante el proceso de desarrollo;
-	\item \emph{Creer en la magia}. No existe la bala de plata. Muchas veces se cree que con una nueva tecnolog'ia o forma de desarrollo se resolver'an todos los problemas, y lo que ocurre generalmente es que nos pueden llevar a serios problemas.
+	\item \emph{Creer en la magia}. No existe la bala de plata. Muchas veces se cree que con una nueva tecnolog'ia o forma de desarrollo resolver'a todos los problemas, y lo que ocurre generalmente es que pueden llevar a serios problemas.
 \end{itemize}
 
 El costo de una baja calidad de software es dif'icil de ver hasta el final del proyecto. Com'unmente, la baja calidad le dar'a problemas a'un a los usuarios finales ya que el proyecto se haya terminado. Los errores m'as comunes son: l'ideres de proyecto que toman compromisos irresponsables y no insisten en que el trabajo se haga de forma correcta. Todos los problemas mencionados anteriormente se pudieron evitar si la administraci'on hubiera insistido en planear correctamente el trabajo y realizarlo de forma disciplinada.
@@ -159,100 +131,56 @@ Hay tres razones fundamentales para insistir en que la Calidad de Software tiene
 	\item Si la gerencia y el l'ider de proyecto no insisten en la administraci'on de la calidad de software, nadie m'as lo har'a.
 \end{enumerate}
 
-Varios estudios han demostrado que incluso los ingenieros experimentados inyectan un defecto cada diez l'ineas de todo\cite{Humphrey2002}. Esto no significa que los programadores sean incompetentes, simplemente son humanos.
+Varios estudios han demostrado que incluso los ingenieros experimentados inyectan un defecto cada diez l'ineas de c'odigo\cite{Humphrey2002}. Esto no significa que los programadores sean incompetentes, simplemente son humanos.
 
-El costo de encontrar y corregir los defectos se incrementa en cada fase del proceso de desarrollo de software. Entre m'as permanezca un defecto en el sistema, ser'a m'as dif'icil removerlo.
+El costo de encontrar y corregir los defectos se incrementa en cada fase del proceso de desarrollo de software. Entre m'as permanezca un defecto en el sistema, ser'a m'as dif'icil removerlo, a dem'as de que se multiplica.
 
-Existen varias t'ecnicas para remover defectos antes de llegar a la fase de pruebas. Varias de estas t'ecnicas fueron mencionadas en la secci'on 3.2.3 del presente Trabajo de Tesis, y ser'an descritas a mayor profundidad en la secci'on 3.4.2. Una de estas t'ecnicas por ejemplo, es la revisi'on de c'odigo, en las que se lee y revisa el c'odigo producido en busca de defectos. Estas actividades suelen tomar una peque'na cantidad de tiempo, y cada defecto encontrado ahorra una gran cantidad de tiempo en la fase de pruebas.
+Existen varias t'ecnicas para remover defectos antes de llegar a la fase de pruebas. Estas t'ecnicas fueron  ser'an descritas a mayor profundidad en la secci'on \ref{sec:tecnicasdedetecciondedefectos} . Una de estas t'ecnicas por ejemplo, es la revisi'on de c'odigo, en las que se lee y revisa el c'odigo producido en busca de defectos. Estas actividades suelen tomar una peque'na cantidad de tiempo, y cada defecto encontrado ahorra una gran cantidad de tiempo en la fase de pruebas.
 
 A diferencia de las revisiones de c'odigo, la fase de pruebas es una actividad de calidad mucho m'as larga. La raz'on de esto es que en las pruebas de software solo se revela los s'intomas del defecto, mientras que en las revisiones se encuentra directamente el defecto.
 
-La mejor manera de remover defectos de software es realizando revisiones de c'odigo, ya que estas son m'as baratas y m'as efectivas que las pruebas de software. El ingeniero que desarroll'o el programa es el m'as indicado para encontrar y corregir sus propios defectos.
+La mejor manera de remover defectos de software es realizando revisiones de c'odigo, ya que estas son m'as baratas y m'as efectivas que las pruebas de software. Adicionalmente, el ingeniero que desarroll'o el programa es el m'as indicado para encontrar y corregir sus propios defectos.
 
 Aun conociendo la efectividad de las revisiones de c'odigo, muchas organizaciones no las utilizan. La raz'on es que para realizar revisiones de c'odigo efectivas se requieren m'etodos disciplinados.
 
-Si los proyectos tienen la mayor parte de su tiempo dedicado a la fase de pruebas de software, va a ser casi imposible planearlo y darle seguimiento. Si se desea que los planes tengan compromisos precisos y realizables, se debe de insistir en realizar un trabajo de calidad.
+Si los proyectos tienen la mayor parte de su tiempo dedicado a la fase de pruebas de software, va a ser casi imposible planearlo y darle seguimiento. Si se desea que los planes tengan compromisos precisos y realizables, se debe de insistir en realizar un trabajo de calidad incluyendo actividades de detecci'on de defectos.
 
-\section{Organizaciones con Procesos de Calidad}
-\noindent
-Existen varios factores que se tienen que tomar en cuenta en una organizaci'on que se dedique al desarrollo de software para que esta produzca sistemas de alta calidad.
+\subsection{Introduciendo la Calidad a las Organizaciones}
+Una organizaci'on exitosa siempre busca mejorar sus procesos por medio de reducir el tiempo que toman, aumentar su calidad y reducir sus costos. Un principio b'asico de la administraci'on que nos permite llegar a este objetivo es: Lo que se mide puede ser administrado y lo que es administrado puede ser realizado. Al contrario, lo que no es medido com'unmente se ignora. 
 
-\subsection{3.4.1	Administraci'on Racional}
-\noindent
-El principio de la administraci'on racional es confiar que los miembros de un equipo de desarrollo de software son profesionales preocupados en el 'exito del proyecto.
-
-En la administraci'on racional se necesita crear planes, seguir estos planes, y corregir los problemas antes de que se salgan de control. Sus cuatro elementos principales son\cite{Humphrey2002}:
+Para que una organizaci'on pueda construir software utilizando procesos de calidad que resulten en sistemas de alta calidad, debe de utilizar la administraci'on racional. El principio de administraci'on racional es confiar en que los miembros de un equipo de desarrollo de software son profesionales preocupados por el 'exito del proyecto. En la administraci'on racional se necesita crear planes, seguir estos planes, y corregir los problemas antes de que se salgan de control, tambi'en hace un 'enfasis especial en el calendario, la calidad y los costos. Los cuatro elementos principales de la administraci'on racional son\cite{Humphrey2002}:
 
 \begin{enumerate}
 	\item Establecer metas agresivas a largo plazo, pero descomponerlas en metas real'isticas y medibles a corto plazo;
-	\item Insistir en la creaci'on de planes e insistir que estos planes sean creados por las personas que har'an el trabajo. Los planes tienen que ser detallados y completos, y tienen que ser revisados a conciencia en busca de omisiones y otros errores;
+	\item Insistir en la creaci'on de planes e insistir que estos planes sean creados por las personas que har'an el trabajo. Los planes tienen que ser detallados y completos, y tienen que ser revisados a conciencia en busca de omisiones y otros errores por los l'ideres de proyecto y la gerencia;
+	\item Los planes de trabajo deben de ser utilizados al momento de realizar el trabajo. Esto permite realizar balanceo de cargas y conocer el estado actual del proyecto. Todos los productos deben de tener alta calidad, si no es as'i eventualmente tendr'an que ser corregidos y tendr'an un costo extra.
 	\item Se tienen que utilizar datos e informaci'on. Si se utiliza de forma objetiva los datos y la informaci'on del desempe'no del equipo, se demuestra la confianza que se tiene en el equipo y la disposici'on que existe para escuchar sus problemas, planes e ideas;
+	\item La reducci'on de costos se logra por medio de maximizar el tiempo de trabajo de los ingenieros, y esto se hace planeando el tiempo que tomar'an las actividades y midiendo el tiempo que realmente tomaron.
 	\item Dar seguimiento al trabajo realizado y  utilizar la informaci'on actual para anticipar y resolver problemas futuros. Los calendarios y planes se salen de control d'ia a d'ia.
 \end{enumerate}
 
-Cuando el trabajo es planeado, medido y monitoreado, se puede analizar el desempe'no del proyecto y del negocio.
+En resumen, para que una organizaci'on pueda mejorar su calidad las diferentes partes deben de cumplir con lo propuesto anteriormente. Los ingenieros deben de utilizar las pr'acticas de calidad, as'i como planear y dar seguimiento al trabajo realizado y finalmente medir y administrar la calidad del producto. Los l'ideres o administradores de proyecto deben iniciar y mantener este nuevo comportamiento, as'i como monitorear los planes y balancear efectivamente la carga de trabajo. La gerencia o l'ideres de la organizaci'on deben de proveer un ambiente disciplinado y atractivo de trabajo, establecer las metas a largo plazo y dar seguimiento al trabajo realizado. Cuando el trabajo es planeado, medido y monitoreado, se puede analizar el desempe'no del proyecto y del negocio.
 
-\subsection{Transformado las Organizaciones}
-\noindent
-Las organizaciones siempre quieren realizar sus actividades m'as r'apido, de mejor manera y a menor costo. Un principio b'asico en la administraci'on es: Lo que se mide puede ser administrado, y lo que es administrador puede realizarse. Al contrario, lo que no es medido com'unmente se ignora.
-
-Las tres principales cosas en las que una organizaci'on se debe de concentrar para hacer el cambio de calidad son: Calendario, calidad y costo. Para lograr esto se tiene que cambiar la forma en que los ingenieros trabajan. Para acelerar el trabajo, te debes de enfocar a las actividades, como se hacen y que se necesita para acelerar el proyecto.
-
-El primer requerimiento para ser m'as r'apido, mejor y m'as econ'omico es hacer planes detallados y comprensivos. Los ingenieros son quienes deben de realizar estos planes. Despu'es la gerencia debe de asegurarse que los ingenieros tengan las habilidades y conocimientos necesarios para elaborar estos planes. Finalmente los jefes directos de los ingenieros, com'unmente los l'ideres de proyecto, deben de participar en la elaboraci'on de los planes, y finalmente, la administraci'on y la gerencia debe de revisar que estos planes sean completos.
-
-El siguiente requerimiento es que los ingenieros deben de utilizar los planes que elaboraron para realizar el trabajo. Uno de los mayores beneficios de tener planes detallados es que los equipos pueden balancear las cargas de trabajo. La calidad es clave aqu'i, se necesita que todos los productos de trabajo tengan alta calidad, si no, eventualmente tendr'an que ser corregidos y tendr'an un costo extra.
-
-Una meta de calidad en la organizaci'on deber'ia ser que los ingenieros est'en entrenados en las pr'acticas de calidad y que utilicen estas pr'acticas para realizar el trabajo.
-
-La estrategia principal para reducir el costo de ingenier'ia es ayudar a los ingenieros a maximizar el tiempo trabajado en actividades que se encuentren dentro del plan de desarrollo. En el tiempo de actividades de desarrollo no se toma en cuenta el tiempo invertido en juntas, descansos, asesor'ia por parte de la gerencia u otras actividades requeridas dentro de los proyectos de ingenier'ia. En promedio los ingenieros invierten a las actividades planeadas entre diez y quince horas por semana.
-
-Para maximizar el tiempo que se invierte en actividades planeadas existen cuatro elementos clave: Medir el tiempo invertido en las actividades planeadas, mantener a los ingenieros motivados, planear el tiempo a invertir en las actividades planeadas, y revisi'on y apoyo por parte de la administraci'on. 
-
-Entonces para que una organizaci'on pueda mejorar su calidad las diferentes partes deben de cumplir con lo propuesto anteriormente. Los ingenieros deben de utilizar las pr'acticas de calidad, as'i como planear y dar seguimiento al trabajo realizado y finalmente medir y administrar la calidad del producto. Los l'ideres o administradores de proyecto deben iniciar y mantener este nuevo comportamiento, as'i como monitorear los planes y balancear efectivamente la carga de trabajo. La gerencia o l'ideres de la organizaci'on deben de proveer un ambiente disciplinado y atractivo de trabajo, establecer las metas a largo plazo y dar seguimiento al trabajo realizado.
-
-\subsection{Cambiando el Comportamiento de los Ingenieros}
-\noindent
-La calidad del producto de software desarrollado est'a determinada por el proceso que se utiliz'o para crear el producto. La 'unica forma de crear productos de software de calidad es implementar t'ecnicas de calidad de software bajo un proceso disciplinado.
-
-Para que los ingenieros sean capaces de crear planes detallados basados en informaci'on hist'orica, y sigan estos planes para hacer el trabajo, los ingenieros deben estar capacitados y convencidos que el realizar estas acciones va a fomentar el 'exito en el proyecto.
-
-La idea b'asica detr'as de esto es que si las partes peque'nas del sistema no tienen alta calidad, el sistema completo tampoco ser'a de calidad. Es por esto que los ingenieros deben de enfocarse en la calidad desde el principio del ciclo de desarrollo, teniendo cada componente por m'inimo que sea, una calidad envidiable.
-
-Todas las partes a cargo del desarrollo del proyecto son responsables de implementar los distintos m'etodos calidad. La gerencia y los l'ideres de proyecto son los responsables de implementar estos m'etodos de calidad y los ingenieros deben de seguir fielmente estos m'etodos. Toma el mismo tiempo escribir programas de alta calidad que lo que toma escribir programas plagados de defectos.
-
-\subsection{Construyendo Equipos Motivados}
-\noindent
-Los mejores resultados dentro de una organizaci'on se obtienen cuando la administraci'on conf'ia en sus ingenieros. En el contexto de negocios hay tres formas de motivar a las personas: Miedo, avaricia y compromiso. Solo en los trabajos m'as simples el miedo y la avaricia son motivadores efectivos.
-
-Para crear equipos motivamos, se necesita que todos los ingenieros est'en capacitados para realizar el trabajo que van a hacer. Despu'es se tiene que convencer a los ingenieros de que el trabajo que van a realizar es importante y que se necesita su compromiso personal para que tenga 'exito. Se tienen que plantear metas agresivas, pero crear planes detallados para alcanzarlas, si los planes creados por los ingenieros no cumplen la gerencia se tiene que pedir a los ingenieros que justifiquen sus planes. Los planes tienen que ser revisados en busca de partes donde se pueda recortar tiempo, pero tambi'en deben de buscarse omisiones. Lo que se necesita es un compromiso realista que el equipo pueda cumplir, no una vana promesa.
-
-El l'ider de proyecto debe de checar el progreso en el trabajo cada semana, y la gerencia al menos cada mes.
+El BM proveer'a a las organizaciones con la infraestructura b'asica para la implementaci'on de una administraci'on racional. Permitir'a establecer planes, dar de alta tareas con sus tiempos planificados, darles seguimiento y registrar sus tiempos reales. M'as detalles de esto se dar'an en la secci'on \ref{sec:administracionyseguimientodeactividades}.
 
 \subsection{Beneficios del Trabajo de Calidad}
 \noindent
-Cuando se utilizan correctamente m'etodos disciplinados para planear, dar seguimiento y administrar el trabajo, los productos elaborados ser'an de alta calidad y dentro de calendario. M'as importante a'un, tendremos una noci'on bastante precisa de en qu'e parte del proceso de desarrollo se encuentra el proyecto, y una predicci'on fiable de cu'ando se va a terminar.
+Cuando se utilizan correctamente m'etodos disciplinados para planear, dar seguimiento y administrar, el trabajo ser'a de alta calidad y ser'a terminado dentro de calendario. M'as importante a'un, tendremos una noci'on bastante precisa de en qu'e parte del proceso de desarrollo se encuentra el proyecto, y una predicci'on fiable de cu'ando se va a terminar.
 
 El tiempo que se requiere para escribir programas de alta calidad es el mismo que se necesita para escribir programas de baja calidad. Los productos de calidad reducen el tiempo desarrollo. Entre menos defectos existan, el costo ser'a menor y los estimados ser'an m'as efectivos. Tambi'en el tiempo que se requiera para terminar la etapa de pruebas ser'a mucho menor.
 
-\subsection{Pasos para Mejorar la Calidad}
-\noindent
-Esta subsecci'on presenta un resumen r'apido de la secci'on 3.4, dando los puntos principales para que una organizaci'on haga una transformaci'on hacia la cultura de la alta calidad\cite{Humphrey2002}:
-
-\begin{enumerate}
-	\item Establecer una pol'itica de calidad. Se debe de tener claro que el trabajo de calidad es la primera prioridad. Las pol'iticas de calidad deben de ser escritas y publicadas, haciendo 'enfasis en que hacer las cosas de forma correcta es la mejor forma de hacerlas;
-	\item La gerencia debe de tener en cuenta que son los responsables de la mejora de los procesos. Normalmente se opta por asignar una persona en particular para dar seguimiento a la mejora que se va teniendo;
-	\item Establecer metas precisas y medibles. Para alcanzar metas agresivas, las metas deben de ser claras y tener formas de medirlas para hacer comparaciones;
-	\item Los l'ideres de proyecto deben de ser responsables de la mejora de cada uno de los equipos a su cargo;
-	\item Se deben de proveer los recursos necesarios para realizar las mejoras;
-	\item Se deben de identificar las 'areas de mejora, priorizarlas y enfocarse en las m'as importantes. Ya que se hayan mejorado las 'areas de mayor prioridad se puede pasar a mejorar otras;
-	\item Se debe de dar seguimiento al proceso de mejora.
-\end{enumerate}
-
 \section{El Proceso Personal del Software}
 \noindent
+El Proceso Personal del Software (por sus siglas en Ingl'es PSP) es una metodolog'ia de mejora continua en el desarrollo de software propuesta por Watts Humphrey en su libro ``PSP A Self-Improvement Process for Software Engineers''\cite{Humphrey}. El PSP ayuda a controlar, administrar y mejorar los procesos para desarrollar software. Provee una infraestructura de gu'ias, plantillas y procedimientos para: desarrollar software, dar seguimiento a los defectos y admistrar la calidad. Esto hace que los productos de trabajo sean m'as predecibles y eficientes, que se elaboren mejores planes, dar un seguimiento adecuado al desempe'no y medir la calidad de los productos elaborados.
+
+El BM toma varios conceptos de esta metodolog'ia para alcanzar los objetivos que propone. En esta secci'on ser'an descritos los conceptos de los que hace uso el BM.
+
+\subsection{?`Qu'e es la calidad de software?}
+\noindent
+
 Los m'etodos tradicionales para asegurar la calidad del software en desarrollo son: Inspecci'on de requerimientos, inspecci'on de dise'no, compilaci'on, inspecci'on de c'odigo y pruebas. La tabla \ref{DefectosNivelCMM} muestra los niveles de defectos promedio por las organizaciones seg'un su nivel de CMM\cite{Humphrey}.
 
-\begin{table}
+\begin{table}[htbp]
 	\centering
 		\begin{tabular}{| c | c |}
 			\hline
@@ -261,38 +189,48 @@ Los m'etodos tradicionales para asegurar la calidad del software en desarrollo s
 			2 & 6.24 \\ \hline
 			3 & 4.73 \\ \hline
 			4 & 2.228 \\ \hline
-			5 & 8 \\ 
+			5 & 1 \\ 
 			\hline
 		\end{tabular}
 	\caption{N'umero de Defectos por Nivel de CMM}
 	\label{DefectosNivelCMM}
 \end{table}
 
-Para mejorar la calidad de productos de software, aparte de utilizar los m'etodos tradicionales de calidad, se debe de medir y dar seguimiento al trabajo personal. Si el objetivo es tener un sistema de software de alta calidad, cada parte del sistema debe de ser de alta calidad. La estrategia de PSP (por sus siglas en ingl'es Personal Software Process) es administrar los defectos contenidos en todas las partes del sistema. Con partes de alta calidad, el proceso de desarrollo de software se puede escalar sin perder productividad.
+Para mejorar la calidad de productos de software, aparte de utilizar los m'etodos tradicionales de calidad, se debe de medir y dar seguimiento al trabajo personal. S'i el objetivo es tener un sistema de software de alta calidad, cada parte del sistema debe de ser de alta calidad. La estrategia de PSP es administrar los defectos contenidos en todas las partes del sistema. Con partes de alta calidad, el proceso de desarrollo de software se puede escalar sin perder productividad.
 
-\subsection{?`Qu'e es la calidad de software?}
-\noindent
-La definici'on de calidad deber'ia de basarse en las necesidades de los usuarios\cite{Humphrey}.
+La definici'on de calidad deber'ia de basarse en las necesidades de los usuarios\cite{Humphrey}. Los usuarios deben de contar con un producto funcional. Si el producto tiene muchos defectos este no se desempe'nar'a con una consistencia razonable. Sin embargo esto no significa que los defectos son siempre la principal prioridad. Despu'es de los defectos se tienen caracter'isticas de calidad como: Desempe'no, seguridad, usabilidad, compatibilidad, funcionalidad, confiabilidad entre otras. Normalmente se gasta un tiempo excesivo en la correcci'on de defectos, dejando muy poco tiempo dedicado a las otras caracter'isticas mencionadas anteriormente.
 
-Los usuarios deben de contar con un producto funcional. Si el producto tiene muchos defectos este no se desempe'nar'a con una consistencia razonable. Sin embargo esto no significa que los defectos son siempre la principal prioridad. Despu'es de los defectos encontramos caracter'isticas de calidad como: Desempe'no, seguridad, usabilidad, compatibilidad, funcionalidad, confiabilidad entre otras.
-
-Normalmente se gasta un tiempo excesivo en la correcci'on de defectos, dejando muy poco tiempo dedicado a las otras caracter'isticas mencionadas anteriormente.
-
-Aunque nos referimos que los defectos son solo una parte de la calidad del producto de software, son el principal objetivo del PSP, ya que la administraci'on efectiva de estos es esencial para la administraci'on de costo, calendario y los dem'as aspectos de la calidad de producto.
+Aunque los defectos son solo una parte de la calidad del producto de software, son el principal objetivo del PSP, ya que la administraci'on efectiva de estos es esencial para la administraci'on de costo, calendario y los dem'as aspectos de la calidad de producto.
 
 \subsection{La Econom'ia de la Calidad de Software}
 \noindent
-La calidad de software es un problema de calidad. Cada prueba realizada cuesta dinero y toma tiempo.
+La calidad de software es un problema de econ'omico. Cada prueba realizada cuesta dinero y toma tiempo. Entre m'as tiempo el defecto permanezca en el producto, el impacto es m'as alto. Por ejemplo encontrar un problema de requerimientos cuando el cliente ya est'a utilizando el producto puede ser demasiado costoso; en cambio, encontrar el defecto durante una revisi'on de c'odigo ser'a mucho menos costoso. El objetivo, entonces, es remover los defectos lo antes posible en el proceso de desarrollo. Esto se logra haciendo revisiones e inspecciones de cada producto de trabajo lo m'as pronto posible, antes de que se haya terminado de construir el producto de software.
 
-Entre m'as tiempo el defecto permanezca en el producto, el impacto es m'as alto. Por ejemplo encontrar un problema de requerimientos cuando el cliente ya est'a utilizando el producto puede ser demasiado costoso, en cambio encontrar el defecto durante una revisi'on de c'odigo ser'a mucho menos costoso. El objetivo entonces es, remover los defectos lo antes posible en el proceso de desarrollo. Esto se logra haciendo revisiones e inspecciones de cada producto de trabajo lo m'as pronto posible de que se haya terminado el producto.
+El proceso de pruebas puede ser muy efectivo para identificar problemas de desempe'no, usabilidad y problemas operacionales, pero no es tan efectivo removiendo grandes cantidades de defectos. Los datos de estudios realizados demuestran que mientras m'as tarde en el proceso de desarrollo sea encontrado un defecto, es m'as dif'icil encontrarlo y removerlo\cite{Humphrey}. La tabla \ref{CostoEncontrarCorregir} nos muestra cuanto cuesta encontrar y corregir defectos en Inspecciones, Pruebas y Mantenimiento seg'un distintos estudios:
 
-El proceso de pruebas puede ser muy efectivo para identificar problemas de desempe'no, usabilidad y problemas operacionales, pero no es tan efectivo removiendo grandes cantidades de defectos. Los datos de estudios realizados demuestran que mientras m'as tarde en el proceso de desarrollo sea encontrado un defecto, es m'as dif'icil encontrarlo y removerlo.
+\begin{table}[htbp]
+	\centering
+		\begin{tabular}{| c | c | c | c |}
+			\hline
+			\textbf{Referencia} & \textbf{Inspecci'on} & \textbf{Pruebas} & \textbf{Uso} \\ \hline
+			IBM (Remus and Ziles 1979) \cite{Remus1979} & 1 & 4.1 veces la inspecci'on &  \\ \hline
+			JPL (Bush 1990)\cite{Bush1990} & \$90 - \$120 & \$10,000 &  \\ \hline
+			Ackerman et al. 1989\cite{Ackerman1989} & 1 hora & 2-20 horas &  \\ \hline
+			Ragland 1992\cite{Ragland1992} &  & 20 horas &  \\ \hline
+			Russell 1991\cite{Rusell1991} & 1 hora & 2-4 horas &  \\ \hline
+			Shooman and Bolsky 1975\cite{Shooman1975} & 0.6 horas & 3.05 horas &  \\ \hline
+			Weller 1993\cite{Weller1993} & 0.7 horas & 6 horas &  \\ 
+			\hline
+		\end{tabular}
+	\caption{Costo de Encontrar y Corregir Defectos}
+	\label{CostoEncontrarCorregir}
+\end{table}
 
 \subsection{Tipos de Defectos}
 \noindent
 Los tipos de defectos m'as comunes son: Errores en requerimientos, errores de dise'no, errores de codificaci'on, errores de documentaci'on, correcciones defectuosas. La tabla \ref{TiposDefectosKLOC} presenta el n'umero de defectos cada mil l'ineas de c'odigo seg'un el tipo de defecto\cite{Humphrey}.
 
-\begin{table}
+\begin{table}[htbp]
 	\centering
 		\begin{tabular}{| c | c |}
 			\hline
@@ -311,11 +249,11 @@ Los tipos de defectos m'as comunes son: Errores en requerimientos, errores de di
 
 \subsection{M'etricas de Calidad}
 \noindent
-Para mejorar la calidad, se debe de medir la calidad\cite{Humphrey}. El PSP propone el uso de las siguientes m'etricas para medir la calidad de las organizaciones de software: El Yield de Calidad, el Costo de la Calidad (COQ), la Tasa de Revisiones, la Calidad de Radio de Fases y el 'Indice de Calidad de Proceso.
+Para mejorar la calidad, se debe de medir la calidad\cite{Humphrey}. El PSP propone el uso de las siguientes m'etricas para medir la calidad de las organizaciones de software: La efectividad de la t'ecnica de detecci'on de defectos (Yield de Calidad), el Costo de la Calidad (Por sus siglas en Ingl'es, COQ), la Tasa de Revisiones, la Calidad de Radio de Fases y el 'Indice de Calidad de Proceso.
 
-El Yield mide la eficiencia de cada fase removiendo defectos. El Yield de una fase es el porcentaje de defectos de producto totales que son removidos en esa fase. El Yield de proceso es el porcentaje de defectos que son removidos antes de la primera compilaci'on. El Yield aumenta claramente cuando se comienzan a utilizar revisiones de dise'no y de c'odigo.
+El Yield mide la eficiencia de cada fase en la detecci'on de defectos. El Yield de una fase es el porcentaje de defectos de producto totales que son removidos en esa fase. El Yield de proceso es el porcentaje de defectos que son removidos antes de la primera compilaci'on o pruebas de unidad. El Yield de proceso aumenta claramente cuando se comienzan a utilizar revisiones de dise'no y de c'odigo.
 
-El COQ tiene tres componentes principales:
+El COQ tiene tres componentes principales\cite{Humphrey}:
 
 \begin{enumerate}
 	\item \emph{Costo de las Fallas (CF)}. El costo total de las fases de compilaci'on y de pruebas;
@@ -329,22 +267,22 @@ En la tabla \ref{MetricasCOQ} se muestran las m'etricas que se pueden obtener a 
 	\centering
 		\begin{tabular}{|l|l|l|} \hline
 		\multicolumn{3}{|c|}{\textbf{F'ormulas COQ}} \\ \hline
-		\multirow{4}{*}{\begin{math}CF = 100(\frac{TC + TT}{TTD})\end{math}} 
+		\multirow{4}{*}{\begin{math}CF = 100(\frac{TC + TP}{TTD})\end{math}} 
 		& CF & Costo de Fallas \\
 		& TC & Tiempo de Compilaci'on \\
-		& TT & Tiempo de Pruebas \\
+		& TP & Tiempo de Pruebas \\
 		& TTD & Tiempo Total de Desarrollo \\ \hline
-		\multirow{4}{*}{\begin{math}CE = 100(\frac{TRD + TRP}{TTD})\end{math}} 
+		\multirow{4}{*}{\begin{math}CE = 100(\frac{TRD + TRC}{TTD})\end{math}} 
 		& CE & Costo de Evaluaci'on \\
 		& TRD & Tiempo de Revisi'on de Dise'no \\
-		& TRP & Tiempo de Revisi'on de Compilaci'on \\
+		& TRC & Tiempo de Revisi'on de C'odigo \\
 		& TTD & Tiempo Total de Desarrollo \\ \hline
 		\multirow{2}{*}{\begin{math}TCOQ = CF + CE\end{math}} 
 		& CE & Costo de Evaluaci'on \\
-		& TTD & Tiempo Total de Desarrollo \\ \hline
+		& CF & Costo de Fallas \\ \hline
 		\multirow{2}{*}{\begin{math}CE\% = 100(\frac{CE}{TCOQ})\end{math}} 
 		& CE & Costo de Evaluaci'on como \% del TTD\\
-		& TTD & Tiempo Total de Desarrollo \\ \hline
+		& TCOQ & Costo Total de la Calidad \\ \hline
 		\multirow{3}{*}{\begin{math}RF = \frac{CE}{CF}\end{math}} 
 		& RF & Raz'on de Falla \\
 		& CE & Costo de Evaluaci'on \\
@@ -354,48 +292,44 @@ En la tabla \ref{MetricasCOQ} se muestran las m'etricas que se pueden obtener a 
 	\label{MetricasCOQ}
 \end{table}
 
-El Yield y el COQ son 'utiles, pero miden el trabajo que hiciste, no lo que est'as haciendo. La Tasa de Revisi'on y al Radio de Calidad por Fase proveen una manera de dar seguimiento y control a los tiempos de revisi'on. 
+El Yield y el COQ son 'utiles, pero miden el trabajo que hiciste, no lo que est'as haciendo. La Tasa de Revisi'on y el Radio de Calidad por Fase proveen una manera de dar seguimiento y control a los tiempos de revisi'on. 
 
-La tasa de revisi'on se utiliza principalmente para revisiones de c'odigo e inspecciones, y mide el n'umero de l'ineas de c'odigo (LOC) o p'aginas revisadas por hora.
+La tasa de revisi'on se utiliza principalmente para revisiones de c'odigo e inspecciones, y mide el n'umero de L'ineas de C'odigo (LOC por sus siglas en Ingl'es) o p'aginas revisadas por hora.
 
 El Radio de Calidad por Fase, Es el radio de tiempo utilizado en dos fases de proceso. El radio para la revisi'on es el tiempo utilizado para realizar revisiones dividido entre el tiempo de desarrollo.
 
-El 'Indice de Calidad de Proceso (PQI), es una m'etrica compuesta por cinco sub-m'etricas, la cual nos permite analizar el desempe'no general de los procesos de una organizaci'on de software. El PQI se obtiene de multiplicar las cinco sub-m'etricas que se presentan en la tabla \ref{SubMetricasPQI} y el objetivo es que el resultado sea 1.0.
+El 'Indice de Calidad de Proceso (PQI por sus siglas en Ingl'es), es una m'etrica compuesta por cinco sub-m'etricas, la cual nos permite analizar el desempe'no general de los procesos de una organizaci'on de software. El PQI se obtiene de multiplicar las cinco sub-m'etricas que se presentan en la tabla \ref{SubMetricasPQI}. El valor ideal es que el resultado sea 1.0; sin embargo, estudios realizados por Humphrey\cite{Humphrey} indican que un valor mayor a 0.4 provee un valor adecuado de calidad.
 
 \begin{table}[htbp]
 	\centering
 		\begin{tabular}{|l|l|l|} \hline
 		\multicolumn{3}{|c|}{\textbf{F'ormulas PQI}} \\ \hline
-		\multirow{3}{*}{\begin{math}PQI-DP = \frac{TD}{TP}\end{math}} 
-		& PQI-DP & PQI de Dise'no y Programaci'on \\
+		\multirow{3}{*}{\begin{math}DP = \frac{TD}{TP}\end{math}} 
+		& DP & PQI de Dise'no y Programaci'on \\
 		& TD & Tiempo de Dise'no \\
 		& TP & Tiempo Programaci'on \\ \hline
-		\multirow{3}{*}{\begin{math}PQI-RD = 2(\frac{TRD}{TD})\end{math}} 
-		& PQI-RD & PQI de Revisi'on de Dise'no \\
+		\multirow{3}{*}{\begin{math}RD = 2(\frac{TRD}{TD})\end{math}} 
+		& RD & PQI de Revisi'on de Dise'no \\
 		& TRD & Tiempo de Revisi'on de Dise'no \\
 		& TD & Tiempo de Dise'no \\ \hline
-		\multirow{3}{*}{\begin{math}PQI-RP = 2(\frac{TRP}{TP})\end{math}} 
-		& PQI-RP & PQI de Revisi'on de Programaci'on \\
+		\multirow{3}{*}{\begin{math}RP = 2(\frac{TRP}{TP})\end{math}} 
+		& RP & PQI de Revisi'on de Programaci'on \\
 		& TRP& Tiempo de Revisi'on de Programaci'on \\
 		& TP & Tiempo de Programaci'on \\ \hline
-		\multirow{3}{*}{\begin{math}PQI-DC = 20(10 + \frac{DC}{KLOC})\end{math}} 
-		& PQI-DC & PQI para Defectos de Compilaci'on por KLOC\\
+		\multirow{3}{*}{\begin{math}DC = 20(10 + \frac{DC}{KLOC})\end{math}} 
+		& DC & PQI para Defectos de Compilaci'on por KLOC\\
 		& DC & Defectos de Compilaci'on \\
 		& KLOC & Mil L'ineas de C'odigo \\ \hline
-		\multirow{3}{*}{\begin{math}PQI-DT = \frac{10}{5 + \frac{DT}{KLOC}}\end{math}} 
-		& PQI-DT & PQI para Defectos de Pruebas por KLOC \\
+		\multirow{3}{*}{\begin{math}DT = \frac{10}{5 + \frac{DT}{KLOC}}\end{math}} 
+		& DT & PQI para Defectos de Pruebas por KLOC \\
 		& DT & Defectos de Pruebas \\
-		& KLOC & Mil L'ineas de C'odigo \\ \hline		
+		& KLOC & Mil L'ineas de C'odigo \\ \hline	
+		\multirow{1}{*}{\begin{math}TPQI = DP \cdot RD \cdot RP \cdot DC \cdot DT\end{math}} 
+		& TPQI & PQI Total \\ \hline		
 		\end{tabular}
-	\caption{Sub-M'etricas del PQI}
+	\caption{M'etricas del PQI}
 	\label{SubMetricasPQI}
 \end{table}
-
-\subsection{Administraci'on de la Calidad del Producto}
-\noindent
-El proceso de pruebas ha crecido hasta que ahora consume cerca de la mitad del calendario de desarrollo. La estrategia consiste en solucionar esto removiendo tantos defectos como sea posible antes de entrar en pruebas. Esta estrategia mejora tanto la calidad del producto como la productividad en el desarrollo.
-
-En los sistemas de millones de LOC debemos enfocarnos en tener menos de diez errores por cada MLOC.
 
 \subsection{Pr'acticas para la Mejora de Calidad del PSP}
 \noindent
@@ -405,14 +339,17 @@ Existen seis principios que recomienda el PSP para la Mejora de la Calidad Perso
 \begin{enumerate}
 	\item Para tener calendarios predecibles, se tiene que planear y dar seguimiento al trabajo personal;
 	\item Para hacer planes precisos y que se les pueda dar seguimiento, estos planes tienen que ser detallados;
-	\item Para hacer planes detallados, debes de basar los planes en datos hist'oricos;
-	\item Para hacer un trabajo de alta calidad, debes de usar un proceso personal definido y medible;
+	\item Para hacer planes detallados, se deben basar en datos hist'oricos;
+	\item Para hacer un trabajo de alta calidad, se debe usar un proceso personal definido y medible;
 	\item Ya que el trabajo de mala calidad no es predecible, la calidad es un pre requisito para la predictibilidad.
 \end{enumerate}
 
+Estos principios se promueven en el BM porque provee la infraestructura para dar seguimiento al trabajo personal, almacena datos hist'oricos y permite el establecimiento de ciclos de vida.
+
 \subsection{Prevenci'on de Defectos}
 \noindent
-Se debe de revisar los datos de los defectos que m'as se encuentran durante el desarrollo y las pruebas. Con esto se pueden establecer estrategias como enfocarse en los errores que:
+
+Para prevenir la inyecci'on de defectos se debe de revisar los datos de los defectos que m'as se encuentran durante el desarrollo y las pruebas. Esto nos ayuda a conocer cuales son los defectos m'as comunes y establecer estrategias como enfocarse en los errores que:
 
 \begin{itemize}
 	\item Se encuentran en el programa final o en el periodo de pruebas;
@@ -422,28 +359,30 @@ Se debe de revisar los datos de los defectos que m'as se encuentran durante el d
 	\item Aquellos que m'as nos molestan.
 \end{itemize}
 
+El BM est'a basado en esta filosof'ia. Fomenta las ideas de realizar revisiones personales a los programas. La revisi'on de defectos se hace con el fin de detectar los defectos, sin embargo no es suficiente, el BM tambi'en recomienda su registro, seguimiento y administraci'on. Al registrar los defectos podemos generar estad'isticas y reportes que permitan conocer los tipos de defectos mencionados anteriormente.
+
 \subsection{T'ecnicas de Detecci'on de Defectos}
+\label{sec:tecnicasdedetecciondedefectos}
 \noindent
 Las t'ecnicas de detecci'on de defectos pueden ser definidas como la evaluaci'on y la revisi'on de un producto de trabajo por parte de uno o m'as compa'neros de trabajo calificados para realizar la actividad\cite{Owens1997}.
 
-Existen diferentes tipos de t'ecnicas de detecci'on de defectos, unas m'as formales y r'igidas que otras. Evidentemente la diferencia radica en la forma de conducir la revisi'on del producto de trabajo. Tambi'en existen diferentes clasificaciones acerca de las t'ecnicas, pero creo que una clasificaci'on coherente consiste en separar las t'ecnicas que involucran a una sola persona y las t'ecnicas en las que participan dos o m'as miembros del equipo. Los tipos m'as utilizados son: Revisi'on Personal, Revisi'on entre Colegas, Caminatas, Inspecci'on
+Existen diferentes tipos de t'ecnicas de detecci'on de defectos, unas m'as formales y r'igidas que otras. Evidentemente la diferencia radica en la forma de conducir la revisi'on del producto de trabajo. Tambi'en existen diferentes clasificaciones acerca de las t'ecnicas. Una posible clasificaci'on consiste en separar las t'ecnicas que involucran a una sola persona y las t'ecnicas en las que participan dos o m'as miembros del equipo. Los tipos m'as utilizados son: La revisi'on personal y la revisi'on entre colegas.
 
 La revisi'on personal consiste en examinar el producto de trabajo antes de entregarlo a cualquier otro miembro del equipo, ya sea para su lectura, compilaci'on, revisi'on, implementaci'on o prueba.
 
-Existen varias t'ecnicas de detecci'on de defectos que se realizan entre colegas y/o miembros de un equipo de desarrollo\cite{Harjumma2005}. Estas t'ecnicas se puede clasificar de acuerdo a su formalidad, de acuerdo con existen 6 diferentes tipos de t'ecnicas:
+Existen varias t'ecnicas de detecci'on de defectos que se realizan entre colegas y/o miembros de un equipo de desarrollo\cite{Harjumma2005}. Estas t'ecnicas se puede clasificar de acuerdo a su formalidad, de acuerdo \cite{Harjumma2005} con existen 6 diferentes tipos de t'ecnicas:
 
 \begin{itemize}
 	\item Revisi'on ad hoc;
 	\item Revisi'on general;
 	\item Revisi'on de parejas;
-	\item Caminata;
 	\item Revisi'on de equipo;
-	\item Inspecci'on.
+	\item La Caminata y la inspecci'on son explicadas m'as detalladamente a continuaci'on.
 \end{itemize}
 
-La caminata es un tipo de revisi'on en el que precisamente una persona (preparada especialmente para ello) pasa a trav'es del producto, exponi'endolo a una audiencia. Mediante esta t'ecnica se pueden obviar muchos detalles, con lo cual se reduce el tiempo de revisi'on. Sin embargo, esto puede ser contraproducente si el objetivo es precisamente detectar defectos que residen en los detalles. Al mismo tiempo, el proceso de revisi'on est'a definido por el producto de trabajo siendo revisado, a diferencia de la inspecci'on, en el que el proceso se determina por los puntos a revisar\cite{Freedman1984}.
+La caminata es un tipo de revisi'on en el que precisamente una persona (preparada especialmente para ello) pasa por cada una de las partes del producto, exponi'endolo a una audiencia. Mediante esta t'ecnica se pueden obviar muchos detalles, con lo cual se reduce el tiempo de revisi'on. Sin embargo, esto puede ser contraproducente si el objetivo es precisamente detectar defectos que residen en los detalles. Al mismo tiempo, el proceso de revisi'on est'a definido por el producto de trabajo siendo revisado, a diferencia de la inspecci'on, en el que el proceso se determina por los puntos a revisar\cite{Freedman1984}.
 
-La Inspecci'on es muy probablemente la t'ecnica m'as formal de detecci'on de defectos de software\cite{Harjumma2005}. Consiste de los siguientes pasos\cite{Owens1997}:
+La Inspecci'on es probablemente la t'ecnica m'as formal de detecci'on de defectos de software\cite{Harjumma2005}. Consiste de los siguientes pasos\cite{Owens1997}:
 
 \begin{enumerate}
 	\item \emph{Planeaci'on}: Seleccionar d'onde, cu'ando y qui'enes participar'an;
@@ -454,9 +393,11 @@ La Inspecci'on es muy probablemente la t'ecnica m'as formal de detecci'on de def
 	\item \emph{Seguimiento}: El autor del producto notifica al l'ider de las correcciones y 'estas son revisadas. 
 \end{enumerate}
 
+Tanto la caminata como la inspecci'on aumentan su efectividad cuando se utilizan listas de chequeo. El BM permitir'a la creaci'on de plantillas que sirvan de gu'ia para la realizaci'on de estas t'ecnicas. La funcionalidad ser'a explicada m'as a detalle en la secci'on [REFERENCIA].
+
 \subsection{?`Por qu'e Revisar los Programas?}
 \noindent
-Es la manera m'as r'apida y m'as barata para encontrar y corregir problemas antes de dise'nar una funci'on equivocada o implementar un dise'no incorrecto. Un poco de tiempo invertido revisando un programa puede ahorrar mucho tiempo durante las fases de compilaci'on y pruebas. A'un m'as importante, cuando todos en el equipo de desarrollo hacen revisiones de dise'no y de c'odigo a conciencia, el tiempo de integraci'on y de pruebas de sistema es reducido en un factor de cinco a diez.
+Los programas se revisan porque es la manera m'as r'apida y m'as barata para encontrar y corregir problemas antes de dise'nar una funci'on equivocada o implementar un dise'no incorrecto. Un poco de tiempo invertido revisando un programa puede ahorrar mucho tiempo durante las fases de compilaci'on y pruebas. A'un m'as importante, cuando todos en el equipo de desarrollo hacen revisiones de dise'no y de c'odigo a conciencia, el tiempo de integraci'on y de pruebas de sistema es reducido en un factor de cinco a diez.
 
 \subsection{Principios de la Revisi'on}
 Los principios de las revisiones personales son los siguientes\cite{Humphrey}:
@@ -468,15 +409,17 @@ Los principios de las revisiones personales son los siguientes\cite{Humphrey}:
 	\item Seguir las buenas pr'acticas de la revisi'on: revisar en incrementos peque'nos, hacer las revisiones en papel y hacerlas cuando est'as descansado;
 	\item Medir el tiempo de la revisi'on, el tama'no de los productos revisados y el n'umero y tipo de defectos encontrados y perdidos;
 	\item Usar los datos de las mediciones para mejorar el proceso personal de revisi'on;
-	\item Dise'nas e implementar los productos para que sean f'aciles de revisar;
+	\item Dise'nar e implementar los productos para que sean f'aciles de revisar;
 	\item Revisar los datos para identificar las formas de prevenir defectos.
 \end{itemize}
 
+Esta es la herramienta principal que propone el BM para la detecci'on de defectos. El BM tiene una plantilla por default para realizar revisiones personales en lenguajes de programaci'on de prop'osito general. Esto se explica m'as a detalle en la secci'on [REFERENCIA].
+
 \subsection{Lista de Chequeo de Revisi'on de C'odigo}
 \noindent
-Una lista de chequeo es una forma especializada que se usa en para hacer las revisiones. La lista de chequeo tambi'en te ayuda de disciplinar tu trabajo y te gu'ia en los pasos de revisi'on.
+Una lista de chequeo es una forma especializada que se usa para hacer las revisiones. La lista de chequeo tambi'en ayuda a disciplinar el trabajo y gu'iar en el proceso de revisi'on.
 
-Se necesita que cada persona desarrolle su propia lista de chequeo, para que cada persona se enfoque en los errores que m'as comete, o en los que quiere evitar seg'un la estrategia que se siga, y que se completen todos los elementos de la lista. Para hacer un mejor uso de la lista de chequeo se tiene que dividir la lista en secciones con caracter'isticas similares para concentrarte en los mismos tipos de errores en cada pasada al c'odigo o al dise'no. Para elaborar una lista de chequeo se puede tomar como base la tabla \ref{DefectosPSP} \cite{Humphrey}.
+Para la revisi'on personal es necesario que cada persona desarrolle su propia lista de chequeo, para que cada persona se enfoque en los errores que m'as comete, o en los que quiere evitar seg'un la estrategia que se siga, y que se completen todos los elementos de la lista. Para hacer un mejor uso de la lista de chequeo se tiene que dividir la lista en secciones con caracter'isticas similares para concentrarte en los mismos tipos de errores en cada pasada al documento a revisar (ya sea c'odigo, dise'no o requerimientos). Para elaborar una lista de chequeo se puede tomar como base los tipos de defectos mostrados en la tabla \ref{DefectosPSP} \cite{Humphrey}.
 
 \begin{table}[htbp]
 	\centering
@@ -499,7 +442,7 @@ Se necesita que cada persona desarrolle su propia lista de chequeo, para que cad
 	\label{DefectosPSP}
 \end{table}
 
-La lista de chequeo es construida a partir de esta lista de defectos. Se deben proponer distintas actividades para enfocarse a remover los distintos tipos de defectos. La tabla \ref{ListaChequeoRevisionCodigoPSP} presenta un ejemplo de lista de chequeo\cite{Humphrey}:
+La lista de chequeo es construida a partir de esta lista de defectos. Se deben proponer distintas actividades para enfocarse a remover los distintos tipos de defectos. La tabla \ref{ListaChequeoRevisionCodigoPSP} presenta un ejemplo de lista de chequeo para lenguajes de prop'osito general propuesta por Humphrey\cite{Humphrey}.
 
 \begin{table}[htbp]
 	\centering
@@ -548,15 +491,17 @@ La lista de chequeo es construida a partir de esta lista de defectos. Se deben p
 
 La lista de chequeo aparte de ser personalizada, tiene que ser actualizada constantemente. La persona al seguir los procesos de calidad tiene una mejor'ia notable en la forma de hacer su trabajo, por lo tanto los errores que se comenten en el tiempo van cambiando y la lista tiene que ser actualizada. Tambi'en se tiene que tener en cuenta que las listas de chequeo cambian notablemente de un proyecto a otro, dependiendo del lenguaje de programaci'on que se utilice entre otros factores.
 
-La intenci'on de la revisi'on de c'odigo es para asegurarte que todos los detalles son correctos. Una vez que hayas definido tus pr'acticas, debes de incorporarlas en tus est'andares y checarlos en tus revisiones.
+La intenci'on de la revisi'on de c'odigo es asegurar que todos los detalles son correctos. Una vez que se definen las pr'acticas, deben de ser incorporadas en los est'andares y ser checados en las revisiones.
 
 La estrategia de la revisi'on es:
 
 \begin{itemize}
-	\item Para asegurarte que el c'odigo cubra todo el dise'no, revisa cada m'etodo para asegurarte que todas las funciones requeridas est'an incluidas;
-	\item Para checar las librer'ias a incluir, examina cada m'etodo para asegurarte que existan las inclusiones necesarias para cada funci'on de la librer'ia;
-	\item Para checar problemas de inicializaci'on, haz una caminata por la l'ogica de todos los m'etodos.
+	\item Para asegurar que el c'odigo cubre todo el dise'no, se revisa cada m'etodo para asegurar que todas las funciones requeridas est'an incluidas;
+	\item Para checar las librer'ias a incluir, examinar cada m'etodo para asegurar que existan las inclusiones necesarias para cada funci'on de la librer'ia;
+	\item Para checar problemas de inicializaci'on, realizar una caminata por la l'ogica de todos los m'etodos.
 \end{itemize}
+
+Esta estrategia debe de ser utilizada en las revisiones registradas en el BM.
 
 \subsection{Evaluando las Revisiones Personales}
 \noindent
@@ -571,7 +516,7 @@ Algunas medidas 'utiles para evaluar las revisiones son:
 
 Las m'etricas formales que se proponen por PSP son: Yield de Revisi'on, Densidad de Defectos, Tasa de Defectos y Tasa de Revisi'on. 
 
-Yield de revisi'on es el porcentaje de defectos en el producto que fueron encontrados en la revisi'on. Un Yield alto es bueno, uno malo es pobre. La meta del Yield debe de ser el 100\%. La meta de PSP es encontrar y corregir todos los errores antes de la primera compilaci'on o las pruebas. Para hacer un estimado de Yield para cualquier fase, debes de asumir el Yield de la fase anterior.
+Yield de revisi'on es el porcentaje de defectos en el producto que fueron encontrados en la revisi'on. Un Yield alto es bueno, uno malo es pobre. La meta del Yield debe de ser el 100\%. La meta de PSP es encontrar y corregir todos los errores antes de la primera compilaci'on o las pruebas; es decir, un yield de proceso ed 100\%. Para hacer un estimado de Yield para cualquier fase, debes de asumir el Yield de la fase anterior. Inicialmente es com'un un Yield de fase de 50\% y conforme se va madurando la t'ecnica es posible tener 70\% o m'as\cite{Humphrey}.
 
 La Tasa de Defectos es el n'umero de defectos que se encontraron en el c'odigo por LOC.
 
@@ -583,27 +528,21 @@ La efectividad de los m'etodos de revisi'on es el radio de defectos removidos po
 \noindent
 Las revisiones de c'odigos son inherentemente mejores que las pruebas\cite{Humphrey}. Depuraci'on es el proceso de encontrar c'odigo defectuoso que causa que el programa se comporte impropiamente. La cantidad de tiempo que se gasta realizando el debugging generalmente tiene poca relaci'on con la complejidad del defecto\cite{Humphrey}.
 
-La meta de la revisi'on es remover el m'aximo n'umero de defectos, en otras palabras llegar a pruebas con cero defectos.
+La meta de la revisi'on es remover el m'aximo n'umero de defectos, en otras palabras llegar a pruebas con cero defectos. En una revisi'on, personalmente se revisa el programa que una ha generado. Una inspecci'on es una revisi'on en equipo de un programa. Despu'es de las revisiones personales, la inspecci'on es la t'ecnica m'as valiosa que un equipo de desarrollo de software puede utilizar.
 
-En una revisi'on, personalmente revisas tu propio programa. Una inspecci'on es una revisi'on en equipo de un programa. Despu'es de las revisiones personales, la inspecci'on es la t'ecnica m'as valiosa que un equipo de desarrollo de software puede utilizar.
-
-\section{Dise'no de Software}
+\subsection{Dise'no de Software}
 \noindent
-La principal herramienta a disposici'on de los ingenieros de software son las abstracciones. Podemos crear abstracciones arbitrariamente y combinarlas en abstracciones m'as grandes. Si cumplimos con las capacidades de los sistemas que soportamos podemos tambi'en crear las estructuras l'ogicas que necesitemos.
+La principal herramienta a disposici'on de los ingenieros de software son las abstracciones. Se pueden crear abstracciones arbitrariamente y combinarlas en abstracciones m'as grandes. Si se cumplen con las capacidades de los sistemas que se soportan entonces tambi'en se pueden crear las estructuras l'ogicas que necesarias.
 
-El principal problema reside en la escala o el tama'no de los sistemas de software. La forma de subdividir los sistemas tiene que ser coherente y realmente ayudar a resolver los problemas de complejidad. Ya que si en el caso de un sistema de 1000000 LOC, creas 500 tipos de 10 LOC, entonces tendr'ias que dise'nar un sistema de 100000 LOC, lo que parece una ayuda, pero en realidad est'as forzando a los dise'nadores a relacionar coherentemente los 500 tipos distintos. Para que la escalabilidad sea 'util, no solamente se debe de capturar los requerimientos f'isicos de la escalabilidad, si no capturar un nivel de funcionalidad significativa en las partes.
+El principal problema reside en la escala o el tama'no de los sistemas de software. La forma de subdividir los sistemas tiene que ser coherente y realmente ayudar a resolver los problemas de complejidad. Ya que si en el caso de un sistema de 1,000,000 LOC, creas 500 tipos de 10 LOC, entonces tendr'ias que dise'nar un sistema de 100,000 LOC, lo que parece una ayuda, pero en realidad se forza a los dise'nadores a relacionar coherentemente los 500 tipos distintos. Para que la escalabilidad sea 'util, no solamente se debe de capturar los requerimientos f'isicos de la escalabilidad, si no capturar un nivel de funcionalidad significativa en las partes.
 
 La forma m'as cl'asica es utilizar la regla de divide-y-vencer'as. En otras palabras, el sistema se tiene que dividir en partes m'as peque'nas, las cuales deben de ser vistas como subsistemas coherentes o componentes. Si esto se hace correctamente, se reduce la complejidad en un factor de diez o m'as.  Sin embargo hacer esto correctamente es una tarea dif'icil, a la que se llama dise'no. El dise'no de calidad tiene dos partes: la calidad del concepto de dise'no y la calidad de la representaci'on del dise'no.
 
-\subsection{?`Por qu'e Dise'nar?}
-\noindent
-Producir un dise'no claro, completo y libre de defectos hace m'as lento el proceso individual de desarrollo, sin embargo, si todo el equipo de desarrollo hace lo mismo, acelerar'a el trabajo en equipo ya que facilitar'a el trabajo de integraci'on y pruebas de sistema.
+Producir un dise'no claro, completo y libre de defectos es un paso necesario para construir productos de calidad. Crear dise'nos detallados hace m'as lento el proceso individual de desarrollo, sin embargo, si todo el equipo de desarrollo hace lo mismo, acelerar'a el trabajo en equipo ya que facilitar'a el trabajo de integraci'on y pruebas de sistema.
 
 \subsection{El Proceso de Dise'no}
 \noindent
 El dise'no de software es una actividad creativa la cual no puede ser reducida a un proceso rutinario. Sin embargo, esta actividad, no tiene que carecer por completo de estructura. El dise'no generalmente inicia revisando el prop'osito del producto, obteniendo datos relevantes, produciendo una vista general del dise'no y llenando los detalles. Para dise'nos complejos, los buenos dise'nadores siguen un proceso din'amico. Ellos trabajan en un nivel conceptual por un periodo de tiempo y despu'es ahondan en cada parte.
-
-El principio de incertidumbre de los requerimientos: Los requerimientos nunca van a ser completamente conocidos hasta que los usuarios utilicen el producto terminado. Tomando en cuenta este principio, el trabajo del dise'nador es crear una soluci'on funcional a un problema mal definido.
 
 Ocasionalmente, el dise'nador no va a ser capaz de especificar una funci'on hasta que se haya dise'nado, construido y probado. En estos casos se deben de construir prototipos para estas funciones. Antes de desarrollar un prototipo, se debe de especificar su prop'osito y las preguntas que va a responder.
 
@@ -613,96 +552,25 @@ Los diferentes niveles de dise'no son\cite{Humphrey}:
 
 \begin{enumerate}
 	\item \emph{El dise'no conceptual}. Es un concepto de planeaci'on que se utiliza para estimar el tama'no del producto.
-	\item \emph{Dise'no a nivel de sistema (SLD)}. Es la vista general del sistema completo de hardware y software. Si se est'a trabajando en frenos para autos, el nivel de sistema ser'ia el auto, pero en cambio s'i se trabaja con pistones, el nivel de sistema ser'ia el motor.
 	\item \emph{Dise'no de alto nivel (HLD)}. Este dise'no tiene como objetivo dividir el sistema que se est'a desarrollando en partes m'as peque'nas o componentes.
 	\item \emph{Dise'no detallado (DLD)}. Este nivel de dise'no toma los componentes especificados por el HLD y define como construirlos.
-	\item \emph{Dise'no de implementaci'on (ILD)}. Toma el producto del DLD y lo refina de una forma en que el producto puede ser autom'aticamente construido.
 \end{enumerate}
 
-\subsection{Requerimientos y Dise'no}
+Los ciclos de vida por default propuestos en el BM contienen etapas de dise'no previas a la programaci'on y es sugerido que esto se haga para asegurar una alta calidad en el software elaborado. Esto ser'a descrito m'as a detalle en la secci'on \ref{sec:ciclodevidadeproyectos}.
+
+\subsection{Calidad y el Dise'no}
 \indent
-Se puede argumentar que se necesita tener el conjunto completo de requerimientos antes de comenzar con el trabajo, pero esto es raramente posible debido a las siguientes razones\cite{Humphrey}:
+Un dise'no con un nivel de detalle adecuado es una excelente gu'ia durante la construcci'on del sistema de software, ayudando a los programadores a estar seguros de cuando terminaron el programa y si tiene todas las funcionalidades requeridas.
 
-\begin{itemize}
-	\item La especificaci'on de requerimientos es una habilidad especializada;
-	\item Los requerimientos cambian conforme el proceso de desarrollo avanza;
-	\item La soluci'on que se desarrolla probablemente cambie el problema;
-	\item El principio de incertidumbre de los requerimientos.
-\end{itemize}
+Cuando no se realiza un dise'no previo a la programaci'on, se comienza a dise'nar al momento de programar y no se da la suficiente atenci'on a los posibles detalles, casos extremos y otras eventualidades que pueden ocasionar que un sistema falle.
 
-Los requerimientos deben de ser los m'as claro posible. Una vez que se tiene la definici'on completa se debe de comenzar con el dise'no.
+Es por esto que una herramienta enfocada a mejorar la calidad del software como el BM haga un 'enfasis especial en dise'nar antes de programar y que este dise'no sea un dise'no de calidad.
 
-\subsection{Estrategias de Dise'no y Desarrollo}
-\indent
-Cuando se est'a siguiendo una estrategia de desarrollo se deben de seguir las siguientes directrices\cite{Humphrey}:
-
-\begin{enumerate}
-	\item Cuando sea pr'actico, completar primero el HLD;
-	\item El dise'no de un programa no se considera completo hasta que las especificaciones de todas sus abstracciones est'an completas;
-	\item Registre los supuestos para despu'es asegurarte que son v'alidos;
-	\item Escriba notas acerca del dise'no que expliquen la l'ogica en las decisiones de dise'no;
-	\item Trate de resolver todas las incertidumbres antes de comenzar con el dise'no;
-	\item Penetre en tantos niveles de dise'no como sea necesario para resolver las incertidumbres.
-\end{enumerate}
-
-Algunas estrategias de desarrollo son las siguientes\cite{Humphrey}:
-
-\begin{itemize}
-	\item \emph{La estrategia progresiva}. Es una manera natural de desarrollar un sistema que consiste de funciones secuenciales. Si existe una estructura central, se puede dividir en pedazos verticales, implementando cada pedazo en un ciclo completo de desarrollo. Esta estrategia tiene la ventaja de ser f'acil de definir e implementar. Tiene la desventaja de que no se puede probar exhaustivamente el comportamiento de cada pedazo.
-	\item \emph{La estrategia de mejoras funcionales}. Define una versi'on inicial del sistema y le agrega mejoras. Esta estrategia se sigue com'unmente en la actualizaci'on de grandes sistemas. En esta estrategia se construye un sistema funcional tan pronto como sea posible. Provee una base temprana para las pruebas de seguridad y desempe'no. El principal problema de esta estrategia es que el primer paso puede ser muy grande.
-	\item \emph{La estrategia camino-r'apido}. Es parecida a la estrategia de mejoras funcionales, con la diferencia de que la versi'on inicial del sistema est'a dise'nada para demostrar el desempe'no. Ya que se enfoca en el desempe'no, la versi'on inicial del sistema solo debe de contener la l'ogica m'inima para controlar las funciones sensitivas al desempe'no. La ventaja principal es que expone problemas de tiempo en una etapa temprana. Para sistemas que tienen restricciones de tiempo o para versiones iniciales de un sistema operativo puede ser una estrategia muy atractiva. La principal desventaja es tambi'en el paso inicial.
-	\item \emph{La estrategia boba}. Sigue un enfoque de arriba hacia abajo. Inicia con las funciones de alto nivel del sistema y obvia el resto de las funciones con regresos predefinidos. Una vez que las funciones de alto nivel son probadas, implementa gradualmente las funciones obviadas. Esta estrategia tiene la ventaja de construir el sistema en pazos peque'nos y provee considerable flexibilidad al momento de ordenar la implementaci'on funcional. La principal desventaja de esta estrategia es que mucha de la funcionalidad 'util no es vista hasta fases avanzadas del proceso de desarrollo.
-\end{itemize}
-
-\subsection{Calidad en el Dise'no}
-\indent
 Los factores que afectan la calidad en el dise'no son la precisi'on y la completez\cite{Humphrey}. El dise'no de software debe de contener una soluci'on completa y precisa al problema.
 
-Se necesita un dise'no precisamente documentado, ya que si no al momento de implementaci'on se tendr'a que completar el dise'no lo que es altamente propenso a errores.
-
-Se puede desperdiciar tiempo sobre especificando el dise'no, pero un dise'no que no est'e suficientemente especificado puede ser costoso y ser propenso a errores. Para ser m'as eficiente, se necesita definir espec'ificamente el contenido que tendr'a el dise'no. Esto te ayudar'a a producir un dise'no de alta calidad y te guiar'a al momento de hacer revisiones. Siempre y cuando cumplas con los criterios de salida, puedes utilizar los m'etodos de dise'no que prefieras.
-
-Las personas que utilizar'an el dise'no son: Programadores, dise'nadores, documentadores y el equipo de pruebas. A continuaci'on se describe:
-
-\begin{itemize}
-	\item Administraci'on de sistema: Registro de seguimiento de problemas, restricciones de implementaci'on, descripci'on de la funci'on del sistema, notas de aplicaci'on, escenarios de uso y restricciones del sistema;
-	\item Ingenieros de sistema: Una descripci'on de los datos y archivos relevantes, una descripci'on de los mensajes de sistema, condiciones especiales y razones por las que se tomaron decisiones en el dise'no del sistema;
-	\item Dise'nadores de software: Una imagen de en qu'e parte del sistema encaja el programa, una imagen l'ogica del programa, una lista de las clases (clases, componentes o partes) relacionadas, una lista de las variables externas, una descripci'on precisa de todas las referencias y la descripci'on de la l'ogica del programa (pseudoc'odigo).
-\end{itemize}
-
-\subsection{Plantillas de Dise'no}
-\noindent
 La falta de un dise'no preciso es la fuente de muchos errores de implementaci'on. Para lograr una representaci'on adecuada del sistema requieren 3 cosas: Producir un dise'no coherente, registrar toda la informaci'on de dise'no y  registrar esa informaci'on en una forma precisa y entendible.
 
-Una vez generado el dise'no se debe analizar su correcci'on, completez y consistencia, para asegurarse que la notaci'on l'ogica sea precisa. La notaci'on usada para el dise'no debe ser concisa y precisa, y debe de cumplir con las siguientes caracter'isticas\cite{Humphrey}:
-
-\begin{itemize}
-	\item Debe ser capaz de representar el dise'no precisa y completamente;
-	\item Debe ser entendida y usada por las personas que usan el dise'no;
-	\item Debe ayudar a verificar que el dise'no hace lo que se pretende.
-\end{itemize}
-
-Un buen dise'no debe tener m'inima redundancia. En las plantillas de PSP, cada 'item solo se registra una vez, y se usan referencias cuando es necesario. Existen 4 categor'ias para agrupar los elementos de dise'no en una plantilla de PSP\cite{Humphrey}:
-
-\begin{enumerate}
-	\item \emph{Externo-est'atico}: Define las relaciones est'aticas de una parte con otras partes o con elementos del sistema;
-	\item \emph{Externo-din'amico}: Define interacciones  de una parte con otras partes o elementos del sistema;
-	\item \emph{Interno-est'atico}: Contiene una descripci'on est'atica de un m'odulo o parte, como su estructura l'ogica detallada;
-	\item \emph{Interno-din'amico}: Define las caracter'isticas din'amicas de las partes.
-\end{enumerate}
-
-Existen 4 plantillas de dise'no diferentes en el PSP\cite{Humphrey}:
-
-\begin{itemize}
-	\item \emph{Plantilla de Especificaci'on Operacional (OST)}. El OST es una forma simplificada de casos de uso que es utilizada para describir el comportamiento operacional de un programa. Ayuda a visualizar c'omo el programa debe reaccionar en varios escenarios de uso. Cuando una decisi'on de dise'no involucra a un actor, se produce un escenario para registrar c'omo el actor percibe la acci'on. En comparaci'on con el UML (Unified Modeling Language) es una combinaci'on de diagramas de casos de uso, descripci'on de casos de uso, diagramas de actividades y diagramas de secuencia;
-	\item \emph{Plantilla de Especificaci'on Funcional (FST)}. El FST provee una forma simple de documentar la mayor'ia de los contenidos de un diagrama de clases de UML. Este tipo de plantilla describe las partes, incluyendo sus m'etodos, relaciones y limitantes (restricciones). Las partes pueden ser clases, m'odulos  o incluso un sistema entero. El FST provee una descripci'on detallada de cada una de esas partes. En comparaci'on con el UML es un diagrama de clases;
-	\item \emph{Plantilla de Especificaci'on de Estados (SST)}. Esta plantilla provee una forma simple y precisa de especificar el comportamiento de los estados de un sistema, el cual es determinado por sus entradas y el estado actual. Programas con m'ultiples estados son denominados m'aquinas de estados. En comparaci'on con el UML es un diagrama de estados;
-	\item \emph{Plantilla de Especificaci'on L'ogica (LST)}. Es un tipo de plantilla que usa un lenguaje simple de dise'no de programaci'on (PDL) para describir la l'ogica del programa. Los PDLs tambi'en son conocidos como pseudoc'odigo. La plantilla contiene una descripci'on en pseudoc'odigo de un programa. El objetivo es describir de manera clara y concisa qu'e har'a el programa y c'omo. Se debe usar lenguaje humano ordinario, evitando usar expresiones de programaci'on. De otra manera se estar'ia programando el c'odigo del programa, y no el dise'no.
-\end{itemize}
-
-Las plantillas tambi'en son 'utiles al mejorar programas ya existentes. Ya que para producir mejoras sin defectos es necesario conocer el dise'no, o es posible que haya errores de dise'no, las plantillas ayudan a documentar el dise'no de estos programas.
-
-Estas plantillas se pueden usar de manera escalada. Es decir, en un sistema muy grande, se pueden usar plantillas de FST y OST para definir la funcionalidad del sistema en general, y usar plantillas separadas para definir la funcionalidad de los sub-sistemas o componentes.
+Una vez generado el dise'no se debe analizar su correcci'on, completez y consistencia, para asegurarse que la notaci'on l'ogica sea precisa. El dise'no de alta calidad debe tener m'inima redundancia.
 
 \subsection{Verificaci'on de Dise'no}
 \noindent
@@ -720,42 +588,324 @@ Los programas tienen que ser verificados porque los desarrolladores tienen la cr
 
 Es recomendable utilizar t'ecnicas de verificaci'on de dise'no para reducir el n'umero de defectos y aumentar la calidad del programa. El problema no es que las pruebas sean malas, sino que no son suficientes. Imagina analizar todas las posibilidades de ejecuci'on de cierto programa, eso nos llevar'ia demasiados a'nos. Por eso es importante utilizar t'ecnicas de verificaci'on para reducir el n'umero de defectos, que adem'as se traduce en la reducci'on del costo para encontrar esos defectos, ya que se encuentran en una etapa temprana de desarrollo.
 
-Aunque no es una t'ecnica de verificaci'on en s'i, es importante para comparar el dise'no de un programa contra las bases de los est'andares. Todos los est'andares definen convenciones para el producto, est'andares de dise'no del producto y est'andares para reutilizaci'on de c'odigo.
+El dise'no de un programa contra las bases de los est'andares de cada organizaci'on. Todos los est'andares definen convenciones para el producto, est'andares de dise'no del producto y est'andares para reutilizaci'on de c'odigo.
 
 Las convenciones para el producto final incluyen las interfaces de usuario, la manera de atacar errores, convenciones de nombres, procedimientos de instalaci'on y la ayuda. El est'andar de dise'no del producto abarca desde las convenciones hasta la arquitectura del sistema. Los est'andares para reutilizaci'on de c'odigo precisan que las partes a reutilizar est'en completamente definidas, sean de la mayor calidad y est'en soportadas adecuadamente.
 
-Las distintas t'ecnicas de verificaci'on son\cite{Humphrey}:
+Una t'ecnicas de verificaci'on es la Verificaci'on Anal'itica\cite{Humphrey} o verificaci'on de ciclos. La verificaci'on de ciclos nos ayuda a asegurarnos que el programa no caer'a en ning'un ciclo infinito, no se quedar'a atorado y no presentar'a ning'un comportamiento extra'no. En general, la verificaci'on de ciclos consiste en verificar que las precondiciones del ciclo se cumplan siempre, que se garantice la terminaci'on del ciclo para cualquier argumento que afecte al ciclo y que se mantenga la identidad cuando se cumple la condici'on de terminaci'on, es decir, que no se ejecute una o m'as veces de las correctas.
+
+La figura \ref{veranalitica} contiene un fragmento del c'odigo del BM. A partir de este c'odigo se realizar'a una Verificaci'on Anal'itica de este.
+
+\lstset{ %
+  language=Octave,                % the language of the code
+  basicstyle=\footnotesize,           % the size of the fonts that are used for the code
+  numbers=left,                   % where to put the line-numbers
+  numberstyle=\color{gray},  % the style that is used for the line-numbers
+  stepnumber=1,                   % the step between two line-numbers. If it's 1, each line 
+                                  % will be numbered
+  numbersep=5pt,                  % how far the line-numbers are from the code
+  backgroundcolor=\color{white},      % choose the background color. You must add \usepackage{color}
+  showspaces=false,               % show spaces adding particular underscores
+  showstringspaces=false,         % underline spaces within strings
+  showtabs=false,                 % show tabs within strings adding particular underscores
+  frame=single,                   % adds a frame around the code
+  rulecolor=\color{black},        % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. commens (green here))
+  tabsize=2,                      % sets default tabsize to 2 spaces
+  captionpos=b,                   % sets the caption-position to bottom
+  breaklines=true,                % sets automatic line breaking
+  breakatwhitespace=false,        % sets if automatic breaks should only happen at whitespace
+  title=\lstname,                   % show the filename of files included with \lstinputlisting;
+                                  % also try caption instead of title
+  keywordstyle=\color{blue},          % keyword style
+  commentstyle=\color{dkgreen},       % comment style
+  stringstyle=\color{mauve},         % string literal style
+  escapeinside={\%*}{*)},            % if you want to add a comment within your code
+  morekeywords={*,...},               % if you want to add more keywords to the set
+  caption={Ejemplo Verificaci'on Anal'itica}, 
+  label=veranalitica
+}
+\begin{lstlisting}
+	if(projectOrder >= 0 && phase.getProjectOrder() != projectOrder){
+	     
+		int actualOrder = phase.getProjectOrder();
+		Project project = projectDAO.findById(phase.getProject().getProjectId());
+		List<Phase> phases = project.getPhases();
+		
+		if(projectOrder > actualOrder){
+			for(Phase p:phases){
+				if(p.getProjectOrder() > actualOrder && p.getProjectOrder() <= projectOrder){
+					p.setProjectOrder(p.getProjectOrder() - 1);
+				}
+			}
+		}
+		else if(projectOrder < actualOrder){
+			for(Phase p:phases){
+				if(p.getProjectOrder() < actualOrder && p.getProjectOrder() >= projectOrder){
+					p.setProjectOrder(p.getProjectOrder() + 1);
+				}
+			}
+		}
+            
+		phase.setProjectOrder(projectOrder);
+	}
+\end{lstlisting}
+
+El c'odigo presentado realiza el ajuste del orden de las fases dentro del proyecto. Por ejemplo, si el proyecto tiene tres fases: A, B y C; donde A es la primer fase, B es la segunda fase y C la tercera; entonces si agregamos una fase X entre B y C, el c'odigo debe de modificar el campo de las fases para que especifique que A es la primer fase, B la segunda, X la tercera y C la cuarta. El c'odigo realiza lo siguiente:
 
 \begin{itemize}
-	\item \emph{Verificaci'on por Tabla de Ejecuci'on}. El prop'osito de esta t'ecnica es verificar el flujo l'ogico de ejecuci'on del programa. Esta t'ecnica puede consumir bastante tiempo, sin embargo, es bastante confiable, sencilla y es mucho m'as r'apida para identificar problemas complejos de dise'no que las pruebas. Es importante seguir un proceso para realizar esta verificaci'on, para de esta manera maximizar su efectividad sin tener que desarrollar demasiados casos o escenarios. Se recomienda comenzar identificando los ciclos y rutinas complejas para su revisi'on. Posteriormente definir c'omo se har'a el an'alisis. Si de abajo hacia arriba o de arriba hacia abajo, esto depende de cu'al de los niveles (alto o bajo) sea el m'as s'olido en el dise'no. Si el nivel alto se ve s'olido, se recomienda comenzar con el nivel bajo y viceversa.
-	\item \emph{Verificaci'on por Tabla de Seguimiento}. Es muy similar a la tabla de ejecuci'on, solamente que aqu'i se realiza la verificaci'on de una manera m'as general. Con la tabla de ejecuci'on, b'asicamente se emula el funcionamiento de una computadora. Con la tabla de seguimiento, primero se consideran todos los posibles casos l'ogicos y se selecciona un escenario para cada caso. Aunque son muy similares, en general las tablas de seguimiento son mucho m'as eficientes que las tablas de ejecuci'on. El m'etodo para ejecutar esta t'ecnica de verificaci'on es el mismo que para las tablas de ejecuci'on. Durante el an'alisis mediante esta t'ecnica, es bueno considerar la robustez del programa. Como por ejemplo, cu'ales ser'ian los l'imites de ejecuci'on y si el dise'no los soportar'a, cu'ales son las excepciones que se pueden presentar y si el dise'no las manejar'a correctamente. Es importante considerar que si la l'ogica del dise'no es demasiado compleja para ser analizada por una tabla de seguimiento, lo mejor ser'ia redise'nar esta parte.
-	\item \emph{Verificaci'on de M'aquinas de Estado}. Si el programa incluye m'aquinas de estado, es importante verificar que estas m'aquinas hayan sido dise'nadas correctamente. De manera general, se considera que una m'aquina de estado es correcta si se puede alcanzar el estado de retorno (si es que lo hay) desde cualquier otro estado y si las transiciones entre los estados son completas y ortogonales.
-	\item \emph{Una funci'on completa es aquella que incluye todas las condiciones l'ogicas posibles}. Existen t'ecnicas, como los mapas de Karnaugh, para determinar si una funci'on es completa o  no. Adem'as, un conjunto de funciones es ortogonal si ninguno de sus miembros tiene ninguna condici'on en com'un. Si una m'aquina de estado cumple con estas dos condiciones, se puede decir que es una m'aquina de estado correctamente dise'nada.
-	\item \emph{Verificaci'on Anal'itica}. Dentro de las verificaciones anal'iticas existe un caso especial que es la verificaci'on de ciclos. La verificaci'on de ciclos nos ayuda a asegurarnos que el programa no caer'a en ning'un ciclo infinito, no se quedar'a atorado y no presentar'a ning'un comportamiento extra'no. En general, la verificaci'on de ciclos consiste en verificar que las precondiciones del ciclo se cumplan siempre, que se garantice la terminaci'on del ciclo para cualquier argumento que afecte al ciclo y que se mantenga la identidad cuando se cumple la condici'on de terminaci'on, es decir, que no se ejecute una o m'as veces de m'as.
+	\item De la l'inea 3 a la 5 se obtiene el orden actual de la fase (la variable actualOrder), el objeto del proyecto y la lista de fases;
+	\item En la l'inea 7 se compara el orden actual de la fase con el orden nuevo que esta tendr'a (la variable projectOrder). Si projectOrder es mayor a actualOrder se ingresa al ciclo de la l'inea 8;
+	\item El ciclo de la l'inea 8 recorre la lista de fases y si el orden actual de la fase (la llamada p.getProjectOrder())  es mayor a actualOrder y menor o igual a projectOrder entonces el orden de la fase tiene que ser restado en uno.;
+	\item El ciclo de la l'inea 15 recorre la lista de fases y si p.getProjectOrder()  es menor a actualOrder y mayor o igual a projectOrder entonces el orden de la fase tiene que ser aumentado en uno.
+	\item En la l'inea 14 se compara actualOrder con projectOrder. Si projectOrder es menor a actualOrder se ingresa al ciclo de la l'inea 15;
+	
 \end{itemize}
 
-As'i mismo, existen otras t'ecnicas de verificaci'on anal'iticas que ayudan a verificar la l'ogica del programa. Para seleccionar alguna t'ecnica en particular o alguna herramienta que realice esta t'ecnica, es importante considerar lo siguiente:
+Ahora se realizar'a la Verificaci'on Anal'itica del c'odigo:
 
-\begin{itemize}
-	\item Si la t'ecnica puede conducir a resultados err'oneos;
-	\item Si la t'ecnica podr'a encontrar todos los defectos de una categor'ia en especial o solamente algunos;
-	\item La profundidad con la que podr'a realizar el an'alisis;
-	\item La eficiencia respecto al tiempo que tomar'a el an'alisis;
-	\item Si se necesita que el producto est'e finalizado completamente o no.
-\end{itemize}
-
-El tipo de productos que puede verificar. Si es de prop'osito general o de alg'un dominio en espec'ifico.
-
-Las herramientas que proveen una verificaci'on autom'atica puede ser muy 'utiles, pero tambi'en peligrosas si no se usan adecuadamente. Siempre es necesario tener en cuenta que es muy poco probable que estas herramientas muestren el 100\% de errores cometidos en el dise'no. Por lo que se recomienda realizar siempre revisiones personales al dise'no y otras t'ecnicas de verificaci'on antes de utilizar herramientas para realizar una verificaci'on automatizada.
+\begin{enumerate}
+	\item \emph{Precondiciones del ciclo}. La precondici'on es que exista una lista con fases, esta lista siempre existir'a ya que la misma fase de donde se obtienen las distintas variables es parte de esta lista.
+	\item \emph{Terminaci'on del ciclo}. El ciclo siempre tendr'a a un final ya que este simplemente recorre la lista de fases recibida.
+	\item \emph{Identidad del ciclo}. El ciclo se ejecuta una sola vez por fase por lo que su identidad se mantiene.
+\end{enumerate}
 
 Cuando se dise'nan programas complejos, siempre se cometen errores. Por lo tanto, siempre ser'a importante realizar revisiones completas a todos los dise'nos que se hagan. Adem'as, es importante contar con una estrategia de verificaci'on que permita maximizar los resultados de la verificaci'on. Esta estrategia puede no ser la misma para diferentes tipos de programas. 
 
 Sin embargo, el mejor momento para realizar la verificaci'on y los an'alisis siempre ser'a mientras se produce el dise'no. Mantener el registro de resultados actualizado y seguir procedimientos para la revisi'on del dise'no ser'an dos tareas que maximizar'an los resultados de la verificaci'on.
 
-\section{Seguimiento de Defectos}
+\section{Defectos de Software}
 \noindent
+El BM como su nombre lo dice, hace un gran 'enfasis en la administraci'on adecuada de los defectos encontrados durante el desarrollo de software. A continuaci'on se presentar'an los conceptos principales utilizados en la herramienta para hacer una administraci'on adecuada de defectos.
 
-\section{Costo de la Calidad en el Desarrollo de Software}
+\subsection{Clasificaci'on Ortogonal de Defectos}
 \noindent
+Normalmente, los defectos representan el aspecto no deseado en el manejo de calidad del software. Una herramienta que nos permite atacar las debilidades de los modelos antes mencionados es la Clasificaci'on Ortogonal de Defectos, la cual est'a dise'nada para capturar todos los atributos de los defectos y permitirnos hacer an'alisis matem'aticos sobre ellos\cite{Chillarege1992}.
+
+La clasificaci'on ortogonal de defectos nos permite clasificar 8 tipos de atributos diferentes, que est'an divididos en 2 clases: La secci'on de apertura y la secci'on de clausura\cite{Chillarege1992}.
+
+En la secci'on de apertura se encuentran los atributos que son registrados cuando se encuentra el defecto, y antes de resolverlo. Los atributos son\cite{Chillarege1992}:
+
+\begin{itemize}
+	\item \emph{Actividad}. Se refiere a la actividad que se estaba realizando cuando se encontr'o el defecto. Un ejemplo de estas actividades ser'ia inspecciones de c'odigo, pruebas unitarias, pruebas de sistema, etc.
+	\item \emph{Trigger}. Se refiere al ambiente o condici'on existente que ocasiona que el defecto aparezca, aquella condici'on necesaria para reproducir el defecto. El m'etodo ya tiene algunos activadores definidos para cierto tipo de actividades, aunque tambi'en se pueden usar los propios.
+	\item \emph{Impacto}. Aqu'i se selecciona el impacto que el defecto podr'ia haber tenido en el cliente final si no se arreglara. En caso de que el defecto lo haya detectado un cliente, se pone el impacto actual que el defecto tuvo en el cliente.
+\end{itemize}
+
+En la secci'on de clausura se encuentran los atributos que son registrados despu'es de que el defecto ha sido arreglado. Los atributos son\cite{Chillarege1992}:
+
+\begin{itemize}
+	\item \emph{Target}. Representa la entidad de alto nivel que se arregl'o. Por ejemplo, el dise'no o el c'odigo del programa.
+	\item \emph{Tipo de defecto}. Representa la naturaleza de la correcci'on que se realiz'o. Para este campo existen valores predeterminados, por ejemplo: asignaci'on o inicializaci'on, que se refiere a que el valor de una variable fue corregido; algoritmo/m'etodo, significa que se implement'o o corrigi'o un algoritmo; tiempo/serializaci'on, que nos indica que se tuvo que implementar m'etodos de serializaci'on en un recurso compartido.
+	\item \emph{Qualifier}. Aplica al tipo de defecto, y captura el calificativo que describe al defecto. Para este atributo existen 3 valores posibles: 
+	\begin{itemize}
+		\item \emph{Omisi'on}. Indica que el defecto se debi'o a una omisi'on.
+		\item \emph{Incorrecto}. Indica que valores incorrectos se usaron.
+		\item \emph{Extra'no}. Indica que el defecto se debe a algo no relevante al c'odigo.
+	\end{itemize}
+	\item \emph{Fuente}. Identifica el origen del target que ten'ia el defecto. Para este atributo tambi'en existen ciertos valores predeterminados: 
+	\begin{itemize}
+		\item \emph{Desarrollado internamente}. Nos dice que el defecto fue introducido por el equipo de desarrollo.
+		\item \emph{Reusado de una librer'ia}. Nos indica que el defecto pertenec'ia a una librer'ia de reuso.
+		\item \emph{Outsourced}. Indica que el defecto fue introducido por una empresa que hizo servicios de outsourcing.
+		\item \emph{Ported}. Indica que el defecto tiene que ver con una parte que fue validada en un ambiente diferente.
+	\end{itemize}
+	\item \emph{Edad}. Identifica el historial del target que ten'ia el defecto. Para este campo existen los siguientes valores:
+	\begin{itemize}
+		\item \emph{Base}. Indica que el defecto est'a en un aparte del producto que no ha sido modificada en el proyecto actual, y no es parte de una librer'ia de reuso. Es un defecto latente.
+		\item \emph{Nuevo}. El defecto fue introducido en el proyecto actual.
+		\item \emph{Re-escrito}. El defecto fue introducido por re-dise'nar o re-escribir una funci'on con el objetivo de mejorar su dise'no o calidad.
+		\item \emph{Re-arreglado}. El defecto fue introducido al proveer una soluci'on a un defecto previo.
+	\end{itemize}
+\end{itemize}
+
+El BM extiende la clasificaci'on ortogonal de defectos para dar seguimiento a los que sean registrados en el sistema. El seguimiento que se le dar'a a los defectos dentro del BM ser'a revisado con m'as detalle en la secci'on \ref{sec:administracionyseguimientodedefectos}.
+
+\subsection{Inyecci'on de Defectos y Eficiencia en la Remoci'on de Defectos}
+\noindent
+La frase inyecci'on de defectos se refiere al n'umero probable de defectos que ser'an encontrados durante el desarrollo de aplicaciones de software\cite{Lazic2009}. La tabla \ref{PotencialDefectosPromedio} nos muestra el n'umero promedio de defectos inyectados durante el desarrollo por puntos de funci'on\cite{Capers2007}.
+
+\begin{table}[htbp]
+	\centering
+		\begin{tabular}{| c | c |}
+			\hline
+			Requerimientos & 1.00 \\ \hline
+			Dise'no & 1.25 \\ \hline
+			Codificaci'on & 1.75 \\ \hline
+			Documentaci'on & 0.60 \\ \hline
+			Correcciones Err'oneas & 0.40 \\ \hline
+			Total & 5.00 \\ 
+			\hline
+		\end{tabular}
+	\caption{Potencial de Inyecci'on Defectos Promedio}
+	\label{PotencialDefectosPromedio}
+\end{table}
+
+La frase eficiencia en la remoci'on de defectos se refiere al porcentaje de defectos potenciales que ser'an removidos antes de que la aplicaci'on de software entre en producci'on\cite{Lazic2009}. Algunos defectos son m'as dif'iciles de remover que otros, como se muestra en la tabla \ref{EfectividadRemocion}, donde se compara la eficiencia de remoci'on de defectos contra diferentes categor'ias de defectos\cite{Capers2007}.
+
+\begin{table}[htbp]
+	\centering
+		\begin{tabular}{| c | c | c | c |}
+			\hline
+			\textbf{Origen del Defecto} & \textbf{Potencial} & \textbf{Eficiencia en la Remoci'on} & \textbf{Defectos Restantes} \\ \hline
+			Requerimientos & 1.00 & 77\% & 0.23 \\ \hline
+			Dise'no & 1.25 & 85\% & 0.19 \\ \hline
+			Codificaci'on & 1.75 & 95\% & 0.09 \\ \hline
+			Documentaci'on & 0.60 & 80\% & 0.12 \\ \hline
+			Correcciones Err'oneas & 0.40 & 70\% & 0.12 \\ 
+			\hline
+		\end{tabular}
+	\caption{Efectividad en la Remoci'on de Defectos}
+	\label{EfectividadRemocion}
+\end{table}
+
+\subsection{El Costo Real de los Defectos de Software}
+\noindent
+Es obvio que mientras una aplicaci'on defectuosa crece y evoluciona es m'as costoso repararla \cite{Lazic2009}. Un defecto que cueste \$1 repararlo en la computadora del programador costar'a \$100 repararlo ya que se haya incorporado a la aplicaci'on completa, y costar'a algunos miles de d'olares si llega a producci'on\cite{McConnell2004}. Este comportamiento se muestra en la figura \ref{fig:DefectCost} donde encontramos el costo de remover defectos de software seg'un la fase de inyecci'on y de remoci'on\cite{McConnell2004}.
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[scale=0.9]{images/DefectCost.png}
+	\caption{Costo de la Remoci'on de Defectos por Fase}
+	\label{fig:DefectCost}
+\end{figure}
+
+El costo de remover un defecto de software crece exponencialmente cada fase que este se mantiene dentro del ciclo de desarrollo sin ser detectado\cite{Boehm1981}. En un proyecto t'ipico de software, el 80\% del costo total es utilizado en la correcci'on de defectos\cite{Lazic2009}.
+
+Es por esto que el BM sugiere una cultura de revisi'on y prevenci'on, la cual tiene como objetivo evitar la introducci'on de defectos, removerlos tan r'apido como sea posible si es que estos son inyectados y as'i evitar el aumento exponencial de costo y esfuerzo. El BM sugiere que la calidad en el desarrollo de software es mucho m'as que simplemente introducir una fase de pruebas. Las iniciativas de calidad deben existir durante todo el proceso de desarrollo para alcanzar la meta de un software con cero defectos.
+
+\section{Costo de la Calidad de Software}
+\noindent
+El Costo de la Calidad (por sus siglas en Inglés CoQ) representa los costos en los que incide una organización al tener que repetir un proceso para realizar el trabajo correctamente\cite{Lazic2009}. El CoQ es un término que nos permite evaluar la economía involucrada para producir software de alta calidad\cite{Lazic2009}.
+El CoQ se divide en dos tipos principales: El costo de la conformidad y el costo de la no conformidad\cite{Black2002}.
+
+\begin{math}CoQ = Costo_{Conformidad} + Costo_{No-conformidad}\end{math}
+
+A su vez, el costo de la conformidad se divide en costos de prevención y costos de evaluación, mientras que el costo de la conformidad se divide en fallas internas y externas\cite{Houston1998}. Esto se muestra en la figura\ref{fig:CoQ}:
+
+\begin{math}CoQ = Prevencion_{Costo} + Evaluacion_{Costo} + FallasInternas_{Costo} + FallasExternas_{Costo}\end{math}
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[scale=0.9]{images/CoSQ.png}
+	\caption{Costo de la Calidad de Software}
+	\label{fig:CoQ}
+\end{figure}
+
+Los significados los diferentes tipos de costos son los siguientes\cite{Juran1998}:
+
+\begin{itemize}
+	\item \emph{Costos de prevención}. Son los costos asociados con la planeación de la calidad; el diseño, la implementación y la administración de la calidad del sistema; la auditoría del sistema; encuestas a los proveedores y las mejoras de proceso.
+	\item \emph{Costos de evaluación}. Son los costos asociados con la medición, evaluación y revisión de los productos para asegurar su conformidad con los estándares de calidad y requerimientos de desempeño.
+	\item \emph{Costos de falla}. Son las pérdidas asociadas con la creación de un producto que no cumpla con los criterios de conformidad. Se dividen en internos y externos.
+	\item \emph{Costos de falla internos}. Son los costos asociados con las fallas y defectos del proceso, equipo, producto y materiales que no cumplen con los estándares de calidad o los requerimientos.
+	\item \emph{Costos de falla externos}. Son generados por productos, servicios y procesos defectuosos cuando el usuario los utiliza. Incluyen garantías, quejas, devoluciones y remplazos.
+\end{itemize}
+
+La figura \ref{fig:CoQ-Graph} es una representación gráfica del CoQ propuesta por varios investigadores\cite{Knox1993,Houston1998,Black2002}.
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[scale=0.9]{images/CoSQ-Graph.png}
+	\caption{El costo de la alta confiabilidad}
+	\label{fig:CoQ-Graph}
+\end{figure}
+
+La figura anterior nos muestra que para alcanzar una alta confiabilidad y cero defectos (cerca del punto rojo) el costo es muy alto, pero alcanzar un nivel razonable de calidad (entre los dos puntos verdes) no requiere un costo muy alto.
+
+\subsection{De las Pruebas a la Prevenci'on}
+\noindent
+Anteriores esquemas de calidad de software suger'ian que una fuerte etapa de pruebas era la mejor acci'on posible para asegurar la calidad en el software, sin embargo, una encuesta dirigida por \cite{Lazic2009} a distintas organizaciones dedicadas al desarrollo de software encontr'o que la mayor'ia de estas organizaciones estaban de acuerdo que una cultura que favoreciera las pruebas antes que la prevenci'on de los defectos provocaba un programa poco productivo de calidad.
+
+Los costos para dar calidad y los costos causados por falta de la calidad tienen una relaci'on inversa: mientras que la inversi'on en alcanzar calidad aumenta, los costos provocados por la falta de calidad disminuyen\cite{Lazic2009}. Este modelo te'orico se muestra en la figura \ref{fig:ModelOfSQ}\cite{Lazic2009}. La figura muestra que mientras los costos de prevenci'on y evaluaci'on aumentan, los costos de las fallas disminuyen hasta que se alcanza un punto 'optimo, despu'es del punto 'optimo aumentar la inversi'on en prevenci'on y evaluaci'on no tienen tan buenos resultados \cite{Lazic2009}.
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[scale=0.9]{images/ModelOfSQ.png}
+	\caption{Modelo de la Calidad de Software}
+	\label{fig:ModelOfSQ}
+\end{figure}
+
+Cuando se comienza a invertir en evaluaci'on provoca que las fallas internas aumenten ya que se detectan m'as defectos en etapas tempranas, pero remover defectos en etapas tempranas es mucho m'as barato que hacerlo en pruebas o mantenimiento\cite{Lazic2009}. En general las actividades de evaluaci'on disminuyen las fallas externas y el total de fallas disminuye. Una inversi'on peque'na en prevenci'on y evaluaci'on produce grandes disminuciones de costo total de calidad\cite{Lazic2009}.
+
+Fomentar una cultura donde la prevenci'on de los errores sea m'as importante que el proceso de pruebas es uno de los objetivos de este trabajo de Tesis.
+
+\subsection{An'alisis del Costo de la Calidad}
+\noindent
+El an'alisis del costo de la calidad es el concepto de estudiar los costos relacionados con la calidad como medios de comunicaci'on entre el departamento de calidad y la gerencia de las organizaciones\cite{Lazic2009}. El objetivo de hacer un an'alisis del costo de la calidad no es reducir el costo, si no asegurarnos de que se invierta en el tipo correcto de costo y se maximice el beneficio obtenido de esa inversi'on. La mejor estrategia para esto es cambiar las actividades relacionadas con las fallas por actividades de prevenci'on y evaluaci'on. 
+
+Un an'alisis costo beneficio se realiza para determinar que tan bien, o que tan mal, una acci'on resultar'a. Un an'alisis de costo beneficio encuentra, cuantifica y agrega los factores positivos. Estos son los beneficios, entonces cuantifica y substrae todos los negativos, en otras palabras los costos. La diferencia entre estos indica si la acci'on es recomendable o no\cite{Lazic2009}.
+
+Una consideraci'on clave en el an'alisis del costo de la calidad es la visibilidad. La visibilidad obtenida gracias al an'alisis del costo de la calidad permite el equipo de aseguramiento de la calidad enfocar su atenci'on en aquellas actividades que descubren y corrigen la causa ra'iz de los defectos. La causa ra'iz puede ser utilizada para determinar como el proceso de desarrollo puede ser mejorado para prevenir nuevos defectos\cite{Lazic2009}.
+
+Knox propone un modelo te'orico en el cual demuestra la inversi'on en las distintas actividades del CoQ seg'un el nivel de CMMI\cite{Knox1993}. Este se muestra en la figura \ref{fig:CoQ-CMM} donde podemos observar como se reduce el CoQ total al ir aumentando las actividades de evaluaci'on y prevenci'on seg'un el nivel de CMMI.
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[scale=0.9]{images/CoSQ-CMM.png}
+	\caption{CoQ por nivel de CMM}
+	\label{fig:CoQ-CMM}
+\end{figure}
+
+Para hacer una mejora real en la calidad de software debemos enfocarnos en dos mejoras de proceso\cite{Lazic2009}: Prevenci'on de defectos y remoci'on de defectos.
+
+La prevenci'on de defectos se refiere a las tecnolog'ias y metodolog'ias que reducen el n'umero de defectos que deben de ser eliminados. Ejemplos de estos m'etodos pueden ser m'etodos formales de dise'no, generaci'on autom'atica de c'odigo a partir de especificaciones formales, la capacitaci'on y la creaci'on de una conciencia sobre los defectos inyectados.
+
+La remoci'on de defectos se refiere a los m'etodos que pueden aumentar los niveles de eficiencia en la remoci'on de defectos al introducir diferentes tipos de revisiones.
+
+
+\subsection{An'alisis del Retorno de Inversi'on}
+\noindent
+Hay dos beneficios principales de tener una alta calidad en el software: Tiempo y dinero. El retorno de inversi'on (por sus siglas en Ingl'es ROI) analiza los ahorros en costo y en calendario que se tienen al implementar ciertas actividades de calidad\cite{Lazic2009}. El ROI se expresa en t'erminos de esfuerzo ya que es el mayor costo de un proyecto de software.
+
+Una forma de calcular el ROI de un proyecto es la siguiente\cite{Lazic2009}:
+
+\begin{math}ROI = \frac{OriginalTotalCoQ - NewTotalCoQ}{OriginalTotalCoQ}\end{math}
+
+Este modelo nos muestra el porcentaje de ahorro del costo de calidad total del proyecto. Para ilustrarlo se muestra un ejemplo en la tabla \ref{ROItable}\cite{Lazic2009}. En esta tabla se muestran dos casos hipot'eticos, en ambos se trata de un proyecto con mil defectos. El primero muestra el CoQ de una empresa que no invierte en prevenci'on y evaluaci'on, mientras que en el segundo caso se muestra el escenario donde se realiza la inversi'on. De esta manera se calcula el ROI, realizando la comparaci'on de los costos que se hubieran tenido sin una estrategia de calidad, contra el CoQ real.
+
+\begin{table}[htbp]
+	\centering
+		\begin{tabular}{| c | c | c |}
+		  \hline
+		  \multicolumn{3}{|c|}{\textbf{An'alisis del ROI}} \\
+		  \hline
+		  \textbf{Recursos} & \textbf{Caso1} & \textbf{Caso2} \\
+		  Personal & \$0 & \$60,000 \\
+		  Infraestructura & \$0 & \$10,000 \\
+		  Herramientas & \$0 & \$12,500 \\
+		  Total de Inversi'on & \$0 & \$82,500 \\
+		  \hline
+		  \multicolumn{3}{|c|}{\textbf{Desarrollo (Requerimientos, Diseño y Codificaci'on)}} \\
+		  \hline
+		  Defectos Encontrados & 250 & 350 \\
+		  Costo de Correcci'on de Defectos & \$2,500 & \$3,500 \\
+		  \hline
+		  \multicolumn{3}{|c|}{\textbf{Pruebas}} \\
+		  \hline
+		  Defectos Encontrados & 0 & 600 \\
+		  Costo de Correcci'on de Defectos & 0 & \$60,000 \\
+		  \hline
+		  \multicolumn{3}{|c|}{\textbf{Producci'on}} \\
+		  \hline
+		  Defectos Encontrados & 750 & 50 \\
+		  Costo de Correcci'on de Defectos & \$750,000 & \$50,000 \\
+		  \hline
+		  \hline
+		  \multicolumn{3}{|c|}{\textbf{CoQ}} \\
+		  \hline
+		  Conformidad & 0 & \$82,500 \\
+		  No-conformidad & \$752,500 & \$113,500 \\
+		  \textbf{Total} & \$752,500 & \$196,000 \\
+		  \textbf{ROI} & NA & 74\% \\
+		  \hline
+		\end{tabular}
+	\caption{An'alisis del ROI}
+	\label{ROItable}
+\end{table}
+
+\begin{math}ROI = \frac{752500 - 196000}{752500}=0.74=74\%\end{math}
+
+Este resultado nos quiere decir que se ahorr'o el 74\% del total de CoQ. Estos an'alisis son realizados com'unmente antes al finalizar las pruebas de sistema y antes de ingresar a producci'on. Por lo cual la situaci'on del ROI puede empeorar conforme el sistema se encuentra en producci'on y los usuarios comienzan a encontrar los defectos mientras lo usan.
+
 
 \clearpage

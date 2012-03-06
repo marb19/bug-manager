@@ -21,6 +21,15 @@
 \providecommand{\BIBdecl}{\relax}
 \BIBdecl
 
+\bibitem{Humphrey}
+W.~S. Humphrey, \emph{PSP A Self-Improvement Process for Software
+  Engineers}.\hskip 1em plus 0.5em minus 0.4em\relax Addison - Wesley, 2005.
+
+\bibitem{Humphrey2002}
+------, \emph{Winning with Software, An Executive Strategy, How to Transform
+  Your Software Group into a Competitive Asset}.\hskip 1em plus 0.5em minus
+  0.4em\relax Addison - Wesley, 2002.
+
 \bibitem{Crosby1979}
 P.~B. Crosby, \emph{Quality Is Free: The Art of Making Quality Certain: How to
   Manage Quality - So That It Becomes A Source of Profit for Your
@@ -34,10 +43,6 @@ J.~M. Juran and F.~M. Gryna, \emph{Juran's quality control handbook}.\hskip 1em
 \bibitem{Davies2000}
 E.~Davies and M.~Whyman, ``Iso 9000:2000-new iso, new responsibilities for top
   management,'' \emph{Engineering Management Journal}, pp. 244 -- 248, 2000.
-
-\bibitem{RohitDhiman2005}
-R.~Dhiman, C.~Sigel, and J.~Dörr, \emph{ISO/IEC 9126 Standard}, ISO/IEC Std.,
-  2005.
 
 \bibitem{Herzwurm1996}
 D.~Stelzer, W.~Mellis, and G.~Herzwurm, ``Software process improvement via iso
@@ -55,15 +60,41 @@ C.~Yoo, J.~Yoon, B.~Lee, C.~Lee, J.~Lee, S.~Hyun, and C.~Wu, ``An integrated
 J.~E. Bentley and W.~Bank, ``Software testing fundamentals—concepts, roles, and
   terminology.''
 
-\bibitem{Humphrey2002}
-W.~S. Humphrey, \emph{Winning with Software, An Executive Strategy, How to
-  Transform Your Software Group into a Competitive Asset}.\hskip 1em plus 0.5em
-  minus 0.4em\relax Addison - Wesley, 2002.
+\bibitem{McConnell2004}
+S.~McConnell, \emph{Professional Software Development}.\hskip 1em plus 0.5em
+  minus 0.4em\relax Addison - Wesley, 2004.
 
-\bibitem{Humphrey}
-------, \emph{PSP A Self-Improvement Process form Software Engineers},
-  P.~Education, Ed.\hskip 1em plus 0.5em minus 0.4em\relax Addison - Wesley,
-  2005.
+\bibitem{Remus1979}
+H.~Remus and S.~Ziles, ``Prediction and management of program quality,'' in
+  \emph{Proceedings of the Fourth International Conference on Software
+  Engineering, Munich, Germany}, 1979, pp. 341--350.
+
+\bibitem{Bush1990}
+M.~Bush, ``Improving software quality: The use of formal inspections at the jet
+  propulsion laboratory,'' in \emph{Twelfth International Conference on
+  Software Engineering}, March 1990, pp. 196--199.
+
+\bibitem{Ackerman1989}
+A.~F. Ackerman, L.~S. Buchwald, and F.~H. Lewski, ``Software inspections: An
+  effective verification process,'' \emph{IEEE Software}, vol.~8, pp. 31--36,
+  1989.
+
+\bibitem{Ragland1992}
+B.~Ragland, ``Inspections are needed now more than ever,'' \emph{Journal of
+  Defense Software Engineering}, vol.~38, November 1992.
+
+\bibitem{Rusell1991}
+G.~W. Rusell, ``Experience with inspections in ultralarge-scale developments,''
+  \emph{IEEE Software}, pp. 25--31, January 1991.
+
+\bibitem{Shooman1975}
+M.~L. Shooman and M.~I. Bolsky, ``Types, distribution, and test and correction
+  times for programming errors,'' in \emph{Proceedings of the 1975 Conference
+  on Reliable Software}.\hskip 1em plus 0.5em minus 0.4em\relax IEEE, 1975.
+
+\bibitem{Weller1993}
+E.~F. Weller, ``Lessons learned from two years of inspection data,'' \emph{IEEE
+  Software}, pp. 38--45, 1993.
 
 \bibitem{Owens1997}
 K.~Owens, ``Software detailed technical reviews: Finding and using defects,''
@@ -76,5 +107,41 @@ L.~Harjumma, ``Peer reviews in real life - motivators and demotivators.''
 \bibitem{Freedman1984}
 G.~M. Freedman and D.~P. Weinberg, ``Reviews, walkthroughs and inspections,''
   \emph{IEEE Transactions on Software Engineering}, 1984.
+
+\bibitem{Chillarege1992}
+R.~Chillarege, I.~Bhandari, J.~Chaar, M.~Halliday, D.~Moebus, B.~Ray, and M.-Y.
+  Wong, ``Orthogonal defect classification-a concept for in-process
+  measurements,'' \emph{IEEE Transactions on Software Engineering}, vol.~18,
+  pp. 943--956, 1992.
+
+\bibitem{Lazic2009}
+L.~Lazic, A.~Kolasinac, and D.~Avdic, ``The software quality economics model
+  for software project optimization,'' \emph{WSEAS Transactions on Computers},
+  vol.~8, pp. 21--47, 2009.
+
+\bibitem{Capers2007}
+J.~Capers, \emph{Estimating Software Costs}.\hskip 1em plus 0.5em minus
+  0.4em\relax McGraw-Hill, 2007.
+
+\bibitem{Boehm1981}
+B.~Boehm, \emph{Software Engineering Economics}.\hskip 1em plus 0.5em minus
+  0.4em\relax Prentice Hall, 1981.
+
+\bibitem{Black2002}
+R.~Black, \emph{Managing the Testing Process}, segunda edición~ed., Wiley,
+  Ed.\hskip 1em plus 0.5em minus 0.4em\relax Wiley, 2002.
+
+\bibitem{Houston1998}
+D.~Houston and B.~Keats, ``Cost of software quality: A means of promoting
+  software process improvement,'' \emph{Quality Engineering}, vol.~10, pp.
+  563--573, 1998.
+
+\bibitem{Juran1998}
+J.~Juran and A.~B. Godfrey, \emph{Juran's Quality Handbook}.\hskip 1em plus
+  0.5em minus 0.4em\relax McGraw-Hill, 1998.
+
+\bibitem{Knox1993}
+S.~T. Knox, ``Modeling the cost of software quality,'' \emph{Digital Technical
+  Journal}, vol.~5, pp. 9--16, 1993.
 
 \end{thebibliography}
