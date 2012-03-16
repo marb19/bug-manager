@@ -16,6 +16,7 @@
 \normalsize
 
 \section{Concepto de Operaciones}
+\label{sec:ConceptoDeOperaciones}
 \noindent
 El BM es un sistema de administraci'on, de seguimiento y de mejora continua de la calidad personal y grupal en el desarrollo de sistemas de software. Esto lo realiza mediante el seguimiento de proyectos, seguimiento de actividades de desarrollo, seguimiento de actividades de calidad, administraci'on de defectos y generaci'on de estad'isticas y m'etricas verdaderamente 'utiles para las organizaciones de software.
 
@@ -149,6 +150,7 @@ Dentro de las limitaciones identificadas para el sistema BM se encuentran:
 \end{itemize}
 
 \section{Dise'no del Sistema}
+\label{sec:DisenoDelSistema}
 \noindent
 El BM est'a construido con las siguientes tecnolog'ias:
 
@@ -359,8 +361,446 @@ El seguimiento de las actividades se muestra en la figura \ref{fig:SSseguirtarea
 	\label{fig:SSseguirtarea1BM}
 \end{figure}
 
+Las actividades de calidad se administran de manera similar a las actividades de desarrollo. Las diferencias principales son su enfoque y el uso de plantillas de calidad. Mientras que las actividades de desarrollo tienen como principal objetivo construir el sistema mediante la creaci'on de productos de trabajo, las actividades de calidad tienen como objetivo revisar estos productos de trabajo, para liberarlos de defectos y evitar que estos avancen durante el ciclo de vida.
+
+Es de suma importancia evitar que los defectos avancen en el ciclo de vida de desarrollo del sistema, ya que como se explic'o en la secci'on \ref{sec:elcostorealdelosdefectosdesoftware}, el esfuerzo, y por lo tanto el costo, de remover estos defectos aumenta exponencialmente conforme el defecto cambia de fase.
+
+Entonces las actividades de calidad son realizadas ya sea inmediatamente despu'es de terminar un producto de trabajo o al final de la fase. Estas actividades deben de ser apoyadas con una plantilla de calidad, la cual servir'a de gu'ia en la realizaci'on de la actividad. Estas plantillas fueron descritas a mayor profundidad en la secci'on \ref{sec:listadechequeoderevisiondecodigo} y su uso dentro del BM ser'a descrito en la secci'on \ref{sec:administraciondeplantillasdecalidad}.
+
 \subsection{Administraci'on  y Seguimiento de Defectos}
 \label{sec:administracionyseguimientodedefectos}
 \noindent
+El BM toma su nombre de la funcionalidad explicada en esta secci'on. El registro, seguimiento y administraci'on correcta de los defectos introducidos en el desarrollo de software es fundamental para asegurar su calidad. Tan solo el registro de los defectos que son inyectados provoca una disminuci'on del 30\% en la densidad de defectos de un proyecto de software\cite{Humphrey}. La correcta administraci'on de defectos permite generar estad'isticas y m'etricas para conocer los defectos que:
+
+\begin{itemize}
+	\item Se encuentran en el programa final o en el periodo de pruebas;
+	\item Aquellos que ocurren m'as frecuentemente;
+	\item Aquellos que son m'as dif'iciles o costosos de corregir;
+	\item Aquellos en los que se pueden realizar acciones preventivas sencillas;
+	\item Aquellos que m'as nos molestan.
+\end{itemize}
+
+Las funcionalidades b'asicas para la administraci'on de defectos son las siguientes:
+
+\begin{itemize}
+	\item \emph{Alta de defectos}. Es el registro de un nuevo defecto. La informaci'on requerida para dar de alta es la siguiente: El nombre del defecto, una descripci'on breve del defecto, la fase actual en que se encuentra el proyecto (se coloca autom'aticamente) y la tarea donde fue detectado el defecto. Ver la figura \ref{fig:SSdefectos1BM}.
+	\item \emph{Baja de defectos}. El defecto puede ser borrado siempre y cuando tenga ENVIADO de estatus y sin esfuerzo agregado.
+	\item \emph{Modificaci'on de defectos}. Es el seguimiento de defectos propiamente, ser'a explicado a m'as detalle a continuaci'on.
+\end{itemize}
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[scale=0.9]{images/SSdefectos1BM.png}
+	\caption{Agregar Nuevo Defecto}
+	\label{fig:SSdefectos1BM}
+\end{figure}
+
+La modificaci'on de defectos se refiere al seguimiento que se le dar'a al defecto desde que es reportado hasta que es corregido o cancelado. Para el seguimiento existen varios campos editables los cuales contienen la informaci'on de la clasificaci'on ortogonal de defectos\cite{Chillarege1992}, la cual fue explicada a detalle en la secci'on \ref{sec:clasificacionortogonaldedefectos}, y otros propuestos para el BM. A continuaci'on se explica cada uno de estos campos (ver figura \ref{fig:SSdefectos2BM}):
+
+\begin{itemize}
+	\item \emph{Nombre}. Es un nombre que se le asigna al defecto para identificarlo r'apidamente.
+	\item \emph{Descripci'on}. Esta debe de decir a grandes rasgos los s'intomas del defecto para poder replicarlo.
+	\item \emph{Responsable}. Es la persona del equipo de trabajo encargada de corregir el defecto, no necesariamente es quien inyect'o el defecto.
+	\item \emph{Fecha de Apertura}. Se asigna autom'aticamente cuando se da de alta el defecto.
+	\item \emph{Fecha de Cierre}. Se asigna autom'aticamente cuando el estatus del defecto pasa a CORREGIDO o CANCELADO.
+	\item \emph{Fase de Detecci'on}. Se asigna autom'aticamente dependiendo de la fase actual en que se encuentre el proyecto.
+	\item \emph{Tarea de Detecci'on}. Es la tarea que se estaba realizando cuando se detect'o el defecto. Es importante destacar que los defectos pueden ser encontrados ya sea en tareas de desarrollo o de calidad. Por ejemplo: Un programador puede encontrar un defecto en el dise'no al momento de implementarlo.
+	\item \emph{Fase de Inyecci'on}. Este campo no es obligatorio. Representa la fase en que el defecto fue inyectado.
+	\item \emph{Tarea de Inyecci'on}. Este campo no es obligatorio. Representa la tarea en que el defecto fue inyectado.
+	\item \emph{Fase de Remoci'on}. Este campo es obligatorio para cambiar el estatus del defecto a CORREGIDO. Representa la fase donde el defecto fue corregido.
+	\item \emph{Tarea de Remoci'on}. Este campo es obligatorio para cambiar el estatus del defecto a CORREGIDO. Representa la tarea donde el defecto fue corregido.
+	\item \emph{Esfuerzo Acumulado}. Al igual que en las actividades, representa el esfuerzo realizado hasta el momento en la remoci'on del defecto.
+	\item \emph{Agregar Esfuerzo}. Funciona igual que en las actividades. Se agrega el esfuerzo invertido en el defecto hasta el momento, si se deja en cero entonces el estatus del defecto pasa a CORREGIDO.
+	\item \emph{Estatus}. El defecto puede tener cuatro estados:
+	\begin{itemize}
+		\item \emph{ENVIADO}. Es el estatus inicial del defecto el cual tiene una vez que este es registrado.
+		\item \emph{ACEPTADO}. Es el estatus que el responsable del defecto coloca cuando este determina que lo reportado si es un defecto y se dispone a corregirlo.
+		\item \emph{CANCELADO}. Es el estatus del defecto cuando se decide que el defecto no ser'a corregido o no es realmente un defecto.
+		\item \emph{CORREGIDO}. Es el estatus que se coloca cuando el responsable ha corregido el defecto.
+	\end{itemize}
+	\item \emph{Tipo de Defecto}. Los tipos de defectos ser'an explicados a detalle en la secci'on \ref{sec:administraciondetiposdedefectos}.
+	\item \emph{Edad}. Es un campo de la clasificaci'on ortogonal de defectos\cite{Chillarege1992}. Fue explicado a detalle en la secci'on \ref{sec:clasificacionortogonaldedefectos}.
+	\item \emph{Fuente}. Es un campo de la clasificaci'on ortogonal de defectos\cite{Chillarege1992}. Fue explicado a detalle en la secci'on \ref{sec:clasificacionortogonaldedefectos}.
+	\item \emph{Referencia}. Este campo representa si el defecto fue inyectado cuando se correg'ia otro defecto. Contiene el identificador 'unico de otro defecto.
+	\item \emph{Agregar Comentario}. Al igual que para las actividades, se pueden agregar comentarios para mencionar cualquier situaci'on relevante al defecto.
+\end{itemize}
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[scale=0.7]{images/SSdefectos2BM.png}
+	\caption{Seguimiento de Defectos}
+	\label{fig:SSdefectos2BM}
+\end{figure}
+
+Para que las empresas obtengan los beneficios del BM se recomiendan las siguientes actividades como m'inimo en la administraci'on y seguimiento de defectos:
+
+\begin{itemize}
+	\item Registrar el momento en el que los defectos sean detectados, si no se hace entonces se olvida y el defecto nunca ser'a registrado.
+	\item Agregar el esfuerzo real que tom'o el defecto. Al igual que en las actividades registrar solo el tiempo efectivo que se tom'o para corregir el defecto.
+	\item Clasificar correctamente el defecto seg'un su tipo.
+	\item Agregar nuevos tipos de defectos si es que lo requiere la organizaci'on de software. Ver secci'on \ref{sec:administraciondetiposdedefectos}.
+	\item Encontrar las fases y tareas de inyecci'on y remoci'on de cada defecto.
+	\item Al realizar la correcci'on del defecto utilizar las plantillas de calidad que se utilizan para una actividad de desarrollo. Esto con la finalidad de asegurarnos de no inyectar nuevos defectos al corregir un defecto previo.
+\end{itemize}
+
+Estas acciones permitir'an al BM identificar cuales son los tipos m'as comunes de defectos, que defectos son m'as costosos de corregir, en que fases se inyectan m'as defectos y otras m'etricas valiosas para que las organizaciones puedan establecer estrategias para mejorar la calidad.
+
+\subsection{Administraci'on de Tipos de Defectos}
+\label{sec:administraciondetiposdedefectos}
+\noindent
+Los defectos pueden ser clasificados por su tipo. Por ejemplo, no es lo mismo un error de sintaxis que un error en el dise'no, o un error en la l'ogica de un algoritmo. Es por esto que el BM permite la administraci'on de los tipos de defectos, es decir, permite el alta, baja y modificaci'on de estos tipos. El BM sugiere al menos utilizar los defectos que propone Humphrey en el PSP \cite{Humphrey} (ver tabla \ref{DefectosPSP2}). Sin embargo este tipo de defectos son muy gen'ericos, y pueden no ser suficientes para todas las organizaciones de software, as'i que se recomienda agregar tipos de defectos seg'un las necesidades de cada organizaci'on.
+
+\begin{table}[htbp]
+	\centering
+		\begin{tabular}{| l | l | l |}
+			\hline
+			\textbf{N'umero de Tipo} & \textbf{Nombre del Tipo} & \textbf{Descripci'on} \\ \hline
+			10 & Documentaci'on & Comentarios y mensajes. \\ \hline
+			20 & Sintaxis & Ortograf'ia, puntuaci'on y tipos. \\ \hline
+			30 & Paquete & Administraci'on, librer'ias y versiones. \\ \hline
+			40 & Asignaci'on & Declaraci'on, nombres duplicados y l'imites. \\ \hline
+			50 & Interface & Procedimientos, referencias, I/O y formatos. \\ \hline
+			60 & Chequeo & Mensajes de error y chequeos inadecuados. \\ \hline
+			70 & Datos & Estructura y contenido. \\ \hline
+			80 & Funci'on & L'ogica, apuntadores, ciclos, etc. \\ \hline
+			90 & Sistema & Configuraci'on, tiempo y memoria. \\ \hline
+			100 & Medio Ambiente & Dise'no, compilaci'on y pruebas.\\
+			\hline
+		\end{tabular}
+	\caption{Clasificiaci'on de Defectos del PSP}
+	\label{DefectosPSP2}
+\end{table}
+
+\subsection{Administraci'on de Plantillas de Calidad}
+\label{sec:administraciondeplantillasdecalidad}
+\noindent
+El BM es un sistema que sirve como gu'ia para la implementaci'on de estrategias de calidad en las organizaciones peque'nas y medianas de software. Una herramienta muy importante que brinda el BM a estas organizaciones son las plantillas de calidad. Estas plantillas de calidad son el equivalente a las listas de chequeo mencionadas por Humphrey en el PSP\cite{Humphrey} y revisadas a detalla en la secci'on \ref{sec:listadechequeoderevisiondecodigo} del presente Trabajo de Tesis.
+
+Las plantillas de calidad son entonces gu'ias especializadas para guiar las actividades de detecci'on de defectos. El BM tiene la capacidad de dar de alta (ver figura \ref{fig:SSplantillas2BM}), modificar y eliminar plantillas de calidad. Las plantillas de calidad pueden ser p'ublicas o privadas, es decir, si el administrador o el l'ider de proyecto pueden crear una plantilla para que sea visible por todos los desarrolladores de la organizaci'on, o cualquier usuario puede crear una plantilla para solo ser utilizada por 'el.
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[scale=0.9]{images/SSplantillas2BM.png}
+	\caption{Crear Nueva Plantilla de Calidad}
+	\label{fig:SSplantillas2BM}
+\end{figure}
+
+Dentro del BM tienen las siguientes partes (ver figura \ref{fig:SSplantillas1BM}):
+
+\begin{itemize}
+	\item Una serie de categor'ias las cuales se obtienen a partir de los tipos de defectos.
+	\item Una serie de tareas o estrategias dentro de cada categor'ia para poder detectar los tipos de defectos.
+\end{itemize}
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[scale=0.7]{images/SSplantillas1BM.png}
+	\caption{Editar Plantilla de Calidad}
+	\label{fig:SSplantillas1BM}
+\end{figure}
+
+La figura \ref{fig:SSplantillas1BM} nos muestra una plantilla de calidad para realizar revisiones personales a c'odigos escritos en lenguajes de prop'osito general como Java, C++, Pascal, etc. Como se puede observar, existen tres columnas:
+
+\begin{itemize}
+	\item \emph{Categor'ia}. Esta columna nos muestra el tipo de defecto.
+	\item \emph{Descripci'on}. Es la descripci'on de la actividad o estrategia a seguir.
+	\item \emph{Acciones}. Son acciones simples para modificar o borrar la estrategia escrita.
+\end{itemize}
+
+La plantilla propuesta dentro del BM tiene las siguientes estrategias para detectar defectos, se mencionar'a el tipo de defecto que busca detectar, la estrategia y una breve explicaci'on (ver Tabla \ref{plantilladecalidadbm}).
+
+\begin{table}[htbp]
+	\centering
+		\begin{tabular}{| p{3.5cm} | p{5cm} | p{6.5cm} |}
+			\hline
+			\textbf{Tipo de Defecto} & \textbf{Estrategia} & \textbf{Explicaci'on} \\ \hline
+			Documentaci'on & Verificar que los nombres de variables y m'etodos sean consistentes. & Busca que los nombres de los m'etodos y las variables tengan relaci'on con su uso dentro del c'odigo. Con esto se asegura de que el c'odigo sea le'ible y m'as f'acil de ser entendido por un tercero o en un futuro. \\ \hline
+			Documentaci'on & Verificar que el c'odigo sigue los est'andares de codificaci'on establecidos. & Busca asegurarse que el c'odigo escrito siga los est'andares de codificaci'on de la organizaci'on de software para que el c'odigo elaborado por todos los desarrolladores tenga un mismo formato. \\ \hline
+			Sintaxis & Verificar la consistencia de los par'entesis. Cada par'entesis abierto tiene que ser cerrado. & Asegura que el c'odigo no tenga problemas relacionados a las parejas de par'entesis y llaves a trav'es del c'odigo. \\ \hline
+			Sintaxis & Verificar que la sintaxis y puntuaci'on de cada l'inea es la correcta. & Asegura que el c'odigo al momento de compilar tenga el menor n'umero de errores de sintaxis posible y evitar tomar mucho tiempo en compilaci'on. \\ \hline
+			Sintaxis & Verificar que las clases importadas est'en completas. & Evita que al momento de la compilaci'on se tengan errores debido a que una funci'on no es encontrada a causa de no existir la librer'ia. \\ \hline
+			Asignaci'on & Verificar variables y par'ametros de inicializaci'on al inicio del programa, ciclo y funci'on. & Asegura que una variable no tenga un valor nulo al momento de ejecuci'on. \\ \hline
+			Asignaci'on & Verificar el uso correcto de los operadores l'ogicos. & Asegura que no haya problemas con los operadores l'ogicos al momento de realizar condiciones. \\ 
+			\hline
+		\end{tabular}
+	\caption{Plantilla de Calidad BM}
+	\label{plantilladecalidadbm}
+\end{table}
+
+\subsection{Reportes}
+\label{sec:reportes}
+\noindent
+Los reportes del BM nos permiten analizar el desempe'no de los distintos aspectos de la organizaci'on de software. Nos permite conocer estad'isticas por desarrollador, por proyecto y por organizaci'on. Los líderes de proyecto tienen acceso a los reportes para desarrolladores y sus proyectos, mientras que los administradores tienen acceso a todos los reportes. Estos reportes son generados a partir de toda la informaci'on ingresada por los usuarios del BM en las actividades y los defectos. As'i que para que los reportes sean 'utiles y con informaci'on fidedigna deben seguirse a conciencia las recomendaciones de las secciones \ref{sec:administracionyseguimientodeactividades} y \ref{sec:administracionyseguimientodedefectos}. 
+
+Otro aspecto importante a remarcar, es que el BM es flexible en cuanto las unidades de tama'no utilizadas para medir los productos de trabajo del desarrollo de software. Se recomienda el uso de LOC para los programas y hojas de documentaci'on para los dem'as productos, sin embargo cada organizaci'on puede reportar lo que le sea m'as conveniente. Sin embargo es de suma importancia no mezclar unidades, si se comenz'o a registrar el tama'no de los programas en LOC y despu'es se hace en puntos de funci'on, es un hecho que la informaci'on presentada en los reportes ser'a inconsistente. Entonces, cada organizaci'on debe de mantener las mismas unidades, o iniciar con una nueva instalaci'on del BM si se desea cambiarlas.
+
+A partir de analizar los reportes tanto las organizaciones de software, como los l'ideres de proyecto y los desarrolladores podr'an plantear estrategias para mejorar en las 'areas de oportunidad y as'i mejorar su productividad y calidad en el desarrollo de software. El BM nos da reportes en cuatro 'areas distintas: Generales, costo de la calidad, t'ecnicas de detecci'on de defectos y caracterizaci'on de defectos. La tabla\ref{ReportesBM} nos muestra los reportes que existen, organizados por 'area y mostrando al nivel de la organizaci'on que se pueden aplicar:
+
+\begin{table}[htbp]
+	\centering
+		\begin{tabular}{|p{5cm}|p{5cm}|p{5cm}|} \hline
+		\textbf{Categor'ia} & \textbf{Reportes} & \textbf{Nivel(es)}\\ \hline
+		\multirow{4}{*}{Generales} 
+		& Tiempo por Fase & Proyecto \\
+		& Productividad por Fase & Proyecto \\
+		& Yield por Fase & Proyecto \\
+		& Resumen General & Proyecto \\ \hline
+		\multirow{4}{*}{CoQ} 
+		& Productividad Compuesta & Usuario, Proyecto, Organizaci'on \\
+		& ROI de Proyecto/Empresa & Proyecto, Organizaci'on \\
+		& ROI de T'ecnicas de Detecci'on & Proyecto, Organizaci'on \\
+		& CoQ vs CNQ & Proyecto, Organizaci'on \\ \hline
+		\multirow{5}{*}{T'ecnicas de Detecci'on} 
+		& Yield por T'ecnica de Detecci'on & Proyecto, Organizaci'on \\
+		& Esfuerzo por T'ecnica de Detecci'on & Proyecto, Organizaci'on \\
+		& Eficiencia por T'ecnica de Detecci'on & Proyecto, Organizaci'on \\
+		& Raz'on de Revisi'on por T'ecnica de Detecci'on & Proyecto, Organizaci'on \\
+		& N'umero de Defectos por T'ecnica de Detecci'on & Proyecto, Organizaci'on \\ \hline
+		\multirow{3}{*}{Defectos} 
+		& Densidad de Defectos & Usuario, Proyecto, Organizaci'on \\
+		& N'umero de Defectos por Tipo & Usuario, Proyecto, Organizaci'on\\
+		& Defectos Inyectados y Removidos por Fase & Usuario, Proyecto, Organizaci'on \\ \hline
+		\end{tabular}
+	\caption{Reportes BM}
+	\label{ReportesBM}
+\end{table}
+
+Para el presente Trabajo de Tesis se har'a un enfoque especial a los reportes relacionados con el CoQ. A continuaci'on se detallar'an los reportes pertinentes y se explicar'a la clase de informaci'on que le brindan a las organizaciones.
+
+\subsubsection{Tiempo por Fase}
+\label{sec:tiempoporfase}
+\noindent
+Este es el primer reporte general que ofrece el BM. Este reporte solo se presenta a nivel proyecto y es bastante simple. Solo nos dice el esfuerzo invertido en cada fase en el proyecto elegido. Aunque puede sonar algo trivial el reporte nos puede demostrar el tiempo que gastan las organizaciones de software en pruebas, que es en promedio la mitad del tiempo total del proyecto \cite{Humphrey}. Por medio del an'alisis de este reporte se pueden tomar estrategias como invertir una mayor cantidad de tiempo en la fase de dise'no y en las actividades de calidad para reducir el tiempo que toma la fase de pruebas.
+
+\subsubsection{Productividad por Fase}
+\label{sec:ProductividadporFase}
+\noindent
+Productividad por fase es un reporte a nivel proyecto. Este reporte nos dice la productividad que hubo en cada fase. Es importante mencionar que la productividad en cada fase est'a en unidades distintas. Por ejemplo: Lo m'as com'un ser'ia encontrar la fase de programaci'on medida en LOC o puntos de funci'on por hora, mientras que fases como dise'no o requerimientos estar'ian medidas en hojas de documentaci'on por hora. La productividad se calcula con la siguiente f'ormula:
+
+\begin{math}P = \frac{S}{E}\end{math}
+
+Donde:
+
+\begin{itemize}
+	\item P: Productividad.
+	\item S: Tama'no del producto.
+	\item E: Esfuerzo de la fase.
+\end{itemize}
+
+Organizaciones maduras en el desarrollo de software tienen una productividad promedio de 20 l'ineas de c'odigo por hora e inyectan un error cada diez LOC \cite{Humphrey2002}. A partir de estos valores podemos comenzar a comparar nuestra organizaci'on con la industria.
+
+\subsubsection{Yield por Fase}
+\label{sec:YieldporFase}
+\noindent
+El Yield mida la eficiencia de cada fase en la detecci'on de defectos. El Yield de una fase es el porcentaje de defectos de producto totales que son removidos en una fase. Por ejemplo: Al final del proyecto se sabe que se inyectaron 100 defectos al final de la fase de codificaci'on, sin embargo 50 de estos defectos fueron removidos en esta misma fase, por lo tanto el Yield de la fase de codificaci'on para dicho proyecto es del 50\%.
+
+Con este reporte las organizaciones de software pueden medir la efectividad removiendo defectos que tienen en cada fase. Un Yield de fase adecuado es del 70\% [CITA]. La f'ormula para calcular el Yield es la siguiente:
+
+\begin{math}Y = \frac{DD}{DT}\end{math}
+
+Donde:
+
+\begin{itemize}
+	\item Y: Yield.
+	\item DD: Defectos Detectados en la Fase.
+	\item DT: Defectos Totales del Proyecto.
+\end{itemize}
+
+\subsubsection{Resumen General}
+\label{sec:ResumenGeneral}
+\noindent
+El resumen general es un reporte a nivel proyecto. Es una herramienta muy poderosa con la que cuenta el BM para analizar la calidad con la que se est'a construyendo el desarrollo de software. Muestra una radiograf'ia actual con las m'etricas m'as importantes de calidad de software (ver secci'on \ref{sec:metricasdecalidad}). Un ejemplo de este reporte lo podemos ver en la figura \ref{fig:SSreportes1BM}.
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[scale=0.6]{images/SSreportes1BM.png}
+	\caption{Resumen General}
+	\label{fig:SSreportes1BM}
+\end{figure}
+
+A continuaci'on se describir'an a detalle las partes del reporte:
+
+\begin{itemize}
+	\item La primera columna con nombre FASE, representa las fases que tiene el proyecto en cuesti'on.
+	\item La segunda y tercer columna representan los defectos. La segunda muestra los defectos que se inyectaron en la fase determinada y la tercera muestra los defectos que fueron detectados en esa fase.
+	\item La cuarta columna muestra el Yield (la eficiencia de detecci'on de defectos) de cada fase. Se recomienda un Yield m'inimo de 70\% para cada fase\cite{Humphrey}. Si no se tiene el Yield adecuado se pueden tomar estrategias como integrar nuevas actividades de calidad a la fase, o mejorar la forma en que se hacen las actividades de calidad actuales.
+	\item La quinta columna presenta la Raz'on de Revisi'on de las actividades de calidad de cada fase. En otras palabras es la velocidad con que se realizan las revisiones. M'as detalles acerca de la Tasa de Revisi'on en la secci'on \ref{sec:RazonporTecnicadeDeteccion}.
+	\item La sexta columna simplemente muestra el tiempo total que ha tomado cada fase. En organizaciones con una pobre calidad en el desarrollo de software la fase de pruebas toma hasta el 50\% del tiempo total del proyecto[CITA]. El objetivo del BM es ayudar a las organizaciones de desarrollo de software a llegar a la fase de pruebas con cero defectos.
+	\item La s'eptima columna representa la eficiencia removiendo defectos de cada fase. Se mide en defectos removidos por hora.
+	\item La octava columna presenta la efectividad relativa detectando defectos. Esta m'etrica hace una comparaci'on entre la eficiencia detectando defectos de una fase cualquiera contra la eficiencia de la fase de pruebas. Se recomienda al menos tener una eficiencia relativa del 50\% en cada fase\cite{Humphrey}.
+	\item La novena, d'ecima y onceava columna presentan m'etricas del CoQ. La novena columna presenta el costo de evaluaci'on de cada fase del proyecto, en otras palabras todos los costos asociados con el aseguramiento de la calidad como revisiones, inspecciones, planeaci'on de la calidad entre otros. La d'ecima columna presenta el costo de las fallas de cada fase en el proyecto, en otras palabras el esfuerzo que tom'o corregir los errores inyectados en esas fases. Finalmente la onceava columna presenta una comparaci'on entre los costos de evaluaci'on y los costos de las fallas. El objetivo debe de ser obtener un valor de 2. Un valor m'as bajo representa la falta de actividades de calidad en la fase, mientras un valor m'as alto dice que las actividades de calidad son excesivas para la fase.
+	\item Por 'ultimo tenemos tres filas al final. La primera fila nos dice la densidad de defectos del proyecto, que es la cantidad de defectos por KLOC del proyecto. Para poder hacer una comparaci'on adecuada nos podemos referir a la secci'on \ref{sec:DensidaddeDefectos}. La segunda fila nos muestra el n'umero total de defectos y la tercera fila las LOC del proyecto, o en otras palabras su tama'no total.
+\end{itemize}
+
+Se recomienda la consulta de este reporte al menos al final de cada fase del proyecto, para tener en cuenta la calidad actual del proyecto y poder tomar las distintas estrategias para mejorarla si es necesario.
+
+\subsubsection{Productividad Compuesta}
+\label{sec:ProductividadCompuesta}
+\noindent
+La productividad compuesta es un reportes a nivel usuario, proyecto y organizaci'on. Es una m'etrica propuesta especialmente para la herramienta del BM.
+
+La productividad dentro de la industria de software es medida de forma neta, en otras palabras, las l'ineas de c'odigo que un desarrollador produce por hora. Sin embargo, las l'ineas escritas pueden contener defectos, y estos defectos requieren de un esfuerzo para ser corregidos. La tabla \ref{ejemploproductividadcompuesta} presenta un ejemplo de lo mencionado anteriormente:
+
+\begin{table}[htbp]
+	\centering
+		\begin{tabular}{| l | l | l |}
+			\hline
+			\textbf{} & \textbf{Programador1} & \textbf{Programador 2} \\ \hline
+			\textbf{LOC} & 1000 & 1000 \\ \hline
+			\textbf{Tiempo} & 1 hora & 2 horas \\ \hline
+			\textbf{Productividad} & 1000 LOC/HR & 500 LOC/HR \\ \hline
+			\textbf{Defectos Inyectados} & 60 & 15 \\ \hline
+			\textbf{Esfuerzo de Remoci'on} & 1 hora & 0.25 horas \\ \hline
+			\textbf{Productividad Compuesta} & 500 LOC/HR & 444.44 LOC/HR \\
+			\hline
+		\end{tabular}
+	\caption{Ejemplo Productividad Compuesta}
+	\label{ejemploproductividadcompuesta}
+\end{table}
+
+Al analizar el escenario planteado en la tabla [REFERENCIA] con la productividad simple, podríamos concluir que el Programador 1 tiene el doble de productividad que el Programador 2. Sin embargo, el Programador 1 inyecta más defectos que el Programador 2, por lo que requiere de más tiempo para corregir sus defectos. Analizando el escenario con la productividad compuesta, observamos que los programadores tienen productividades muy similares. Las fórmulas utilizadas para calcular la productividad simple y la productividad compuesta son las siguientes:
+
+\begin{math}P = \frac{S}{DT}\end{math}
+
+\begin{math}CP = \frac{S}{DT + CT}\end{math}
+
+Donde:
+
+\begin{itemize}
+	\item P: Productividad.
+	\item CP: Productividad Compuesta.
+	\item S: Tama'no Total.
+	\item DT: Tiempo Total de Desarrollo.
+	\item CT: Tiempo Total de Correcciones.
+\end{itemize}
+
+Gracias a este reporte incluido en el BM los l'ideres de proyecto y los gerentes pueden hacer evaluaciones m'as objetivas de los desarrolladores, proyectos y desempe'no general de la organizaci'on, tomando en cuenta no solo la cantidad de producto elaborado, si no la calidad que este tiene. La figura \ref{fig:SSreportes2BM} muestra un ejemplo de como se ve el reporte dentro del BM.
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[scale=0.9]{images/SSreportes2BM.png}
+	\caption{Productividad Compuesta}
+	\label{fig:SSreportes2BM}
+\end{figure}
+
+\subsubsection{ROI de Proyecto/Empresa}
+\label{sec:ROIdeProyecto/Empresa}
+\noindent
+El ROI de Proyecto/Empresa es un reporte a nivel proyecto y organización. Este reporte realiza el cálculo del ROI de las actividades de calidad realizadas en un proyecto, y compara el costo real del proyecto contra el costo que hubiera tenido si no se implementan las técnicas de calidad. Para realizar el cálculo de lo que hubiera costado el proyecto se toma en cuenta la regla de que el esfuerzo para remover un defecto aumenta diez veces cada fase que permanece en el proyecto\cite{Lazic2009}. Las fórmula utilizada para generar este reporte es la siguiente:
+
+\begin{math}ROI = \frac{QF - QA}{QA}\end{math}
+
+Donde:
+
+\begin{itemize}
+	\item ROI: Retorno de Inversi'on.
+	\item QF: Costo de Correcci'on de Defectos.
+	\item QA: Costo de las Actividades de Calidad.
+\end{itemize}
+
+La figura \ref{fig:SSreportes3BM} muestra un ejemplo de como se ve el reporte en el BM. Este reporte es muy útil para las organizaciones en el sentido que muestra una visión general de la efectividad de las técnicas de calidad del proyecto, en otras palabras, evalúa las técnicas en términos de tiempo y dinero.
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[scale=0.9]{images/SSreportes3BM.png}
+	\caption{ROI de Proyecto u Organizaci'on}
+	\label{fig:SSreportes3BM}
+\end{figure}
+
+\subsubsection{ROI de T'ecnicas de Detecci'on}
+\label{sec:ROIdeTecnicasdeDeteccion}
+\noindent
+El ROI de T'ecnicas de Detecci'on es un reporte a nivel proyecto y organizaci'on. Es similar al reporte de ROI de Proyecto/Empresa en el sentido que pone las t'ecnicas de calidad en t'erminos de tiempo y dinero, pero lo hace de forma individual. En vez de calcular el ROI total del proyecto, lo hace por separado con cada t'ecnica. Este reporte nos permite hacer una evaluaci'on m'as profunda del ROI y evaluar que t'ecnicas son m'as efectivas y convenientes de implementar que otras.
+
+\subsubsection{CoQ vs CNQ}
+\label{sec:CoQvsCNQ}
+\noindent
+El CoQ vs CNQ es un reporte a nivel proyecto y organizaci'on. Este hace una comparaci'on entre el costo de conformidad y el costo de la no conformidad (ver secci'on \ref{sec:costodelacalidaddesoftware}). Las organizaciones de software deben intentar que exista un balance entre estos costos, visto de otra forma, el CoQ y el CNQ deben de ser similares. La figura \ref{fig:SSreportes4BM} nos muestra el reporte dentro del BM.
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[scale=0.9]{images/SSreportes4BM.png}
+	\caption{CoQ vs CNQ}
+	\label{fig:SSreportes4BM}
+\end{figure}
+
+\subsubsection{Yield por T'ecnica de Detecci'on}
+\label{sec:YieldporTecnicadeDeteccion}
+\noindent
+El Yield por T'ecnica de Detecci'on es un reporte a nivel proyecto y organizaci'on. Indica la eficiencia de cada t'ecnica de detecci'on en la detecci'on de defectos. En otras palabras indica que porcentaje del total de defectos detect'o dicha t'ecnica.
+
+\subsubsection{N'umero de Defectos por T'ecnica de Detecci'on}
+\label{sec:NumerodeDefectosporTecnicadeDeteccion}
+\noindent
+El n'umero de defectos por t'ecnica de detecci'on es un reporte a nivel proyecto y organizaci'on. Indica el n'umero de defectos detectados por cada t'ecnica de detecci'on de defectos. 
+
+\subsubsection{Esfuerzo por T'ecnica de Detecci'on}
+\label{sec:EsfuerzoporTecnicadeDeteccion}
+\noindent
+El esfuerzo por t'ecnica de detecci'on es un reporte a nivel proyecto y organizaci'on. Indica el esfuerzo que se tom'o en cada t'ecnica de detecci'on de defectos.
+
+\subsubsection{Eficiencia por T'ecnica de Detecci'on}
+\label{sec:EficienciaporTecnicadeDeteccion}
+\noindent
+La eficiencia por t'ecnica de detecci'on es un reporte a nivel proyecto y organizaci'on. Surge al conjuntar el reporte de N'umero de Defectos por T'ecnica de Detecci'on y el Esfuerzo por T'ecnica de Detecci'on. Indica cuantos defectos detecta por hora cada t'ecnica de detecci'on. Se calcula con la siguiente f'ormula:
+
+\begin{math}E = \frac{DT}{ET}\end{math}
+
+Donde:
+
+\begin{itemize}
+	\item E: Eficiencia por T'ecnica de Revisi'on.
+	\item DT: Defectos Detectatados por T'ecnica de Revisi'on.
+	\item ET: Esfuerzo Total en T'ecnica de Revisi'on.
+\end{itemize}
+
+\subsubsection{Raz'on de Revisi'on por T'ecnica de Detecci'on}
+\label{sec:RazonporTecnicadeDeteccion}
+\noindent
+La raz'on de revisi'on por t'ecnica de detecci'on es un reporte a nivel proyecto y organizaci'on. Indica la velocidad a la que se realizan las distintas t'ecnicas de detecci'on de defectos. Para actividades de revisi'on de c'odigo se recomienda una velocidad de 300-500 LOC por hora\cite{SmartBear}. Esta velocidad nos permite un enfoque suficiente a cada l'inea sin caer en una p'erdida de tiempo. Una estrategia para aumentar el Yield de las revisiones de c'odigo puede ser realizar las revisiones de c'odigo al ritmo mencionado anteriormente. La f'ormula que se utiliza para calcular la raz'on de revisi'on es la siguiente:
+
+\begin{math}R = \frac{S}{T}\end{math}
+
+Donde:
+
+\begin{itemize}
+	\item R: Raz'on de Revisi'on.
+	\item S: Tama'no Total del Producto Revisado.
+	\item T: Tiempo Total de la Revisi'on.
+\end{itemize}
+
+\subsubsection{Densidad de Defectos}
+\label{sec:DensidaddeDefectos}
+\noindent
+La densidad de defectos es un reporte a nivel usuario, proyecto y organizaci'on. La densidad de defectos es el n'umero de defectos encontrados en un proyecto por cada KLOC. La figura \ref{fig:densidaddefectoscmmitsp} presenta la densidad de defectos para organizaciones con niveles de CMMI 1, 2, 3, 4,5 y organizaciones con TSP. Con esta gr'afica podemos hacer una evaluaci'on del nivel de calidad del proyecto.
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[scale=0.9]{images/DensidadDefectos.png}
+	\caption{Densidad de Defectos por Nivel de CMMI y TSP}
+	\label{fig:densidaddefectoscmmitsp}
+\end{figure}
+
+Este reporte se calcula con la siguiente f'ormula:
+
+\begin{math}DD = 1000*\frac{D}{S}\end{math}
+
+Donde:
+
+\begin{itemize}
+	\item DD: Densidad de Defectos.
+	\item D: N'umero Total de Defectos.
+	\item S: Tama'no del Producto.
+\end{itemize}
+
+\subsubsection{N'umero de Defectos por Tipo}
+\label{sec:NumerodeDefectosporTipo}
+\noindent
+El n'umero de defectos por tipo es un reporte a nivel usuario, proyecto y organizaci'on. Indica el n'umero de defectos clasificados por tipo que se inyectaron. Con este reporte se pueden plantear estrategias para detectar y evitar cometer los defectos m'as comunes. Por ejemplo se pueden actualizar las plantillas de calidad para detectar determinado tipo de defecto.
+
+\subsubsection{Defectos Inyectados y Removidos por Fase}
+\label{sec:DefectosInyectadosyRemovidosporFase}
+\noindent
+El reporte de defectos inyectados y removidos por fase es a nivel usuario, proyecto y organizaci'on. Indica el n'umero de defectos que se inyectan y se remueven en cada fase.
 
 \clearpage

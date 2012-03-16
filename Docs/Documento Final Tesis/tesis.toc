@@ -2,8 +2,8 @@
 \contentsline {chapter}{Dedicatoria}{\es@scroman {i}}
 \contentsline {chapter}{Agradecimientos}{\es@scroman {ii}}
 \contentsline {chapter}{Resumen}{\es@scroman {iv}}
-\contentsline {chapter}{Lista de Tablas}{\es@scroman {ix}}
-\contentsline {chapter}{Lista de Figuras}{\es@scroman {x}}
+\contentsline {chapter}{Lista de Tablas}{\es@scroman {x}}
+\contentsline {chapter}{Lista de Figuras}{\es@scroman {xi}}
 \contentsline {chapter}{\numberline {1}Introducci'on}{1}
 \contentsline {section}{\numberline {1.1}Antecedentes}{1}
 \contentsline {section}{\numberline {1.2}Planteamiento del Problema}{2}
@@ -43,11 +43,11 @@
 \contentsline {subsection}{\numberline {2.4.16}Calidad y el Dise'no}{30}
 \contentsline {subsection}{\numberline {2.4.17}Verificaci'on de Dise'no}{31}
 \contentsline {section}{\numberline {2.5}Defectos de Software}{34}
-\contentsline {subsection}{\numberline {2.5.1}Clasificaci'on Ortogonal de Defectos}{35}
+\contentsline {subsection}{\numberline {2.5.1}Clasificaci'on Ortogonal de Defectos}{34}
 \contentsline {subsection}{\numberline {2.5.2}Inyecci'on de Defectos y Eficiencia en la Remoci'on de Defectos}{37}
-\contentsline {subsection}{\numberline {2.5.3}El Costo Real de los Defectos de Software}{38}
-\contentsline {section}{\numberline {2.6}Costo de la Calidad de Software}{39}
-\contentsline {subsection}{\numberline {2.6.1}De las Pruebas a la Prevenci'on}{41}
+\contentsline {subsection}{\numberline {2.5.3}El Costo Real de los Defectos de Software}{37}
+\contentsline {section}{\numberline {2.6}Costo de la Calidad de Software}{38}
+\contentsline {subsection}{\numberline {2.6.1}De las Pruebas a la Prevenci'on}{40}
 \contentsline {subsection}{\numberline {2.6.2}An'alisis del Costo de la Calidad}{42}
 \contentsline {subsection}{\numberline {2.6.3}An'alisis del Retorno de Inversi'on}{43}
 \contentsline {chapter}{\numberline {3}Desarrollo del Trabajo}{45}
@@ -67,5 +67,42 @@
 \contentsline {subsection}{\numberline {3.3.3}Administraci'on de Proyectos}{55}
 \contentsline {subsection}{\numberline {3.3.4}Ciclo de Vida de Proyectos}{56}
 \contentsline {subsection}{\numberline {3.3.5}Administraci'on y Seguimiento de Actividades}{58}
-\contentsline {subsection}{\numberline {3.3.6}Administraci'on y Seguimiento de Defectos}{62}
-\contentsline {chapter}{Bibliograf'ia}{65}
+\contentsline {subsection}{\numberline {3.3.6}Administraci'on y Seguimiento de Defectos}{63}
+\contentsline {subsection}{\numberline {3.3.7}Administraci'on de Tipos de Defectos}{67}
+\contentsline {subsection}{\numberline {3.3.8}Administraci'on de Plantillas de Calidad}{68}
+\contentsline {subsection}{\numberline {3.3.9}Reportes}{71}
+\contentsline {subsubsection}{Tiempo por Fase}{73}
+\contentsline {subsubsection}{Productividad por Fase}{73}
+\contentsline {subsubsection}{Yield por Fase}{73}
+\contentsline {subsubsection}{Resumen General}{74}
+\contentsline {subsubsection}{Productividad Compuesta}{76}
+\contentsline {subsubsection}{ROI de Proyecto/Empresa}{78}
+\contentsline {subsubsection}{ROI de T'ecnicas de Detecci'on}{79}
+\contentsline {subsubsection}{CoQ vs CNQ}{80}
+\contentsline {subsubsection}{Yield por T'ecnica de Detecci'on}{80}
+\contentsline {subsubsection}{N'umero de Defectos por T'ecnica de Detecci'on}{80}
+\contentsline {subsubsection}{Esfuerzo por T'ecnica de Detecci'on}{81}
+\contentsline {subsubsection}{Eficiencia por T'ecnica de Detecci'on}{81}
+\contentsline {subsubsection}{Raz'on de Revisi'on por T'ecnica de Detecci'on}{81}
+\contentsline {subsubsection}{Densidad de Defectos}{82}
+\contentsline {subsubsection}{N'umero de Defectos por Tipo}{82}
+\contentsline {subsubsection}{Defectos Inyectados y Removidos por Fase}{83}
+\contentsline {chapter}{\numberline {4}Resultados y Conclusiones}{84}
+\contentsline {section}{\numberline {4.1}Resultados de la Construcci'on del BM}{86}
+\contentsline {section}{\numberline {4.2}An'alisis del CoQ}{89}
+\contentsline {subsubsection}{Costo de la conformidad y de la no-conformidad}{89}
+\contentsline {subsubsection}{An'alisis del ROI}{90}
+\contentsline {subsubsection}{Productividad Compuesta}{92}
+\contentsline {section}{\numberline {4.3}Conclusiones}{92}
+\contentsline {subsection}{\numberline {4.3.1}Estrategias}{93}
+\contentsline {subsubsection}{Administraci'on b'asica de proyectos de software (seguimiento de actividades)}{93}
+\contentsline {subsubsection}{Registro y seguimiento de defectos}{93}
+\contentsline {subsubsection}{Uso de plantillas de calidad}{94}
+\contentsline {subsubsection}{An'alisis de la informaci'on generada}{94}
+\contentsline {subsection}{\numberline {4.3.2}Beneficios}{95}
+\contentsline {subsection}{\numberline {4.3.3}Resultados}{96}
+\contentsline {section}{\numberline {4.4}Trabajo Futuro}{97}
+\contentsline {subsubsection}{BM en la industria}{97}
+\contentsline {subsubsection}{Estimaci'on de Proyectos}{98}
+\contentsline {subsubsection}{Planeaci'on de la Calidad}{98}
+\contentsline {chapter}{Bibliograf'ia}{102}

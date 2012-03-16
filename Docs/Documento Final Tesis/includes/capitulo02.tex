@@ -248,6 +248,7 @@ Los tipos de defectos m'as comunes son: Errores en requerimientos, errores de di
 \end{table}
 
 \subsection{M'etricas de Calidad}
+\label{sec:metricasdecalidad}
 \noindent
 Para mejorar la calidad, se debe de medir la calidad\cite{Humphrey}. El PSP propone el uso de las siguientes m'etricas para medir la calidad de las organizaciones de software: La efectividad de la t'ecnica de detecci'on de defectos (Yield de Calidad), el Costo de la Calidad (Por sus siglas en Ingl'es, COQ), la Tasa de Revisiones, la Calidad de Radio de Fases y el 'Indice de Calidad de Proceso.
 
@@ -349,7 +350,7 @@ Estos principios se promueven en el BM porque provee la infraestructura para dar
 \subsection{Prevenci'on de Defectos}
 \noindent
 
-Para prevenir la inyecci'on de defectos se debe de revisar los datos de los defectos que m'as se encuentran durante el desarrollo y las pruebas. Esto nos ayuda a conocer cuales son los defectos m'as comunes y establecer estrategias como enfocarse en los errores que:
+Para prevenir la inyecci'on de defectos se debe de revisar los datos de los defectos que m'as se encuentran durante el desarrollo y las pruebas. Esto nos ayuda a conocer cuales son los defectos m'as comunes y establecer estrategias como enfocarse en los defectos que:
 
 \begin{itemize}
 	\item Se encuentran en el programa final o en el periodo de pruebas;
@@ -393,7 +394,7 @@ La Inspecci'on es probablemente la t'ecnica m'as formal de detecci'on de defecto
 	\item \emph{Seguimiento}: El autor del producto notifica al l'ider de las correcciones y 'estas son revisadas. 
 \end{enumerate}
 
-Tanto la caminata como la inspecci'on aumentan su efectividad cuando se utilizan listas de chequeo. El BM permitir'a la creaci'on de plantillas que sirvan de gu'ia para la realizaci'on de estas t'ecnicas. La funcionalidad ser'a explicada m'as a detalle en la secci'on [REFERENCIA].
+Tanto la caminata como la inspecci'on aumentan su efectividad cuando se utilizan listas de chequeo. El BM permitir'a la creaci'on de plantillas que sirvan de gu'ia para la realizaci'on de estas t'ecnicas. La funcionalidad ser'a explicada m'as a detalle en la secci'on \ref{sec:administraciondeplantillasdecalidad}.
 
 \subsection{?`Por qu'e Revisar los Programas?}
 \noindent
@@ -416,6 +417,7 @@ Los principios de las revisiones personales son los siguientes\cite{Humphrey}:
 Esta es la herramienta principal que propone el BM para la detecci'on de defectos. El BM tiene una plantilla por default para realizar revisiones personales en lenguajes de programaci'on de prop'osito general. Esto se explica m'as a detalle en la secci'on [REFERENCIA].
 
 \subsection{Lista de Chequeo de Revisi'on de C'odigo}
+\label{sec:listadechequeoderevisiondecodigo}
 \noindent
 Una lista de chequeo es una forma especializada que se usa para hacer las revisiones. La lista de chequeo tambi'en ayuda a disciplinar el trabajo y gu'iar en el proceso de revisi'on.
 
@@ -500,7 +502,7 @@ La estrategia de la revisi'on es:
 	\item Para checar las librer'ias a incluir, examinar cada m'etodo para asegurar que existan las inclusiones necesarias para cada funci'on de la librer'ia;
 	\item Para checar problemas de inicializaci'on, realizar una caminata por la l'ogica de todos los m'etodos.
 \end{itemize}
-
+ 
 Esta estrategia debe de ser utilizada en las revisiones registradas en el BM.
 
 \subsection{Evaluando las Revisiones Personales}
@@ -573,6 +575,7 @@ La falta de un dise'no preciso es la fuente de muchos errores de implementaci'on
 Una vez generado el dise'no se debe analizar su correcci'on, completez y consistencia, para asegurarse que la notaci'on l'ogica sea precisa. El dise'no de alta calidad debe tener m'inima redundancia.
 
 \subsection{Verificaci'on de Dise'no}
+\label{sec:VerificaciondeDiseno}
 \noindent
 Para programas largos y complejos, hasta los m'etodos de verificaci'on de dise'no que m'as consumen tiempo y m'as trabajo requieren son m'as efectivos y r'apidos que las pruebas. Los siguientes m'etodos de verificaci'on son relativamente r'apidos de aprender:
 
@@ -678,6 +681,7 @@ Sin embargo, el mejor momento para realizar la verificaci'on y los an'alisis sie
 El BM como su nombre lo dice, hace un gran 'enfasis en la administraci'on adecuada de los defectos encontrados durante el desarrollo de software. A continuaci'on se presentar'an los conceptos principales utilizados en la herramienta para hacer una administraci'on adecuada de defectos.
 
 \subsection{Clasificaci'on Ortogonal de Defectos}
+\label{sec:clasificacionortogonaldedefectos}
 \noindent
 Normalmente, los defectos representan el aspecto no deseado en el manejo de calidad del software. Una herramienta que nos permite atacar las debilidades de los modelos antes mencionados es la Clasificaci'on Ortogonal de Defectos, la cual est'a dise'nada para capturar todos los atributos de los defectos y permitirnos hacer an'alisis matem'aticos sobre ellos\cite{Chillarege1992}.
 
@@ -759,6 +763,7 @@ La frase eficiencia en la remoci'on de defectos se refiere al porcentaje de defe
 \end{table}
 
 \subsection{El Costo Real de los Defectos de Software}
+\label{sec:elcostorealdelosdefectosdesoftware}
 \noindent
 Es obvio que mientras una aplicaci'on defectuosa crece y evoluciona es m'as costoso repararla \cite{Lazic2009}. Un defecto que cueste \$1 repararlo en la computadora del programador costar'a \$100 repararlo ya que se haya incorporado a la aplicaci'on completa, y costar'a algunos miles de d'olares si llega a producci'on\cite{McConnell2004}. Este comportamiento se muestra en la figura \ref{fig:DefectCost} donde encontramos el costo de remover defectos de software seg'un la fase de inyecci'on y de remoci'on\cite{McConnell2004}.
 
@@ -774,6 +779,7 @@ El costo de remover un defecto de software crece exponencialmente cada fase que 
 Es por esto que el BM sugiere una cultura de revisi'on y prevenci'on, la cual tiene como objetivo evitar la introducci'on de defectos, removerlos tan r'apido como sea posible si es que estos son inyectados y as'i evitar el aumento exponencial de costo y esfuerzo. El BM sugiere que la calidad en el desarrollo de software es mucho m'as que simplemente introducir una fase de pruebas. Las iniciativas de calidad deben existir durante todo el proceso de desarrollo para alcanzar la meta de un software con cero defectos.
 
 \section{Costo de la Calidad de Software}
+\label{sec:costodelacalidaddesoftware}
 \noindent
 El Costo de la Calidad (por sus siglas en Inglés CoQ) representa los costos en los que incide una organización al tener que repetir un proceso para realizar el trabajo correctamente\cite{Lazic2009}. El CoQ es un término que nos permite evaluar la economía involucrada para producir software de alta calidad\cite{Lazic2009}.
 El CoQ se divide en dos tipos principales: El costo de la conformidad y el costo de la no conformidad\cite{Black2002}.
@@ -830,6 +836,7 @@ Cuando se comienza a invertir en evaluaci'on provoca que las fallas internas aum
 Fomentar una cultura donde la prevenci'on de los errores sea m'as importante que el proceso de pruebas es uno de los objetivos de este trabajo de Tesis.
 
 \subsection{An'alisis del Costo de la Calidad}
+\label{sec:AnalisisdelCostodelaCalidad}
 \noindent
 El an'alisis del costo de la calidad es el concepto de estudiar los costos relacionados con la calidad como medios de comunicaci'on entre el departamento de calidad y la gerencia de las organizaciones\cite{Lazic2009}. El objetivo de hacer un an'alisis del costo de la calidad no es reducir el costo, si no asegurarnos de que se invierta en el tipo correcto de costo y se maximice el beneficio obtenido de esa inversi'on. La mejor estrategia para esto es cambiar las actividades relacionadas con las fallas por actividades de prevenci'on y evaluaci'on. 
 
@@ -854,6 +861,7 @@ La remoci'on de defectos se refiere a los m'etodos que pueden aumentar los nivel
 
 
 \subsection{An'alisis del Retorno de Inversi'on}
+\label{sec:AnalisisdelRetornodeInversion}
 \noindent
 Hay dos beneficios principales de tener una alta calidad en el software: Tiempo y dinero. El retorno de inversi'on (por sus siglas en Ingl'es ROI) analiza los ahorros en costo y en calendario que se tienen al implementar ciertas actividades de calidad\cite{Lazic2009}. El ROI se expresa en t'erminos de esfuerzo ya que es el mayor costo de un proyecto de software.
 

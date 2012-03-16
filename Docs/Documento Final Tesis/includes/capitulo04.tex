@@ -10,211 +10,390 @@
 \fancyfoot[CO,CE]{}
 %Termina configuracion de capitulo
 
-\chapter{Reglas de Presentaci'on} %Cambia al nombre de tu capitulo
+\chapter{Resultados y Conclusiones} %Cambia al nombre de tu capitulo
 \setstretch{1.5} %Regresa el interlineado a 1.5
 
 \normalsize
 \noindent
-Este manual de tesis se basa, en parte, del estilo establecido por la Rector'ia de la Universidad Virtual (UV) del Sistema Tecnol'ogico de Monterrey \cite{Demo:manualUV} y publicado por la American Psychological Association (APA) \cite{Demo:APA,Demo:manualAPA}. Los alumnos de las maestr'ias de la EGIA (Escuela de Graduados en Ingenier'ia y Arquitectura) del ITESM Campus Guadalajara deben considerar que es imprescindible apegarse a las reglas de estilo que se presentan en este manual.
+El BM fue construido utilizando el siguiente ciclo de vida:
 
-Las siguientes reglas de formato son aplicables a las maestr'ias ofrecidas por la EGIA. Aseg'urate de seguirlas minuciosamente. Este manual est'a escrito estrictamente de acuerdo a las reglas generales y particulares que se mencionan a continuaci'on, as'i que le sirve como modelo para escribir tanto su documento de anteproyecto de tesis, como su documento final.
-
-\section{Reglas generales}
-\noindent
 \begin{enumerate}
-	\item Imprime solamente en un lado de la p'agina.
-	\item Usa sangr'ias para cada p'arrafo nuevo, a excepci'on del primer p'arrafo que sigue a un cap'itulo, secci'on o subsecci'on.
-	\item Inicia cada cap'itulo en una p'agina nueva.
-	\item No dejes l'ineas aisladas al inicio de una p'agina. Escribe por lo menos un p'arrafo en su parte superior de al menos cuatro l'ineas.
-	\item Utilizar una p'agina nueva para las referencias bibliogr'aficas como se muestra en este manual.
-	\item Separa las s'ilabas siguiendo estrictamente las reglas gramaticales.
-	\item Los trabajos producidos en impresoras de puntos son inaceptables, as'i como aqu'ellos producidos en otros medios que no aseguren una alta calidad de impresi'on. Se recomienda utilizar impresoras del tipo postscript.
-	\item Centra los t'itulos de las p'aginas preliminares y la bibliograf'ia. Por ejemplo: Dedicatoria, Agradecimientos, Resumen, Contenido, Lista de Tablas y figuras y Bibliograf'ia (ver como ejemplo las p'aginas preliminares de este manual).
-	\item Los cap'itulos del cuerpo del documento deben estar justificados a la izquierda y escritas en negritas. El t'itulo del cap'itulo correspondiente lleva may'usculas al inicio de todas las palabras, a excepci'on de las palabras cortas como: de, un, una, el, la, etc. Por ejemplo: \textbf{Dise'no de una Plataforma de Decodificaci'on}.
-	\item Las subdivisiones de los cap'itulos deben estar escritas en negritas y min'usculas a excepci'on de la primera letra de la oraci'on.
-	\item La silustraciones y tablas podr'an ser presentadas horizontalmente si no caben de manera vertical.
+	\item \emph{Fase de Requerimientos}. En esta fase se hizo la propuesta del sistema, tomando en cuenta las funcionalidades que iba a contener, as'i como los alcances y sus limitaciones. El producto de trabajo de esta fase fue el Concepto de Operaciones del sistema. Como fue elaborada esta fase a detalle se describe en la secci'on \ref{sec:ConceptoDeOperaciones}.
+	\item \emph{Dise'no}. En esta fase se realiz'o el dise'no conceptual y de la base de datos del sistema. El producto de trabajo fue el dise'no de las pantallas (las cuales se anexaron al Concepto de Operaciones), la arquitectura del sistema y el dise'no de la base de datos. Esto se describe a detalle en la secci'on \ref{sec:DisenoDelSistema}.
+	\item \emph{Construcci'on}. En esta fase se realiz'o la codificaci'on del sistema. El sistema fue dividido en tareas las cuales conten'ian una funcionalidad a implementar y cada tarea pas'o por el siguiente proceso:
+	\begin{enumerate}
+		\item \emph{Dise'no Detallado}. Se produc'ia un dise'no detallado en el cual se indicaban las clases requeridas, las funciones para estas clases y como se conectar'ian entre ellas.
+		\item \emph{Codificaci'on}. Se realizaba la programaci'on de las distintas clases especificadas en el dise'no detallado.
+		\item \emph{Revisi'on Personal de C'odigo}. Despu'es de haber terminado la programaci'on de la funcionalidad se pasaba a la revisi'on de esta. Para realizar las revisiones personales se segu'ian las recomendaciones de la secci'on \ref{sec:administracionyseguimientodeactividades}.
+		\item \emph{Pruebas Unitarias}. Finalmente se realizaban pruebas unitarias de la funcionalidad implementada antes de declarar la tarea como terminada.
+	\end{enumerate}
+	\item \emph{Pruebas de Sistema}. En esta fase se realizaron pruebas que conjuntaban las distintas funcionalidades del BM.
 \end{enumerate}
 
-\section{Tipo de letra}
+La construcci'on del BM fue realizada implementando las t'ecnicas b'asicas de calidad de software propuestas en el Trabajo de Tesis. Las t'ecnicas de calidad utilizadas fueron las siguientes:
+
+\begin{itemize}
+	\item \emph{Registro de actividades}. Para todas las actividades en la fase de construcci'on se registr'o:
+	\begin{itemize}
+		\item Tiempos de dise'no, codificaci'on, revisi'on de c'odigo y pruebas unitarias.
+		\item Tama'no total de la tarea.
+		\item Defectos detectados en la revisi'on de c'odigo.
+	\end{itemize}
+	\item \emph{Registro de defectos}. Cada que un defecto era detectado en el ciclo de desarrollo, este era registrado con los siguientes par'ametros:
+	\begin{itemize}
+		\item Una descripci'on que ayudara a reproducir el defecto.
+		\item Fase y actividad de inyecci'on y remoci'on.
+		\item Tipo de defecto, utilizando la clasificaci'on propuesta por PSP\cite{Humphrey}(ver secci'on \ref{sec:listadechequeoderevisiondecodigo}).
+		\item Esfuerzo en la remoci'on del defecto.
+		\item Tama'no de la correcci'on del defecto.
+		\item Referencia en caso de que el defecto se hubiera inyectado al corregir otro defecto.
+	\end{itemize}
+	\item \emph{Revisiones Personales de C'odigo}. Las revisiones personales de c'odigo se utilizaron como filtro para evitar que los defectos avanzaran en el ciclo de desarrollo. Las revisiones personales se realizaron bajo los conceptos expresados en la secci'on \ref{sec:administracionyseguimientodeactividades}. A su vez estas revisiones estuvieron apoyadas por la plantilla de calidad propuesta para el BM (ver secci'on \ref{sec:administraciondeplantillasdecalidad}). Pero como se recomienda, las plantillas de calidad fueron actualizadas conforme se avanzaba en la construcci'on del BM para mejorar su efectividad.
+\end{itemize}
+
+\section{Resultados de la Construcci'on del BM}
+\label{sec:ResultadosdelaConstrucciondelBM}
 \noindent
-\begin{enumerate}
-	\item Si emplea el procesador de textos Word\copyright  de Microsoft\textsuperscript{\texttrademark} o alguno similar, utilice letra de tipo Times New Roman de tama'no 12 puntos para la redacci'on del documento. Si usted escribe el documento en \LaTeX, utilice el layout disponible para tal efecto. No use letra cursiva excepto para las palabras cuyo origen sea de un idioma diferente al Espa'nol.
-	\item Usa el mismo tipo de letra para todo el manuscrito; incluyendo las p'aginas preliminares, las referencias bibliogr'aficas y los anexos.
-	\item Podr'as usar tama'nos reducidos de letras solamente en los pies de p'agina, pies de ilustraciones y tablas y citas textuales de otros trabajos.
-	\item Usa el mismo tipo de letra para numerar ilustraciones y tablas, el cual puede ser diferente del tipo de letra usado para el texto del trabajo\footnote{De preferencia utilizar todas las especificaciones de este manual. En caso de utilizar, por ejemplo, el editor de texto Word ajustar las caracter'isticas del mismo para que cumplan con todas las especificaciones.\label{footnote}}.
-	\item Usa numeraci'on ar'abiga (1, 2, 3, etc.) en la numeraci'on de secciones, subsecciones y en los n'umeros de p'agina. No se permiten cursivas para estos n'umeros.
-\end{enumerate}
+A partir de la filosof'ia de desarrollo de software expuesta se realiz'o la construcci'on del BM. Las estad'isticas generales del proyecto se presentar'an utilizando el formato del reporte Resumen General, el cual fue descrito en la secci'on \ref{sec:reportes}. Las estad'isticas se muestran en las tablas \ref{ResumenGeneralParteI} y \ref{ResumenGeneralParteII}:
 
-\section{Ecuaciones}
-\noindent
-\begin{enumerate}
-	\item La presentaci'on de las ecuaciones deber'a realizarse con el uso de un editor de ecuaciones.
-	\item Puedes utilizar un estilo de letra diferente al del texto para las ecuaciones.
-	\item Puedes numerar las ecuaciones a trav'es del escrito si lo consideras pertinente. Si es as'i, poner la numeraci'on justificada a la derecha de las ecuaciones. Ejemplo:
-\end{enumerate}
-
-Si consideramos una transmisi'on de s'imbolos sobre un canal con modulaci'on BPSK (\emph{Binary Phase Shift Keying}) no codificada, y utilizamos una demodulaci'on coherente\footnote{El demodulador conoce la frecuencia y la fase de la onda recibida.\label{footnote}}, la probabilidad de error \begin{math}P_b(e)\end{math} sobre un canal gaussiano se puede expresar bajo la forma [7]:
-\[P_b(e)=Q\left(\sqrt{\frac{2E_b}{N_0}}\right)\]
-donde \begin{math}Q(.)\end{math} es la funci'on de error de una variable aleatoria gaussiana normalizada:
-\[Q(x)=\int_x^\infty \frac{1}{\sqrt{2\pi}}e^{-\frac{u^2}{2}}du\]
-El l'imite de la capacidad de informaci'on cuando \begin{math}R \to 0\end{math} es derivado de la ecuaci'on \begin{math}\lim_{R \to 0} [1-H_b(e)]=\frac{E_b}{(ln 2) N_0}\end{math}. Re-escribi'endolo, obtenemos:
-\[
-\begin{aligned}
-\frac{E_b}{N_0}&=ln 2(1-H_b(e))\\
-&=ln 2(1+P_b(e)log_2P_b(e)+(1-P_b(e))log_2(1-P_b(e)))
-\end{aligned}
-\]
-
-\section{Figuras}
-\noindent
-En esta secci'on se muestran algunos ejemplos de figuras, ilustraciones y gr'aficas extra'idas de la referencia \cite{Demo:phdTesis} que pueden servir de modelo en la redacci'on del documento de tesis.
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.75\textwidth]{images/figura4_1}
-\caption{Evoluci'on de los FPGA hacia soluciones completas en un solo chip.}
-\label{fig:4.1}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.7\textwidth]{images/figura4_2}
-\caption{Comparaci'on del desempe'no de FER entre Turbo2000 y DVB-RCS. Par'ametros de la simulaci'on: Tama'no = 188 bytes, 8 iteraciones, q=4, QPSK y AWGN.}
-\label{fig:4.2}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.9\textwidth]{images/figura4_3}
-\caption{Plataforma Turbo2000.}
-\label{fig:4.3}
-\end{figure}
-
-\section{Tablas}
-\noindent
-Esta secci'on presenta algunos ejemplos de formatos de tablas extra'idas de la referencia \cite{Demo:phdTesis} que se pueden usar en el documento de tesis.
-\begin{table}[H]
-	\begin{center}
-		\begin{tabular}{ | c | c | c | }
+\begin{table}[htbp]
+	\centering
+		\begin{tabular}{| p{2cm} | p{2cm} | p{2cm} | p{2cm} | p{2cm} | p{2cm} | p{2cm} |}
 			\hline
-			& & \\[-18pt]
-			\emph{q} bits	&	\emph{L}\subscript{max}	&	\begin{math}\Delta\end{math}\subscript{max} \\[3pt]
-			\hline \hline
-			& & \\[-18pt]
-			2 & 11 & 8 \\[8pt]
-			3 & 33 & 24 \\[8pt]
-			4 & 77 & 82 \\[8pt]
-			5 & 165 & 123 \\[8pt]
-			6 & 341 & 395 \\[5pt]
-			\hline
+			 & \textbf{Defectos Inyectados} & \textbf{Defectos Detectados} & \textbf{Yield} & \textbf{Velocidad de Revisi'on LOC/HR} & \textbf{Eficiencia de Remoci'on Def/HR} & \textbf{Efectividad Relativa F/P} \\ \hline
+			 Dise'no & 18 & 0 & 0 & NA & 0 & 0 \\ \hline
+			 Codificaci'on & 95 & 20 & 17\% & NA & 0.26 & 0.13 \\ \hline
+			 Revisi'on & 0 & 27 & 29\% & 719.11 & 2.41 & 1.18 \\ \hline
+			 Pruebas & 0 & 66 & 100\% & NA & 2.05 & NA \\ \hline
 		\end{tabular}
-	\end{center}
-	\caption{Din'amica de m'etricas para diferentes valores de q con $R =1/2, E_b/N_0 = 2 dB$ y modulaci'on QPSK.}
+	\caption{Resumen General Parte I}
+	\label{ResumenGeneralParteI}
 \end{table}
 
-\begin{table}[H]
-	\begin{center}
-	\begin{threeparttable}
-	\begin{tabular}{ | c || c | c | }
-		\hline
-		& & \\[-8pt]
-		Unit'e	&	\# Add./Soustr.	&	\# min(.)	\\[3pt]
-		\hline \hline
-		& & \\[-18pt]CMB			&	22					&	0					\\& & \\[-18pt]\hline
-		& & \\[-18pt]Proc. ACS		&	$2^m \cdot N_a = 64$	&	$N_s \cdot (2^m-1)=48$	\\& & \\[-18pt]\hline
-		& & \\[-18pt]CP			&	$2^m \cdot N_a = 64$	&	$2^m \cdot (N_s-1)=60$	\\& & \\[-18pt]\hline
-		& & \\[-18pt]CIE\tnote{a}	&	$2^{m+1} = 8$		&	$2^m-1=3$			\\& & \\[-18pt]\hline
-		& & \\[-18pt]CCD\tnote{b}	&	1					&	2					\\& & \\[-18pt]\hline
-		& & \\[-18pt]CCA\tnote{b}	&	1					&	2					\\
-		\hline
-	\end{tabular}
-	\setstretch{1.0}
-	\begin{tablenotes}
-		\item[\tiny a]{\tiny No se consideran los sub-bloques de actualizaci'on de los datos extr'insecos.}
-		\item[\tiny b]{\tiny El comparador de salida es considerado como un sumador.}
-	\end{tablenotes}
-	\setstretch{1.5}
-	\end{threeparttable}
-	\end{center}
-	\caption{Complejidad de c'alculo de las unidades del decodificador Turbo2000.}
+Al hacer un an'alisis de la informaci'on de la tabla \ref{ResumenGeneralParteI} tenemos los siguientes datos:
+
+\begin{itemize}
+	\item El 84\% de los defectos fueron inyectados en la fase de codificaci'on.
+	\item En la fase de codificaci'on se detectaron el 18\% de los defectos, en la revisi'on de c'odigo el 24\% y en las pruebas el 58\%. 
+	\item El Yield en Codificaci'on fue 17\%, en Revisi'on de C'odigo 29\% y en Pruebas 100\%. Es importante destacar que el 100\% de Yield en Pruebas es debido a que el sistema no ha salido a Producci'on y no se han encontrado m'as defectos.
+	\item La velocidad de las revisiones fue de 719.11 LOC por hora.
+	\item La eficiencia de remoci'on de defectos de la fase de codificaci'on fue de 0.26 defectos por hora, de revisi'on 2.41 defectos por hora y de pruebas 2.05 defectos por hora.
+	\item La efectividad relativa removiendo defectos de la fase de codificaci'on fue 0.13 y de revisi'on 1.18.
+\end{itemize}
+
+Aunque el objetivo del BM es llegar a la fase de pruebas con 0 defectos, esto no es una meta que se alcance en el primer proyecto donde se implementan las t'ecnicas de calidad. El Yield de las Revisiones de C'odigo fue 29\%, cuando el recomendado por fase es de 70\%\cite{Humphrey2002}. Sin embargo, se tiene el dato de que la velocidad promedio de las revisiones fue de 719.11 LOC por hora, cuando la velocidad ideal es entre 300-500 LOC por hora. Esto significa que si las revisiones se hubieran hecho con un poco m'as de tiempo hubiera obtenido un Yield m'as alto. A pesar de hacer las revisiones a una velocidad muy alta y con un Yield bajo, demostraron ser m'as efectivas detectando defectos al encontrar 2.41 defectos por hora, contra los 2.05 defectos detectados por hora de las pruebas.
+
+\begin{table}[htbp]
+	\centering
+		\begin{tabular}{| p{2.5cm} | p{2.5cm} | p{2.5cm} | p{2.5cm} | p{2.5cm} |}
+			\hline
+			 & \textbf{Tiempo por Fase} & \textbf{Costo de Evaluaci'on} & \textbf{Costo de Falla} & \textbf{A/FR} \\ \hline
+			 Dise'no & 870 & NA & 0 & NA \\ \hline
+			 Codificaci'on & 5566 & NA & 145 & NA \\ \hline
+			 Revisi'on & 673 & 673 & 355 & 0.35 \\ \hline
+			 Pruebas & 1932 & NA & 807 & NA \\ \hline
+			 \multicolumn{4}{| c |}{Total de Defectos} & 113 \\ \hline
+			 \multicolumn{4}{| c |}{Tama'no Total (LOC)} & 8066 \\ \hline
+			 \multicolumn{4}{| c |}{Densidad de Defectos} & 14.01 \\ \hline
+		\end{tabular}
+	\caption{Resumen General Parte II}
+	\label{ResumenGeneralParteII}
 \end{table}
 
-\begin{table}[H]
-	\begin{center}
-	\begin{threeparttable}
-	\begin{tabular}{ | l || l | l | l |}
-		\hline
-		& & & \\[-18pt]
-		\textbf{Tratamiento}		&	\textbf{Unidades activas}		&	\textbf{\# Add./Soustr.}	&	\textbf{\# min(.)}	\\[3pt]
-		\hline \hline
-		& & &\\[-18pt]RETOUR 2	&	CMB, Proc. ACS \emph{Retour}&	$22+2^m \cdot N_s$			& $N_s \cdot (2^m-1)$\\& & &\\[-18pt]
-		& & &\\[-18pt]			&						&	86						& 48\\& & &\\[-18pt]\hline
-		& & &\\[-18pt]ALLER 2		&	CMB, Proc. ACS \emph{Aller},&	$22+2^{m+1} \cdot (N_s+1)$	& $N_s \cdot (2^m-1)-1$\\& & &\\[-18pt]
-		& & &\\[-18pt]			&	CP, CIE				&	158						& 111\\& & &\\[-18pt]\hline
-		& & &\\[-18pt]RETOUR 1	&	CMB, Proc. ACS \emph{Retour}&	$22+2^m \cdot N_s$			& $N_s \cdot (2^m-1)$\\& & &\\[-18pt]
-		& & &\\[-18pt]			&						&	86						& 48\\& & &\\[-18pt]\hline
-		& & &\\[-18pt]ALLER 1		&	CMB, Proc. ACS \emph{Aller},&	$24+2^{m+1} \cdot (N_s+1)$	& $N_s \cdot (2^m-1)+3$\\& & &\\[-18pt]
-		& & &\\[-18pt]			&	CP, CIE, CDD, CCA			&	160						& 115\\[3pt]
-		\hline
-	\end{tabular}
-	\end{threeparttable}
-	\end{center}
-	\caption{Complejidad de c'alculo seg'un el tratamiento del decodificador Turbo2000.}
+A partir del an'alisis de la tabla \ref{ResumenGeneralParteII} tenemos los siguientes datos:
+
+\begin{itemize}
+	\item La fase codificaci'on tom'o el 62\% del tiempo total del proyecto, mientras que la fase de pruebas el 21\%.
+	\item El esfuerzo total en revisiones de c'odigo fue el 7\% del tiempo total del proyecto.
+	\item La relaci'on de actividades de actividades de prevenci'on y evaluaci'on contra costo de las fallas fue de 0.35.
+	\item El total de defectos fue de 113, el tama'no total del sistema fue de 8066 l'ineas de c'odigo lo que resulta en una densidad de defectos de 14.01.
+\end{itemize}
+
+Es com'un que la industria de software gaste hasta el 50\% del tiempo total de sus proyectos en la fase de pruebas debido a la mala calidad\cite{Humphrey2002}, en el BM solo se gast'o el 21\% del tiempo en pruebas, por lo que fue una m'etrica exitosa. Sin embargo, la densidad de defectos fue de 14.01 Defectos/KLOC, en la secci'on \ref{sec:reportes} se present'o una gr'afica donde se menciona que organizaciones de desarrollo de software con nivel 1 de CMMI tienen el 7 Defectos/KLOC, por lo que la densidad de defectos fue el doble que el nivel m'as b'asico de CMMI. Esto pudo ser a causa de la relaci'on que existe entre las actividades de prevenci'on y evaluaci'on contra el tiempo invertido en pruebas. Se obtuvo un valor de 0.35 cuando se recomienda un valor de 2\cite{Humphrey}, lo que indicar'ia invertir el doble de tiempo en actividades de prevenci'on y evaluaci'on contra el tiempo invertido en pruebas. Esto podr'ia haber reducido sensiblemente la densidad de defectos del sistema.
+
+Finalmente queda analizar los defectos inyectados. Se inyectaron un total de 133 defectos, los cuales requirieron de un esfuerzo de 21.8 horas removerlos. De estos defectos 18 fueron inyectados en la fase de dise'no y 95 en la fase de programaci'on. La tabla \ref{N'umerodeDefectosporTipo} muestra la clasificaci'on de los 133 defectos por su tipo:
+
+\begin{table}[htbp]
+	\centering
+		\begin{tabular}{| c | c |}
+			\hline
+			 \textbf{Tipo de Defecto} & \textbf{N'umero de Defectos} \\ \hline
+			 Funci'on & 53 \\ \hline
+			 Asignaci'on & 18 \\ \hline
+			 Inferface & 2 \\ \hline
+			 Sintaxis & 12 \\ \hline
+			 Chequeo & 9 \\ \hline
+			 Datos & 19 \\ \hline
+		\end{tabular}
+	\caption{N'umero de Defectos por Tipo}
+	\label{N'umerodeDefectosporTipo}
 \end{table}
 
-\section{M'argenes}
-\noindent
-\begin{enumerate}
-	\item El margen izquierdo (del lado del encuadernado) ser'a de tres cent'imetros, incluyendo tablas e ilustraciones. El margen derecho ser'a de dos cent'imetros.
-	\item Los m'argenes superior e inferior ser'an de dos cent'imetros. Esto no incluye los encabezados o pies de p'agina.
-	\item Las p'aginas horizontales deber'an tener en la parte superior de la hoja un margen de tres cent'imetros; para que, al ubicarlas de manera vertical en el manuscrito, este margen coincida con el requerido para el encuadernado.
-\end{enumerate}
+Como se observa en la tabla \ref{N'umerodeDefectosporTipo} los defectos de funci'on fueron los m'as comunes en la construcci'on del BM. Este tipo de defectos son errores en los algoritmos o la funcionalidad del sistema, en otras palabras errores en la l'ogica del programa. Conociendo esta informaci'on se pueden plantear estrategias como la Verificaci'on de Ciclos (ver secci'on \ref{sec:VerificaciondeDiseno}) para asegurar la calidad de partes complejas del sistema.
 
-\section{Espacios}
-\noindent
-\begin{enumerate}
-	\item El texto del trabajo se har'a a doble espacio como viene en este manual.
-	\item Se permite usar espacio sencillo en el 'indice de contenido, de ilustraciones, de tablas y en los ap'endices.
-	\item El espacio sencillo es obligatorio para citas textuales en p'arrafos de otros autores, pies de figura, pies de tabla y pies de p'agina. Ejemplo de una cita textual \cite{Demo:phdTesis}:\\
-	
-	\setstretch{1.0}
-	\small
-	``Un turbo-c'odigo m-binario est'a compuesto de dos c'odigos CRSC m-binarios id'enticos concatenados en paralelo a trav'es de un permutador. La t'ecnica de terminaci'on circular es utilizada en estos c'odigos bidimensionales para codificar bloques sin hacer uso de bits de terminaci'on. La tasa de codificaci'on global R para un turbo-c'odigo es igual a m/(m + 2).''
-\end{enumerate}
-\setstretch{1.5}
+Es importante destacar que todas estas estad'isticas y resultados fueron calculados al momento de finalizar la fase de pruebas. Una vez que el sistema se encuentre en producci'on se van a encontrar m'as defectos lo cual modificar'ia las estad'isticas.
 
-\section{P'aginas}
+\section{An'alisis del CoQ}
+\label{sec:AnalisisdelCoQ}
 \noindent
-\begin{enumerate}
-	\item Se numeran todas las p'aginas a partir de las p'aginas de Dedicatoria, Agradecimientos, Resumen, Contenido, Lista de Tablas y Figuras, Bibliograf'ia, Ap'endices y Vitae.
-	\item No se numeran las p'aginas de la Portada y de Firmas.
-	\item Coloca los n'umeros de p'aginas en el centro del margen inferior al inicio de un cap'itulo, y en el margen superior derecho para las dem'as. Las p'aginas en las que aparecen cuadros y gr'aficas tambi'en deben numerarse y su disposici'on (vertical u horizontal) no debe alterar la posici'on del n'umero de p'agina.
-	\item Las p'aginas que incluyen la Dedicatoria, Agradecimientos, Resumen, Contenido, Lista de Tablas y Figuras utilizan la numeraci'on romana, es decir, I, II, III, IV, etc.
-	\item Las p'aginas a partir del cap'itulo 1 utilizan la numeraci'on ar'abiga, es decir, 1, 2, 3, etc. Esto considera tambi'en a la Bibliograf'ia, los Ap'endices y el Vitae.
-	\item No uses la palabra ``p'agina'' antes de la numeraci'on de las p'aginas.
-	\item Usa el mismo tipo de letra para todos los n'umeros de p'agina.
-\end{enumerate}
+En esta secci'on se har'a el an'alisis del costo de la calidad del proceso de construcci'on del BM. El an'alisis constar'a de lo siguiente:
 
-\section{Manuscrito final del documento de tesis}
+\begin{itemize}
+	\item Costo de la conformidad y de la no-conformidad.
+	\item An'alisis del ROI.
+	\item Productividad Compuesta.
+\end{itemize}
+
+\subsubsection{Costo de la conformidad y de la no-conformidad}
+\label{Costodelaconformidadydelanoconformidad}
 \noindent
-El manuscrito final de tesis deber'a respetar el siguiente orden:
-\begin{enumerate}
-	\item Portada del empastado (obligatoria): No se coloca el n'umero de p'agina y no se cuenta. Ver primera p'agina del manual.
-	\item P'agina de Firmas (obligatoria): No se coloca el n'umero de p'agina y no se cuenta. Ver segunda p'agina del manual.
-	\item Dedicatoria (opcional): Se coloca p'agina con n'umero romano en min'uscula.
-	\item Ep'igrafe (opcional): Se coloca p'agina con n'umero romano en min'uscula.
-	\item P'agina de reconocimientos o agradecimientos (opcional): Se coloca p'agina con n'umero romano en min'uscula.
-	\item Resumen (obligatorio): Se coloca p'agina con n'umero romano en min'uscula.
-	\item 'Indice de contenido (obligatorio): Se coloca p'agina con n'umero romano en min'uscula.
-	\item Lista de tablas (puede ser requerido): Se coloca p'agina con n'umero romano en min'uscula.
-	\item Lista de ilustraciones o gr'aficas (puede ser requerido): Se coloca p'agina con n'umero romano en min'uscula.
-	\item Lista de abreviaturas (opcional): Se coloca p'agina con n'umero romano en min'uscula.
-	\item Glosario (opcional): Se coloca p'agina con n'umero romano en min'uscula.
-	\item Introducci'on (obligatoria). La introducci'on ser'a considerada como el primer cap'itulo del cuerpo del manuscrito. A partir de aqu'i inicia la paginaci'on ar'abiga.
-	\item Cuerpo del manuscrito (obligatorio): Continu'a la paginaci'on ar'abiga.
-	\newpage
-	\item Referencias bibliogr'aficas (obligatorio): Continu'a la paginaci'on ar'abiga. Utilizar el formato del IEEE como viene en la siguiente p'agina.
-	\item Ap'endices (opcional): Continu'a la paginaci'on ar'abiga.
-	\item Vitae (obligatorio): Continu'a la paginaci'on ar'abiga.
-\end{enumerate}
+En la secci'on \ref{sec:AnalisisdelCostodelaCalidad} del presente Trabajo de Tesis se propuso la f'ormula para realizar el c'alculo del CoQ\cite{Lazic2009}:
+
+\begin{math}CoQ = Prevencion_{Costo} + Evaluacion_{Costo} + FallasInternas_{Costo} + FallasExternas_{Costo}\end{math}
+
+Para realizar el c'alculo se tienen que identificar estos costos dentro de la construcci'on del BM. Estos son los siguientes:
+
+\begin{itemize}
+	\item \emph{Costos de prevenci'on}. No existieron costos de prevenci'on en la construcci'on del BM. Esto se debe a que no se contaba con un plan de calidad ni con actividades dirigidas a mejoras de proceso o similares.
+	\item \emph{Costos de evaluaci'on}. Los 'unicos costos de evaluaci'on dentro de la construcci'on del BM fueron la realizaci'on de las revisiones personales de c'odigo. Estas tomaron el 7.44\% del total del tiempo del proyecto y una cantidad neta de 11.22 horas.
+	\item \emph{Fallas internas}. Las fallas internas representan el costo de realizar las pruebas y corregir los defectos. Las pruebas conllevaron un esfuerzo de 32.20 horas mientras que la remoci'on de defectos requiri'o de un esfuerzo de 21.80 horas.
+	\item \emph{Fallas externas}. Ya que el BM no ha llegado a producci'on, no se han reportado costos por fallas externas.
+\end{itemize}
+
+Tomando en cuenta los costos, el CoQ total se calcula de la siguiente manera:
+
+\begin{math}CoQ = 0 + 11.22 + (32.20+21.80) + 0 = 65.22\end{math}
+
+Por lo tanto el CoQ es de 65.22 horas, o el 43\% del tiempo total del proyecto. El CoQ se encuentra en unidades de esfuerzo (horas), para traducir estas unidades a t'erminos econ'omicos se debe de ponderar el costo de cada hora para la organizaci'on de software y realizar la multiplicaci'on.
+
+En la secci'on \ref{sec:AnalisisdelCostodelaCalidad} se presenta la gr'afica \ref{fig:CoQ-CMM} donde tenemos lo siguiente:
+
+\begin{itemize}
+	\item Organizaciones de software con CMMI Nivel 1 tienen un CoQ del 60\% del costo total del proyecto.
+	\item Organizaciones de software con CMMI Nivel 2 tienen un CoQ del 57\% del costo total del proyecto.
+	\item Organizaciones de software con CMMI Nivel 3 tienen un CoQ del 50\% del costo total del proyecto.
+	\item Organizaciones de software con CMMI Nivel 4 tienen un CoQ del 35\% del costo total del proyecto.
+	\item Organizaciones de software con CMMI Nivel 5 tienen un CoQ del 22\% del costo total del proyecto.
+\end{itemize}
+
+En comparaci'on con esto, el BM tuvo un desempe'no parecido a una organizaci'on de software con CMMI nivel 3. Sin embargo, el BM aun no pasa a la etapa de producci'on, donde seguramente se detectar'an m'as defectos, los cuales modificar'an esta relaci'on.
+
+\subsubsection{An'alisis del ROI}
+\label{AnalisisdelROI}
+\noindent
+El an'alisis del ROI se realizar'a de la siguiente forma. Se comparar'a el esfuerzo realizado en la b'usqueda y remoci'on de defectos dentro del BM, contra el escenario en el que no se hubiera hecho ning'un esfuerzo en calidad y todos los defectos hubieran pasado a producci'on. Esto se representa en la tabla \ref{ROIBM}:
+
+\begin{table}[htbp]
+	\centering
+		\begin{tabular}{| c | c | c |}
+		  \hline
+		  \multicolumn{3}{|c|}{\textbf{An'alisis del ROI}} \\
+		  \hline
+		  \textbf{Recursos} & \textbf{Caso1} & \textbf{Caso2} \\
+		  Esfuerzo de Desarrollo & 118.49 & 118.49 \\
+		  \hline
+		  \multicolumn{3}{|c|}{\textbf{Dise'no)}} \\
+		  \hline
+		  Defectos Encontrados & 0 & 0 \\
+		  Costo de Correcci'on & 0 & 0 \\
+		  \hline
+		  \multicolumn{3}{|c|}{\textbf{Codificaci'on}} \\
+		  \hline
+		  Defectos Encontrados & 0 & 20 \\
+		  Costo de Correcci'on & 0 & 2.42 \\
+		  \hline
+		  \multicolumn{3}{|c|}{\textbf{Revisi'on}} \\
+		  \hline
+		  Defectos Encontrados & 0 & 27 \\
+		  Costo de Correcci'on & 0 & 5.92 \\
+		  \multicolumn{3}{|c|}{\textbf{Pruebas}} \\
+		  \hline
+		  Defectos Encontrados & 0 & 27 \\
+		  Costo de Correcci'on & 0 & 5.92 \\
+		  \multicolumn{3}{|c|}{\textbf{Producci'on}} \\
+		  \hline
+		  Defectos Encontrados & 113 & 0 \\
+		  Costo de Correcci'on & 218 & 0 \\
+		  \hline
+		  \hline
+		  \multicolumn{3}{|c|}{\textbf{CoQ}} \\
+		  \hline
+		  \textbf{Total} & 336.49 & 140.29\\
+		  \textbf{ROI} & NA & 58.31\% \\
+		  \hline
+		\end{tabular}
+	\caption{An'alisis del ROI BM}
+	\label{ROIBM}
+\end{table}
+
+Para la elaboraci'on de esta tabla se toma en cuenta la suposici'on de que el esfuerzo de remoci'on de un defecto aumenta diez veces cada que pasa de fase en el ciclo de desarrollo[CITA]. El ROI de las actividades de calidad para el BM es del 58.31\%. En otras palabras, esto quiere decir que cada dos horas invertidas en calidad disminuyeron aproximadamente una hora del esfuerzo total del proyecto.
+
+\subsubsection{Productividad Compuesta}
+\label{ProductividadCompuesta}
+\noindent
+Como se explic'o en la secci'on [REFERENCIA], la productividad compuesta pondera el desempe'no de los desarrolladores tomando en cuenta no solo las l'ineas de c'odigo producidas en determinado tiempo, si no ponderadas con el costo de los defectos que inyectaron al producirlas. El caso de la construcci'on del BM se detalla en la tabla [REFERENCIA]:
+
+\begin{table}[htbp]
+	\centering
+		\begin{tabular}{| l | l |}
+			\hline
+			 Esfuerzo Total de Desarrollo & 150.68 \\ \hline
+			 Tama'no Total del Producto & 8066 \\ \hline
+			 Esfuerzo Total de Correcci'on & 21.8 \\ \hline
+			 Productividad & 12 \\ \hline
+			 Productividad Compuesta & 47.77 \\ \hline
+			 Datos & 19 \\ \hline
+		\end{tabular}
+	\caption{N'umero de Defectos por Tipo}
+	\label{N'umerodeDefectosporTipo}
+\end{table}
+
+La productividad compuesta fue calculada de la siguiente forma:
+
+\begin{math}ProductividadCompuesta= 8066/(150.68+21.80) = 47.77\end{math}
+
+Al comparar la productividad con la productividad compuesta encontramos una diferencia de 5.76 LOC, resultante de tomar en cuenta el esfuerzo que tom'o corregir los errores que inyectaron al momento de realizar el trabajo.
+
+\section{Conclusiones}
+\label{sec:Conclusiones}
+\noindent
+El BM se presenta como una excelente herramienta para guiar a las organizaciones peque'nas y medianas de desarrollo de software en la introducci'on e implementaci'on de estrategias y t'ecnicas b'asicas de calidad de software. A continuaci'on se describir'an brevemente las principales estrategias propuestas en el BM, los beneficios de seguir estas estrategias y los resultados de probar las estrategias en el caso de la construcci'on de la misma herramienta.
+
+\subsection{Estrategias}
+\label{sec:Estrategias}
+\noindent
+
+\subsubsection{Administraci'on b'asica de proyectos de software (seguimiento de actividades)}
+\label{sec:Administraci'onb'asicadeproyectosdesoftware}
+\noindent
+Lo que no es medido, no es administrado y lo que no es administrado no es realizado\cite{Humphrey2002}. Los proyectos de software deben de ser planeados y administrados para que tengan 'exito. El BM facilita estas actividades a las organizaciones de software por medio de lo siguiente:
+
+\begin{itemize}
+	\item \emph{Creaci'on de ciclo de vida de proyecto} (ver secci'on \ref{sec:ciclodevidadeproyectos}). El ciclo de vida determinar'a el orden en que se har'an las actividades principales llamadas fases, como dise'no, codificaci'on y pruebas; y su definici'on es b'asica porque estas fases ser'an descompuestas en actividades espec'ificas para la elaboraci'on del proyecto. El BM propone dos ciclos de vida default, cascada e iterativo, y permite a los usuarios la creaci'on de ciclos de vida personalizados.
+	\item \emph{Registro y seguimiento de actividades} (ver secci'on \ref{sec:administracionyseguimientodeactividades}). Todas las actividades realizadas en el proyecto deben de ser registradas. Una vez registradas, deben de ser actualizadas constantemente con la siguiente informaci'on:	
+	\begin{itemize}
+		\item Estatus actual de la actividad.
+		\item Esfuerzo efectivo (tiempo que tom'o) realizado en la actividad.
+		\item Tama'no del producto obtenido de la realizaci'on de la actividad.
+	\end{itemize}
+\end{itemize}
+
+\subsubsection{Registro y seguimiento de defectos}
+\label{sec:Registroyseguimientodedefectos}
+\noindent
+Los errores cometidos dentro de la elaboraci'on de un proyecto de software tienen que ser registrados para su correcta administraci'on y seguimiento. El BM facilita esta tarea por medio de lo siguiente:
+
+\begin{itemize}
+	\item Registro de Defectos (ver secci'on \ref{sec:administracionyseguimientodedefectos}). El BM brinda una forma sencilla de registro de defectos en la cual se describe el defecto y se guarda la fase y actividad de detecci'on. 
+	\item	Seguimiento de Defectos (ver secci'on \ref{sec:administracionyseguimientodedefectos}). Al igual que las tareas, a los defectos se les debe dar un seguimiento adecuado. El BM hace un 'enfasis especial en las siguientes caracter'isticas del defecto:
+	\begin{itemize}
+		\item Responsable de corregir el defecto.
+		\item Fase y tarea de detecci'on.
+		\item Fase y tarea de inyecci'on.
+		\item Fase y tarea de remoci'on.
+		\item Esfuerzo efectivo que tom'o la correcci'on del defecto.
+		\item Tama'no que tuvo la correcci'on del defecto.
+		\item Estatus actual del defecto.
+	\end{itemize}
+\end{itemize}
+
+\subsubsection{Uso de plantillas de calidad}
+\label{sec:Usodeplantillasdecalidad}
+\noindent
+Las plantillas de calidad o listas de chequeo, son instrumentos que sirven como gu'ia para realizar actividades de calidad. Utilizadas de forma correcta ayudan a que las actividades de calidad sean realizadas de una mejor forma y detectar un n'umero mayor de defectos. El BM ayuda a las organizaciones de desarrollo de software a utilizar las plantillas de calidad por medio de (ver secci'on \ref{sec:administraciondeplantillasdecalidad}):
+
+\begin{itemize}
+	\item \emph{Propuesta de Plantilla Default}. El BM propone una plantilla de calidad para la revisi'on personal de c'odigo de prop'osito general.
+	\item \emph{Creaci'on de Plantillas de Calidad}. El BM brinda al usuario una interfaz la cual facilita la creaci'on y modificaci'on de plantillas de calidad para adaptarlas a las necesidades del trabajo que se est'e realizando. Para que las plantillas sean m'as efectivas deben de actualizarse con respecto a los defectos m'as comunes y m'as costosos, y actualizarlas cuando estos defectos se dejen de cometer.
+\end{itemize}
+
+\subsubsection{An'alisis de la informaci'on generada}
+\label{sec:Analisisdelainformaciongenerada}
+\noindent
+Todos los datos que se introducen en el BM es almacenada en una base de datos. Estos datos son presentados despu'es como informaci'on 'util a trav'es de distintos reportes los cuales ayudan a las empresas a analizar su desempe'no en distintas 'areas del desarrollo de software. Los principales reportes son los siguientes(ver secci'on \ref{sec:reportes}):
+
+\begin{itemize}
+	\item Un resumen general el cual presenta una radiograf'ia del desempe'no y calidad del proyecto en desarrollo.
+	\item Reportes del CoQ que nos dan informaci'on acerca de la productividad de los desarrolladores, el retorno de inversi'on de las t'ecnicas de calidad y la comparaci'on del CoQ contra el CNQ.
+	\item Reportes de las t'ecnicas de defectos, su efectividad, eficiencia y velocidad con que estas se realizan.
+\end{itemize}
+
+\subsection{Beneficios}
+\label{sec:Beneficios}
+\noindent
+El uso de las estrategias mencionadas trae los siguientes beneficios en el proceso de desarrollo de software:
+
+\begin{itemize}
+	\item Cuando el proyecto es planeado, medido, y se le da seguimiento, se puede monitorear el desempe'no y el estado actual del proyecto\cite{Humphrey2002}.
+	\item Se puede conocer lo que tarda una organizaci'on en hacer las distintas tareas del desarrollo de software. 
+	\item Acumulando esta clase de datos hist'oricos se pueden realizar planes m'as efectivos y precisos en el futuro.
+	\item El registro de los defectos cometidos provoca que los desarrolladores de software reduzcan en un 30\% la inyecci'on de defectos\cite{Humphrey}.
+	\item Al conocer los tipos de defectos que m'as se introducen, as'i como aquellos que son m'as costosos, los desarrolladores y las organizaciones de software pueden establecer estrategias para evitar la inyecci'on de defectos.
+	\item Las plantillas de calidad ayudan a que las actividades de calidad sean realizadas de una forma m'as efectiva y que detecten una mayor cantidad de defectos con menor esfuerzo.
+	\item Las actividades de calidad ayudan a detectar los defectos antes de que estos avancen en el ciclo de vida del proyecto, lo cual es de suma importancia ya que cada fase que un defecto avanza en el ciclo de vida aumenta exponencialmente su costo de remoci'on.
+\end{itemize}
+
+\subsection{Resultados}
+\label{sec:Resultados}
+\noindent
+El BM fue construido utilizando las estrategias propuestas en el presente Trabajo de Tesis. Para probar la efectividad de estas estrategias comparar'an las medidas de calidad obtenidas de la contra los resultados obtenidos en la industria de desarrollo de software. Estos resultados fueron presentados a detalle en la secci'on \ref{sec:ResultadosdelaConstrucciondelBM}:
+
+\begin{itemize}
+	\item El 10\% del tiempo del proyecto se invirti'o en dise'no, el  62\% en codificaci'on, el 7\% en revisi'on y el 21\% en pruebas. Las empresas sin administraci'on de la calidad en el desarrollo de software gastan hasta el 50\% total del tiempo del proyecto en pruebas.
+	\item La densidad de defectos de la construcci'on del BM fue de 14.01 defectos por KLOC. Organizaciones con CMMI nivel 1 tienen una densidad de 7 defectos por KLOC\cite{Humphrey}, por lo que la construcci'on del BM sali'o baja en esa categor'ia.
+	\item El Yield de las revisiones de c'odigo fue del 29\%, cuando se recomienda un m'inimo de 70\%.
+	\item La velocidad de revisi'on de c'odigo fue de 719 LOC por hora, cuando se recomienda una velocidad entre 300 y 500 LOC por hora. 
+	\item En las revisiones de c'odigo se encontraron 2.41 defectos por hora, mientras que la fase de prueba encontr'o 2.05 defectos por hora.
+	\item El CoQ fue del 43\% del proyecto, un desempe'no similar a una organizaci'on de software con CMMI nivel 3\cite{Humphrey}.
+\end{itemize}
+
+Los resultados demuestran la efectividad de las estrategias propuestas en distintas categor'ias. Las revisiones de c'odigo demostraron ser m'as efectivas en la detecci'on de defectos que las pruebas, a pesar de que las revisiones fueron realizadas con una mala calidad como demuestran las estrategias. El tiempo utilizado en pruebas estuvo muy abajo del promedio de las organizaciones que no tienen procesos de calidad y el costo de la calidad del proyecto fue de una organizaci'on de software con nivel 3 de CMMI.
+
+\section{Trabajo Futuro}
+\label{sec:TrabajoFuturo}
+\noindent
+El BM fue propuesto como una herramienta para introducir la calidad en las organizaciones medianas y peque'nas. A partir de la creaci'on de esta herramienta existen diferentes 'areas donde el trabajo puede continuar:
+
+\begin{itemize}
+	\item Introducir el BM en la industria.
+	\item Agregar m'odulo de estimaci'on de proyectos al BM.
+	\item Agregar m'odulo de planeaci'on de calidad al BM.
+\end{itemize}
+
+\subsubsection{BM en la industria}
+\label{sec:BMenlaindustria}
+\noindent
+La forma m'as natural de continuar el trabajo del BM es llevarlo a la vida real. Si bien la estrategia propuesta fue puesta en pr'actica en la construcci'on del mismo, es necesario colocar el BM en varias empresas peque'nas de software las cuales carezcan de la administraci'on de la calidad para probar su verdadera val'ia. A partir de la introducci'on del BM en la industria para trabajar en cuestiones como:
+
+\begin{itemize}
+	\item Detectar y remover defectos en el BM en producci'on, con el objetivo de actualizar las estad'isticas generadas en el presente Trabajo de Tesis.
+	\item Realiza un an'alisis de la facilidad de introducci'on y la usabilidad del BM.
+	\item An'alisis de las posibles mejoras en la calidad del proceso de desarrollo de software que tuvieron las organizaciones despu'es de la introducci'on del BM.
+	\item Validaci'on de la efectividad de las estrategias propuestas en el BM.
+	\item An'alisis de la compatibilidad del BM con los distintos proyectos de desarrollo de software. Por ejemplo, el BM en proyectos de: Desarrollo web, desarrollo de sistemas embebidos, desarrollo de aplicaciones de escritorio, entre otros.
+\end{itemize}
+
+\subsubsection{Estimaci'on de Proyectos}
+\label{sec:EstimaciondeProyectos}
+\noindent
+La informaci'on que almacena el BM acerca de las actividades de desarrollo de software, como el esfuerzo que tom'o realizarlas y el tama'no del producto resultante puede ser utilizada en distintas formas por las organizaciones de software. Una de estas es la estimaci'on de software. Una mejora para el BM ser'ia agregar un m'odulo el cual se encargue de las estimaciones a partir de la informaci'on hist'orica generada por los distintos proyectos realizados en la organizaci'on de software. Algunos m'etodos de estimaci'on que se pueden utilizar son:
+
+\begin{itemize}
+	\item \emph{Estimaci'on basada en aproximaciones} (Siglas en ingl'es PROBE). En este m'etodo se realiza un dise'no conceptual el cual divide el proyecto en distintas actividades de distintos tipos. Utilizando los datos hist'oricos de actividades similares se aproxima cuanto tardar'an en realizarse las actividades del proyecto\cite{Humphrey}.
+	\item \emph{COCOMO}. Un m'etodo de estimaci'on basado en regresiones lineales, el cual utiliza el tama'no del proyecto y el esfuerzo como entradas\cite{Chulani1999}.
+\end{itemize}
+
+\subsubsection{Planeaci'on de la Calidad}
+\label{sec:Planeaci'ondelaCalidad}
+\noindent
+Al igual que el proyecto es planeado, la calidad que este tendr'a tambi'en debe de ser planeada. Esto puede ser una tarea complicada con los primeros proyectos desarrollados en una organizaci'on de software, o cuando no se cuentan con datos hist'oricos. Sin embargo con la informaci'on que recaba el BM en su uso, se puede realizar la planeaci'on de calidad. As'i que otro m'odulo 'util por agregar ser'ia la planeaci'on de la calidad con los siguientes requerimientos m'inimos:
+
+\begin{itemize}
+	\item Planeaci'on de: Densidad de defectos, productividad compuesta, Yield de cada fase, velocidad de las revisiones de c'odigo, eficiencia de las revisiones de c'odigo, costo de la calidad y relaci'on entre revisiones y pruebas.
+	\item Los datos planeados deben de obtenerse a partir de datos hist'oricos.
+	\item Se deben de establecer metas de mejora en una o m'as de las caracter'isticas de calidad planeadas.
+\end{itemize}
+
+El BM se presenta como una excelente herramienta para introducir la calidad en el desarrollo de software para empresas peque'nas y medianas. La val'ia de esta herramienta se encuentra en sus estrategias propuestas y como el sistema gu'ia a las organizaciones de software en la implementaci'on de dichas estrategias.
 
 \clearpage
