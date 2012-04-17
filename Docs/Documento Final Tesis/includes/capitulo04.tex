@@ -81,7 +81,7 @@ Al hacer un an'alisis de la informaci'on de la tabla \ref{ResumenGeneralParteI} 
 	\item La efectividad relativa removiendo defectos de la fase de codificaci'on fue 0.13 y de revisi'on 1.18.
 \end{itemize}
 
-Aunque el objetivo del BM es llegar a la fase de pruebas con 0 defectos, esto no es una meta que se alcance en el primer proyecto donde se implementan las t'ecnicas de calidad. El Yield de las Revisiones de C'odigo fue 29\%, cuando el recomendado por fase es de 70\%\cite{Humphrey2002}. Sin embargo, se tiene el dato de que la velocidad promedio de las revisiones fue de 719.11 LOC por hora, cuando la velocidad ideal es entre 300-500 LOC por hora. Esto significa que si las revisiones se hubieran hecho con un poco m'as de tiempo hubiera obtenido un Yield m'as alto. A pesar de hacer las revisiones a una velocidad muy alta y con un Yield bajo, demostraron ser m'as efectivas detectando defectos al encontrar 2.41 defectos por hora, contra los 2.05 defectos detectados por hora de las pruebas.
+Aunque el objetivo del BM es llegar a la fase de pruebas con 0 defectos, esto no es una meta que se alcance en el primer proyecto donde se implementan las t'ecnicas de calidad. En este proyecto no se llevaron a cabo revisiones de dise'no. El Yield de las Revisiones de C'odigo fue 29\%, cuando el recomendado por fase es de 70\%\cite{Humphrey2002}. Sin embargo, se tiene el dato de que la velocidad promedio de las revisiones fue de 719.11 LOC por hora, cuando la velocidad ideal menor a 200 LOC por hora. Esto significa que si las revisiones se hubieran hecho con un poco m'as de tiempo se hubiera obtenido un Yield m'as alto. A pesar de hacer las revisiones a una velocidad muy alta y con un Yield bajo, demostraron ser m'as efectivas detectando defectos al encontrar 2.41 defectos por hora, contra los 2.05 defectos detectados por hora de las pruebas.
 
 \begin{table}[htbp]
 	\centering
@@ -226,12 +226,12 @@ El an'alisis del ROI se realizar'a de la siguiente forma. Se comparar'a el esfue
 	\label{ROIBM}
 \end{table}
 
-Para la elaboraci'on de esta tabla se toma en cuenta la suposici'on de que el esfuerzo de remoci'on de un defecto aumenta diez veces cada que pasa de fase en el ciclo de desarrollo[CITA]. El ROI de las actividades de calidad para el BM es del 58.31\%. En otras palabras, esto quiere decir que cada dos horas invertidas en calidad disminuyeron aproximadamente una hora del esfuerzo total del proyecto.
+Para la elaboraci'on de esta tabla se toma en cuenta la suposici'on de que el esfuerzo de remoci'on de un defecto aumenta diez veces cada que pasa de fase en el ciclo de desarrollo\cite{Lazic2009}. El ROI de las actividades de calidad para el BM es del 58.31\%. Esto quiere decir que unidad de tiempo invertida en calidad logró un reducci'on del 58.31\% de esa unidad en el esfuerzo total del proyecto.
 
 \subsubsection{Productividad Compuesta}
 \label{ProductividadCompuesta}
 \noindent
-Como se explic'o en la secci'on [REFERENCIA], la productividad compuesta pondera el desempe'no de los desarrolladores tomando en cuenta no solo las l'ineas de c'odigo producidas en determinado tiempo, si no ponderadas con el costo de los defectos que inyectaron al producirlas. El caso de la construcci'on del BM se detalla en la tabla [REFERENCIA]:
+Como se explic'o en la secci'on \ref{sec:ProductividadCompuesta}, la productividad compuesta pondera el desempe'no de los desarrolladores tomando en cuenta no solo las l'ineas de c'odigo producidas en determinado tiempo, si no ponderadas con el costo de los defectos que inyectaron al producirlas. El caso de la construcci'on del BM se detalla en la tabla \ref{NumerodeDefectosporTipo}:
 
 \begin{table}[htbp]
 	\centering
@@ -245,7 +245,7 @@ Como se explic'o en la secci'on [REFERENCIA], la productividad compuesta pondera
 			 Datos & 19 \\ \hline
 		\end{tabular}
 	\caption{N'umero de Defectos por Tipo}
-	\label{N'umerodeDefectosporTipo}
+	\label{NumerodeDefectosporTipo}
 \end{table}
 
 La productividad compuesta fue calculada de la siguiente forma:
@@ -257,7 +257,7 @@ Al comparar la productividad con la productividad compuesta encontramos una dife
 \section{Conclusiones}
 \label{sec:Conclusiones}
 \noindent
-El BM se presenta como una excelente herramienta para guiar a las organizaciones peque'nas y medianas de desarrollo de software en la introducci'on e implementaci'on de estrategias y t'ecnicas b'asicas de calidad de software. A continuaci'on se describir'an brevemente las principales estrategias propuestas en el BM, los beneficios de seguir estas estrategias y los resultados de probar las estrategias en el caso de la construcci'on de la misma herramienta.
+El BM se presenta como una herramienta accesible y f'acil para guiar a las organizaciones peque'nas y medianas de desarrollo de software en la introducci'on e implementaci'on de estrategias y t'ecnicas b'asicas de calidad de software. A continuaci'on se describir'an brevemente las principales estrategias propuestas en el BM, los beneficios de seguir estas estrategias y los resultados de probar las estrategias en el caso de la construcci'on de la misma herramienta.
 
 \subsection{Estrategias}
 \label{sec:Estrategias}
@@ -269,7 +269,7 @@ El BM se presenta como una excelente herramienta para guiar a las organizaciones
 Lo que no es medido, no es administrado y lo que no es administrado no es realizado\cite{Humphrey2002}. Los proyectos de software deben de ser planeados y administrados para que tengan 'exito. El BM facilita estas actividades a las organizaciones de software por medio de lo siguiente:
 
 \begin{itemize}
-	\item \emph{Creaci'on de ciclo de vida de proyecto} (ver secci'on \ref{sec:ciclodevidadeproyectos}). El ciclo de vida determinar'a el orden en que se har'an las actividades principales llamadas fases, como dise'no, codificaci'on y pruebas; y su definici'on es b'asica porque estas fases ser'an descompuestas en actividades espec'ificas para la elaboraci'on del proyecto. El BM propone dos ciclos de vida default, cascada e iterativo, y permite a los usuarios la creaci'on de ciclos de vida personalizados.
+	\item \emph{Creaci'on de ciclo de vida de proyecto} (ver secci'on \ref{sec:ciclodevidadeproyectos}). El ciclo de vida determinar'a el orden en que se har'an las actividades principales llamadas fases, como dise'no, codificaci'on y pruebas; y su definici'on es b'asica porque estas fases ser'an descompuestas en actividades espec'ificas para la elaboraci'on del proyecto. El BM propone dos ciclos de vida default, cascada e iterativo, y permite a los usuarios la creaci'on de ciclos de vida personalizados. Es importante notar que el BM puede ser empleado para registrar el ciclo de vida de cualquier actividad o fase; es decir, podr'ia utilizarse por los analistas y descomponer los pasos del an'alisis como fases. Similarmente podr'ia solo ser usado en la fase de dise'no o en la fase de pruebas detallando cada una de las fases en actividades y agregando actividades de remoci'on de defectos.
 	\item \emph{Registro y seguimiento de actividades} (ver secci'on \ref{sec:administracionyseguimientodeactividades}). Todas las actividades realizadas en el proyecto deben de ser registradas. Una vez registradas, deben de ser actualizadas constantemente con la siguiente informaci'on:	
 	\begin{itemize}
 		\item Estatus actual de la actividad.
@@ -339,7 +339,7 @@ El uso de las estrategias mencionadas trae los siguientes beneficios en el proce
 El BM fue construido utilizando las estrategias propuestas en el presente Trabajo de Tesis. Para probar la efectividad de estas estrategias comparar'an las medidas de calidad obtenidas de la contra los resultados obtenidos en la industria de desarrollo de software. Estos resultados fueron presentados a detalle en la secci'on \ref{sec:ResultadosdelaConstrucciondelBM}:
 
 \begin{itemize}
-	\item El 10\% del tiempo del proyecto se invirti'o en dise'no, el  62\% en codificaci'on, el 7\% en revisi'on y el 21\% en pruebas. Las empresas sin administraci'on de la calidad en el desarrollo de software gastan hasta el 50\% total del tiempo del proyecto en pruebas.
+	\item El 10\% del tiempo del proyecto se invirti'o en dise'no, el  62\% en codificaci'on, el 7\% en revisi'on y el 21\% en pruebas. Las empresas sin administraci'on de la calidad en el desarrollo de software gastan hasta el 50\% total del tiempo del proyecto en pruebas. A pesar de que estos datos no son ideales se lograron los beneficios presentados a continuaci'on.
 	\item La densidad de defectos de la construcci'on del BM fue de 14.01 defectos por KLOC. Organizaciones con CMMI nivel 1 tienen una densidad de 7 defectos por KLOC\cite{Humphrey}, por lo que la construcci'on del BM sali'o baja en esa categor'ia.
 	\item El Yield de las revisiones de c'odigo fue del 29\%, cuando se recomienda un m'inimo de 70\%.
 	\item La velocidad de revisi'on de c'odigo fue de 719 LOC por hora, cuando se recomienda una velocidad entre 300 y 500 LOC por hora. 
@@ -394,6 +394,6 @@ Al igual que el proyecto es planeado, la calidad que este tendr'a tambi'en debe 
 	\item Se deben de establecer metas de mejora en una o m'as de las caracter'isticas de calidad planeadas.
 \end{itemize}
 
-El BM se presenta como una excelente herramienta para introducir la calidad en el desarrollo de software para empresas peque'nas y medianas. La val'ia de esta herramienta se encuentra en sus estrategias propuestas y como el sistema gu'ia a las organizaciones de software en la implementaci'on de dichas estrategias.
+\lettrine{E}{l} BM se presenta como una excelente herramienta para empresas peque'nas y medianas en la introducci'on de calidad en el desarrollo de software . La val'ia de esta herramienta se encuentra en sus estrategias propuestas y como el sistema gu'ia a las organizaciones de software en la implementaci'on de dichas estrategias.
 
 \clearpage

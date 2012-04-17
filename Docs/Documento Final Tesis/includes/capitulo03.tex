@@ -34,7 +34,7 @@ Los objetivos principales del sistema son:
 	\item Proporcionar informaci'on valiosa a la empresa para la toma de decisiones respecto a cambios en sus procesos de desarrollo de software.
 	\item Facilitar la evoluci'on y adaptaci'on de las diferentes actividades de aseguramiento de la calidad.
 	\item Promover una cultura de calidad personal enfocada en la prevenci'on de defectos.
-	\item Proveer datos sobre el esfuerzo (costo) de las actividades de remoci'on de defectos.
+	\item Proveer datos sobre el costo de las actividades de remoci'on de defectos  y como 'estas disminuyen el costo total del proyecto.
 	\item Facilitar un cambio cultural respecto a la forma de trabajar de peque'nas y medianas empresas.
 \end{itemize}
 
@@ -45,7 +45,7 @@ Se puede definir como alcance en cuanto a funcionalidad lo siguiente:
 \begin{itemize}
 	\item Registrar y dar seguimiento a las actividades de desarrollo y calidad establecidas para el ciclo de vida de desarrollo.
 	\item Hacer un seguimiento puntual a la inyecci'on, remoci'on y correcci'on de defectos a lo largo de las diferentes etapas del ciclo de vida.
-	\item Generar estad'isticas y m'etricas de valor para la empresa y el personal en base a la informaci'on proporcionada por los usuarios del sistema.
+	\item Generar estad'isticas y m'etricas de valor para la empresa y el personal con base en la informaci'on proporcionada por los usuarios del sistema.
 	\item Dar una gu'ia en los procedimientos principales de aseguramiento de la calidad.
 \end{itemize}
 
@@ -130,7 +130,7 @@ El BM impacta a los distintos niveles de cualquier organizaci'on dedicada al des
 	\item A nivel de desarrollador se tiene el mayor impacto:	
 	\begin{itemize}
 		\item Implicar'a que los desarrolladores cuenten con la suficiente disciplina para realizar las actividades de calidad de la mejor manera posible.
-		\item Al registrar los defectos cometidos crear'a conciencia de estos dando un impacto inmediato a la calidad.
+		\item Al registrar los defectos cometidos crear'a conciencia de estos impactando la calidad del trabajo personal.
 		\item Ayudar'a a los desarrolladores a mejorar sus procesos personales de desarrollo.
 		\item Se generar'an estad'isticas y m'etricas con informaci'on ver'idica la cual permitir'a analizar los procesos y mejorar las 'areas m'as d'ebiles.
 		\item En resumen, mejorar'a la forma en que los desarrolladores hacen su trabajo, haciendo que los productos que elaboren tengan una mayor calidad desde el inicio recortando el costo y el calendario de los proyectos.
@@ -195,7 +195,7 @@ La figura \ref{fig:dbBM} nos muestra el dise'no de la base de datos.
 	\label{fig:dbBM}
 \end{figure}
 
-Esta contiene las siguientes tablas:
+La BD incluye las siguientes tablas:
 
 \begin{itemize}
 	\item \emph{User}. Contiene los usuarios del sistema.
@@ -261,7 +261,7 @@ La figura \ref{fig:SSciclo1BM} nos muestra la pantalla donde se permite elegir l
 Los tipos de fase predefinidos en el BM son los siguientes:
 
 \begin{itemize}
-	\item \emph{Requerimientos}. Esta es la fase donde se realiza la licitaci'on y el an'alisis de los requerimientos del proyecto.
+	\item \emph{Requerimientos}. Esta es la fase donde se realiza la b'usqueda de las necesidades y el an'alisis de los requerimientos del proyecto.
 	\item \emph{Dise'no}. En esta fase se toman las decisiones m'as importantes respecto a como ser'a construido el proyecto. Lo que se realice en esta fase determinar'a como es que el proyecto funcionar'a y si tendr'a 'exito o no. Los productos de trabajo de esta fase m'as comunes son la arquitectura y el dise'no detallado.
 	\item \emph{Codificaci'on}. En esta fase se construye el sistema, tambi'en es llamada fase de construcci'on o programaci'on. Es la etapa de programaci'on y la primera que nos viene a la mente en el desarrollo de software.
 	\item \emph{Revisi'on}. Esta fase puede ser utilizada como comod'in. Se incluy'o en caso de que el equipo de desarrollo decida agregar alguna fase completa de revisi'on de los productos de otra fase. Ya que el costo de los errores aumenta exponencialmente conforme avanza de fases el proyecto\cite{Lazic2009}, entonces es muy importante evitar la inyecci'on de errores en fases tempranas como Requerimientos y Dise'no, as'i que podr'ia incluirse una fase completa para realizar actividades como inspecciones al dise'no y a los requerimientos. En caso de que se decida no utilizar una fase completa para revisiones, es muy importante que al menos se realicen revisiones personales al trabajo realizado.
@@ -283,7 +283,7 @@ Los tipos de fase predefinidos en el BM son los siguientes:
 	\label{fig:SSciclo2BM}
 \end{figure}
 
-Es importante destacar que la definici'on del ciclo de vida es el primer paso para iniciar la planeaci'on del proyecto. La planeaci'on es una de las pr'acticas recomendadas por \cite{Humphrey2002} para realizar la administraci'on racional. Si una organizaci'on quiere tener 'exito en el negocio del software es clave la planeaci'on del proyecto.
+Es importante destacar que la definici'on del ciclo de vida es el primer paso para iniciar la planeaci'on del proyecto. La planeaci'on es una de las pr'acticas recomendadas por Humphrey\cite{Humphrey2002} para realizar la administraci'on racional. Si una organizaci'on quiere tener 'exito en el negocio del software es clave la planeaci'on del proyecto.
 
 Para el uso correcto del BM y obtener su mayor potencial se recomienda una definici'on a conciencia del ciclo de vida. Una vez definido el ciclo de vida se puede pasar a la definici'on de las tareas dentro de cada fase. Tambi'en es de suma importancia que cada una de estas tareas cuente con su actividad de revisi'on, para fomentar la cultura de la prevenci'on antes de las pruebas.
 
@@ -303,7 +303,7 @@ El BM facilita la labor de la planeaci'on y administraci'on de actividades por m
 El BM tiene dos tipos de actividades:
 
 \begin{itemize}
-	\item \emph{Actividades de Desarrollo}. En esta categor'ia caen todas las actividades relacionadas con el proceso de desarrollo de software en las cuales se generan productos de trabajo. Ejemplos de estas son: Licitaci'on de requerimientos, dise'no detallado del m'odulo de un sistema, programaci'on, pruebas unitarias entre otras. Este tipo de actividades tienen subtipos, estos son los siguientes:	
+	\item \emph{Actividades de Desarrollo}. En esta categor'ia caen todas las actividades relacionadas con el proceso de desarrollo de software en las cuales se generan productos de trabajo. Ejemplos de estas son: Levantamiento de requerimientos, dise'no detallado del m'odulo de un sistema, programaci'on, pruebas unitarias entre otras. Este tipo de actividades tienen subtipos, estos son los siguientes:	
 	\begin{itemize}
 		\item \emph{REQUIREMENTS}. Actividades relacionadas a una fase de requerimientos.
 		\item \emph{DESIGN}. Actividades relacionadas a una fase de dise'no.
@@ -316,16 +316,18 @@ El BM tiene dos tipos de actividades:
 	\item \emph{Actividades de Calidad}. Son las actividades de prevenci'on y evaluaci'on realizadas en el proyecto de desarrollo las cuales nos ayudan a evitar la inyecci'on de defectos o a detectarlos lo antes posible dentro del ciclo de desarrollo. Las actividades de calidad que maneja el BM, las cuales fueron descritas a detalle en la secci'on \ref{sec:tecnicasdedetecciondedefectos}, son las siguientes:
 	\begin{itemize}
 		\item \emph{PERSONAL REVIEW}. Actividades donde se realiza una revisi'on personal a un producto de trabajo.
-		\item \emph{PEER REVIEW}. Actividades donde se realiza una revisi'on entre colegas de un producto de trabajo.
-		\item \emph{WALKTHROUGH}. Actividades donde se realiza una caminata a un producto de trabajo.
-		\item \emph{INSPECTION}. Actividades donde se realiza una inspecci'on a un producto de trabajo.
+		\item \emph{PEER REVIEW}. Actividades donde se realiza una revisi'on entre colegas de un producto de trabajo, existen dos subtipos:
+		\begin{itemize}
+			\item \emph{WALKTHROUGH}. Actividades donde se realiza una caminata a un producto de trabajo.
+			\item \emph{INSPECTION}. Actividades donde se realiza una inspecci'on a un producto de trabajo.
+		\end{itemize}
 	\end{itemize}
 \end{itemize}
 
 Para obtener mayores beneficios del BM y tener un nivel 'optimo de calidad se recomienda la siguiente forma de trabajo:
 
 \begin{itemize}
-	\item Realizar al menos una revisi'on personal a cada producto de trabajo utilizando una plantilla de calidad. Por ejemplo cada que el desarrollador termine de programar un clase del sistema, realizar una revisi'on personal de esta apoy'andose con la plantilla de calidad default o una elaborada personalmente.
+	\item Realizar al menos una revisi'on personal a cada producto de trabajo utilizando una plantilla de calidad. Por ejemplo cada que el desarrollador termine de programar una clase del sistema, realizar una revisi'on personal de esta apoy'andose con la plantilla de calidad default o una elaborada personalmente.
 	\item Realizar una inspecci'on a cada producto mayor de trabajo. Un producto mayor de trabajo es un producto que representa el cierre de una fase, por ejemplo: El documento de requerimientos al terminar la fase de requerimientos, la arquitectura del sistema al terminar el dise'no conceptual, entre otros.	
 \end{itemize}
 
@@ -594,7 +596,7 @@ Organizaciones maduras en el desarrollo de software tienen una productividad pro
 \noindent
 El Yield mida la eficiencia de cada fase en la detecci'on de defectos. El Yield de una fase es el porcentaje de defectos de producto totales que son removidos en una fase. Por ejemplo: Al final del proyecto se sabe que se inyectaron 100 defectos al final de la fase de codificaci'on, sin embargo 50 de estos defectos fueron removidos en esta misma fase, por lo tanto el Yield de la fase de codificaci'on para dicho proyecto es del 50\%.
 
-Con este reporte las organizaciones de software pueden medir la efectividad removiendo defectos que tienen en cada fase. Un Yield de fase adecuado es del 70\% [CITA]. La f'ormula para calcular el Yield es la siguiente:
+Con este reporte las organizaciones de software pueden medir la efectividad removiendo defectos que tienen en cada fase. Un Yield de fase adecuado es del 70\% \cite{Humphrey}. La f'ormula para calcular el Yield es la siguiente:
 
 \begin{math}Y = \frac{DD}{DT}\end{math}
 
@@ -625,14 +627,14 @@ A continuaci'on se describir'an a detalle las partes del reporte:
 	\item La segunda y tercer columna representan los defectos. La segunda muestra los defectos que se inyectaron en la fase determinada y la tercera muestra los defectos que fueron detectados en esa fase.
 	\item La cuarta columna muestra el Yield (la eficiencia de detecci'on de defectos) de cada fase. Se recomienda un Yield m'inimo de 70\% para cada fase\cite{Humphrey}. Si no se tiene el Yield adecuado se pueden tomar estrategias como integrar nuevas actividades de calidad a la fase, o mejorar la forma en que se hacen las actividades de calidad actuales.
 	\item La quinta columna presenta la Raz'on de Revisi'on de las actividades de calidad de cada fase. En otras palabras es la velocidad con que se realizan las revisiones. M'as detalles acerca de la Tasa de Revisi'on en la secci'on \ref{sec:RazonporTecnicadeDeteccion}.
-	\item La sexta columna simplemente muestra el tiempo total que ha tomado cada fase. En organizaciones con una pobre calidad en el desarrollo de software la fase de pruebas toma hasta el 50\% del tiempo total del proyecto[CITA]. El objetivo del BM es ayudar a las organizaciones de desarrollo de software a llegar a la fase de pruebas con cero defectos.
+	\item La sexta columna simplemente muestra el tiempo total que ha tomado cada fase. En organizaciones con una pobre calidad en el desarrollo de software la fase de pruebas toma hasta el 50\% del tiempo total del proyecto\cite{Humphrey2002}. El objetivo del BM es ayudar a las organizaciones de desarrollo de software a llegar a la fase de pruebas con cero defectos.
 	\item La s'eptima columna representa la eficiencia removiendo defectos de cada fase. Se mide en defectos removidos por hora.
 	\item La octava columna presenta la efectividad relativa detectando defectos. Esta m'etrica hace una comparaci'on entre la eficiencia detectando defectos de una fase cualquiera contra la eficiencia de la fase de pruebas. Se recomienda al menos tener una eficiencia relativa del 50\% en cada fase\cite{Humphrey}.
 	\item La novena, d'ecima y onceava columna presentan m'etricas del CoQ. La novena columna presenta el costo de evaluaci'on de cada fase del proyecto, en otras palabras todos los costos asociados con el aseguramiento de la calidad como revisiones, inspecciones, planeaci'on de la calidad entre otros. La d'ecima columna presenta el costo de las fallas de cada fase en el proyecto, en otras palabras el esfuerzo que tom'o corregir los errores inyectados en esas fases. Finalmente la onceava columna presenta una comparaci'on entre los costos de evaluaci'on y los costos de las fallas. El objetivo debe de ser obtener un valor de 2. Un valor m'as bajo representa la falta de actividades de calidad en la fase, mientras un valor m'as alto dice que las actividades de calidad son excesivas para la fase.
 	\item Por 'ultimo tenemos tres filas al final. La primera fila nos dice la densidad de defectos del proyecto, que es la cantidad de defectos por KLOC del proyecto. Para poder hacer una comparaci'on adecuada nos podemos referir a la secci'on \ref{sec:DensidaddeDefectos}. La segunda fila nos muestra el n'umero total de defectos y la tercera fila las LOC del proyecto, o en otras palabras su tama'no total.
 \end{itemize}
 
-Se recomienda la consulta de este reporte al menos al final de cada fase del proyecto, para tener en cuenta la calidad actual del proyecto y poder tomar las distintas estrategias para mejorarla si es necesario.
+Se recomienda la consulta de este reporte al menos al final de cada fase del proyecto, para tener en cuenta la calidad actual del proyecto y poder tomar las distintas estrategias para mejorarla si es necesario. Los datos que se presentan en la figura \ref{fig:SSreportes1BM} se obtuvieron del ejemplo que se presentar'a en la tabla \ref{ejemploproductividadcompuesta}.
 
 \subsubsection{Productividad Compuesta}
 \label{sec:ProductividadCompuesta}
@@ -649,16 +651,16 @@ La productividad dentro de la industria de software es medida de forma neta, en 
 			\textbf{LOC} & 1000 & 1000 \\ \hline
 			\textbf{Tiempo} & 1 hora & 2 horas \\ \hline
 			\textbf{Productividad} & 1000 LOC/HR & 500 LOC/HR \\ \hline
-			\textbf{Defectos Inyectados} & 60 & 15 \\ \hline
-			\textbf{Esfuerzo de Remoci'on} & 1 hora & 0.25 horas \\ \hline
-			\textbf{Productividad Compuesta} & 500 LOC/HR & 444.44 LOC/HR \\
+			\textbf{Defectos Inyectados} & 60 & 0 \\ \hline
+			\textbf{Esfuerzo de Remoci'on} & 1 hora & 0 horas \\ \hline
+			\textbf{Productividad Compuesta} & 500 LOC/HR & 500 LOC/HR \\
 			\hline
 		\end{tabular}
 	\caption{Ejemplo Productividad Compuesta}
 	\label{ejemploproductividadcompuesta}
 \end{table}
 
-Al analizar el escenario planteado en la tabla [REFERENCIA] con la productividad simple, podríamos concluir que el Programador 1 tiene el doble de productividad que el Programador 2. Sin embargo, el Programador 1 inyecta más defectos que el Programador 2, por lo que requiere de más tiempo para corregir sus defectos. Analizando el escenario con la productividad compuesta, observamos que los programadores tienen productividades muy similares. Las fórmulas utilizadas para calcular la productividad simple y la productividad compuesta son las siguientes:
+Al analizar el escenario planteado en la tabla \ref{ejemploproductividadcompuesta} con la productividad simple, podríamos concluir que el Programador 1 tiene el doble de productividad que el Programador 2. Sin embargo, el Programador 1 inyecta defectos mientras que el Programador 2, por lo que el Programador 1 requiere de tiempo para corregir sus defectos. Analizando el escenario con la productividad compuesta, observamos que los programadores tienen la misma productividad. Las fórmulas utilizadas para calcular la productividad simple y la productividad compuesta son las siguientes:
 
 \begin{math}P = \frac{S}{DT}\end{math}
 
@@ -674,7 +676,7 @@ Donde:
 	\item CT: Tiempo Total de Correcciones.
 \end{itemize}
 
-Gracias a este reporte incluido en el BM los l'ideres de proyecto y los gerentes pueden hacer evaluaciones m'as objetivas de los desarrolladores, proyectos y desempe'no general de la organizaci'on, tomando en cuenta no solo la cantidad de producto elaborado, si no la calidad que este tiene. La figura \ref{fig:SSreportes2BM} muestra un ejemplo de como se ve el reporte dentro del BM.
+Gracias a este reporte incluido en el BM los l'ideres de proyecto y los gerentes pueden hacer evaluaciones m'as objetivas de los desarrolladores, proyectos y desempe'no general de la organizaci'on, tomando en cuenta no solo la cantidad de producto elaborado, si no la calidad que este tiene. La figura \ref{fig:SSreportes2BM} muestra un ejemplo de como se ve el reporte dentro del BM, con el ejemplo de la tabla \ref{ejemploproductividadcompuesta}.
 
 \begin{figure}[h]
 	\centering
@@ -710,12 +712,12 @@ La figura \ref{fig:SSreportes3BM} muestra un ejemplo de como se ve el reporte en
 \subsubsection{ROI de T'ecnicas de Detecci'on}
 \label{sec:ROIdeTecnicasdeDeteccion}
 \noindent
-El ROI de T'ecnicas de Detecci'on es un reporte a nivel proyecto y organizaci'on. Es similar al reporte de ROI de Proyecto/Empresa en el sentido que pone las t'ecnicas de calidad en t'erminos de tiempo y dinero, pero lo hace de forma individual. En vez de calcular el ROI total del proyecto, lo hace por separado con cada t'ecnica. Este reporte nos permite hacer una evaluaci'on m'as profunda del ROI y evaluar que t'ecnicas son m'as efectivas y convenientes de implementar que otras.
+El ROI de T'ecnicas de Detecci'on es un reporte a nivel proyecto y organizaci'on. Es similar al reporte de ROI de Proyecto/Empresa en el sentido que pone las t'ecnicas de calidad en t'erminos de tiempo y dinero, pero lo hace de forma individual. En vez de calcular el ROI total del proyecto, lo hace por separado con cada t'ecnica. Este reporte nos permite hacer una evaluaci'on m'as profunda del ROI y evaluar que t'ecnicas son m'as efectivas y convenientes de implementar que otras. Para la figura se utilizaron los datos de la tabla \ref{ejemploproductividadcompuesta}, y como en este ejemplo no existen actividades de calidad, el ROI es de 0\%.
 
 \subsubsection{CoQ vs CNQ}
 \label{sec:CoQvsCNQ}
 \noindent
-El CoQ vs CNQ es un reporte a nivel proyecto y organizaci'on. Este hace una comparaci'on entre el costo de conformidad y el costo de la no conformidad (ver secci'on \ref{sec:costodelacalidaddesoftware}). Las organizaciones de software deben intentar que exista un balance entre estos costos, visto de otra forma, el CoQ y el CNQ deben de ser similares. La figura \ref{fig:SSreportes4BM} nos muestra el reporte dentro del BM.
+El CoQ vs CNQ es un reporte a nivel proyecto y organizaci'on. Este hace una comparaci'on entre el costo de conformidad y el costo de la no conformidad (ver secci'on \ref{sec:costodelacalidaddesoftware}). Las organizaciones de software deben intentar que exista un balance entre estos costos, visto de otra forma, el CoQ y el CNQ deben de ser similares. La figura \ref{fig:SSreportes4BM} nos muestra el reporte dentro del BM, en esta se encuentran los datos del ejemplo presentado en la tabla \ref{ejemploproductividadcompuesta} donde el 'unico esfuerzo de calidad y no calidad es la correcci'on del defecto que tom'o una hora.
 
 \begin{figure}[h]
 	\centering
@@ -757,7 +759,7 @@ Donde:
 \subsubsection{Raz'on de Revisi'on por T'ecnica de Detecci'on}
 \label{sec:RazonporTecnicadeDeteccion}
 \noindent
-La raz'on de revisi'on por t'ecnica de detecci'on es un reporte a nivel proyecto y organizaci'on. Indica la velocidad a la que se realizan las distintas t'ecnicas de detecci'on de defectos. Para actividades de revisi'on de c'odigo se recomienda una velocidad de 300-500 LOC por hora\cite{SmartBear}. Esta velocidad nos permite un enfoque suficiente a cada l'inea sin caer en una p'erdida de tiempo. Una estrategia para aumentar el Yield de las revisiones de c'odigo puede ser realizar las revisiones de c'odigo al ritmo mencionado anteriormente. La f'ormula que se utiliza para calcular la raz'on de revisi'on es la siguiente:
+La raz'on de revisi'on por t'ecnica de detecci'on es un reporte a nivel proyecto y organizaci'on. Indica la velocidad a la que se realizan las distintas t'ecnicas de detecci'on de defectos. Para actividades de revisi'on de c'odigo se recomienda una velocidad menor que 200 LOC por hora\cite{SmartBear}. Esta velocidad nos permite un enfoque suficiente a cada l'inea sin caer en una p'erdida de tiempo. Una estrategia para aumentar el Yield de las revisiones de c'odigo puede ser realizar las revisiones de c'odigo al ritmo mencionado anteriormente. La f'ormula que se utiliza para calcular la raz'on de revisi'on es la siguiente:
 
 \begin{math}R = \frac{S}{T}\end{math}
 
