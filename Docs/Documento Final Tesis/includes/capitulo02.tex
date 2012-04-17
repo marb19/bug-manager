@@ -38,6 +38,50 @@ Tomando en cuenta estas definiciones, hay autores que se inclinan por definir Ca
 \noindent
 Existen tres principales enfoques bajo los cuales la industria busca mejorar la calidad en el desarrollo de software. Estos son: Adherencia a procesos, elaboraci'on de pruebas y revisiones de producto.
 
+\subsection{Modelos de Calidad}
+\noindent
+Existen varios esfuerzos para crear modelos de calidad los cuales sirvieran como gu'ias para que las organizaciones introdujeran calidad en el software que desarrollan. Ejemplos de estos son: ISO-9126, ISO/IEC 25000 y el modelo de Dromey.
+
+\subsubsection{ISO-9126 e ISO/IEC 25000}
+\noindent
+En el ISO-9126 y en el ISO/IEC 25000, tambi'en conocido como Requerimientos y Evaluaci'on para la Calidad de los Productos de Software (SQuaRE por sus siglas en Ingl'es),  se definen seis atributos de calidad, los cuales identifican la calidad interna y externa del software.  Los atributos est'an organizados en forma de 'arbol, con una primera capa que contiene los atributos, y una segunda la cual tiene las caracter'isticas de cada atributo en particular. Los atributos son los siguientes  \cite{RohitDhiman2005,ISO/IEC25000}:
+
+\begin{itemize}
+	\item \emph{Funcionalidad}. Este atributo se reere a que el sistema cubra adecuadamente las necesidades funcionales del cliente. Sus caracter'isticas son: Precisi'on, interoperabilidad y seguridad.
+	\item \emph{Confiabilidad}. Este atributo se refiere a la capacidad del software de mantener un nivel espec'ifico de desempe'no. Sus caracter'isticas son: Madurez, tolerancia a fallas y la habilidad de recuperarse a 'estas.
+	\item \emph{Usabilidad}. Este atributo se reere a que tan f'acil, intuitivo y usable es el sistema para el usuario. Sus caracter'isticas son: La facilidad con la que el sistema es entendido, que tan f'acil se aprende a usarlo, operatividad y atractividad.
+	\item \emph{Eficiencia}. Este atributo se reere al desempe'no del sistema, en relaci'on a tener un consumo de recursos adecuado. Sus caracter'isticas son: Desempe'no en el tiempo y utilizaci'on de recursos.
+	\item \emph{Mantenibilidad}. Este atributo se reere a como el sistema puede ser mantenido y mejorado en el tiempo. Sus caracter'isticas son: Analizabilidad, modificabilidad, estabilidad y facilidad para ser probado.
+	\item \emph{Portabilidad}. Este atributo se reere a como el sistema puede ser instalado en distintos ambientes. Sus caracter'isticas son: Adaptabilidad, facilidad para ser instalado, coexistencia y reemplazabilidad.
+\end{itemize}
+
+Estos est'andares tambi'en proveen un conjunto de medidas primitivas para evaluar cada sub-caracter'istica y permite a los usuarios definir sus propias m'etricas. A partir de estos atributos, las organizaciones pueden hacer una evaluaci'on de la calidad del producto de software desarrollado.
+
+\subsubsection{Modelo de Calidad de Dromey}
+\noindent
+Geoff Dromey propuso un modelo de calidad \cite{Dromey1995} el cual parte de los atributos de calidad encontrados en el ISO-9126 y en el ISO/IEC 25000 \cite{RohitDhiman2005,ISO/IEC25000}. El modelo consiste en tres entidades principales: Los atributos de calidad, las sub caracter'isticas de los atributos de calidad y los componentes que componen el software. Los componentes son llamados formas estructurales dentro del modelo. Estas entidades y sus relaciones se ilustran en la figura ref{fig:EntidadesdelModelodeCalidaddeDromey}.
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[scale=0.7]{images/Dromey.png}
+	\caption{Entidades del Modelo de Calidad de Dromey}
+	\label{fig:EntidadesdelModelodeCalidaddeDromey}
+\end{figure}
+
+En la figura ref{fig:EntidadesdelModelodeCalidaddeDromey} podemos observar que las formas estructurales y los atributos de calidad se relacionan por medio de las sub caracter'isticas de los atributos de calidad. Estas sub caracter'isticas, pueden ser expresadas como propiedades de las formas estructurales. Esta doble relaci'on permite usar el modelo en las dos perspectivas de construcci'on de software:
+
+\begin{itemize}
+	\item \emph{Bottom-Up}. En esta perspectiva el modelo es utilizado por los desarrolladores al asegurarse que las formas estructurales que componen el software, contengan las propiedades requeridas por los atributos de calidad.
+	\item Top-Down. En esta perspectiva el modelo es utilizado por los dise'nadores al  identificar las propiedades que necesita satisfacer la forma estructural para construir un atributo de calidad en el producto de software.
+\end{itemize}
+
+Adoptar este modelo tiene dos beneficios principales:
+
+\begin{itemize}
+	\item Introducci'on de la Calidad en el Producto de Software. La tarea de introducir la calidad en el software se reduce a asegurarse sistem'aticamente que todas las propiedades de calidad de las formas estructurales est'an presentes.
+	\item Clasificaci'on y Detecci'on de Defectos. La detecci'on de defectos de calidad se reduce a revisar sistem'aticamente, para cada forma estructural, si alguna de sus propiedades de calidad no es cumplida.
+\end{itemize}
+
 \subsection{Adherencia a Procesos}
 \noindent
 Un enfoque que se tiene para dar calidad a los sistemas de software se hace mediante la definici'on y adherencia a procesos. La idea de este enfoque es que las organizaciones tengan procesos bien definidos, y los sigan religiosamente. Esto con el objetivo de siempre poder obtener resultados similares en sus diferentes procesos.
@@ -414,7 +458,7 @@ Los principios de las revisiones personales son los siguientes\cite{Humphrey}:
 	\item Revisar los datos para identificar las formas de prevenir defectos.
 \end{itemize}
 
-Esta es la herramienta principal que propone el BM para la detecci'on de defectos. El BM tiene una plantilla por default para realizar revisiones personales en lenguajes de programaci'on de prop'osito general. Esto se explica m'as a detalle en la secci'on [REFERENCIA].
+Esta es la herramienta principal que propone el BM para la detecci'on de defectos. El BM tiene una plantilla por default para realizar revisiones personales en lenguajes de programaci'on de prop'osito general. Esto se explica m'as a detalle en la secci'on \ref{sec:administraciondeplantillasdecalidad}.
 
 \subsection{Lista de Chequeo de Revisi'on de C'odigo}
 \label{sec:listadechequeoderevisiondecodigo}

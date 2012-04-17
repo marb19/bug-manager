@@ -1,24 +1,24 @@
 \select@language {spanish}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {2.1}{\ignorespaces N'umero de Defectos por Nivel de CMM\relax }}{17}
-\contentsline {table}{\numberline {2.2}{\ignorespaces Costo de Encontrar y Corregir Defectos\relax }}{18}
-\contentsline {table}{\numberline {2.3}{\ignorespaces Tipos de Defectos por Mil L'ineas de C'odigo\relax }}{19}
-\contentsline {table}{\numberline {2.4}{\ignorespaces M'etricas del COQ\relax }}{20}
-\contentsline {table}{\numberline {2.5}{\ignorespaces M'etricas del PQI\relax }}{21}
-\contentsline {table}{\numberline {2.6}{\ignorespaces Clasificiaci'on de Defectos del PSP\relax }}{26}
-\contentsline {table}{\numberline {2.7}{\ignorespaces Lista de Chequeo para la Revisi'on de C'odigo de PSP\relax }}{26}
-\contentsline {table}{\numberline {2.8}{\ignorespaces Potencial de Inyecci'on Defectos Promedio\relax }}{37}
-\contentsline {table}{\numberline {2.9}{\ignorespaces Efectividad en la Remoci'on de Defectos\relax }}{37}
-\contentsline {table}{\numberline {2.10}{\ignorespaces An'alisis del ROI\relax }}{44}
+\contentsline {table}{\numberline {2.1}{\ignorespaces N'umero de Defectos por Nivel de CMM\relax }}{20}
+\contentsline {table}{\numberline {2.2}{\ignorespaces Costo de Encontrar y Corregir Defectos\relax }}{21}
+\contentsline {table}{\numberline {2.3}{\ignorespaces Tipos de Defectos por Mil L'ineas de C'odigo\relax }}{21}
+\contentsline {table}{\numberline {2.4}{\ignorespaces M'etricas del COQ\relax }}{23}
+\contentsline {table}{\numberline {2.5}{\ignorespaces M'etricas del PQI\relax }}{24}
+\contentsline {table}{\numberline {2.6}{\ignorespaces Clasificiaci'on de Defectos del PSP\relax }}{28}
+\contentsline {table}{\numberline {2.7}{\ignorespaces Lista de Chequeo para la Revisi'on de C'odigo de PSP\relax }}{29}
+\contentsline {table}{\numberline {2.8}{\ignorespaces Potencial de Inyecci'on Defectos Promedio\relax }}{40}
+\contentsline {table}{\numberline {2.9}{\ignorespaces Efectividad en la Remoci'on de Defectos\relax }}{40}
+\contentsline {table}{\numberline {2.10}{\ignorespaces An'alisis del ROI\relax }}{47}
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {3.1}{\ignorespaces Clasificiaci'on de Defectos del PSP\relax }}{68}
-\contentsline {table}{\numberline {3.2}{\ignorespaces Plantilla de Calidad BM\relax }}{70}
-\contentsline {table}{\numberline {3.3}{\ignorespaces Reportes BM\relax }}{72}
-\contentsline {table}{\numberline {3.4}{\ignorespaces Ejemplo Productividad Compuesta\relax }}{77}
+\contentsline {table}{\numberline {3.1}{\ignorespaces Clasificiaci'on de Defectos del PSP\relax }}{71}
+\contentsline {table}{\numberline {3.2}{\ignorespaces Plantilla de Calidad BM\relax }}{73}
+\contentsline {table}{\numberline {3.3}{\ignorespaces Reportes BM\relax }}{75}
+\contentsline {table}{\numberline {3.4}{\ignorespaces Ejemplo Productividad Compuesta\relax }}{80}
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {4.1}{\ignorespaces Resumen General Parte I\relax }}{86}
-\contentsline {table}{\numberline {4.2}{\ignorespaces Resumen General Parte II\relax }}{87}
-\contentsline {table}{\numberline {4.3}{\ignorespaces N'umero de Defectos por Tipo\relax }}{88}
-\contentsline {table}{\numberline {4.4}{\ignorespaces An'alisis del ROI BM\relax }}{91}
-\contentsline {table}{\numberline {4.5}{\ignorespaces N'umero de Defectos por Tipo\relax }}{92}
+\contentsline {table}{\numberline {4.1}{\ignorespaces Resumen General Parte I\relax }}{89}
+\contentsline {table}{\numberline {4.2}{\ignorespaces Resumen General Parte II\relax }}{90}
+\contentsline {table}{\numberline {4.3}{\ignorespaces N'umero de Defectos por Tipo\relax }}{91}
+\contentsline {table}{\numberline {4.4}{\ignorespaces An'alisis del ROI BM\relax }}{94}
+\contentsline {table}{\numberline {4.5}{\ignorespaces N'umero de Defectos por Tipo\relax }}{95}

@@ -328,3 +328,14 @@
   timestamp = {2011.10.10}
 }
 
+@STANDARD{ISO/IEC25000,
+  title = {ISO/IEC 25000 Software Engineering
+	
+	- Software product Quality Requirements and Evaluation (SQuaRE)},
+  organization = {ISO/IEC},
+  institution = {ISO/IEC},
+  year = {2005},
+  owner = {CDE-Marco},
+  timestamp = {2012.04.15}
+}
+
