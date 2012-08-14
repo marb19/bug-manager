@@ -24,7 +24,7 @@
                                             min:0
                                     },
                                     investedHours: {
-                                            range: [0,24]
+                                            range: [0,99999]
                                     },
                                     remainingHours: {
                                             min:0
