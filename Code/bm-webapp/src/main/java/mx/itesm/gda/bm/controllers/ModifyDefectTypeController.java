@@ -17,7 +17,6 @@ package mx.itesm.gda.bm.controllers;
 import java.util.Map;
 import mx.itesm.gda.bm.biz.DefectTypeManagementBizOp;
 import mx.itesm.gda.bm.utils.UserLogged;
-import mx.itesm.gda.bm.utils.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -52,7 +51,7 @@ public class ModifyDefectTypeController extends BaseController {
 
     @RequestMapping(method = RequestMethod.POST)
     @Transactional
-    @UserLogged(adminRequired = true)
+    @UserLogged
     public String updateDefectType(
             @RequestParam("defectTypeID") int defectTypeID,
             @RequestParam("defectTypeName") String defectTypeName,

@@ -54,7 +54,7 @@ public class NewDefectController extends BaseController{
     
     @RequestMapping(method = RequestMethod.GET)
     @Transactional(readOnly = true)
-    @UserLogged(adminRequired = true)
+    @UserLogged
     public String displayForm(@RequestParam("project_id") int projectID, ModelMap model) {
         
         if(projectID <= 0){
@@ -74,7 +74,7 @@ public class NewDefectController extends BaseController{
 
     @RequestMapping(method = RequestMethod.POST)
     @Transactional
-    @UserLogged(adminRequired = true)
+    @UserLogged
     public String newDefect(
             @RequestParam("defectName") String defectName,
             @RequestParam("defectDescription") String defectDescription,
