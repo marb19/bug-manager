@@ -14,33 +14,18 @@
 
 package mx.itesm.gda.bm.controllers;
 
-import mx.itesm.gda.bm.biz.ComposedProdBizOp;
-import mx.itesm.gda.bm.biz.PhaseProdReportBizOp;
-import mx.itesm.gda.bm.biz.PhaseTimeReportBizOp;
-import mx.itesm.gda.bm.biz.PhaseYieldReportBizOp;
-import mx.itesm.gda.bm.biz.DefectDensityUserReportBizOp;
-import mx.itesm.gda.bm.biz.TotalDefectsTypeReportBizOp;
-import mx.itesm.gda.bm.biz.DefectsInyRemBizOp;
-import mx.itesm.gda.bm.biz.GeneralSummaryBizOp;
-import mx.itesm.gda.bm.biz.QualityCostBizOp;
-import mx.itesm.gda.bm.biz.ROIProjectBizOp;
-import mx.itesm.gda.bm.biz.ROITecnicasBizOp;
-import mx.itesm.gda.bm.biz.ReviewsEfficiencyBizOp;
-import mx.itesm.gda.bm.biz.ReviewsEffortBizOp;
-import mx.itesm.gda.bm.biz.ReviewsParetoBizOp;
-import mx.itesm.gda.bm.biz.ReviewsSpeedBizOp;
-import mx.itesm.gda.bm.biz.ReviewsYieldBizOp;
+import java.util.List;
+import java.util.Map;
+import mx.itesm.gda.bm.biz.*;
 import mx.itesm.gda.bm.utils.UserLogged;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.ModelMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  *
@@ -58,7 +43,7 @@ public class ReportController extends BaseController {
     @Autowired
     private PhaseYieldReportBizOp phaseYieldReport;
     @Autowired
-    private DefectDensityUserReportBizOp defectDensityReport;
+    private DefectDensityReportBizOp defectDensityReport;
     @Autowired
     private TotalDefectsTypeReportBizOp totalDefectsType;
     @Autowired
@@ -135,13 +120,14 @@ public class ReportController extends BaseController {
         return null;
     }
 
-    @RequestMapping(value = "/densidadDefectosUsuario",
+    @RequestMapping(value = "/densidadDefectos",
     method = { RequestMethod.POST })
     @UserLogged
     @Transactional
-    public String createDefectDensityReport(ModelMap model){
+    public String createDefectDensityReport(ModelMap model,
+            @RequestParam(value= "level2") int level){
 
-        String defectDensityXML = defectDensityReport.getDefectDensityReport();
+        String defectDensityXML = defectDensityReport.getDefectDensityReport(level);
         String text = "La cantidad de defectos que se cometen por cada 1000 líneas de código. ";
 
         model.put("text", text);
