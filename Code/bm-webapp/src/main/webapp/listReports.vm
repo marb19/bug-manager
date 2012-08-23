@@ -119,7 +119,7 @@
                             $("#config-report-form").attr("action","./tecnicasDeteccion.do");
                             break;
                           case "14":
-                            $("#config-report-form").attr("action","./densidadDefectosUsuario.do");
+                            $("#config-report-form").attr("action","./densidadDefectos.do");
                             break;
                           case "15":
                             $("#config-report-form").attr("action","./totalDefectosTipo.do");
@@ -189,7 +189,7 @@
                             $("#level2").val("");
                             $("#level2").attr("disabled", "true");
                         }
-                        else if ($("#report").val() == "5"){
+                        else if ($("#report").val() == "5" || $("#report").val() == "14"){
                             $("#userLabel").hide("fast");
                             $("#username").hide("fast");
                             $("#username").val("");
@@ -205,24 +205,6 @@
                             $("#levelLabel2").show("fast");
                             $("#level2").show("fast");
                             $("#level2").removeAttr("disabled");
-                        }
-                        else if ($("#report").val() == "14"){
-                            $("#userLabel").hide("fast");
-                            $("#username").hide("fast");
-                            $("#username").val("");
-                            $("#username").attr("disabled", "true");
-                            $("#projectLabel").hide("fast");
-                            $("#project_id").hide("fast");
-                            $("#project_id").val("");
-                            $("#project_id").attr("disabled", "true");
-                            $("#levelLabel").hide("fast");
-                            $("#level").hide("fast");
-                            $("#level").val("");
-                            $("#level").attr("disabled", "true");
-                            $("#levelLabel2").hide("fast");
-                            $("#level2").hide("fast");
-                            $("#level2").val("");
-                            $("#level2").attr("disabled", "true");
                         }
                         else if ( $("#report").val() == "15" || $("#report").val() == "16") {
                             $("#level").empty();
@@ -345,7 +327,7 @@
                             $("#level2").val("");
                             $("#level2").attr("disabled", "true");
                         }
-                        else if (this.value == "5"){
+                        else if (this.value == "5" || this.value == "14"){
                             $("#userLabel").hide("fast");
                             $("#username").hide("fast");
                             $("#username").val("");
@@ -361,24 +343,6 @@
                             $("#levelLabel2").show("fast");
                             $("#level2").show("fast");
                             $("#level2").removeAttr("disabled");
-                        }
-                        else if (this.value == "14"){
-                            $("#userLabel").hide("fast");
-                            $("#username").hide("fast");
-                            $("#username").val("");
-                            $("#username").attr("disabled", "true");
-                            $("#projectLabel").hide("fast");
-                            $("#project_id").hide("fast");
-                            $("#project_id").val("");
-                            $("#project_id").attr("disabled", "true");
-                            $("#levelLabel").hide("fast");
-                            $("#level").hide("fast");
-                            $("#level").val("");
-                            $("#level").attr("disabled", "true");
-                            $("#levelLabel2").hide("fast");
-                            $("#level2").hide("fast");
-                            $("#level2").val("");
-                            $("#level2").attr("disabled", "true");
                         }
                         else if (this.value == "15" || this.value == "16") {
                             $("#level").empty();

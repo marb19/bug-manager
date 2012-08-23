@@ -6,26 +6,20 @@
 package mx.itesm.gda.bm.biz.impl;
 
 import java.text.DecimalFormat;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
-import mx.itesm.gda.bm.session.UserLoginSession;
 import mx.itesm.gda.bm.biz.ComposedProdBizOp;
-import mx.itesm.gda.bm.model.dao.TaskDAO;
-import mx.itesm.gda.bm.model.Task;
-import mx.itesm.gda.bm.model.TaskState;
-import mx.itesm.gda.bm.model.Defect;
-import mx.itesm.gda.bm.model.DefectState;
-import mx.itesm.gda.bm.model.TaskType;
+import mx.itesm.gda.bm.model.*;
 import mx.itesm.gda.bm.model.dao.DefectDAO;
-import mx.itesm.gda.bm.model.Project;
 import mx.itesm.gda.bm.model.dao.ProjectDAO;
-import mx.itesm.gda.bm.model.User;
+import mx.itesm.gda.bm.model.dao.TaskDAO;
 import mx.itesm.gda.bm.model.dao.UserDAO;
+import mx.itesm.gda.bm.session.UserLoginSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 /**
  *
  * @author Administrator

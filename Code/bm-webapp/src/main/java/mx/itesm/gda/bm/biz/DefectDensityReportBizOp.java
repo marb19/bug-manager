@@ -9,6 +9,6 @@ package mx.itesm.gda.bm.biz;
  *
  * @author Administrator
  */
-public interface DefectDensityUserReportBizOp extends BizOp{
-    public String getDefectDensityReport();
+public interface DefectDensityReportBizOp extends BizOp{
+    public String getDefectDensityReport(int level);
 }
